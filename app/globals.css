@@ -23,8 +23,8 @@ html {
 
 /* Hide native cursor on fine-pointer (mouse) devices — SmoothCursor replaces it */
 @media (pointer: fine) {
-  *, *::before, *::after {
-    cursor: none !important;
+  html, body, a, button, select, [role="button"] {
+    cursor: none;
   }
 }
 

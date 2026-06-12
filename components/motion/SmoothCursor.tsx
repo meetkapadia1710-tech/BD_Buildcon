@@ -3,142 +3,147 @@
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 
-type Seg = { x1: number; y1: number; x2: number; y2: number; born: number }
-
-const TRAIL_LIFE = 2400
-const NODE_LIFE  = 600
-const MIN_DIST   = 10
-
 export function SmoothCursor() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const dotRef    = useRef<HTMLDivElement>(null)
-  const segs      = useRef<Seg[]>([])
-  const last      = useRef({ x: -9999, y: -9999, init: false })
-  const raf       = useRef<number>(0)
-  const [show, setShow] = useState(false)
+  const dotRef = useRef<HTMLDivElement>(null)
+  const ringRef = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+  const [hovered, setHovered] = useState(false)
+  const [isInput, setIsInput] = useState(false)
 
   useEffect(() => {
+    // Only run on mouse-capable devices
     if (!window.matchMedia('(pointer: fine)').matches) return
 
-    const canvas = canvasRef.current
-    const dot    = dotRef.current
-    if (!canvas || !dot) return
+    const dot = dotRef.current
+    const ring = ringRef.current
+    if (!dot || !ring) return
 
-    setShow(true)
+    // Position setup
+    gsap.set(dot, { xPercent: -50, yPercent: -50, x: -100, y: -100 })
+    gsap.set(ring, { xPercent: -50, yPercent: -50, x: -100, y: -100 })
 
-    const resize = () => {
-      canvas.width  = window.innerWidth
-      canvas.height = window.innerHeight
+    // Quick setters for smooth animations
+    const setDotX = gsap.quickTo(dot, 'x', { duration: 0.02, ease: 'none' })
+    const setDotY = gsap.quickTo(dot, 'y', { duration: 0.02, ease: 'none' })
+    const setRingX = gsap.quickTo(ring, 'x', { duration: 0.15, ease: 'power2.out' })
+    const setRingY = gsap.quickTo(ring, 'y', { duration: 0.15, ease: 'power2.out' })
+
+    const onMouseMove = (e: MouseEvent) => {
+      setVisible(true)
+      setDotX(e.clientX)
+      setDotY(e.clientY)
+      setRingX(e.clientX)
+      setRingY(e.clientY)
     }
-    resize()
-    window.addEventListener('resize', resize, { passive: true })
 
-    gsap.set(dot, { xPercent: -50, yPercent: -50, x: -300, y: -300 })
-    const moveX = gsap.quickTo(dot, 'x', { duration: 0.06, ease: 'none' })
-    const moveY = gsap.quickTo(dot, 'y', { duration: 0.06, ease: 'none' })
+    const onMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      if (!target) return
 
-    const onMove = ({ clientX: x, clientY: y }: MouseEvent) => {
-      moveX(x)
-      moveY(y)
-      if (!last.current.init) { last.current = { x, y, init: true }; return }
-      const dx = x - last.current.x
-      const dy = y - last.current.y
-      if (Math.sqrt(dx * dx + dy * dy) >= MIN_DIST) {
-        segs.current.push({ x1: last.current.x, y1: last.current.y, x2: x, y2: y, born: performance.now() })
-        last.current = { x, y, init: true }
+      // If hovering inputs, textareas, contenteditable elements, hide custom cursor and show browser text cursor
+      const isText = 
+        target.tagName === 'INPUT' || 
+        target.tagName === 'TEXTAREA' || 
+        target.isContentEditable || 
+        target.closest('input, textarea, [contenteditable="true"]')
+
+      if (isText) {
+        setIsInput(true)
+        return
+      }
+
+      // Check if hovering clickable/interactive elements
+      const isClickable = target.closest('a, button, select, option, [role="button"], .clickable')
+      if (isClickable) {
+        setHovered(true)
+        setIsInput(false)
       }
     }
 
-    const onOver = (e: MouseEvent) => {
-      if (!(e.target as HTMLElement).closest('a,button,[role="button"]')) return
-      gsap.to(dot, { scale: 2, duration: 0.22, ease: 'back.out(2.5)' })
-    }
-    const onOut = (e: MouseEvent) => {
-      if (!(e.target as HTMLElement).closest('a,button,[role="button"]')) return
-      gsap.to(dot, { scale: 1, duration: 0.3, ease: 'power2.out' })
-    }
+    const onMouseOut = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      if (!target) return
 
-    // Trail is drawn in pure white — mix-blend-mode:difference on canvas inverts bg colours
-    const ctx = canvas.getContext('2d')!
-    const draw = () => {
-      raf.current = requestAnimationFrame(draw)
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      const isText = 
+        target.tagName === 'INPUT' || 
+        target.tagName === 'TEXTAREA' || 
+        target.isContentEditable || 
+        target.closest('input, textarea, [contenteditable="true"]')
 
-      const now = performance.now()
-      segs.current = segs.current.filter(s => now - s.born < TRAIL_LIFE)
+      if (isText) {
+        setIsInput(false)
+      }
 
-      for (const s of segs.current) {
-        const age  = now - s.born
-        const fade = Math.pow(1 - age / TRAIL_LIFE, 1.6)
-
-        ctx.beginPath()
-        ctx.moveTo(s.x1, s.y1)
-        ctx.lineTo(s.x2, s.y2)
-        ctx.strokeStyle = `rgba(255,255,255,${(fade * 0.75).toFixed(3)})`
-        ctx.lineWidth   = 1.5
-        ctx.lineCap     = 'round'
-        ctx.stroke()
-
-        if (age < NODE_LIFE) {
-          const nf = 1 - age / NODE_LIFE
-          ctx.beginPath()
-          ctx.arc(s.x1, s.y1, 2.5, 0, Math.PI * 2)
-          ctx.fillStyle = `rgba(255,255,255,${(nf * 0.9).toFixed(3)})`
-          ctx.fill()
-        }
+      const isClickable = target.closest('a, button, select, option, [role="button"], .clickable')
+      if (isClickable) {
+        setHovered(false)
       }
     }
 
-    draw()
-    window.addEventListener('mousemove', onMove, { passive: true })
-    document.addEventListener('mouseover', onOver)
-    document.addEventListener('mouseout',  onOut)
+    const onMouseDown = () => {
+      gsap.to(ring, { scale: 0.75, duration: 0.15 })
+    }
+
+    const onMouseUp = () => {
+      gsap.to(ring, { scale: hovered ? 1.8 : 1, duration: 0.2 })
+    }
+
+    const onMouseLeaveWindow = () => {
+      setVisible(false)
+    }
+
+    const onMouseEnterWindow = () => {
+      setVisible(true)
+    }
+
+    window.addEventListener('mousemove', onMouseMove, { passive: true })
+    document.addEventListener('mouseover', onMouseOver)
+    document.addEventListener('mouseout', onMouseOut)
+    window.addEventListener('mousedown', onMouseDown)
+    window.addEventListener('mouseup', onMouseUp)
+    document.addEventListener('mouseleave', onMouseLeaveWindow)
+    document.addEventListener('mouseenter', onMouseEnterWindow)
 
     return () => {
-      cancelAnimationFrame(raf.current)
-      window.removeEventListener('resize',    resize)
-      window.removeEventListener('mousemove', onMove)
-      document.removeEventListener('mouseover', onOver)
-      document.removeEventListener('mouseout',  onOut)
+      window.removeEventListener('mousemove', onMouseMove)
+      document.removeEventListener('mouseover', onMouseOver)
+      document.removeEventListener('mouseout', onMouseOut)
+      window.removeEventListener('mousedown', onMouseDown)
+      window.removeEventListener('mouseup', onMouseUp)
+      document.removeEventListener('mouseleave', onMouseLeaveWindow)
+      document.removeEventListener('mouseenter', onMouseEnterWindow)
     }
-  }, [show])
+  }, [hovered, isInput])
 
   return (
     <>
-      {/*
-        mix-blend-mode: difference on the canvas inverts the background colour.
-        White drawn on white → black.  White on dark → white.  White on teal → orange/amber.
-        The cursor is always legible regardless of background.
-      */}
-      <canvas
-        ref={canvasRef}
-        aria-hidden="true"
-        className="fixed inset-0 z-[598] pointer-events-none"
+      {/* Outer Ring */}
+      <div
+        ref={ringRef}
+        className="fixed top-0 left-0 pointer-events-none rounded-full border border-black z-[600]"
         style={{
-          opacity: show ? 1 : 0,
-          transition: 'opacity 0.6s',
-          mixBlendMode: 'difference',
+          width: 32,
+          height: 32,
+          opacity: visible && !isInput ? 0.65 : 0,
+          backgroundColor: hovered ? 'rgba(0, 0, 0, 0.08)' : 'transparent',
+          transform: hovered ? 'scale(1.8)' : 'scale(1)',
+          transition: 'opacity 0.25s, background-color 0.25s, transform 0.25s ease-out',
+          willChange: 'transform',
         }}
       />
 
-      {/* Diamond — white fill, mix-blend-mode:difference auto-contrasts any bg */}
+      {/* Center Dot */}
       <div
         ref={dotRef}
-        aria-hidden="true"
-        className="fixed top-0 left-0 z-[600] pointer-events-none"
+        className="fixed top-0 left-0 pointer-events-none rounded-full bg-black z-[601]"
         style={{
-          width: 14,
-          height: 14,
+          width: 6,
+          height: 6,
+          opacity: visible && !isInput && !hovered ? 1 : 0,
+          transition: 'opacity 0.25s',
           willChange: 'transform',
-          opacity: show ? 1 : 0,
-          transition: 'opacity 0.6s',
-          mixBlendMode: 'difference',
         }}
-      >
-        <svg width="14" height="14" viewBox="0 0 14 14">
-          <polygon points="7,0 14,7 7,14 0,7" fill="white" />
-        </svg>
-      </div>
+      />
     </>
   )
 }
