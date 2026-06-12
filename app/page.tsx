@@ -12,6 +12,9 @@ import { projects } from '@/content/projects'
 import { testimonials } from '@/content/testimonials'
 import { clients } from '@/content/clients'
 import { services } from '@/content/services'
+import { BlueprintReveal } from '@/components/motion/BlueprintReveal'
+import { ConstructionDraw } from '@/components/motion/ConstructionDraw'
+import { RisingFloors, type StatFloor } from '@/components/motion/RisingFloors'
 
 export const metadata: Metadata = {
   title: 'BD Buildcon LLP | Industrial EPC Contractor, Bharuch, Gujarat',
@@ -68,6 +71,13 @@ const pillars = [
     title: 'Technology Under One Roof',
     body: 'Owned fleet, testing lab and specialist teams — no third-party dependency.',
   },
+]
+
+const floorStats: StatFloor[] = [
+  { value: 50,  suffix: '+', label: 'Projects Completed', heightPct: 72 },
+  { value: 35,  suffix: '+', label: 'Years Experience',   heightPct: 58 },
+  { value: 0,   suffix: '',  label: 'Accidents Recorded', heightPct: 88 },
+  { value: 70,  suffix: '%', label: 'Repeat Client Ratio',heightPct: 80 },
 ]
 
 export default function HomePage() {
@@ -155,6 +165,7 @@ export default function HomePage() {
       </section>
 
       {/* ── What We Build ── */}
+      <BlueprintReveal>
       <section className="section-pad bg-white" aria-label="Services overview">
         <div className="container-max">
           <SectionHeading
@@ -186,6 +197,7 @@ export default function HomePage() {
           </FadeRise>
         </div>
       </section>
+      </BlueprintReveal>
 
       {/* ── Pillars Band ── */}
       <section className="bg-surface border-y border-hairline py-20" aria-label="Company pillars">
@@ -201,6 +213,57 @@ export default function HomePage() {
               </div>
             ))}
           </FadeRise>
+        </div>
+      </section>
+
+      {/* ── Construction Draw ── */}
+      <section className="bg-dark-bg py-20 lg:py-28 overflow-hidden" aria-label="Our construction process">
+        <div className="container-max">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* SVG structural frame */}
+            <FadeRiseItem>
+              <ConstructionDraw className="w-full max-w-lg mx-auto text-teal opacity-90" />
+            </FadeRiseItem>
+
+            {/* Text */}
+            <div>
+              <FadeRiseItem>
+                <span className="font-body text-label-md text-teal uppercase tracking-widest block mb-4">
+                  How We Build
+                </span>
+                <h2 className="font-display text-headline-lg text-white leading-snug mb-6">
+                  Every structure starts with a precise drawing.
+                </h2>
+              </FadeRiseItem>
+              <FadeRiseItem delay={0.1}>
+                <div className="space-y-4 font-body text-body-lg text-white/60 leading-relaxed mb-8">
+                  <p>
+                    From foundation to roof, each phase of an EPC project follows a
+                    carefully engineered sequence — structural steel, floor slabs, bracing
+                    systems and crane logistics planned before a single bolt is tightened.
+                  </p>
+                  <p>
+                    Our in-house design and execution teams work from the same drawing set,
+                    eliminating the coordination gaps that delay lesser contractors.
+                  </p>
+                </div>
+              </FadeRiseItem>
+              <FadeRiseItem delay={0.15}>
+                <div className="grid grid-cols-3 gap-4">
+                  {[
+                    { phase: '01', title: 'Design & Plan' },
+                    { phase: '02', title: 'Fabricate & Build' },
+                    { phase: '03', title: 'Commission' },
+                  ].map((step) => (
+                    <div key={step.phase} className="border border-teal/20 rounded-card p-4 hover:border-teal/50 transition-colors">
+                      <div className="font-body text-teal text-[10px] uppercase tracking-widest mb-1">{step.phase}</div>
+                      <div className="font-display text-white text-body-md font-semibold">{step.title}</div>
+                    </div>
+                  ))}
+                </div>
+              </FadeRiseItem>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -231,26 +294,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Stats Band ── */}
-      <section className="bg-teal text-white py-16" aria-label="Key statistics">
+      {/* ── Stats Band — rising floors ── */}
+      <section className="bg-teal text-white py-20 overflow-hidden" aria-label="Key statistics">
         <div className="container-max">
-          <FadeRise className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {[
-              { value: 50, suffix: '+', label: 'Projects Completed' },
-              { value: 35, suffix: '+', label: 'Years Experience' },
-              { value: 0, suffix: '', label: 'Accidents Recorded' },
-              { value: 70, suffix: '%', label: 'Repeat Client Ratio' },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <div className="font-display font-extrabold text-display-lg text-white leading-none mb-2">
-                  <CountUp target={stat.value} suffix={stat.suffix} />
-                </div>
-                <div className="font-body text-label-md uppercase tracking-wider text-white/80">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </FadeRise>
+          <SectionHeading
+            title="Our Track Record"
+            subtitle="Numbers that have been earned on site — not in a brochure."
+            className="[&_h2]:text-white [&_p]:text-white/70 mb-14"
+          />
+          <RisingFloors stats={floorStats} />
         </div>
       </section>
 

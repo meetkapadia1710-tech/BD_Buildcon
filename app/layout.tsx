@@ -5,6 +5,7 @@ import { UtilityBar } from '@/components/layout/UtilityBar'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { LenisProvider } from '@/components/motion/LenisProvider'
+import { PageTransitionOverlay } from '@/components/motion/PageTransitionOverlay'
 
 const hanken = Hanken_Grotesk({
   subsets: ['latin'],
@@ -103,6 +104,7 @@ export default function RootLayout({
       </head>
       <body>
         <LenisProvider>
+          <PageTransitionOverlay />
           <UtilityBar />
           <Header />
           <main>{children}</main>
