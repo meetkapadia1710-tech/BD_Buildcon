@@ -108,7 +108,7 @@ export default function ContactPage() {
       {/* Map */}
       <section className="h-[400px] border-y border-hairline overflow-hidden" aria-label="Office location map">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3702.5!2d72.9959!3d21.7051!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395f43b77c9dd97d%3A0xc14cc0d3e7db8cf5!2sBharuch%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1234567890"
+          src="https://maps.google.com/maps?q=Millenium+Arcade%2C+Opp+SVM+Engineering+College%2C+Old+National+Highway+8%2C+Bharuch%2C+Gujarat+392002&output=embed&z=16"
           width="100%"
           height="400"
           style={{ border: 0 }}

@@ -6,6 +6,8 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { LenisProvider } from '@/components/motion/LenisProvider'
 import { PageTransitionOverlay } from '@/components/motion/PageTransitionOverlay'
+import { SmoothCursor } from '@/components/motion/SmoothCursor'
+import { ScrollProgress } from '@/components/motion/ScrollProgress'
 
 const hanken = Hanken_Grotesk({
   subsets: ['latin'],
@@ -104,6 +106,8 @@ export default function RootLayout({
       </head>
       <body>
         <LenisProvider>
+          <SmoothCursor />
+          <ScrollProgress />
           <PageTransitionOverlay />
           <UtilityBar />
           <Header />

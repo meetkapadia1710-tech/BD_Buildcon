@@ -21,6 +21,13 @@ html {
   scroll-behavior: auto; /* Lenis manages smooth scrolling */
 }
 
+/* Hide native cursor on fine-pointer (mouse) devices — SmoothCursor replaces it */
+@media (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+}
+
 body {
   @apply font-body text-ink antialiased;
   background-color: #FFFFFF;
@@ -77,27 +84,50 @@ img {
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 px-8 py-3.5
            bg-teal text-white font-body text-label-md uppercase tracking-widest
-           rounded-full transition-all duration-300
-           hover:bg-teal-hover
+           rounded-full
            focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2
            min-h-[44px];
+    transition: background-color 0.25s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+  }
+  .btn-primary:hover {
+    @apply bg-teal-hover;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(22,168,184,0.35);
+  }
+  .btn-primary:active {
+    transform: scale(0.96) translateY(0);
+    box-shadow: none;
   }
 
   .btn-ghost {
     @apply inline-flex items-center justify-center gap-2 px-8 py-3.5
            border-2 border-teal text-teal font-body text-label-md uppercase tracking-widest
-           rounded-full transition-all duration-300
-           hover:bg-teal hover:text-white
+           rounded-full
            focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2
            min-h-[44px];
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+  }
+  .btn-ghost:hover {
+    @apply bg-teal text-white;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(22,168,184,0.25);
+  }
+  .btn-ghost:active {
+    transform: scale(0.96) translateY(0);
   }
 
   .btn-ghost-white {
     @apply inline-flex items-center justify-center gap-2 px-8 py-3.5
            border-2 border-white text-white font-body text-label-md uppercase tracking-widest
-           rounded-full transition-all duration-300
-           hover:bg-white hover:text-ink
-           min-h-[44px];
+           rounded-full min-h-[44px];
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .btn-ghost-white:hover {
+    @apply bg-white text-ink;
+    transform: translateY(-2px);
+  }
+  .btn-ghost-white:active {
+    transform: scale(0.96) translateY(0);
   }
 
   .section-pad {
@@ -113,9 +143,14 @@ img {
   }
 
   .card {
-    @apply bg-white rounded-card border border-hairline shadow-card
-           transition-all duration-300
-           hover:-translate-y-1 hover:shadow-card-hover;
+    @apply bg-white rounded-card border border-hairline shadow-card;
+    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1),
+                box-shadow 0.35s ease,
+                border-color 0.25s ease;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    @apply shadow-card-hover border-teal/20;
   }
 
   .form-field {
@@ -141,6 +176,34 @@ img {
   .section-heading .rule {
     @apply mx-auto;
   }
+}
+
+/* Fluid underline — draws left to right on hover */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+}
+
+/* Image reveal on hover — smooth zoom */
+.img-hover img {
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.img-hover:hover img {
+  transform: scale(1.06);
 }
 
 /* Clip path for RevealImage */

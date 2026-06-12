@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useEffect, Children, cloneElement, isValidElement } from 'react'
+import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -18,9 +18,9 @@ type FadeRiseProps = {
 export function FadeRise({
   children,
   className = '',
-  stagger = 0.12,
+  stagger = 0.1,
   delay = 0,
-  y = 24,
+  y = 32,
   as: Tag = 'div',
 }: FadeRiseProps) {
   const ref = useRef<HTMLElement>(null)
@@ -29,13 +29,13 @@ export function FadeRise({
     const container = ref.current
     if (!container) return
 
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReduced) return
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduced) return
 
-    const items = container.children
+    const items = Array.from(container.children)
     if (!items.length) return
 
-    gsap.set(items, { opacity: 0, y })
+    gsap.set(items, { opacity: 0, y, filter: 'blur(6px)' })
 
     const trigger = ScrollTrigger.create({
       trigger: container,
@@ -44,8 +44,9 @@ export function FadeRise({
         gsap.to(items, {
           opacity: 1,
           y: 0,
-          duration: 0.9,
-          ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+          filter: 'blur(0px)',
+          duration: 1.0,
+          ease: 'expo.out',
           stagger,
           delay,
         })
@@ -76,10 +77,10 @@ export function FadeRiseItem({ children, className = '', delay = 0 }: FadeRiseIt
     const el = ref.current
     if (!el) return
 
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReduced) return
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduced) return
 
-    gsap.set(el, { opacity: 0, y: 24 })
+    gsap.set(el, { opacity: 0, y: 32, filter: 'blur(6px)' })
 
     const trigger = ScrollTrigger.create({
       trigger: el,
@@ -88,8 +89,9 @@ export function FadeRiseItem({ children, className = '', delay = 0 }: FadeRiseIt
         gsap.to(el, {
           opacity: 1,
           y: 0,
-          duration: 0.9,
-          ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
+          filter: 'blur(0px)',
+          duration: 1.0,
+          ease: 'expo.out',
           delay,
         })
       },
