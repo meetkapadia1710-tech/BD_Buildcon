@@ -16,7 +16,7 @@ import { services } from '@/content/services'
 export const metadata: Metadata = {
   title: 'BD Buildcon LLP | Industrial EPC Contractor, Bharuch, Gujarat',
   description:
-    'Turnkey industrial EPC contractor since 1992. All projects completed on deadline with zero accidents. ISO 9001:2015 · NSIC-CRISIL · ₹650M+ delivered.',
+    'Turnkey industrial EPC contractor since 1995. All projects completed on deadline with zero accidents. ISO 9001:2015 · NSIC · ₹200+ Cr delivered.',
 }
 
 const sectors = [
@@ -54,8 +54,8 @@ const pillars = [
         <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
       </svg>
     ),
-    title: '60% Repeat Clients',
-    body: 'More than half of our clients return — the strongest endorsement in the industry.',
+    title: '70% Repeat Clients',
+    body: 'More than two-thirds of our clients return — the strongest endorsement in the industry.',
   },
   {
     icon: (
@@ -104,7 +104,7 @@ export default function HomePage() {
           <FadeRiseItem delay={0.1}>
             <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 text-white/80 font-body text-label-md uppercase tracking-widest mb-8">
               <span className="w-2 h-2 bg-teal rounded-full animate-pulse" />
-              ISO 9001:2015 Certified · NSIC-CRISIL Rated
+              ISO 9001:2015 Certified · NSIC Rated
             </div>
           </FadeRiseItem>
 
@@ -118,7 +118,7 @@ export default function HomePage() {
 
           <FadeRiseItem delay={0.35}>
             <p className="font-body text-body-lg text-white/70 max-w-2xl mx-auto mb-10">
-              25+ years · ISO 9001:2015 · NSIC-CRISIL · ₹650M+ turnover
+              35+ years · ISO 9001:2015 · NSIC · ₹200+ Cr turnover
             </p>
           </FadeRiseItem>
 
@@ -237,9 +237,9 @@ export default function HomePage() {
           <FadeRise className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
               { value: 50, suffix: '+', label: 'Projects Completed' },
-              { value: 25, suffix: '+', label: 'Years Experience' },
+              { value: 35, suffix: '+', label: 'Years Experience' },
               { value: 0, suffix: '', label: 'Accidents Recorded' },
-              { value: 60, suffix: '%', label: 'Repeat Client Ratio' },
+              { value: 70, suffix: '%', label: 'Repeat Client Ratio' },
             ].map((stat) => (
               <div key={stat.label}>
                 <div className="font-display font-extrabold text-display-lg text-white leading-none mb-2">
@@ -251,6 +251,55 @@ export default function HomePage() {
               </div>
             ))}
           </FadeRise>
+        </div>
+      </section>
+
+      {/* ── Desk of Directors ── */}
+      <section className="section-pad bg-footer" aria-label="Message from the Director">
+        <div className="container-max">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Director photo */}
+            <RevealImage
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=900&auto=format&fit=crop"
+              alt="Director of BD Buildcon LLP"
+              fill
+              wrapperClassName="aspect-[3/4] rounded-card overflow-hidden"
+              className="object-cover object-top"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              parallax
+            />
+
+            {/* Message */}
+            <div>
+              <FadeRiseItem>
+                <span className="font-body text-label-md text-teal uppercase tracking-widest block mb-4">
+                  Desk of Directors
+                </span>
+                <div className="text-[72px] leading-none text-teal/20 font-display select-none mb-2" aria-hidden="true">
+                  &ldquo;
+                </div>
+                <blockquote className="font-display text-headline-sm text-white leading-snug mb-6">
+                  Every project we undertake must be delivered safely, on time, and to the highest quality standards.
+                  There are no shortcuts when people&apos;s lives and industrial operations depend on what we build.
+                </blockquote>
+                <p className="font-body text-body-lg text-white/55 leading-relaxed mb-8">
+                  Over 35 years, we have grown from a regional civil contractor into a full-service turnkey EPC
+                  partner recognised across Gujarat and beyond — earned project by project through transparent
+                  communication, technical depth and the resilience to deliver under pressure.
+                </p>
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="h-px w-10 bg-teal shrink-0" aria-hidden="true" />
+                  <div>
+                    <p className="font-display font-bold text-white text-body-lg">Director</p>
+                    <p className="font-body text-body-md text-white/45">BD Buildcon LLP · Est. 1995</p>
+                  </div>
+                </div>
+                <Link href="/about/directors" className="btn-ghost-white text-sm">
+                  Read the full message
+                </Link>
+              </FadeRiseItem>
+            </div>
+          </div>
         </div>
       </section>
 

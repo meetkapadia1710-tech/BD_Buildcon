@@ -65,13 +65,13 @@ export const certifications: Certification[] = [
     documentImage: 'https://placehold.co/600x850/F6F8F8/2E353B?text=ISO+9001%3A2015+Certificate',
   },
   {
-    id: 'nsic-crisil',
-    client: 'NSIC-CRISIL',
-    clientShort: 'NSIC-CRISIL',
+    id: 'nsic',
+    client: 'NSIC',
+    clientShort: 'NSIC',
     type: 'accreditation',
     year: '2023',
-    description: 'NSIC-CRISIL performance and credit rating — affirming financial soundness and execution capability.',
+    description: 'NSIC performance and credit rating — affirming financial soundness and execution capability.',
     image: undefined,
-    documentImage: 'https://placehold.co/600x850/F6F8F8/2E353B?text=NSIC-CRISIL+Rating',
+    documentImage: 'https://placehold.co/600x850/F6F8F8/2E353B?text=NSIC+Rating',
   },
 ]

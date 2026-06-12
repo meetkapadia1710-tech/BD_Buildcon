@@ -37,19 +37,19 @@ export default function DirectorsPage() {
                 <div className="space-y-5 font-body text-body-lg text-body leading-relaxed">
                   <p>
                     Welcome to BD Buildcon LLP. Since founding the company (formerly Bhumi Developers)
-                    in 1992, our driving force has been a simple but uncompromising belief: every project
+                    in 1995, our driving force has been a simple but uncompromising belief: every project
                     we undertake must be delivered safely, on time, and to the highest quality standards.
                     There are no shortcuts when people's lives and industrial operations depend on what
                     we build.
                   </p>
                   <p>
-                    Over 25 years, we have grown from a regional civil contractor into a full-service
+                    Over 35 years, we have grown from a regional civil contractor into a full-service
                     turnkey EPC contractor recognised across Gujarat and beyond. That growth has been
                     earned project by project — through transparent communication, technical depth and
                     the resilience to deliver in challenging conditions.
                   </p>
                   <p>
-                    Our repeat client ratio of more than 60% is the metric I am proudest of. It tells
+                    Our repeat client ratio of more than 70% is the metric I am proudest of. It tells
                     me that clients don't just complete a project with us — they trust us with the next
                     one. That trust is the foundation on which we continue to invest: in our people, our
                     machinery fleet and our quality systems.
@@ -91,9 +91,9 @@ export default function DirectorsPage() {
               {/* Stat strip */}
               <FadeRise className="mt-6 grid grid-cols-3 gap-3">
                 {[
-                  { num: '25+', label: 'Years' },
+                  { num: '35+', label: 'Years' },
                   { num: '50+', label: 'Projects' },
-                  { num: '60%', label: 'Repeat' },
+                  { num: '70%', label: 'Repeat' },
                 ].map((s) => (
                   <div key={s.label} className="bg-surface rounded-card p-4 text-center border border-hairline">
                     <div className="font-display font-bold text-teal text-headline-sm">{s.num}</div>

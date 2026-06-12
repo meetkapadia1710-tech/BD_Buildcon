@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: '%s | BD Buildcon LLP',
   },
   description:
-    'BD Buildcon LLP (formerly Bhumi Developers) — turnkey industrial EPC contractor with 25+ years in Civil, Mechanical, PEB structures, piling and piping. ISO 9001:2015 certified. Based in Bharuch, Gujarat.',
+    'BD Buildcon LLP (formerly Bhumi Developers) — turnkey industrial EPC contractor with 35+ years in Civil, Mechanical, PEB structures, piling and piping. ISO 9001:2015 certified. Based in Bharuch, Gujarat.',
   keywords: [
     'industrial EPC contractor',
     'turnkey construction',
@@ -44,12 +44,12 @@ export const metadata: Metadata = {
     siteName: 'BD Buildcon LLP',
     title: 'BD Buildcon LLP | Industrial EPC Contractor',
     description:
-      'Turnkey industrial EPC contractor with 25+ years. Specialised in Civil, Mechanical, PEB, piling, piping. ISO 9001:2015 certified.',
+      'Turnkey industrial EPC contractor with 35+ years. Specialised in Civil, Mechanical, PEB, piling, piping. ISO 9001:2015 certified.',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'BD Buildcon LLP | Industrial EPC Contractor',
-    description: 'Turnkey industrial EPC contractor since 1992. Zero accidents. On-time delivery.',
+    description: 'Turnkey industrial EPC contractor since 1995. Zero accidents. On-time delivery.',
   },
   robots: {
     index: true,
@@ -96,7 +96,7 @@ export default function RootLayout({
                 closes: '20:00',
               },
               description:
-                'Turnkey industrial EPC contractor specialised in Civil, Mechanical, PEB, piling, piping. 25+ years. ISO 9001:2015 certified.',
+                'Turnkey industrial EPC contractor specialised in Civil, Mechanical, PEB, piling, piping. 35+ years. ISO 9001:2015 certified.',
             }),
           }}
         />

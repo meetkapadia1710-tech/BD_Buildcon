@@ -28,7 +28,7 @@ const values = [
   {
     icon: '🤝',
     title: 'Client Trust',
-    body: 'Transparent communication and consistent results have made more than 60% of our clients repeat partners.',
+    body: 'Transparent communication and consistent results have made more than 70% of our clients repeat partners.',
   },
   {
     icon: '💡',

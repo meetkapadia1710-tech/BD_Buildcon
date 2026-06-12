@@ -8,7 +8,7 @@ import { RevealImage } from '@/components/motion/RevealImage'
 
 export const metadata: Metadata = {
   title: 'Overview',
-  description: 'Learn about BD Buildcon LLP — a turnkey industrial EPC contractor with 25+ years, ISO 9001:2015 certified, specialised in Civil, Mechanical, PEB, piling and piping.',
+  description: 'Learn about BD Buildcon LLP — a turnkey industrial EPC contractor with 35+ years, ISO 9001:2015 certified, specialised in Civil, Mechanical, PEB, piling and piping.',
 }
 
 const bentoCards = [
@@ -107,8 +107,8 @@ export default function OverviewPage() {
                   across difficult weather and terrain.
                 </p>
                 <p className="font-body text-body-md text-body leading-relaxed">
-                  Since 1992, we have delivered 50+ projects for clients across chemical, pharma,
-                  petroleum, fertiliser, glass, tyre and food industries — with more than 60% of
+                  Since 1995, we have delivered 50+ projects for clients across chemical, pharma,
+                  petroleum, fertiliser, glass, tyre and food industries — with more than 70% of
                   clients returning for additional work, a testament to consistent execution excellence.
                 </p>
               </FadeRiseItem>
@@ -117,9 +117,9 @@ export default function OverviewPage() {
               <FadeRiseItem delay={0.1}>
                 <div className="mt-8 flex gap-6 pl-5 border-l-4 border-teal">
                   {[
-                    { num: '25+', label: 'Years Experience' },
+                    { num: '35+', label: 'Years Experience' },
                     { num: '50+', label: 'Projects Delivered' },
-                    { num: '60%', label: 'Repeat Clients' },
+                    { num: '70%', label: 'Repeat Clients' },
                   ].map((s) => (
                     <div key={s.label}>
                       <span className="block font-display font-bold text-headline-md text-ink">{s.num}</span>

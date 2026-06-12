@@ -5,30 +5,30 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MagneticButton } from '@/components/motion/MagneticButton'
+import { contactInfo } from '@/content/links'
 
 const aboutLinks = [
-  { label: 'Overview', href: '/about/overview' },
-  { label: 'Ideology', href: '/about/ideology' },
-  { label: 'Desk of Directors', href: '/about/directors' },
-  { label: 'Certification', href: '/about/certification' },
-  { label: 'Plant & Machinery', href: '/about/plant-machinery' },
-  { label: 'Equipment & Accessories', href: '/about/equipment' },
+  { label: 'Overview',               href: '/about/overview',       desc: 'Company profile & history' },
+  { label: 'Ideology',               href: '/about/ideology',        desc: 'Values, vision & mission' },
+  { label: 'Certification',          href: '/about/certification',   desc: 'ISO 9001 · NSIC accreditation' },
+  { label: 'Plant & Machinery',      href: '/about/plant-machinery', desc: '100+ owned equipment items' },
+  { label: 'Equipment & Accessories',href: '/about/equipment',       desc: 'Full plant capability list' },
 ]
 
 const navLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'About Us', href: '/about/overview', hasDropdown: true },
-  { label: 'Why Us', href: '/why-us' },
-  { label: 'Projects', href: '/projects' },
+  { label: 'Home',          href: '/' },
+  { label: 'About Us',      href: '/about/overview', hasDropdown: true },
+  { label: 'Why Us',        href: '/why-us' },
+  { label: 'Projects',      href: '/projects' },
   { label: 'Employee Area', href: '/employee-area' },
-  { label: 'Contact', href: '/contact' },
+  { label: 'Contact',       href: '/contact' },
 ]
 
 export function Header() {
-  const [scrolled, setScrolled] = useState(false)
+  const [scrolled, setScrolled]     = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [aboutOpen, setAboutOpen] = useState(false)
-  const pathname = usePathname()
+  const [aboutOpen, setAboutOpen]   = useState(false)
+  const pathname    = usePathname()
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -51,23 +51,42 @@ export function Header() {
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-sm py-3'
-          : 'bg-white border-b border-hairline py-4'
+          ? 'bg-white/95 backdrop-blur-md shadow-[0_2px_16px_rgba(0,0,0,0.07)] py-2'
+          : 'bg-white border-b border-hairline py-3'
       }`}
     >
-      <div className="max-w-container mx-auto px-gutter flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex flex-col leading-none group">
-          <span className="font-display text-xl font-bold text-teal tracking-tight transition-colors group-hover:text-teal-hover">
-            BD Buildcon LLP
-          </span>
-          <span className="text-[10px] text-body font-body tracking-wide hidden sm:block">
-            (Formerly known as Bhumi Developers)
-          </span>
+      <div className="max-w-container mx-auto px-gutter flex items-center justify-between gap-6">
+
+        {/* ── Logo ─────────────────────────────────────────── */}
+        <Link href="/" className="flex items-center gap-3 shrink-0 group">
+          {/* Geometric mark */}
+          <div className="relative w-9 h-9 shrink-0">
+            <div className="absolute inset-0 rounded bg-teal transition-colors duration-200 group-hover:bg-teal-hover" />
+            <svg viewBox="0 0 36 36" className="absolute inset-0 w-full h-full" aria-hidden="true">
+              {/* B shape */}
+              <rect x="8"  y="8"  width="5" height="20" rx="1" fill="white" />
+              <rect x="8"  y="8"  width="11" height="5"  rx="1" fill="white" />
+              <rect x="8"  y="16" width="11" height="4"  rx="1" fill="white" />
+              <rect x="8"  y="23" width="11" height="5"  rx="1" fill="white" />
+              {/* D shape */}
+              <rect x="22" y="8"  width="5" height="20" rx="1" fill="white" opacity="0.55" />
+              <rect x="22" y="8"  width="9" height="4"  rx="1" fill="white" opacity="0.55" />
+              <rect x="22" y="24" width="9" height="4"  rx="1" fill="white" opacity="0.55" />
+            </svg>
+          </div>
+          {/* Text */}
+          <div className="leading-none">
+            <div className="font-display font-bold text-ink text-[18px] tracking-tight">
+              BD Buildcon <span className="text-teal">LLP</span>
+            </div>
+            <div className="font-body text-[9px] uppercase tracking-[0.15em] text-body hidden sm:block mt-0.5">
+              Formerly Bhumi Developers
+            </div>
+          </div>
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
+        {/* ── Desktop Nav ───────────────────────────────────── */}
+        <nav className="hidden lg:flex items-center" aria-label="Main navigation">
           {navLinks.map((link) =>
             link.hasDropdown ? (
               <div key={link.label} className="relative" ref={dropdownRef}>
@@ -76,45 +95,56 @@ export function Header() {
                   onBlur={() => setTimeout(() => setAboutOpen(false), 150)}
                   aria-expanded={aboutOpen}
                   aria-haspopup="true"
-                  className={`flex items-center gap-1 px-3 py-2 rounded font-body text-label-md uppercase tracking-wider transition-colors duration-200 ${
-                    isActive('/about')
-                      ? 'text-teal'
-                      : 'text-ink hover:text-teal'
+                  className={`relative flex items-center gap-1 px-4 py-3 font-body text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors duration-200 ${
+                    isActive('/about') ? 'text-teal' : 'text-ink hover:text-teal'
                   }`}
                 >
                   {link.label}
                   <svg
-                    className={`w-3.5 h-3.5 transition-transform duration-200 ${aboutOpen ? 'rotate-180' : ''}`}
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
+                    className={`w-3 h-3 transition-transform duration-200 ${aboutOpen ? 'rotate-180' : ''}`}
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
                     aria-hidden="true"
                   >
                     <polyline points="6 9 12 15 18 9" />
                   </svg>
+                  {isActive('/about') && (
+                    <motion.span
+                      layoutId="nav-indicator"
+                      className="absolute bottom-0 left-3 right-3 h-[2px] bg-teal rounded-full"
+                    />
+                  )}
                 </button>
 
                 <AnimatePresence>
                   {aboutOpen && (
                     <motion.div
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 8 }}
-                      transition={{ duration: 0.18 }}
-                      className="absolute top-full left-0 mt-1 w-52 bg-white rounded-card border border-hairline shadow-card-hover overflow-hidden z-50"
+                      initial={{ opacity: 0, y: 12, scale: 0.97 }}
+                      animate={{ opacity: 1, y: 0,  scale: 1 }}
+                      exit={{ opacity: 0,  y: 12, scale: 0.97 }}
+                      transition={{ duration: 0.16, ease: 'easeOut' }}
+                      className="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl border border-hairline shadow-[0_8px_40px_rgba(0,0,0,0.12)] overflow-hidden z-50"
                     >
-                      {aboutLinks.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className={`block px-4 py-2.5 font-body text-body-md transition-colors duration-150 hover:bg-surface hover:text-teal ${
-                            pathname === item.href ? 'text-teal bg-surface' : 'text-ink'
-                          }`}
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
+                      {/* Teal accent top strip */}
+                      <div className="h-1 bg-teal w-full" />
+                      <div className="p-2">
+                        {aboutLinks.map((item) => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            className={`flex items-start gap-3 px-3 py-2.5 rounded-xl transition-colors duration-150 group/item ${
+                              pathname === item.href
+                                ? 'bg-teal/10 text-teal'
+                                : 'text-ink hover:bg-surface hover:text-teal'
+                            }`}
+                          >
+                            <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-teal/30 group-hover/item:bg-teal shrink-0 transition-colors" />
+                            <div>
+                              <div className="font-body text-body-md font-semibold leading-tight">{item.label}</div>
+                              <div className="font-body text-[10px] text-body mt-0.5 opacity-60">{item.desc}</div>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -123,71 +153,85 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`px-3 py-2 rounded font-body text-label-md uppercase tracking-wider transition-colors duration-200 ${
-                  isActive(link.href)
-                    ? 'text-teal border-b-2 border-teal pb-1.5'
-                    : 'text-ink hover:text-teal'
+                className={`relative px-4 py-3 font-body text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors duration-200 ${
+                  isActive(link.href) ? 'text-teal' : 'text-ink hover:text-teal'
                 }`}
               >
                 {link.label}
+                {isActive(link.href) && (
+                  <motion.span
+                    layoutId="nav-indicator"
+                    className="absolute bottom-0 left-3 right-3 h-[2px] bg-teal rounded-full"
+                  />
+                )}
               </Link>
             )
           )}
         </nav>
 
-        {/* Desktop CTA */}
-        <div className="hidden lg:block">
-          <MagneticButton as="a" href="/contact" className="btn-primary text-sm px-6 py-2.5">
+        {/* ── Desktop CTA ───────────────────────────────────── */}
+        <div className="hidden lg:flex items-center gap-3 shrink-0">
+          {/* Phone shortcut */}
+          <a
+            href={`tel:${contactInfo.phoneTel}`}
+            className="flex items-center gap-2 text-ink hover:text-teal transition-colors duration-200 group"
+            aria-label={`Call ${contactInfo.phone}`}
+          >
+            <div className="w-8 h-8 rounded-full border border-hairline flex items-center justify-center transition-colors duration-200 group-hover:border-teal group-hover:bg-teal/5">
+              <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+              </svg>
+            </div>
+            <span className="font-body text-[12px] font-semibold hidden xl:block">{contactInfo.phone}</span>
+          </a>
+
+          {/* Divider */}
+          <span className="h-6 w-px bg-hairline hidden xl:block" aria-hidden="true" />
+
+          <MagneticButton as="a" href="/contact" className="btn-primary text-[11px] tracking-wider px-5 py-2.5">
             Start your project
           </MagneticButton>
         </div>
 
-        {/* Mobile hamburger */}
+        {/* ── Mobile hamburger ──────────────────────────────── */}
         <button
           onClick={() => setMobileOpen((o) => !o)}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={mobileOpen}
-          className="lg:hidden p-2 rounded text-ink hover:text-teal transition-colors"
+          className="lg:hidden p-2 rounded-lg text-ink hover:text-teal hover:bg-surface transition-colors"
         >
-          <span className="sr-only">{mobileOpen ? 'Close menu' : 'Open menu'}</span>
-          <div className="w-6 h-5 flex flex-col justify-between">
-            <span
-              className={`block h-0.5 bg-current transition-all duration-300 ${mobileOpen ? 'rotate-45 translate-y-2' : ''}`}
-            />
-            <span
-              className={`block h-0.5 bg-current transition-all duration-300 ${mobileOpen ? 'opacity-0' : ''}`}
-            />
-            <span
-              className={`block h-0.5 bg-current transition-all duration-300 ${mobileOpen ? '-rotate-45 -translate-y-2' : ''}`}
-            />
+          <div className="w-5 h-4 flex flex-col justify-between">
+            <span className={`block h-[2px] bg-current rounded-full transition-all duration-300 ${mobileOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
+            <span className={`block h-[2px] bg-current rounded-full transition-all duration-300 ${mobileOpen ? 'opacity-0 scale-x-0' : ''}`} />
+            <span className={`block h-[2px] bg-current rounded-full transition-all duration-300 ${mobileOpen ? '-rotate-45 -translate-y-[9px]' : ''}`} />
           </div>
         </button>
       </div>
 
-      {/* Mobile overlay menu */}
+      {/* ── Mobile menu ───────────────────────────────────────── */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            transition={{ duration: 0.28, ease: 'easeInOut' }}
             className="lg:hidden overflow-hidden bg-white border-t border-hairline"
           >
-            <nav className="px-6 py-6 flex flex-col gap-1" aria-label="Mobile navigation">
+            <nav className="px-5 py-5 flex flex-col gap-0.5" aria-label="Mobile navigation">
               {navLinks.map((link) =>
                 link.hasDropdown ? (
                   <div key={link.label}>
-                    <div className="font-body text-label-md uppercase tracking-wider text-body py-2 px-3">
+                    <div className="px-3 py-2 font-body text-[10px] font-bold uppercase tracking-[0.15em] text-body/60">
                       {link.label}
                     </div>
-                    <div className="pl-4 flex flex-col gap-1">
+                    <div className="pl-3 flex flex-col gap-0.5">
                       {aboutLinks.map((item) => (
                         <Link
                           key={item.href}
                           href={item.href}
-                          className={`py-2 px-3 rounded font-body text-body-md transition-colors hover:text-teal ${
-                            pathname === item.href ? 'text-teal' : 'text-ink'
+                          className={`px-3 py-2.5 rounded-xl font-body text-body-md transition-colors hover:bg-surface hover:text-teal ${
+                            pathname === item.href ? 'text-teal bg-teal/5' : 'text-ink'
                           }`}
                         >
                           {item.label}
@@ -199,7 +243,7 @@ export function Header() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`py-2.5 px-3 rounded font-body text-body-md uppercase tracking-wider transition-colors hover:text-teal ${
+                    className={`px-3 py-2.5 rounded-xl font-body text-body-md font-semibold uppercase tracking-[0.08em] transition-colors hover:bg-surface hover:text-teal ${
                       isActive(link.href) ? 'text-teal' : 'text-ink'
                     }`}
                   >
@@ -207,8 +251,18 @@ export function Header() {
                   </Link>
                 )
               )}
-              <div className="mt-4 pt-4 border-t border-hairline">
-                <Link href="/contact" className="btn-primary w-full text-sm">
+
+              <div className="mt-4 pt-4 border-t border-hairline flex flex-col gap-2.5">
+                <a
+                  href={`tel:${contactInfo.phoneTel}`}
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl bg-surface text-ink hover:text-teal transition-colors"
+                >
+                  <svg className="w-4 h-4 text-teal shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                  </svg>
+                  <span className="font-body text-body-md font-semibold">{contactInfo.phone}</span>
+                </a>
+                <Link href="/contact" className="btn-primary w-full text-sm text-center">
                   Start your project
                 </Link>
               </div>

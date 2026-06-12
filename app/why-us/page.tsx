@@ -9,7 +9,7 @@ import { CountUp } from '@/components/motion/CountUp'
 
 export const metadata: Metadata = {
   title: 'Why Us',
-  description: 'Why choose BD Buildcon? 25+ years of industrial EPC expertise, zero accidents, 60% repeat clients, and all technology under one roof.',
+  description: 'Why choose BD Buildcon? 35+ years of industrial EPC expertise, zero accidents, 70% repeat clients, and all technology under one roof.',
 }
 
 const reasons = [
@@ -52,9 +52,9 @@ const reasons = [
 ]
 
 const differentiators = [
-  { value: 25, suffix: '+', label: 'Years of Experience' },
+  { value: 35, suffix: '+', label: 'Years of Experience' },
   { value: 0, suffix: '', label: 'Accidents Recorded' },
-  { value: 60, suffix: '%', label: 'Repeat Client Ratio' },
+  { value: 70, suffix: '%', label: 'Repeat Client Ratio' },
   { value: 50, suffix: '+', label: 'Major Projects Completed' },
 ]
 
@@ -64,7 +64,7 @@ export default function WhyUsPage() {
       <PageTitleBand
         title="Why BD Buildcon?"
         breadcrumbs={[{ label: 'Why Us' }]}
-        description="The BD Buildcon team has 25+ years of experience and a proven track record, ensuring projects are completed in a timely, quality and professional manner."
+        description="The BD Buildcon team has 35+ years of experience and a proven track record, ensuring projects are completed in a timely, quality and professional manner."
       />
 
       {/* Alternating rows */}
@@ -122,7 +122,7 @@ export default function WhyUsPage() {
           {/* Certifications */}
           <FadeRiseItem delay={0.2}>
             <div className="mt-12 flex flex-wrap justify-center gap-6">
-              {['ISO 9001:2015', 'NSIC-CRISIL Rated', 'Zero Accidents Since 1992'].map((badge) => (
+              {['ISO 9001:2015', 'NSIC Rated', 'Zero Accidents Since 1995'].map((badge) => (
                 <div
                   key={badge}
                   className="flex items-center gap-2 bg-white/10 rounded-full px-5 py-2.5 backdrop-blur-sm"
