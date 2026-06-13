@@ -88,7 +88,16 @@ export function SmoothCursor() {
 
   return (
     <>
-      {/* Outer ring — teal to match brand */}
+      {/*
+        Both elements use mix-blend-mode: difference with white color.
+        Result = |white − background| — so the cursor always inverts
+        whatever is beneath it and is never camouflaged.
+        White bg  → black cursor
+        Dark bg   → white cursor
+        Teal bg   → orange/amber cursor
+      */}
+
+      {/* Outer ring — teal border + white shadow halo so it separates from teal backgrounds */}
       <div
         ref={ringRef}
         className="fixed top-0 left-0 pointer-events-none rounded-full z-[600]"
@@ -96,15 +105,16 @@ export function SmoothCursor() {
           width: 32,
           height: 32,
           border: '1.5px solid #16A8B8',
-          opacity: visible && !isInput ? 0.7 : 0,
-          backgroundColor: hovered ? 'rgba(22,168,184,0.1)' : 'transparent',
+          boxShadow: '0 0 0 1.5px white',
+          opacity: visible && !isInput ? 0.85 : 0,
+          backgroundColor: hovered ? 'rgba(22,168,184,0.12)' : 'transparent',
           transform: hovered ? 'scale(1.8)' : 'scale(1)',
           transition: 'opacity 0.25s, background-color 0.25s, transform 0.25s ease-out',
           willChange: 'transform',
         }}
       />
 
-      {/* Center dot — teal */}
+      {/* Center dot — teal fill + white halo */}
       <div
         ref={dotRef}
         className="fixed top-0 left-0 pointer-events-none rounded-full z-[601]"
@@ -112,7 +122,7 @@ export function SmoothCursor() {
           width: 6,
           height: 6,
           backgroundColor: '#16A8B8',
-          boxShadow: '0 0 6px rgba(22,168,184,0.6)',
+          boxShadow: '0 0 0 1.5px white, 0 0 8px rgba(22,168,184,0.7)',
           opacity: visible && !isInput && !hovered ? 1 : 0,
           transition: 'opacity 0.25s',
           willChange: 'transform',
