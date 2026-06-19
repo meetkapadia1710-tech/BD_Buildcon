@@ -1,6 +1,6 @@
 export const employeeLinks = {
-  erp: 'https://erp.bdbuildcon.com', // TODO: Replace with actual ERP URL
-  email: 'https://mail.bdbuildcon.com', // TODO: Replace with actual email portal URL
+  erp: 'http://bhumi.novasoftwares.com/',
+  email: 'https://mail.yandex.ru/?pdd_domain=bdbuildcon.com',
 }
 
 export const socialLinks = {

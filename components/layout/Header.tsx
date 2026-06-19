@@ -10,7 +10,7 @@ import { contactInfo } from '@/content/links'
 const aboutLinks = [
   { label: 'Overview',               href: '/about/overview',       desc: 'Company profile & history' },
   { label: 'Ideology',               href: '/about/ideology',        desc: 'Values, vision & mission' },
-  { label: 'Certification',          href: '/about/certification',   desc: 'ISO 9001 · NSIC accreditation' },
+  { label: 'Certification',          href: '/about/certification',   desc: 'ISO 9001:2015 · CRISIL SME 3 rating' },
   { label: 'Plant & Machinery',      href: '/about/plant-machinery', desc: '100+ owned equipment items' },
   { label: 'Equipment & Accessories',href: '/about/equipment',       desc: 'Full plant capability list' },
 ]

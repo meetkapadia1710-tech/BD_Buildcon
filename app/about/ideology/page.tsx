@@ -6,39 +6,33 @@ import { FadeRise, FadeRiseItem } from '@/components/motion/FadeRise'
 
 export const metadata: Metadata = {
   title: 'Ideology',
-  description: 'Vision and Mission of BD Buildcon LLP — building with integrity, safety and on-time delivery.',
+  description: 'The vision, mission and core values of BD Buildcon LLP — integrity, trust, safety and quality-first execution since 1995.',
 }
 
 const values = [
   {
-    icon: '🛡',
-    title: 'Safety First',
-    body: 'Every protocol, every team member, every day — safety is our non-negotiable foundation.',
+    title: 'Integrity',
+    body: 'Hard work and integrity are instilled in every employee. We hold ourselves to the highest standards in the industry — in our workmanship, our communication and our commitments.',
   },
   {
-    icon: '⏱',
-    title: 'On-Time Delivery',
-    body: 'We commit to deadlines and honour them through rigorous planning and owned resources.',
+    title: 'Trust',
+    body: 'Trust is the foundation of every client relationship. Our 70% repeat client ratio is the most meaningful proof of the relationships we have built — one project at a time.',
   },
   {
-    icon: '🔬',
-    title: 'Engineering Quality',
-    body: 'ISO 9001:2015 processes and in-house testing ensure every deliverable meets specification.',
+    title: 'Caring',
+    body: 'We value the health and safety of our employees, and the well-being of the communities where we work and the environment. This humanitarian mindset drives every decision on site.',
   },
   {
-    icon: '🤝',
-    title: 'Client Trust',
-    body: 'Transparent communication and consistent results have made more than 70% of our clients repeat partners.',
+    title: 'Quality First',
+    body: '"Do it right the first time" is not a slogan — it is our operating philosophy. ISO 9001:2015 certified processes and in-house testing ensure every deliverable meets specification.',
   },
   {
-    icon: '💡',
-    title: 'Technology-Led',
-    body: 'Owned plant, modern construction methods and digital tools keep us ahead of schedule.',
+    title: 'Safety',
+    body: 'Safety is our primary focus. Our zero-accident track record across 35+ years and 50+ projects reflects a culture where safety programmes, permit-to-work systems and daily toolbox talks are non-negotiable.',
   },
   {
-    icon: '🔄',
-    title: 'Repeat Partnerships',
-    body: 'The depth of our client relationships is our most valuable asset — built project by project.',
+    title: 'Continuous Improvement',
+    body: 'Our service does not end at project handover. We listen to feedback, adopt better methods and invest in our people and machinery — so every project raises the bar for the next.',
   },
 ]
 
@@ -102,12 +96,14 @@ export default function IdeologyPage() {
         <div className="container-max">
           <SectionHeading title="Our Core Values" />
           <FadeRise className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {values.map((v) => (
+            {values.map((v, i) => (
               <div
                 key={v.title}
                 className="card p-8 flex flex-col gap-4"
               >
-                <span className="text-4xl">{v.icon}</span>
+                <div className="w-10 h-10 rounded-full bg-teal/10 flex items-center justify-center">
+                  <span className="font-display font-bold text-teal text-body-md">{String(i + 1).padStart(2, '0')}</span>
+                </div>
                 <h3 className="font-display text-headline-sm text-ink">{v.title}</h3>
                 <p className="font-body text-body-md text-body leading-relaxed">{v.body}</p>
               </div>
