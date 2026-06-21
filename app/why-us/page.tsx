@@ -49,6 +49,15 @@ const reasons = [
     imageAlt: 'Construction machinery and testing equipment in BD Buildcon yard',
     reverse: true,
   },
+  {
+    id: 'quality-cost',
+    label: 'Quality & Cost',
+    heading: 'Quality you can measure. Cost you can trust.',
+    body: 'All our construction works are executed under a formal Quality Assurance Plan (QAP). We test in our own in-house laboratory — removing third-party delays and giving you faster, independent quality confirmation at every pour and weld. We also provide value engineering: no compromise on specification, but a leaner cost structure for the project as a whole. ISO 9001:2015 processes mean the savings come from efficiency, not corners cut.',
+    image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=900&auto=format&fit=crop',
+    imageAlt: 'Quality testing laboratory and construction quality checks on site',
+    reverse: false,
+  },
 ]
 
 const differentiators = [
@@ -122,7 +131,7 @@ export default function WhyUsPage() {
           {/* Certifications */}
           <FadeRiseItem delay={0.2}>
             <div className="mt-12 flex flex-wrap justify-center gap-6">
-              {['ISO 9001:2015', 'NSIC Rated', 'Zero Accidents Since 1995'].map((badge) => (
+              {['ISO 9001:2015', 'CRISIL SME 3 Rated', 'Zero Accidents Since 1995'].map((badge) => (
                 <div
                   key={badge}
                   className="flex items-center gap-2 bg-white/10 rounded-full px-5 py-2.5 backdrop-blur-sm"

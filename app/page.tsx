@@ -19,14 +19,16 @@ import { RisingFloors, type StatFloor } from '@/components/motion/RisingFloors'
 export const metadata: Metadata = {
   title: 'BD Buildcon LLP | Industrial EPC Contractor, Bharuch, Gujarat',
   description:
-    'Turnkey industrial EPC contractor since 1995. All projects completed on deadline with zero accidents. ISO 9001:2015 · NSIC · ₹200+ Cr delivered.',
+    'Turnkey industrial EPC contractor since 1995. All projects completed on deadline with zero accidents. ISO 9001:2015 certified · CRISIL SME 3 rated · ₹200+ Cr delivered.',
 }
 
 const sectors = [
-  'Chemicals', 'Pharma', 'Petroleum', 'Fertiliser',
-  'Glass', 'Tyre', 'Food', 'Industrial Gases',
-  'Chemicals', 'Pharma', 'Petroleum', 'Fertiliser',
-  'Glass', 'Tyre', 'Food', 'Industrial Gases',
+  'Chemicals', 'Pharma', 'Petroleum', 'Fertiliser', 'Glass',
+  'Tyre', 'Food Processing', 'Industrial Gases', 'Insulation',
+  'Adhesives', 'Natural Fibres', 'Infrastructure', 'Residential',
+  'Chemicals', 'Pharma', 'Petroleum', 'Fertiliser', 'Glass',
+  'Tyre', 'Food Processing', 'Industrial Gases', 'Insulation',
+  'Adhesives', 'Natural Fibres', 'Infrastructure', 'Residential',
 ]
 
 const pillars = [
@@ -114,7 +116,7 @@ export default function HomePage() {
           <FadeRiseItem delay={0.1}>
             <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 text-white/80 font-body text-label-md uppercase tracking-widest mb-8">
               <span className="w-2 h-2 bg-teal rounded-full animate-pulse" />
-              ISO 9001:2015 Certified · NSIC Rated
+              ISO 9001:2015 Certified · CRISIL SME 3 Rated
             </div>
           </FadeRiseItem>
 
@@ -128,7 +130,7 @@ export default function HomePage() {
 
           <FadeRiseItem delay={0.35}>
             <p className="font-body text-body-lg text-white/70 max-w-2xl mx-auto mb-10">
-              35+ years · ISO 9001:2015 · NSIC · ₹200+ Cr turnover
+              35+ years · ISO 9001:2015 · CRISIL SME 3 · ₹200+ Cr delivered
             </p>
           </FadeRiseItem>
 
@@ -342,12 +344,12 @@ export default function HomePage() {
                 <div className="flex items-center gap-4 mb-8">
                   <div className="h-px w-10 bg-teal shrink-0" aria-hidden="true" />
                   <div>
-                    <p className="font-display font-bold text-white text-body-lg">Director</p>
-                    <p className="font-body text-body-md text-white/45">BD Buildcon LLP · Est. 1995</p>
+                    <p className="font-display font-bold text-white text-body-lg">Kiran Majmudar</p>
+                    <p className="font-body text-body-md text-white/45">Director, BD Buildcon LLP · Est. 1995</p>
                   </div>
                 </div>
-                <Link href="/about/directors" className="btn-ghost-white text-sm">
-                  Read the full message
+                <Link href="/about/overview" className="btn-ghost-white text-sm">
+                  About BD Buildcon
                 </Link>
               </FadeRiseItem>
             </div>

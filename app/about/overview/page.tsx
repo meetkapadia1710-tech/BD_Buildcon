@@ -96,20 +96,24 @@ export default function OverviewPage() {
                   Do it right the first time.
                 </h2>
                 <p className="font-body text-body-lg text-body mb-5 leading-relaxed">
-                  BD Buildcon LLP (formerly Bhumi Developers) is specialised in industrial construction
-                  with a customer-centric, quality-first approach. Safety-led, mishap-free execution
-                  and a track record of timely completion ensure a smooth plant start for our clients.
+                  BD Buildcon LLP (formerly Bhumi Developers) is a professional turnkey EPC and civil
+                  construction company with a customer-centric, quality-first approach. Safety-led,
+                  mishap-free execution and a track record of timely completion ensure a smooth plant
+                  start-up for our clients — every time.
                 </p>
                 <p className="font-body text-body-md text-body mb-5 leading-relaxed">
-                  We are active in specialised Civil works, Mechanical, PEB (Pre-Engineered Building)
-                  structures, piling, piping, roads, earthwork and infrastructure. ISO 9001:2015
-                  certified, with the human resource and major equipment to execute challenging projects
-                  across difficult weather and terrain.
+                  We have professional human resources commensurate with the required expertise, and
+                  state-of-the-art construction quality testing equipment required for successful
+                  execution of any project we undertake. We are active in Civil &amp; Structural
+                  works, Mechanical erection, PEB structures, piling, piping, roads, earthwork and
+                  turnkey industrial construction. ISO 9001:2015 certified and CRISIL SME 3 rated.
                 </p>
                 <p className="font-body text-body-md text-body leading-relaxed">
-                  Since 1995, we have delivered 50+ projects for clients across chemical, pharma,
-                  petroleum, fertiliser, glass, tyre and food industries — with more than 70% of
-                  clients returning for additional work, a testament to consistent execution excellence.
+                  Since 1995, we have delivered 50+ projects across chemical, pharma, petroleum,
+                  fertiliser, glass, tyre, food and infrastructure sectors — for clients including
+                  GNFC, GACL, GFL, Tagros, Birla Cellulose, Navin Fluorine, Pidilite, Thermax and
+                  more. Over 70% of our clients return for additional projects — a record built
+                  project by project, without exception.
                 </p>
               </FadeRiseItem>
 

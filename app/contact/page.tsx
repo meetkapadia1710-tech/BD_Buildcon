@@ -126,7 +126,7 @@ export default function ContactPage() {
           <div className="flex flex-wrap justify-center items-center gap-8 opacity-80">
             {[
               { icon: '✓', label: 'ISO 9001:2015' },
-              { icon: '✓', label: 'NSIC Rated' },
+              { icon: '✓', label: 'CRISIL SME 3 Rated' },
               { icon: '✓', label: '35+ Years' },
             ].map((badge) => (
               <div key={badge.label} className="flex items-center gap-3">
