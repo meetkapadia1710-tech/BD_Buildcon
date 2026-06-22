@@ -10,7 +10,7 @@ type Props = {
   children: React.ReactNode
   className?: string
   /** Which side to enter from */
-  from?: 'left' | 'right' | 'bottom'
+  from?: 'left' | 'right' | 'bottom' | 'top'
   delay?: number
   distance?: number
 }
@@ -37,6 +37,7 @@ export function SlideIn({
     if (from === 'left')   fromVars.x = -distance
     if (from === 'right')  fromVars.x = distance
     if (from === 'bottom') fromVars.y = distance
+    if (from === 'top')    fromVars.y = -distance
 
     gsap.set(el, fromVars)
 

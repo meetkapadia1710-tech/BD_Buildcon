@@ -1,53 +1,75 @@
+'use client'
+
 import Link from 'next/link'
-import Image from 'next/image'
+import { motion } from 'framer-motion'
 import type { Project } from '@/content/projects'
 
-type Props = {
-  project: Project
-  priority?: boolean
-  featured?: boolean
-}
+type Props = { project: Project; priority?: boolean; featured?: boolean }
 
 export function ProjectCard({ project, priority = false, featured = false }: Props) {
   return (
-    <Link
-      href={`/projects/${project.slug}`}
-      className={`group relative block overflow-hidden rounded-card bg-dark-bg ${
+    <motion.div
+      className={`group relative block overflow-hidden rounded-card bg-ink ${
         featured ? 'aspect-[16/10]' : 'aspect-[4/3]'
       }`}
+      whileHover={{ y: -6, scale: 1.015, boxShadow: '0 20px 56px rgba(22,168,184,0.22)' }}
+      transition={{ type: 'spring', stiffness: 260, damping: 22 }}
     >
-      <Image
+      <Link href={`/projects/${project.slug}`} className="absolute inset-0 z-10" aria-label={project.name} />
+
+      {/* Image */}
+      <motion.img
         src={project.image}
         alt={`${project.name} — ${project.client}`}
-        fill
-        className="object-cover transition-transform duration-700 group-hover:scale-105"
-        sizes={featured ? '(max-width: 768px) 100vw, 66vw' : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'}
-        priority={priority}
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ willChange: 'transform' }}
+        whileHover={{ scale: 1.07 }}
+        transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
       />
+
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+
+      {/* Teal shimmer on hover */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-t from-teal/20 to-transparent opacity-0"
+        whileHover={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+        aria-hidden="true"
+      />
 
       {/* Sector badge */}
-      <div className="absolute top-4 left-4">
-        <span className="inline-block px-3 py-1 bg-teal text-white text-xs font-body font-semibold uppercase tracking-wider rounded-full">
+      <motion.div
+        className="absolute top-4 left-4 z-20"
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ delay: 0.1, type: 'spring', stiffness: 300 }}
+      >
+        <span className="inline-block px-3 py-1 bg-teal text-white text-xs font-body font-semibold uppercase tracking-wider rounded-full shadow-md">
           {project.sector}
         </span>
-      </div>
+      </motion.div>
 
       {/* Content */}
-      <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-        <h3
-          className={`font-display text-white mb-1 ${
-            featured ? 'text-headline-md' : 'text-headline-sm'
-          }`}
-        >
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 p-6 z-20"
+        initial={{ y: 6 }}
+        whileHover={{ y: 0 }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <h3 className={`font-display text-white mb-1 ${featured ? 'text-headline-md' : 'text-headline-sm'}`}>
           {project.name}
         </h3>
         <p className="font-body text-body-md text-white/70">{project.location}</p>
-        <p className="font-body text-body-md text-white/60 mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <motion.p
+          className="font-body text-body-md text-white/60 mt-1 line-clamp-2"
+          initial={{ opacity: 0, height: 0 }}
+          whileHover={{ opacity: 1, height: 'auto' }}
+          transition={{ duration: 0.25 }}
+        >
           {project.excerpt}
-        </p>
-      </div>
-    </Link>
+        </motion.p>
+      </motion.div>
+    </motion.div>
   )
 }

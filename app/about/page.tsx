@@ -4,6 +4,9 @@ import { PageTitleBand } from '@/components/layout/PageTitleBand'
 import { SectionHeading } from '@/components/layout/SectionHeading'
 import { CTABand } from '@/components/layout/CTABand'
 import { FadeRise, FadeRiseItem } from '@/components/motion/FadeRise'
+import { SlideIn } from '@/components/motion/SlideIn'
+import { StaggerReveal } from '@/components/motion/StaggerReveal'
+import { ParallaxLayer } from '@/components/motion/ParallaxLayer'
 import { RevealImage } from '@/components/motion/RevealImage'
 import { DataTable } from '@/components/ui/DataTable'
 import { CertificationGallery } from '@/components/ui/CertificationGallery'
@@ -91,33 +94,43 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left: Photo gallery */}
             <div className="lg:col-span-5 grid grid-cols-2 gap-4">
-              <RevealImage
-                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=900&auto=format&fit=crop"
-                alt="BD Buildcon on-site construction team reviewing plans at an active industrial site"
-                fill
-                wrapperClassName="col-span-2 aspect-[16/9] rounded-card overflow-hidden"
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 42vw"
-                priority
-              />
-              <RevealImage
-                src="https://images.unsplash.com/photo-1621619856624-42fd193a0661?q=80&w=600&auto=format&fit=crop"
-                alt="Engineer inspecting industrial steel structure and pipework"
-                fill
-                wrapperClassName="aspect-[4/3] rounded-card overflow-hidden"
-                className="object-cover"
-                delay={0.1}
-                sizes="(max-width: 1024px) 50vw, 21vw"
-              />
-              <RevealImage
-                src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=600&auto=format&fit=crop"
-                alt="Heavy construction machinery in operation at an industrial greenfield plant"
-                fill
-                wrapperClassName="aspect-[4/3] rounded-card overflow-hidden"
-                className="object-cover"
-                delay={0.2}
-                sizes="(max-width: 1024px) 50vw, 21vw"
-              />
+              <SlideIn from="bottom">
+                <RevealImage
+                  src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=900&auto=format&fit=crop"
+                  alt="BD Buildcon on-site construction team reviewing plans at an active industrial site"
+                  fill
+                  wrapperClassName="col-span-2 aspect-[16/9] rounded-card overflow-hidden img-hover"
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 42vw"
+                  priority
+                />
+              </SlideIn>
+              <SlideIn from="bottom" delay={0.1}>
+                <ParallaxLayer yRange={10}>
+                  <RevealImage
+                    src="https://images.unsplash.com/photo-1621619856624-42fd193a0661?q=80&w=600&auto=format&fit=crop"
+                    alt="Engineer inspecting industrial steel structure and pipework"
+                    fill
+                    wrapperClassName="aspect-[4/3] rounded-card overflow-hidden img-hover"
+                    className="object-cover"
+                    delay={0.1}
+                    sizes="(max-width: 1024px) 50vw, 21vw"
+                  />
+                </ParallaxLayer>
+              </SlideIn>
+              <SlideIn from="bottom" delay={0.2}>
+                <ParallaxLayer yRange={-10}>
+                  <RevealImage
+                    src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=600&auto=format&fit=crop"
+                    alt="Heavy construction machinery in operation at an industrial greenfield plant"
+                    fill
+                    wrapperClassName="aspect-[4/3] rounded-card overflow-hidden img-hover"
+                    className="object-cover"
+                    delay={0.2}
+                    sizes="(max-width: 1024px) 50vw, 21vw"
+                  />
+                </ParallaxLayer>
+              </SlideIn>
             </div>
 
             {/* Right: Copy */}
@@ -172,14 +185,14 @@ export default function AboutPage() {
       <section className="section-pad bg-surface border-t border-hairline pt-20">
         <div className="container-max">
           <SectionHeading title="What Sets Us Apart" subtitle="Engineering excellence driven by safety, technology and genuine repeat partnerships." />
-          <FadeRise className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <StaggerReveal className="grid grid-cols-1 md:grid-cols-3 gap-5" direction="up" stagger={0.1}>
             {bentoCards.map((card) => (
               <div
                 key={card.title}
-                className={`rounded-card p-8 flex flex-col gap-4 transition-transform duration-300 hover:-translate-y-1 ${
+                className={`card p-8 flex flex-col gap-4 ${
                   card.dark
-                    ? 'bg-teal text-white'
-                    : 'bg-white border border-hairline shadow-card text-ink'
+                    ? 'bg-teal text-white border-teal shadow-[0_8px_32px_rgba(22,168,184,0.3)]'
+                    : 'bg-white'
                 }`}
               >
                 <div className={`w-14 h-14 rounded-full flex items-center justify-center ${card.dark ? 'bg-white/20' : 'bg-teal/10'}`}>
@@ -191,7 +204,7 @@ export default function AboutPage() {
                 </p>
               </div>
             ))}
-          </FadeRise>
+          </StaggerReveal>
         </div>
       </section>
 
@@ -202,9 +215,9 @@ export default function AboutPage() {
 
           <div className="space-y-8">
             {/* Vision */}
-            <FadeRiseItem>
-              <div className="flex gap-6 p-8 bg-surface rounded-card border border-hairline">
-                <div className="shrink-0 w-16 h-16 rounded-full bg-teal flex items-center justify-center">
+            <SlideIn from="left">
+              <div className="flex gap-6 p-8 bg-surface rounded-card border border-hairline hover:border-teal/30 transition-colors shadow-sm">
+                <div className="shrink-0 w-16 h-16 rounded-full bg-teal flex items-center justify-center shadow-lg">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
                     <circle cx="12" cy="12" r="3" />
                     <path d="M20.188 10.934c.4.586.6 1.307.6 2.066s-.2 1.48-.6 2.066m-16.376 0A6.004 6.004 0 013 12c0-.759.2-1.48.6-2.066M12 4a8 8 0 100 16A8 8 0 0012 4z" />
@@ -219,11 +232,11 @@ export default function AboutPage() {
                   </p>
                 </div>
               </div>
-            </FadeRiseItem>
+            </SlideIn>
 
             {/* Mission */}
-            <FadeRiseItem delay={0.1}>
-              <div className="flex gap-6 p-8 bg-teal text-white rounded-card">
+            <SlideIn from="right" delay={0.1}>
+              <div className="flex gap-6 p-8 bg-teal text-white rounded-card shadow-[0_8px_32px_rgba(22,168,184,0.3)]">
                 <div className="shrink-0 w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
                     <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
@@ -237,7 +250,7 @@ export default function AboutPage() {
                   </p>
                 </div>
               </div>
-            </FadeRiseItem>
+            </SlideIn>
           </div>
         </div>
       </section>
@@ -246,20 +259,20 @@ export default function AboutPage() {
       <section className="section-pad bg-surface border-t border-hairline">
         <div className="container-max">
           <SectionHeading title="Our Core Values" />
-          <FadeRise className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" direction="up" stagger={0.12}>
             {values.map((v, i) => (
               <div
                 key={v.title}
-                className="card p-8 flex flex-col gap-4"
+                className="card p-8 flex flex-col gap-4 group"
               >
-                <div className="w-10 h-10 rounded-full bg-teal/10 flex items-center justify-center">
-                  <span className="font-display font-bold text-teal text-body-md">{String(i + 1).padStart(2, '0')}</span>
+                <div className="w-10 h-10 rounded-full bg-teal/10 flex items-center justify-center transition-transform duration-300 group-hover:scale-110 group-hover:bg-teal">
+                  <span className="font-display font-bold text-teal text-body-md group-hover:text-white">{String(i + 1).padStart(2, '0')}</span>
                 </div>
                 <h3 className="font-display text-headline-sm text-ink">{v.title}</h3>
                 <p className="font-body text-body-md text-body leading-relaxed">{v.body}</p>
               </div>
             ))}
-          </FadeRise>
+          </StaggerReveal>
         </div>
       </section>
 

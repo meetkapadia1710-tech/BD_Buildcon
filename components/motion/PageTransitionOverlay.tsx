@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { gsap } from 'gsap'
+import Logo from '@/components/ui/Logo'
 
 export function PageTransitionOverlay() {
   const pathname = usePathname()
@@ -22,7 +23,7 @@ export function PageTransitionOverlay() {
     if (!panel || !line || !mark) return
     gsap.set(panel, { y: '100vh' })
     gsap.set(line,  { scaleX: 0, transformOrigin: 'left center' })
-    gsap.set(mark,  { opacity: 0, y: 16 })
+    gsap.set(mark,  { opacity: 0, scale: 0.95, y: 10 })
   }
 
   const cover = (onDone: () => void) => {
@@ -37,12 +38,9 @@ export function PageTransitionOverlay() {
     const tl = gsap.timeline({ onComplete: onDone, defaults: { ease: 'expo.inOut' } })
     tlRef.current = tl
 
-    // Panel slides up from below
-    tl.to(panel, { y: '0vh', duration: 0.65 })
-    // Laser line draws left → right
-    tl.to(line, { scaleX: 1, duration: 0.45, ease: 'power3.out' }, '-=0.2')
-    // Brand mark rises in
-    tl.to(mark, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, '-=0.25')
+    tl.to(panel, { y: '0vh', duration: 0.45 })
+    tl.to(line,  { scaleX: 1, duration: 0.35, ease: 'power3.out' }, '-=0.15')
+    tl.to(mark,  { opacity: 1, scale: 1, y: 0, duration: 0.3, ease: 'back.out(1.5)' }, '-=0.2')
   }
 
   const reveal = () => {
@@ -56,12 +54,9 @@ export function PageTransitionOverlay() {
     const tl = gsap.timeline({ defaults: { ease: 'expo.inOut' } })
     tlRef.current = tl
 
-    // Mark fades out
-    tl.to(mark, { opacity: 0, y: -12, duration: 0.25, ease: 'power2.in' })
-    // Line retracts right → left
-    tl.to(line, { scaleX: 0, transformOrigin: 'right center', duration: 0.3, ease: 'power3.in' }, '-=0.1')
-    // Panel sweeps away upward
-    tl.to(panel, { y: '-100vh', duration: 0.65 }, '-=0.15')
+    tl.to(mark,  { opacity: 0, scale: 1.05, y: -10, duration: 0.22, ease: 'power2.in' })
+    tl.to(line,  { scaleX: 0, transformOrigin: 'right center', duration: 0.25, ease: 'power3.in' }, '-=0.1')
+    tl.to(panel, { y: '-100vh', duration: 0.45 }, '-=0.15')
   }
 
   // ── intercept all internal link clicks (capture phase) ───────────────────
@@ -104,51 +99,41 @@ export function PageTransitionOverlay() {
   return (
     <div
       ref={panelRef}
-      className="fixed inset-0 z-[300] pointer-events-none flex items-center justify-center"
-      style={{ backgroundColor: '#111416', transform: 'translateY(100vh)' }}
+      className="fixed inset-0 z-[300] pointer-events-none flex items-center justify-center overflow-hidden"
+      style={{ backgroundColor: '#0e1011', transform: 'translateY(100vh)' }}
       aria-hidden="true"
     >
-      {/* Laser-level rule — teal horizontal line */}
+      {/* Soft radial glow */}
+      <div 
+        className="absolute w-[500px] h-[500px] rounded-full pointer-events-none opacity-20 filter blur-[80px]"
+        style={{
+          background: 'radial-gradient(circle, #16A8B8 0%, transparent 70%)',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+        }}
+      />
+
+      {/* Sleek loading bar at the top of the viewport */}
       <div
         ref={lineRef}
-        className="absolute left-0 right-0"
+        className="absolute top-0 left-0 right-0"
         style={{
-          top: '50%',
-          height: '1px',
+          height: '3px',
           transform: 'scaleX(0)',
+          transformOrigin: 'left center',
           backgroundColor: '#16A8B8',
-          boxShadow: '0 0 10px rgba(22,168,184,0.55)',
+          boxShadow: '0 1px 10px rgba(22,168,184,0.6)',
         }}
       />
 
       {/* Brand mark */}
       <div
         ref={markRef}
-        className="relative z-10 flex flex-col items-center gap-5"
+        className="relative z-10 flex flex-col items-center"
         style={{ opacity: 0, transform: 'translateY(16px)' }}
       >
-        {/* Icon */}
-        <div className="w-16 h-16 rounded-xl flex items-center justify-center" style={{ backgroundColor: '#16A8B8' }}>
-          <svg viewBox="0 0 36 36" className="w-9 h-9" aria-hidden="true">
-            <rect x="4"  y="4"  width="6"  height="28" rx="1" fill="white" />
-            <rect x="4"  y="4"  width="14" height="6"  rx="1" fill="white" />
-            <rect x="4"  y="15" width="13" height="5"  rx="1" fill="white" />
-            <rect x="4"  y="26" width="14" height="6"  rx="1" fill="white" />
-            <rect x="21" y="4"  width="6"  height="28" rx="1" fill="white" opacity="0.5" />
-            <rect x="21" y="4"  width="11" height="5"  rx="1" fill="white" opacity="0.5" />
-            <rect x="21" y="27" width="11" height="5"  rx="1" fill="white" opacity="0.5" />
-          </svg>
-        </div>
-
-        {/* Wordmark */}
-        <div className="flex flex-col items-center gap-1.5">
-          <span className="font-display font-bold" style={{ fontSize: '18px', color: 'white', letterSpacing: '-0.02em' }}>
-            BD Buildcon <span style={{ color: '#16A8B8' }}>LLP</span>
-          </span>
-          <span className="font-body uppercase" style={{ fontSize: '9px', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.22em' }}>
-            Industrial EPC Contractor
-          </span>
-        </div>
+        <Logo light={false} className="h-24 w-auto" />
       </div>
     </div>
   )

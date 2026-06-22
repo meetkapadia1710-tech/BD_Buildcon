@@ -1,4 +1,4 @@
-﻿@tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -15,10 +15,30 @@
   --ink: #2E353B;
   --body: #6B7177;
   --footer: #1F2124;
+
+  /* Spacing tokens */
+  --section-pad:    5rem;
+  --section-pad-lg: 7rem;
+  --section-pad-sm: 3rem;
+
+  /* Shadow tokens */
+  --shadow-card:       0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06);
+  --shadow-card-hover: 0 8px 32px rgba(0,0,0,0.12);
+  --shadow-teal:       0 8px 32px rgba(22,168,184,0.22);
+  --shadow-teal-lg:    0 16px 48px rgba(22,168,184,0.28);
+
+  /* Easing */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 html {
   scroll-behavior: auto; /* Lenis manages smooth scrolling */
+}
+
+h1, h2, h3, h4 {
+  text-wrap: balance;
 }
 
 /* Hide native cursor on fine-pointer (mouse) devices — SmoothCursor replaces it */
@@ -69,142 +89,105 @@ img {
 
 /* Scrollbar styling */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 4px;
+  height: 4px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--surface);
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
   background: var(--teal);
-  border-radius: 3px;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--teal-hover);
 }
 
 @layer components {
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 px-8 py-3.5
            bg-teal text-white font-body text-label-md uppercase tracking-widest
-           rounded-full
-           focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2
+           rounded-full focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2
            min-h-[44px];
-    transition: background-color 0.25s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+    transition: background-color 0.25s ease, transform 0.22s var(--ease-spring),
+                box-shadow 0.25s ease, letter-spacing 0.2s ease;
   }
   .btn-primary:hover {
     @apply bg-teal-hover;
     transform: translateY(-2px);
-    box-shadow: 0 10px 28px rgba(22,168,184,0.35);
+    box-shadow: var(--shadow-teal);
+    letter-spacing: 0.15em;
   }
-  .btn-primary:active {
-    transform: scale(0.96) translateY(0);
-    box-shadow: none;
-  }
+  .btn-primary:active { transform: scale(0.96) translateY(0); box-shadow: none; }
 
   .btn-ghost {
     @apply inline-flex items-center justify-center gap-2 px-8 py-3.5
            border-2 border-teal text-teal font-body text-label-md uppercase tracking-widest
-           rounded-full
-           focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2
+           rounded-full focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2
            min-h-[44px];
-    transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+    transition: background-color 0.25s ease, color 0.25s ease,
+                transform 0.22s var(--ease-spring), box-shadow 0.25s ease;
   }
-  .btn-ghost:hover {
-    @apply bg-teal text-white;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 28px rgba(22,168,184,0.25);
-  }
-  .btn-ghost:active {
-    transform: scale(0.96) translateY(0);
-  }
+  .btn-ghost:hover { @apply bg-teal text-white; transform: translateY(-2px); box-shadow: var(--shadow-teal); }
+  .btn-ghost:active { transform: scale(0.96) translateY(0); }
 
   .btn-ghost-white {
     @apply inline-flex items-center justify-center gap-2 px-8 py-3.5
            border-2 border-white text-white font-body text-label-md uppercase tracking-widest
            rounded-full min-h-[44px];
-    transition: background-color 0.25s ease, color 0.25s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+    transition: background-color 0.25s ease, color 0.25s ease,
+                transform 0.22s var(--ease-spring), box-shadow 0.25s ease;
   }
-  .btn-ghost-white:hover {
-    @apply bg-white text-ink;
-    transform: translateY(-2px);
-  }
-  .btn-ghost-white:active {
-    transform: scale(0.96) translateY(0);
-  }
+  .btn-ghost-white:hover { @apply bg-white text-ink; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,255,255,0.2); }
+  .btn-ghost-white:active { transform: scale(0.96) translateY(0); }
 
-  .section-pad {
-    @apply py-24 lg:py-32;
-  }
-
-  .container-max {
-    @apply max-w-container mx-auto px-6;
-  }
-
-  .teal-rule {
-    @apply block w-12 h-1 bg-teal mt-4 mb-0 rounded-full;
-  }
+  .section-pad    { @apply py-20 lg:py-28; }
+  .section-pad-sm { @apply py-12 lg:py-16; }
+  .container-max  { @apply max-w-container mx-auto px-6; }
+  .container-tight { @apply max-w-3xl mx-auto px-6; }
+  .teal-rule { @apply block w-12 h-1 bg-teal mt-4 mb-0 rounded-full; }
 
   .card {
-    @apply bg-white rounded-card border border-hairline shadow-card;
-    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1),
-                box-shadow 0.35s ease,
-                border-color 0.25s ease;
+    @apply bg-white rounded-card border border-hairline;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.35s var(--ease-spring), box-shadow 0.3s ease, border-color 0.25s ease;
   }
-  .card:hover {
-    transform: translateY(-6px);
-    @apply shadow-card-hover border-teal/20;
-  }
+  .card:hover { transform: translateY(-8px); box-shadow: var(--shadow-card-hover); @apply border-teal/20; }
 
   .form-field {
     @apply w-full bg-surface border border-hairline rounded-lg px-4 py-3
-           font-body text-body-md text-ink
-           focus:border-teal focus:ring-1 focus:ring-teal
-           transition-colors duration-200
-           placeholder:text-body;
+           font-body text-body-md text-ink placeholder:text-body;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.18s ease;
+  }
+  .form-field:focus {
+    @apply border-teal outline-none;
+    box-shadow: 0 0 0 3px rgba(22,168,184,0.12);
+    transform: translateY(-1px);
   }
 
-  .page-title-band {
-    @apply bg-surface border-b border-hairline py-10;
-  }
+  .section-heading { @apply text-center mb-12 lg:mb-16; }
+  .section-heading h2 { @apply font-display text-headline-lg text-ink; }
+  .section-heading .rule { @apply mx-auto; }
 
-  .section-heading {
-    @apply text-center mb-16;
-  }
-
-  .section-heading h2 {
-    @apply font-display text-headline-lg text-ink;
-  }
-
-  .section-heading .rule {
-    @apply mx-auto;
-  }
+  .glass { @apply backdrop-blur-md border border-white/20; background: rgba(255,255,255,0.08); }
+  .glass-dark { @apply backdrop-blur-md border border-white/10; background: rgba(31,33,36,0.7); }
+  .teal-glow { box-shadow: var(--shadow-teal); }
+  .teal-glow-lg { box-shadow: var(--shadow-teal-lg); }
 }
 
 /* Fluid underline — draws left to right on hover */
-.link-underline {
-  position: relative;
-}
+.link-underline { position: relative; }
 .link-underline::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left center;
+  content: ''; position: absolute; bottom: -1px; left: 0;
+  width: 100%; height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: left center;
   transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1);
 }
-.link-underline:hover::after {
-  transform: scaleX(1);
-}
+.link-underline:hover::after { transform: scaleX(1); }
 
 /* Image reveal on hover — smooth zoom */
-.img-hover img {
-  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.img-hover:hover img {
-  transform: scale(1.06);
-}
+.img-hover img { transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.img-hover:hover img { transform: scale(1.06); }
 
 /* Clip path for RevealImage */
 .clip-reveal {
@@ -212,6 +195,11 @@ img {
 }
 .clip-revealed {
   clip-path: inset(0% 0 0 0);
+}
+
+.marquee-fade {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
 
 /* Prefers reduced motion */

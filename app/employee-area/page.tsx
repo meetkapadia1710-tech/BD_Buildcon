@@ -1,11 +1,8 @@
-import type { Metadata } from 'next'
+'use client'
+
 import { PageTitleBand } from '@/components/layout/PageTitleBand'
 import { employeeLinks } from '@/content/links'
-
-export const metadata: Metadata = {
-  title: 'Employee Area',
-  description: 'Staff access portal for BD Buildcon LLP — ERP and email login.',
-}
+import { StaggerReveal } from '@/components/motion/StaggerReveal'
 
 const portals = [
   {
@@ -42,7 +39,7 @@ export default function EmployeeAreaPage() {
 
       <section className="section-pad bg-surface">
         <div className="container-max max-w-2xl">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 gap-6" direction="up" stagger={0.12}>
             {portals.map((portal) => (
               <a
                 key={portal.label}
@@ -66,7 +63,7 @@ export default function EmployeeAreaPage() {
                 </div>
               </a>
             ))}
-          </div>
+          </StaggerReveal>
 
           <p className="mt-10 text-center font-body text-body-md text-body">
             Having trouble accessing your account?{' '}

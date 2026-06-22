@@ -1,4 +1,5 @@
-import type { Metadata } from 'next'
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import { FadeRise, FadeRiseItem } from '@/components/motion/FadeRise'
@@ -17,13 +18,7 @@ import { RisingFloors, type StatFloor } from '@/components/motion/RisingFloors'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { SlideIn } from '@/components/motion/SlideIn'
 import { ParallaxLayer } from '@/components/motion/ParallaxLayer'
-
-export const metadata: Metadata = {
-  title: 'BD Buildcon LLP | Industrial EPC Contractor, Bharuch, Gujarat',
-  description:
-    'Turnkey industrial EPC contractor since 1995. All projects completed on deadline with zero accidents. ISO 9001:2015 certified · CRISIL SME 3 rated · ₹200+ Cr delivered.',
-}
-
+import { motion } from 'framer-motion'
 const sectors = [
   'Chemicals', 'Pharma', 'Petroleum', 'Fertiliser', 'Glass',
   'Tyre', 'Food Processing', 'Industrial Gases', 'Insulation',
@@ -91,16 +86,18 @@ export default function HomePage() {
     <>
       {/* ── Hero ── */}
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-dark-bg" aria-label="Hero">
-        {/* Background image */}
+        {/* Background image with Parallax */}
         <div className="absolute inset-0 z-0">
-          <Image
-            src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop"
-            alt="Large industrial plant construction site at twilight with steel structures and piping"
-            fill
-            className="object-cover animate-ken-burns"
-            priority
-            sizes="100vw"
-          />
+          <ParallaxLayer yRange={-60}>
+            <Image
+              src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop"
+              alt="Large industrial plant construction site at twilight with steel structures and piping"
+              fill
+              className="object-cover"
+              priority
+              sizes="100vw"
+            />
+          </ParallaxLayer>
           <div className="absolute inset-0 bg-black/60" />
           {/* Teal swoosh bottom */}
           <svg
@@ -123,7 +120,7 @@ export default function HomePage() {
           </FadeRiseItem>
 
           <FadeRiseItem delay={0.2}>
-            <h1 className="font-display text-display-lg text-white leading-[1.05] tracking-tight mb-6">
+            <h1 className="font-display text-display-lg text-white leading-[1.05] tracking-tight mb-8">
               All our projects,{' '}
               <span className="block">completed on deadline —</span>
               <span className="text-teal">with zero accidents.</span>
@@ -154,7 +151,7 @@ export default function HomePage() {
         className="bg-surface border-b border-hairline py-4 overflow-hidden"
         aria-label="Sectors we serve"
       >
-        <div className="flex">
+        <div className="flex marquee-fade">
           <div className="flex gap-10 animate-marquee whitespace-nowrap pr-10">
             {sectors.map((s, i) => (
               <span key={i} className="flex items-center gap-10 font-body text-label-md text-body uppercase tracking-widest">
@@ -182,7 +179,7 @@ export default function HomePage() {
             {services.map((svc) => (
               <div
                 key={svc.id}
-                className="group relative aspect-[4/5] overflow-hidden rounded-card bg-dark-bg cursor-pointer"
+                className="group relative aspect-[4/5] overflow-hidden rounded-card bg-dark-bg cursor-pointer card"
               >
                 <Image
                   src={svc.image}
@@ -192,7 +189,8 @@ export default function HomePage() {
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 p-6">
+                <div className="absolute inset-0 bg-gradient-to-t from-teal/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute bottom-0 left-0 p-6 z-10">
                   <h3 className="font-display text-headline-sm text-white mb-2">{svc.shortTitle}</h3>
                   <p className="font-body text-body-md text-white/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">
                     {svc.description.slice(0, 80)}…
@@ -210,11 +208,15 @@ export default function HomePage() {
         <div className="container-max">
           <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" direction="up" stagger={0.15}>
             {pillars.map((p, i) => (
-              <div key={p.title} className="flex flex-col items-center text-center gap-4">
+              <div key={p.title} className="flex flex-col items-center text-center gap-4 group">
                 <SlideIn from="bottom" delay={i * 0.07}>
-                  <div className="w-16 h-16 rounded-full bg-teal/10 flex items-center justify-center">
+                  <motion.div
+                    className="w-16 h-16 rounded-full bg-teal/10 flex items-center justify-center text-teal"
+                    whileHover={{ scale: 1.15, rotate: 15, backgroundColor: '#16A8B8', color: '#fff' }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                  >
                     {p.icon}
-                  </div>
+                  </motion.div>
                 </SlideIn>
                 <h3 className="font-display text-headline-sm text-ink">{p.title}</h3>
                 <p className="font-body text-body-md text-body">{p.body}</p>
@@ -264,7 +266,7 @@ export default function HomePage() {
                   { phase: '02', title: 'Fabricate & Build' },
                   { phase: '03', title: 'Commission' },
                 ].map((step) => (
-                  <div key={step.phase} className="border border-teal/20 rounded-card p-4 hover:border-teal/50 transition-colors">
+                  <div key={step.phase} className="border border-teal/20 rounded-card p-4 hover:border-teal/50 transition-colors bg-white/5">
                     <div className="font-body text-teal text-[10px] uppercase tracking-widest mb-1">{step.phase}</div>
                     <div className="font-display text-white text-body-md font-semibold">{step.title}</div>
                   </div>
@@ -283,7 +285,7 @@ export default function HomePage() {
               <SectionHeading title="Featured Projects" centered={false} className="mb-0" />
             </SlideIn>
             <SlideIn from="right">
-              <Link href="/projects" className="hidden sm:flex items-center gap-2 font-body text-label-md text-teal uppercase tracking-wider hover:gap-3 transition-all">
+              <Link href="/projects" className="hidden sm:flex items-center gap-2 font-body text-label-md text-teal uppercase tracking-wider hover:gap-3 transition-all link-underline">
                 See all projects
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                   <path d="M5 12h14M12 5l7 7-7 7" />
@@ -307,8 +309,11 @@ export default function HomePage() {
       </section>
 
       {/* ── Stats Band — rising floors ── */}
-      <section className="bg-teal text-white py-20 overflow-hidden" aria-label="Key statistics">
-        <div className="container-max">
+      <section className="bg-teal text-white py-20 overflow-hidden relative" aria-label="Key statistics">
+        <ParallaxLayer yRange={-20} className="absolute inset-0 z-0 opacity-10 pointer-events-none">
+          <div className="w-full h-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,1)_0%,transparent_100%)]" />
+        </ParallaxLayer>
+        <div className="container-max relative z-10">
           <SectionHeading
             title="Our Track Record"
             subtitle="Numbers that have been earned on site — not in a brochure."
@@ -375,14 +380,26 @@ export default function HomePage() {
 
       {/* ── Safety Band ── */}
       <section className="relative overflow-hidden bg-footer py-20 lg:py-28" aria-label="Safety commitment">
-        <Image
-          src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop"
-          alt="Workers in high-visibility gear on an industrial construction site"
-          fill
-          className="object-cover opacity-20"
-          sizes="100vw"
-        />
-        <div className="relative z-10 container-max text-center">
+        <ParallaxLayer yRange={-30} className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop"
+            alt="Workers in high-visibility gear on an industrial construction site"
+            fill
+            className="object-cover opacity-20"
+            sizes="100vw"
+          />
+        </ParallaxLayer>
+        
+        <motion.div
+          className="relative z-10 container-max text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{
+            hidden: { opacity: 0, scale: 0.95 },
+            visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeOut" } }
+          }}
+        >
           <FadeRiseItem>
             <h2 className="font-display text-headline-lg text-white mb-4">
               A zero-accident standard.
@@ -398,7 +415,7 @@ export default function HomePage() {
               Our safety approach
             </Link>
           </FadeRiseItem>
-        </div>
+        </motion.div>
       </section>
 
       {/* ── Testimonials ── */}

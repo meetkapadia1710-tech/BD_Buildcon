@@ -1,4 +1,5 @@
-import type { Metadata } from 'next'
+'use client'
+
 import Image from 'next/image'
 import { PageTitleBand } from '@/components/layout/PageTitleBand'
 import { SectionHeading } from '@/components/layout/SectionHeading'
@@ -9,12 +10,7 @@ import { CountUp } from '@/components/motion/CountUp'
 import { SlideIn } from '@/components/motion/SlideIn'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { ParallaxLayer } from '@/components/motion/ParallaxLayer'
-
-export const metadata: Metadata = {
-  title: 'Why Us',
-  description: 'Why choose BD Buildcon? 35+ years of industrial EPC expertise, zero accidents, 70% repeat clients, and all technology under one roof.',
-}
-
+import { motion } from 'framer-motion'
 const reasons = [
   {
     id: 'size',
@@ -91,15 +87,21 @@ export default function WhyUsPage() {
               {/* Image */}
               <SlideIn from={reason.reverse ? 'right' : 'left'}>
                 <ParallaxLayer yRange={-25}>
-                  <RevealImage
-                    src={reason.image}
-                    alt={reason.imageAlt}
-                    fill
-                    wrapperClassName="aspect-[16/10] rounded-card overflow-hidden"
-                    className="object-cover"
-                    parallax
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                  />
+                  <motion.div
+                    whileHover={{ scale: 1.02, rotate: reason.reverse ? -1 : 1 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    className="aspect-[16/10] rounded-card overflow-hidden shadow-card"
+                  >
+                    <RevealImage
+                      src={reason.image}
+                      alt={reason.imageAlt}
+                      fill
+                      wrapperClassName="w-full h-full"
+                      className="object-cover"
+                      parallax
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                  </motion.div>
                 </ParallaxLayer>
               </SlideIn>
 

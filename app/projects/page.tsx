@@ -5,6 +5,7 @@ import { PageTitleBand } from '@/components/layout/PageTitleBand'
 import { CTABand } from '@/components/layout/CTABand'
 import { ProjectCard } from '@/components/ui/ProjectCard'
 import { FadeRise } from '@/components/motion/FadeRise'
+import { SlideIn } from '@/components/motion/SlideIn'
 import { projects } from '@/content/projects'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -51,13 +52,14 @@ export default function ProjectsPage() {
       <section className="section-pad bg-white">
         <div className="container-max">
           {/* Sector filter — dropdown */}
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-12">
-            <label
-              htmlFor="sector-filter"
-              className="font-body text-label-md uppercase tracking-widest text-body shrink-0"
-            >
-              Filter by sector
-            </label>
+          <SlideIn from="top">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-12">
+              <label
+                htmlFor="sector-filter"
+                className="font-body text-label-md uppercase tracking-widest text-body shrink-0"
+              >
+                Filter by sector
+              </label>
 
             <div className="relative w-full sm:w-72" ref={dropdownRef}>
               <button
@@ -134,7 +136,8 @@ export default function ProjectsPage() {
                 </button>
               </motion.span>
             )}
-          </div>
+            </div>
+          </SlideIn>
 
           {/* Grid */}
           <AnimatePresence mode="wait">

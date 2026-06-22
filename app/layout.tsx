@@ -5,6 +5,9 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { SmoothCursor } from '@/components/motion/SmoothCursor'
 import { LenisProvider } from '@/components/motion/LenisProvider'
+import { PageTransitionOverlay } from '@/components/motion/PageTransitionOverlay'
+import { PageWrapper } from '@/components/motion/PageWrapper'
+import { ScrollProgress } from '@/components/motion/ScrollProgress'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -34,8 +37,12 @@ export default function RootLayout({
       <body className="font-body text-ink bg-white antialiased">
         <LenisProvider>
           <SmoothCursor />
+          <ScrollProgress />
+          <PageTransitionOverlay />
           <Header />
-          <main>{children}</main>
+          <PageWrapper>
+            <main>{children}</main>
+          </PageWrapper>
           <Footer />
         </LenisProvider>
       </body>

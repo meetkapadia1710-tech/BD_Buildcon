@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { PageTitleBand } from '@/components/layout/PageTitleBand'
 import { FadeRiseItem } from '@/components/motion/FadeRise'
+import { SlideIn } from '@/components/motion/SlideIn'
+import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { contactInfo } from '@/content/links'
 import { ContactForm } from './ContactForm'
 
@@ -30,10 +32,9 @@ export default function ContactPage() {
                 </p>
               </FadeRiseItem>
 
-              <FadeRiseItem delay={0.1}>
-                <div className="space-y-4">
+              <StaggerReveal className="space-y-4" direction="up" stagger={0.1}>
                   {/* Address */}
-                  <div className="flex items-start gap-4 p-5 bg-surface rounded-card border border-hairline group hover:border-teal/30 transition-colors">
+                  <div className="flex items-start gap-4 p-5 bg-surface rounded-card border border-hairline group hover:border-teal/30 transition-colors shadow-sm hover:shadow-card hover:-translate-y-1 transform duration-300">
                     <div className="p-3 rounded-full bg-teal/10 text-teal group-hover:bg-teal group-hover:text-white transition-colors shrink-0">
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
@@ -48,7 +49,7 @@ export default function ContactPage() {
                   {/* Phone */}
                   <a
                     href={`tel:${contactInfo.phoneTel}`}
-                    className="flex items-center gap-4 p-5 bg-surface rounded-card border border-hairline group hover:border-teal/30 transition-colors"
+                    className="flex items-center gap-4 p-5 bg-surface rounded-card border border-hairline group hover:border-teal/30 transition-colors shadow-sm hover:shadow-card hover:-translate-y-1 transform duration-300"
                   >
                     <div className="p-3 rounded-full bg-teal/10 text-teal group-hover:bg-teal group-hover:text-white transition-colors shrink-0">
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -64,7 +65,7 @@ export default function ContactPage() {
                   {/* Email */}
                   <a
                     href={`mailto:${contactInfo.email}`}
-                    className="flex items-center gap-4 p-5 bg-surface rounded-card border border-hairline group hover:border-teal/30 transition-colors"
+                    className="flex items-center gap-4 p-5 bg-surface rounded-card border border-hairline group hover:border-teal/30 transition-colors shadow-sm hover:shadow-card hover:-translate-y-1 transform duration-300"
                   >
                     <div className="p-3 rounded-full bg-teal/10 text-teal group-hover:bg-teal group-hover:text-white transition-colors shrink-0">
                       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -78,8 +79,8 @@ export default function ContactPage() {
                   </a>
 
                   {/* Hours */}
-                  <div className="flex items-center gap-4 p-5 bg-surface rounded-card border border-hairline">
-                    <div className="p-3 rounded-full bg-teal/10 text-teal shrink-0">
+                  <div className="flex items-center gap-4 p-5 bg-surface rounded-card border border-hairline group hover:border-teal/30 transition-colors shadow-sm hover:shadow-card hover:-translate-y-1 transform duration-300">
+                    <div className="p-3 rounded-full bg-teal/10 text-teal shrink-0 group-hover:bg-teal group-hover:text-white transition-colors">
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
                         <circle cx="12" cy="12" r="10" />
                         <polyline points="12 6 12 12 16 14" />
@@ -90,17 +91,16 @@ export default function ContactPage() {
                       <div className="font-body text-body-md text-body">{contactInfo.hours}</div>
                     </div>
                   </div>
-                </div>
-              </FadeRiseItem>
+              </StaggerReveal>
             </div>
 
             {/* Right: Form */}
-            <FadeRiseItem delay={0.15}>
-              <div className="bg-white rounded-card border border-hairline shadow-card p-8">
+            <SlideIn from="right" delay={0.15}>
+              <div className="bg-white rounded-card border border-hairline shadow-card p-8 group hover:shadow-[0_12px_48px_rgba(0,0,0,0.12)] transition-shadow duration-300">
                 <h2 className="font-display text-headline-md text-ink mb-8">GET IN TOUCH WITH US</h2>
                 <ContactForm />
               </div>
-            </FadeRiseItem>
+            </SlideIn>
           </div>
         </div>
       </section>
