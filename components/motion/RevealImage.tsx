@@ -87,7 +87,7 @@ export function RevealImage({
 
   return (
     <div ref={wrapperRef} className={`overflow-hidden ${wrapperClassName}`}>
-      <div ref={imgRef} className="w-full h-full">
+      <div ref={imgRef} className={`w-full h-full ${fill ? 'relative' : ''}`}>
         <Image
           src={src}
           alt={alt}

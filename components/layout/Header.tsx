@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -8,16 +8,9 @@ import { MagneticButton } from '@/components/motion/MagneticButton'
 import { contactInfo } from '@/content/links'
 import Logo from '@/components/ui/Logo'
 
-const aboutLinks = [
-  { label: 'Overview',               href: '/about#overview',       desc: 'Company profile & history' },
-  { label: 'Ideology',               href: '/about#ideology',        desc: 'Values, vision & mission' },
-  { label: 'Certification',          href: '/about#certification',   desc: 'ISO 9001:2015 · CRISIL SME 3 rating' },
-  { label: 'Infrastructure',         href: '/about#infrastructure',  desc: 'Plant, Machinery & Equipment list' },
-]
-
 const navLinks = [
   { label: 'Home',          href: '/' },
-  { label: 'About Us',      href: '/about', hasDropdown: true },
+  { label: 'About Us',      href: '/about' },
   { label: 'Why Us',        href: '/why-us' },
   { label: 'Projects',      href: '/projects' },
   { label: 'Employee Area', href: '/employee-area' },
@@ -27,9 +20,7 @@ const navLinks = [
 export function Header() {
   const [scrolled, setScrolled]     = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [aboutOpen, setAboutOpen]   = useState(false)
   const pathname    = usePathname()
-  const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -39,7 +30,6 @@ export function Header() {
 
   useEffect(() => {
     setMobileOpen(false)
-    setAboutOpen(false)
   }, [pathname])
 
   const isActive = (href: string) => {
@@ -64,86 +54,23 @@ export function Header() {
 
         {/* ── Desktop Nav ───────────────────────────────────── */}
         <nav className="hidden lg:flex items-center" aria-label="Main navigation">
-          {navLinks.map((link) =>
-            link.hasDropdown ? (
-              <div key={link.label} className="relative" ref={dropdownRef}>
-                <button
-                  onClick={() => setAboutOpen((o) => !o)}
-                  onBlur={() => setTimeout(() => setAboutOpen(false), 150)}
-                  aria-expanded={aboutOpen}
-                  aria-haspopup="true"
-                  className={`relative flex items-center gap-1 px-4 py-3 font-body text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors duration-200 ${
-                    isActive('/about') ? 'text-teal' : 'text-ink hover:text-teal'
-                  }`}
-                >
-                  {link.label}
-                  <svg
-                    className={`w-3 h-3 transition-transform duration-200 ${aboutOpen ? 'rotate-180' : ''}`}
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
-                    aria-hidden="true"
-                  >
-                    <polyline points="6 9 12 15 18 9" />
-                  </svg>
-                  {isActive('/about') && (
-                    <motion.span
-                      layoutId="nav-indicator"
-                      className="absolute bottom-0 left-3 right-3 h-[2px] bg-teal rounded-full"
-                    />
-                  )}
-                </button>
-
-                <AnimatePresence>
-                  {aboutOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 12, scale: 0.97 }}
-                      animate={{ opacity: 1, y: 0,  scale: 1 }}
-                      exit={{ opacity: 0,  y: 12, scale: 0.97 }}
-                      transition={{ duration: 0.16, ease: 'easeOut' }}
-                      className="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl border border-hairline shadow-[0_8px_40px_rgba(0,0,0,0.12)] overflow-hidden z-50"
-                    >
-                      {/* Teal accent top strip */}
-                      <div className="h-1 bg-teal w-full" />
-                      <div className="p-2">
-                        {aboutLinks.map((item) => (
-                          <Link
-                            key={item.href}
-                            href={item.href}
-                            className={`flex items-start gap-3 px-3 py-2.5 rounded-xl transition-colors duration-150 group/item ${
-                              pathname === item.href
-                                ? 'bg-teal/10 text-teal'
-                                : 'text-ink hover:bg-surface hover:text-teal'
-                            }`}
-                          >
-                            <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-teal/30 group-hover/item:bg-teal shrink-0 transition-colors" />
-                            <div>
-                              <div className="font-body text-body-md font-semibold leading-tight">{item.label}</div>
-                              <div className="font-body text-[10px] text-body mt-0.5 opacity-60">{item.desc}</div>
-                            </div>
-                          </Link>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ) : (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`relative px-4 py-3 font-body text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors duration-200 ${
-                  isActive(link.href) ? 'text-teal' : 'text-ink hover:text-teal'
-                }`}
-              >
-                {link.label}
-                {isActive(link.href) && (
-                  <motion.span
-                    layoutId="nav-indicator"
-                    className="absolute bottom-0 left-3 right-3 h-[2px] bg-teal rounded-full"
-                  />
-                )}
-              </Link>
-            )
-          )}
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`relative px-4 py-3 font-body text-[11px] font-semibold uppercase tracking-[0.12em] transition-colors duration-200 ${
+                isActive(link.href) ? 'text-teal' : 'text-ink hover:text-teal'
+              }`}
+            >
+              {link.label}
+              {isActive(link.href) && (
+                <motion.span
+                  layoutId="nav-indicator"
+                  className="absolute bottom-0 left-3 right-3 h-[2px] bg-teal rounded-full"
+                />
+              )}
+            </Link>
+          ))}
         </nav>
 
         {/* ── Desktop CTA ───────────────────────────────────── */}
@@ -196,38 +123,17 @@ export function Header() {
             className="lg:hidden overflow-hidden bg-white border-t border-hairline"
           >
             <nav className="px-5 py-5 flex flex-col gap-0.5" aria-label="Mobile navigation">
-              {navLinks.map((link) =>
-                link.hasDropdown ? (
-                  <div key={link.label}>
-                    <div className="px-3 py-2 font-body text-[10px] font-bold uppercase tracking-[0.15em] text-body/60">
-                      {link.label}
-                    </div>
-                    <div className="pl-3 flex flex-col gap-0.5">
-                      {aboutLinks.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className={`px-3 py-2.5 rounded-xl font-body text-body-md transition-colors hover:bg-surface hover:text-teal ${
-                            pathname === item.href ? 'text-teal bg-teal/5' : 'text-ink'
-                          }`}
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`px-3 py-2.5 rounded-xl font-body text-body-md font-semibold uppercase tracking-[0.08em] transition-colors hover:bg-surface hover:text-teal ${
-                      isActive(link.href) ? 'text-teal' : 'text-ink'
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                )
-              )}
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`px-3 py-2.5 rounded-xl font-body text-body-md font-semibold uppercase tracking-[0.08em] transition-colors hover:bg-surface hover:text-teal ${
+                    isActive(link.href) ? 'text-teal' : 'text-ink'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
 
               <div className="mt-4 pt-4 border-t border-hairline flex flex-col gap-2.5">
                 <a
