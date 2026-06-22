@@ -22,7 +22,7 @@ export const services: Service[] = [
       'Industrial flooring and trenches',
       'Chimney and tower structures',
     ],
-    image: 'https://images.unsplash.com/photo-1541888086425-d81bb19240f5?q=80&w=900&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1531834685032-c34bf0d84c77?q=80&w=900&auto=format&fit=crop', // Concrete building structure
     icon: 'foundation',
   },
   {
@@ -38,7 +38,7 @@ export const services: Service[] = [
       'Mezzanine floors',
       'Crane-gantry integrated structures',
     ],
-    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=900&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?q=80&w=900&auto=format&fit=crop', // Crane lifting steel frame
     icon: 'warehouse',
   },
   {
@@ -54,7 +54,7 @@ export const services: Service[] = [
       'Insulation and painting',
       'Pressure testing and commissioning',
     ],
-    image: 'https://images.unsplash.com/photo-1621619856624-42fd193a0661?q=80&w=900&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1504917595217-d4ce5eb96784?q=80&w=900&auto=format&fit=crop', // Industrial valves and piping
     icon: 'plumbing',
   },
   {
@@ -70,7 +70,7 @@ export const services: Service[] = [
       'Drainage and culverts',
       'Compound walls and fencing',
     ],
-    image: 'https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?q=80&w=900&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1578593172559-00109923bb63?q=80&w=900&auto=format&fit=crop', // Excavator digging earthwork
     icon: 'construction',
   },
 ]

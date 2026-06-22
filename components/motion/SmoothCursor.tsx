@@ -47,6 +47,7 @@ export function SmoothCursor() {
         hoveredRef.current = true
         setHovered(true)
         setIsInput(false)
+        gsap.to(ring, { scale: 1.8, duration: 0.25, ease: 'power2.out' })
       }
     }
 
@@ -62,12 +63,13 @@ export function SmoothCursor() {
       if (target.closest('a, button, select, option, [role="button"], .clickable')) {
         hoveredRef.current = false
         setHovered(false)
+        gsap.to(ring, { scale: 1, duration: 0.25, ease: 'power2.out' })
       }
     }
 
     // Use ref so these handlers don't need hovered in their closure
-    const onMouseDown = () => gsap.to(ring, { scale: 0.75, duration: 0.15 })
-    const onMouseUp   = () => gsap.to(ring, { scale: hoveredRef.current ? 1.8 : 1, duration: 0.2 })
+    const onMouseDown = () => gsap.to(ring, { scale: 0.75, duration: 0.15, ease: 'power2.out' })
+    const onMouseUp   = () => gsap.to(ring, { scale: hoveredRef.current ? 1.8 : 1, duration: 0.2, ease: 'power2.out' })
 
     window.addEventListener('mousemove',  onMouseMove,        { passive: true })
     document.addEventListener('mouseover',  onMouseOver)
@@ -84,19 +86,10 @@ export function SmoothCursor() {
       window.removeEventListener('mousedown',  onMouseDown)
       window.removeEventListener('mouseup',    onMouseUp)
     }
-  }, []) // runs once — hoveredRef keeps mouseup handler in sync without re-subscribing
+  }, []) // runs once
 
   return (
     <>
-      {/*
-        Both elements use mix-blend-mode: difference with white color.
-        Result = |white − background| — so the cursor always inverts
-        whatever is beneath it and is never camouflaged.
-        White bg  → black cursor
-        Dark bg   → white cursor
-        Teal bg   → orange/amber cursor
-      */}
-
       {/* Outer ring — teal border + white shadow halo so it separates from teal backgrounds */}
       <div
         ref={ringRef}
@@ -108,8 +101,7 @@ export function SmoothCursor() {
           boxShadow: '0 0 0 1.5px white',
           opacity: visible && !isInput ? 0.85 : 0,
           backgroundColor: hovered ? 'rgba(22,168,184,0.12)' : 'transparent',
-          transform: hovered ? 'scale(1.8)' : 'scale(1)',
-          transition: 'opacity 0.25s, background-color 0.25s, transform 0.25s ease-out',
+          transition: 'opacity 0.25s, background-color 0.25s',
           willChange: 'transform',
         }}
       />

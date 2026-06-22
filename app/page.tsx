@@ -317,7 +317,7 @@ export default function HomePage() {
               src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=900&auto=format&fit=crop"
               alt="Director of BD Buildcon LLP"
               fill
-              wrapperClassName="aspect-[3/4] rounded-card overflow-hidden"
+              wrapperClassName="relative aspect-[3/4] rounded-card overflow-hidden"
               className="object-cover object-top"
               sizes="(max-width: 1024px) 100vw, 50vw"
               parallax

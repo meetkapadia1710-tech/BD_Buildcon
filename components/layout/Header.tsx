@@ -7,6 +7,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { MagneticButton } from '@/components/motion/MagneticButton'
 import { contactInfo } from '@/content/links'
 
+import Logo from '@/components/ui/Logo'
+
 const aboutLinks = [
   { label: 'Overview',               href: '/about/overview',       desc: 'Company profile & history' },
   { label: 'Ideology',               href: '/about/ideology',        desc: 'Values, vision & mission' },
@@ -58,31 +60,8 @@ export function Header() {
       <div className="max-w-container mx-auto px-gutter flex items-center justify-between gap-6">
 
         {/* ── Logo ─────────────────────────────────────────── */}
-        <Link href="/" className="flex items-center gap-3 shrink-0 group">
-          {/* Geometric mark */}
-          <div className="relative w-9 h-9 shrink-0">
-            <div className="absolute inset-0 rounded bg-teal transition-colors duration-200 group-hover:bg-teal-hover" />
-            <svg viewBox="0 0 36 36" className="absolute inset-0 w-full h-full" aria-hidden="true">
-              {/* B shape */}
-              <rect x="8"  y="8"  width="5" height="20" rx="1" fill="white" />
-              <rect x="8"  y="8"  width="11" height="5"  rx="1" fill="white" />
-              <rect x="8"  y="16" width="11" height="4"  rx="1" fill="white" />
-              <rect x="8"  y="23" width="11" height="5"  rx="1" fill="white" />
-              {/* D shape */}
-              <rect x="22" y="8"  width="5" height="20" rx="1" fill="white" opacity="0.55" />
-              <rect x="22" y="8"  width="9" height="4"  rx="1" fill="white" opacity="0.55" />
-              <rect x="22" y="24" width="9" height="4"  rx="1" fill="white" opacity="0.55" />
-            </svg>
-          </div>
-          {/* Text */}
-          <div className="leading-none">
-            <div className="font-display font-bold text-ink text-[18px] tracking-tight">
-              BD Buildcon <span className="text-teal">LLP</span>
-            </div>
-            <div className="font-body text-[9px] uppercase tracking-[0.15em] text-body hidden sm:block mt-0.5">
-              Formerly Bhumi Developers
-            </div>
-          </div>
+        <Link href="/" className="flex items-center shrink-0">
+          <Logo light={true} className="h-10 w-auto" />
         </Link>
 
         {/* ── Desktop Nav ───────────────────────────────────── */}
