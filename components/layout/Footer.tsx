@@ -63,10 +63,10 @@ export function Footer() {
             <nav className="flex flex-col gap-3">
               {[
                 { label: 'Home', href: '/' },
-                { label: 'About Us', href: '/about/overview' },
+                { label: 'About Us', href: '/about#overview' },
                 { label: 'Projects', href: '/projects' },
                 { label: 'Contact Us', href: '/contact' },
-                { label: 'Certification', href: '/about/certification' },
+                { label: 'Certification', href: '/about#certification' },
                 { label: 'Why Us', href: '/why-us' },
               ].map((link) => (
                 <Link

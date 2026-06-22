@@ -9,16 +9,15 @@ import { contactInfo } from '@/content/links'
 import Logo from '@/components/ui/Logo'
 
 const aboutLinks = [
-  { label: 'Overview',               href: '/about/overview',       desc: 'Company profile & history' },
-  { label: 'Ideology',               href: '/about/ideology',        desc: 'Values, vision & mission' },
-  { label: 'Certification',          href: '/about/certification',   desc: 'ISO 9001:2015 · CRISIL SME 3 rating' },
-  { label: 'Plant & Machinery',      href: '/about/plant-machinery', desc: '100+ owned equipment items' },
-  { label: 'Equipment & Accessories',href: '/about/equipment',       desc: 'Full plant capability list' },
+  { label: 'Overview',               href: '/about#overview',       desc: 'Company profile & history' },
+  { label: 'Ideology',               href: '/about#ideology',        desc: 'Values, vision & mission' },
+  { label: 'Certification',          href: '/about#certification',   desc: 'ISO 9001:2015 · CRISIL SME 3 rating' },
+  { label: 'Infrastructure',         href: '/about#infrastructure',  desc: 'Plant, Machinery & Equipment list' },
 ]
 
 const navLinks = [
   { label: 'Home',          href: '/' },
-  { label: 'About Us',      href: '/about/overview', hasDropdown: true },
+  { label: 'About Us',      href: '/about', hasDropdown: true },
   { label: 'Why Us',        href: '/why-us' },
   { label: 'Projects',      href: '/projects' },
   { label: 'Employee Area', href: '/employee-area' },

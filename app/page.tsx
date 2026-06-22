@@ -348,7 +348,7 @@ export default function HomePage() {
                     <p className="font-body text-body-md text-white/45">Director, BD Buildcon LLP · Est. 1995</p>
                   </div>
                 </div>
-                <Link href="/about/overview" className="btn-ghost-white text-sm">
+                <Link href="/about" className="btn-ghost-white text-sm">
                   About BD Buildcon
                 </Link>
               </FadeRiseItem>
