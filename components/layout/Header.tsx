@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MagneticButton } from '@/components/motion/MagneticButton'
 import { contactInfo } from '@/content/links'
+import { BDLogo } from '@/components/layout/BDLogo'
 
 import Logo from '@/components/ui/Logo'
 
