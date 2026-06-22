@@ -52,7 +52,7 @@ export default function ProjectsPage() {
       <section className="section-pad bg-white">
         <div className="container-max">
           {/* Sector filter — dropdown */}
-          <SlideIn from="top">
+          <SlideIn from="top" className="relative z-30">
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-12">
               <label
                 htmlFor="sector-filter"

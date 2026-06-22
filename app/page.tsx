@@ -88,7 +88,7 @@ export default function HomePage() {
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-dark-bg" aria-label="Hero">
         {/* Background image with Parallax */}
         <div className="absolute inset-0 z-0">
-          <ParallaxLayer yRange={-60}>
+          <ParallaxLayer yRange={-60} className="absolute inset-0">
             <Image
               src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop"
               alt="Large industrial plant construction site at twilight with steel structures and piping"
