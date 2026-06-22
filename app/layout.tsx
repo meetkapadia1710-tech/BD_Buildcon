@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Hanken_Grotesk } from 'next/font/google'
 import './globals.css'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
+import { SmoothCursor } from '@/components/motion/SmoothCursor'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -8,9 +11,16 @@ const inter = Inter({
   display: 'swap',
 })
 
+const hanken = Hanken_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-hanken',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
-  title: 'BD Buildcon LLP - Corporate Brochure',
-  description: 'Turnkey industrial EPC contractor with 35+ years in Civil, Mechanical, PEB structures, piling and piping.',
+  title: 'BD Buildcon LLP | Industrial EPC Contractor, Bharuch, Gujarat',
+  description:
+    'Turnkey industrial EPC contractor since 1995. All projects completed on deadline with zero accidents. ISO 9001:2015 certified · CRISIL SME 3 rated · ₹200+ Cr delivered.',
 }
 
 export default function RootLayout({
@@ -19,9 +29,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="bg-neutral-950 text-white min-h-screen">
-        {children}
+    <html lang="en" className={`${inter.variable} ${hanken.variable}`}>
+      <body className="font-body text-ink bg-white antialiased">
+        <SmoothCursor />
+        <Header />
+        <main>{children}</main>
+        <Footer />
       </body>
     </html>
   )
