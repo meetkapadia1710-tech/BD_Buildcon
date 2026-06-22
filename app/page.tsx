@@ -1,83 +1,151 @@
-'use client';
+import type { Metadata } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
+import { FadeRise, FadeRiseItem } from '@/components/motion/FadeRise'
+import { RevealImage } from '@/components/motion/RevealImage'
+import { CountUp } from '@/components/motion/CountUp'
+import { SectionHeading } from '@/components/layout/SectionHeading'
+import { CTABand } from '@/components/layout/CTABand'
+import { TestimonialCard } from '@/components/ui/TestimonialCard'
+import { ProjectCard } from '@/components/ui/ProjectCard'
+import { projects } from '@/content/projects'
+import { testimonials } from '@/content/testimonials'
+import { clients } from '@/content/clients'
+import { services } from '@/content/services'
+import { BlueprintReveal } from '@/components/motion/BlueprintReveal'
+import { ConstructionDraw } from '@/components/motion/ConstructionDraw'
+import { RisingFloors, type StatFloor } from '@/components/motion/RisingFloors'
 
-import { useEffect, useRef } from 'react';
-import Image from 'next/image';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { BDLogo } from '@/components/layout/BDLogo';
+export const metadata: Metadata = {
+  title: 'BD Buildcon LLP | Industrial EPC Contractor, Bharuch, Gujarat',
+  description:
+    'Turnkey industrial EPC contractor since 1995. All projects completed on deadline with zero accidents. ISO 9001:2015 certified · CRISIL SME 3 rated · ₹200+ Cr delivered.',
+}
 
-export default function Home() {
-  const containerRef = useRef<HTMLDivElement>(null);
+const sectors = [
+  'Chemicals', 'Pharma', 'Petroleum', 'Fertiliser', 'Glass',
+  'Tyre', 'Food Processing', 'Industrial Gases', 'Insulation',
+  'Adhesives', 'Natural Fibres', 'Infrastructure', 'Residential',
+  'Chemicals', 'Pharma', 'Petroleum', 'Fertiliser', 'Glass',
+  'Tyre', 'Food Processing', 'Industrial Gases', 'Insulation',
+  'Adhesives', 'Natural Fibres', 'Infrastructure', 'Residential',
+]
 
-  // Scroll Progress for Parallax
-  const { scrollYProgress } = useScroll({ target: containerRef });
-  
-  // Parallax offsets
-  const yHero = useTransform(scrollYProgress, [0, 0.2], [0, 200]);
-  const opacityHero = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+const pillars = [
+  {
+    icon: (
+      <svg className="w-7 h-7 text-teal" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      </svg>
+    ),
+    title: 'Zero Accidents',
+    body: 'Safety is engineered into every protocol, every day on site.',
+  },
+  {
+    icon: (
+      <svg className="w-7 h-7 text-teal" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+      </svg>
+    ),
+    title: 'On-Time Delivery',
+    body: 'Predictable timelines backed by rigorous project planning and owned plant.',
+  },
+  {
+    icon: (
+      <svg className="w-7 h-7 text-teal" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+      </svg>
+    ),
+    title: '70% Repeat Clients',
+    body: 'More than two-thirds of our clients return — the strongest endorsement in the industry.',
+  },
+  {
+    icon: (
+      <svg className="w-7 h-7 text-teal" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+        <line x1="8" y1="21" x2="16" y2="21" />
+        <line x1="12" y1="17" x2="12" y2="21" />
+      </svg>
+    ),
+    title: 'Technology Under One Roof',
+    body: 'Owned fleet, testing lab and specialist teams — no third-party dependency.',
+  },
+]
+
+const floorStats: StatFloor[] = [
+  { value: 50,  suffix: '+', label: 'Projects Completed', heightPct: 72 },
+  { value: 35,  suffix: '+', label: 'Years Experience',   heightPct: 58 },
+  { value: 0,   suffix: '',  label: 'Accidents Recorded', heightPct: 88 },
+  { value: 70,  suffix: '%', label: 'Repeat Client Ratio',heightPct: 80 },
+]
+
+export default function HomePage() {
+  const featuredProjects = projects.slice(0, 4)
 
   return (
-    <main ref={containerRef} className="bg-[#050505] min-h-screen w-full font-sans text-neutral-200 overflow-x-hidden selection:bg-[#16A8B8] selection:text-white">
-      
-      {/* HEADER */}
-      <header className="fixed top-0 w-full z-50 bg-[#050505]/80 backdrop-blur-xl border-b border-white/5 transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
-          <div className="flex items-center">
-            <BDLogo light={false} className="h-10 w-auto" />
-          </div>
-          <nav className="hidden md:flex gap-8 text-xs tracking-[0.2em] uppercase font-semibold text-neutral-400">
-            <a href="#about" className="hover:text-[#16A8B8] transition-colors">About</a>
-            <a href="#services" className="hover:text-[#16A8B8] transition-colors">Services</a>
-            <a href="#infrastructure" className="hover:text-[#16A8B8] transition-colors">Infrastructure</a>
-            <a href="#clients" className="hover:text-[#16A8B8] transition-colors">Clients</a>
-          </nav>
-          <button className="px-6 py-2.5 bg-white text-black text-xs font-bold uppercase tracking-widest hover:bg-[#16A8B8] hover:text-white transition-all duration-300">
-            Contact Us
-          </button>
-        </div>
-      </header>
-
-      {/* HERO SECTION */}
-      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-        <motion.div style={{ y: yHero, opacity: opacityHero }} className="absolute inset-0 z-0">
-          <Image 
-            src="/photos/img_0_0.png" 
-            alt="Hero Construction Background" 
-            fill 
-            className="object-cover opacity-60 mix-blend-luminosity"
+    <>
+      {/* ── Hero ── */}
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-dark-bg" aria-label="Hero">
+        {/* Background image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop"
+            alt="Large industrial plant construction site at twilight with steel structures and piping"
+            fill
+            className="object-cover animate-ken-burns"
             priority
+            sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/60 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-transparent to-[#050505]" />
-        </motion.div>
-
-        <div className="relative z-10 text-center max-w-5xl px-6">
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-[#16A8B8] font-bold tracking-[0.3em] uppercase text-sm mb-6"
+          <div className="absolute inset-0 bg-black/60" />
+          {/* Teal swoosh bottom */}
+          <svg
+            className="absolute bottom-0 left-0 w-full text-white/5"
+            viewBox="0 0 1440 100"
+            preserveAspectRatio="none"
+            aria-hidden="true"
           >
-            Formerly Bhumi Developers
-          </motion.p>
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white leading-[1.1] tracking-tight mb-8"
-          >
-            Building Industrial <br/><span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-400 to-neutral-600">Futures.</span>
-          </motion.h1>
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.8 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-6"
-          >
-            <p className="text-neutral-400 text-lg font-light max-w-2xl">
-              Turnkey Industrial EPC Contractor specialised in Civil, Mechanical, PEB & Piling across India.
-            </p>
-          </motion.div>
+            <path d="M0,60 C360,100 1080,0 1440,60 L1440,100 L0,100 Z" fill="currentColor" />
+          </svg>
         </div>
+
+        {/* Content */}
+        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
+          <FadeRiseItem delay={0.1}>
+            <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 text-white/80 font-body text-label-md uppercase tracking-widest mb-8">
+              <span className="w-2 h-2 bg-teal rounded-full animate-pulse" />
+              ISO 9001:2015 Certified · CRISIL SME 3 Rated
+            </div>
+          </FadeRiseItem>
+
+          <FadeRiseItem delay={0.2}>
+            <h1 className="font-display text-display-lg text-white leading-[1.05] tracking-tight mb-6">
+              All our projects,{' '}
+              <span className="block">completed on deadline —</span>
+              <span className="text-teal">with zero accidents.</span>
+            </h1>
+          </FadeRiseItem>
+
+          <FadeRiseItem delay={0.35}>
+            <p className="font-body text-body-lg text-white/70 max-w-2xl mx-auto mb-10">
+              35+ years · ISO 9001:2015 · CRISIL SME 3 · ₹200+ Cr delivered
+            </p>
+          </FadeRiseItem>
+
+          <FadeRiseItem delay={0.45}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact" className="btn-primary text-sm">
+                Start your project
+              </Link>
+              <Link href="/projects" className="btn-ghost-white text-sm">
+                See the work
+              </Link>
+            </div>
+          </FadeRiseItem>
+        </div>
+      </section>
 
       {/* ── Sector Marquee ── */}
       <section
@@ -253,265 +321,180 @@ export default function Home() {
               className="object-cover object-top"
               sizes="(max-width: 1024px) 100vw, 50vw"
               parallax
-=======
-        {/* Scroll Indicator */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.5 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
-        >
-          <span className="text-[10px] uppercase tracking-[0.3em] text-neutral-500 font-semibold">Scroll</span>
-          <div className="w-[1px] h-12 bg-white/20 relative overflow-hidden">
-            <motion.div 
-              animate={{ y: [0, 48] }}
-              transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
-              className="absolute inset-0 bg-[#16A8B8] h-1/2"
->>>>>>> c78dd576ef26cad3e327c781fe85ee2858d69b90
             />
-          </div>
-        </motion.div>
-      </section>
 
-      {/* STATS STRIP */}
-      <section className="relative z-20 py-16 bg-[#0a0a0a] border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 divide-x divide-white/5">
-          <StatBox value="32+" label="Years Experience" />
-          <StatBox value="50+" label="Major Projects" />
-          <StatBox value="60%" label="Repeat Ratio" />
-          <StatBox value="ZERO" label="Accidents" accent />
-        </div>
-      </section>
-
-      {/* ABOUT SECTION */}
-      <section id="about" className="py-32 relative">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col lg:flex-row gap-20 items-center">
-          <div className="lg:w-1/2">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-8">
-              Decades of <br/> Unyielding Quality.
-            </h2>
-            <div className="space-y-6 text-neutral-400 font-light leading-relaxed text-lg">
-              <p>
-                Established in 1995, BD Buildcon LLP has evolved from a regional civil contractor into a full-scale turnkey EPC partner for major industries. 
-              </p>
-              <p>
-                We pride ourselves on completing complex industrial projects on strict deadlines with zero accidents. Our massive inventory of in-house heavy machinery means we control our timelines, ensuring unparalleled quality without third-party dependencies.
-              </p>
-            </div>
-            
-            <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-8">
-              <div className="p-6 bg-[#0a0a0a] border border-white/5 rounded-2xl">
-                <div className="w-10 h-10 bg-[#16A8B8]/20 rounded-full flex items-center justify-center mb-4">
-                  <div className="w-3 h-3 bg-[#16A8B8] rounded-full" />
-                </div>
-                <h3 className="text-white font-bold mb-2">Our Mission</h3>
-                <p className="text-sm text-neutral-500">Deliver high-quality, safe, and cost-effective construction services through transparency and technological integration.</p>
-              </div>
-              <div className="p-6 bg-[#0a0a0a] border border-white/5 rounded-2xl">
-                <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center mb-4">
-                  <div className="w-3 h-3 bg-white rounded-full" />
-                </div>
-                <h3 className="text-white font-bold mb-2">Our Vision</h3>
-                <p className="text-sm text-neutral-500">To be the preferred EPC contractor across India, recognized for flawless execution and an absolute safety record.</p>
-              </div>
-            </div>
-          </div>
-          <div className="lg:w-1/2 relative">
-            <div className="relative aspect-[4/5] w-full rounded-3xl overflow-hidden shadow-2xl">
-              <Image 
-                src="/photos/img_4_0.png" 
-                alt="Construction Site" 
-                fill 
-                className="object-cover"
-              />
-              <div className="absolute inset-0 border border-white/10 rounded-3xl mix-blend-overlay" />
-            </div>
-            <div className="absolute -bottom-10 -left-10 bg-[#16A8B8] p-8 rounded-2xl text-black max-w-xs shadow-2xl hidden md:block">
-              <p className="font-bold text-xl mb-2">ISO 9001:2015</p>
-              <p className="text-sm font-medium opacity-80">Certified for superior quality management and operational excellence.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SERVICES SECTION */}
-      <section id="services" className="py-32 bg-[#050505] relative overflow-hidden">
-        {/* Background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#16A8B8]/5 rounded-full blur-[120px] pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+            {/* Message */}
             <div>
-              <p className="text-[#16A8B8] font-bold tracking-[0.3em] uppercase text-sm mb-4">Core Capabilities</p>
-              <h2 className="text-4xl md:text-6xl font-serif font-bold text-white">Turnkey Execution</h2>
-            </div>
-            <p className="text-neutral-400 font-light max-w-md">
-              From deep foundations to complex mechanical piping, we provide comprehensive end-to-end industrial construction solutions under one roof.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <ServiceCard 
-              title="Civil & Structural"
-              desc="RCC foundations, bored piling, industrial flooring, trenches, and superstructures for complex manufacturing facilities."
-              img="/photos/img_1_0.png"
-            />
-            <ServiceCard 
-              title="PEB Structures"
-              desc="Design, supply, and erection of Pre-Engineered Buildings, warehouses, storage sheds, and crane-integrated facilities."
-              img="/photos/img_2_0.png"
-            />
-            <ServiceCard 
-              title="Mechanical & Piping"
-              desc="Process and utility piping fabrication, equipment erection, alignment, and commissioning across industrial plants."
-              img="/photos/img_3_0.png"
-            />
-            <ServiceCard 
-              title="Piling & Earthwork"
-              desc="Mass earthwork, industrial roads, drainage, and specialized deep piling solutions for greenfield projects."
-              img="/photos/img_5_0.png"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* INFRASTRUCTURE */}
-      <section id="infrastructure" className="py-32 relative border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6">Self-Reliant Infrastructure</h2>
-            <p className="text-neutral-400 font-light text-lg">
-              Owning over 150+ heavy machinery items—including excavators, cranes, boom placers, and batching plants—allows us to eliminate third-party delays and guarantee project momentum.
-            </p>
-          </div>
-
-          <div className="relative aspect-[21/9] w-full rounded-3xl overflow-hidden">
-             <Image 
-                src="/photos/img_6_0.png" 
-                alt="Infrastructure" 
-                fill 
-                className="object-cover opacity-80"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-              <div className="absolute bottom-10 left-10 right-10 flex justify-between items-end">
-                <div className="text-white">
-                  <p className="text-3xl font-serif font-bold mb-2">In-House Fabrication Yard</p>
-                  <p className="text-neutral-300">Dedicated facilities to ensure highest quality control.</p>
+              <FadeRiseItem>
+                <span className="font-body text-label-md text-teal uppercase tracking-widest block mb-4">
+                  Desk of Directors
+                </span>
+                <div className="text-[72px] leading-none text-teal/20 font-display select-none mb-2" aria-hidden="true">
+                  &ldquo;
                 </div>
-              </div>
+                <blockquote className="font-display text-headline-sm text-white leading-snug mb-6">
+                  Every project we undertake must be delivered safely, on time, and to the highest quality standards.
+                  There are no shortcuts when people&apos;s lives and industrial operations depend on what we build.
+                </blockquote>
+                <p className="font-body text-body-lg text-white/55 leading-relaxed mb-8">
+                  Over 35 years, we have grown from a regional civil contractor into a full-service turnkey EPC
+                  partner recognised across Gujarat and beyond — earned project by project through transparent
+                  communication, technical depth and the resilience to deliver under pressure.
+                </p>
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="h-px w-10 bg-teal shrink-0" aria-hidden="true" />
+                  <div>
+                    <p className="font-display font-bold text-white text-body-lg">Kiran Majmudar</p>
+                    <p className="font-body text-body-md text-white/45">Director, BD Buildcon LLP · Est. 1995</p>
+                  </div>
+                </div>
+                <Link href="/about/overview" className="btn-ghost-white text-sm">
+                  About BD Buildcon
+                </Link>
+              </FadeRiseItem>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CLIENTS */}
-      <section id="clients" className="py-32 bg-[#0a0a0a]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 text-center">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-16">Trusted by Industry Leaders</h2>
-          
-          <div className="flex flex-wrap justify-center gap-4 md:gap-8 opacity-60">
-            {['GNFC', 'GACL', 'PIDILITE', 'AKER SOLUTIONS', 'THERMAX', 'MOTT MACDONALD', 'BIRLA CELLULOSE', 'ATG TYRES'].map(client => (
-              <div key={client} className="px-8 py-4 border border-white/10 rounded-full text-white tracking-widest uppercase font-bold text-sm bg-white/5">
-                {client}
+      {/* ── Safety Band ── */}
+      <section className="relative overflow-hidden bg-footer py-20 lg:py-28" aria-label="Safety commitment">
+        <Image
+          src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop"
+          alt="Workers in high-visibility gear on an industrial construction site"
+          fill
+          className="object-cover opacity-20"
+          sizes="100vw"
+        />
+        <div className="relative z-10 container-max text-center">
+          <FadeRiseItem>
+            <h2 className="font-display text-headline-lg text-white mb-4">
+              A zero-accident standard.
+            </h2>
+          </FadeRiseItem>
+          <FadeRiseItem delay={0.1}>
+            <p className="font-body text-body-lg text-white/70 max-w-2xl mx-auto mb-8">
+              &ldquo;Safety is not a department — it&apos;s the culture we build every morning before the first concrete is poured.&rdquo;
+            </p>
+          </FadeRiseItem>
+          <FadeRiseItem delay={0.2}>
+            <Link href="/why-us" className="btn-ghost-white text-sm">
+              Our safety approach
+            </Link>
+          </FadeRiseItem>
+        </div>
+      </section>
+
+      {/* ── Testimonials ── */}
+      <section className="section-pad bg-surface" aria-label="Client testimonials">
+        <div className="container-max">
+          <SectionHeading
+            title="What Our Clients Say"
+            subtitle="Trusted by leading names across chemical, pharma, petroleum and industrial sectors."
+          />
+          <FadeRise className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {testimonials.slice(0, 3).map((t) => (
+              <TestimonialCard key={t.id} testimonial={t} />
+            ))}
+          </FadeRise>
+        </div>
+      </section>
+
+      {/* ── Clients Logo Grid ── */}
+      <section className="section-pad bg-white border-y border-hairline" aria-label="Our clients">
+        <div className="container-max">
+          <SectionHeading title="Trusted By" subtitle="Industry leaders who partner with BD Buildcon for mission-critical construction." />
+          <FadeRise className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+            {clients.map((client) => (
+              <div
+                key={client.id}
+                className="flex flex-col items-center justify-center p-6 rounded-card border border-hairline bg-surface hover:border-teal/30 hover:bg-teal/5 transition-all duration-300 text-center gap-2"
+              >
+                <div className="w-12 h-12 rounded-full bg-teal/10 flex items-center justify-center">
+                  <span className="font-display font-bold text-teal text-sm">
+                    {client.name.slice(0, 2).toUpperCase()}
+                  </span>
+                </div>
+                <span className="font-body text-body-md text-ink font-semibold leading-tight">{client.name}</span>
+                <span className="font-body text-xs text-body">{client.sector}</span>
               </div>
             ))}
-          </div>
+          </FadeRise>
+        </div>
+      </section>
 
-          <div className="mt-24 grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-            <div className="p-10 bg-[#050505] rounded-3xl border border-white/5 relative">
-              <span className="text-6xl text-[#16A8B8] font-serif absolute top-6 left-6 opacity-20">"</span>
-              <p className="text-neutral-400 italic relative z-10 leading-relaxed mb-8">
-                Bhumi Developers are one of our major construction contractors. They have an excellent track record and have helped us achieve significant milestones, timely, safely, and with the best quality of workmanship... zero accidents.
-              </p>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-white/10 rounded-full" />
-                <div>
-                  <p className="text-white font-bold">Mr. Sunish Nair</p>
-                  <p className="text-xs text-neutral-500 uppercase tracking-wider">Tagros Chemicals India Ltd.</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="p-10 bg-[#050505] rounded-3xl border border-white/5 relative">
-              <span className="text-6xl text-[#16A8B8] font-serif absolute top-6 left-6 opacity-20">"</span>
-              <p className="text-neutral-400 italic relative z-10 leading-relaxed mb-8">
-                We appreciate on successfully completing the Civil and Structural work with ZERO accident. We also appreciate their professionalism, workmanship, minimum usage of manpower and maximum usage of technologies.
-              </p>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-white/10 rounded-full" />
-                <div>
-                  <p className="text-white font-bold">Mr. UM Mukharjee</p>
-                  <p className="text-xs text-neutral-500 uppercase tracking-wider">Mott MacDonald, Mumbai</p>
-                </div>
-              </div>
-            </div>
+      {/* ── Home Enquiry Form ── */}
+      <section className="section-pad bg-surface" id="enquiry" aria-label="Quick enquiry form">
+        <div className="container-max">
+          <SectionHeading
+            title="Start a Conversation"
+            subtitle="Tell us about your project — we respond within one business day."
+          />
+          <div className="max-w-2xl mx-auto">
+            <HomeEnquiryForm />
           </div>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="border-t border-white/10 pt-20 pb-10 bg-[#050505]">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-          <div>
-            <div className="mb-6">
-              <BDLogo light={false} className="h-12 w-auto" />
-            </div>
-            <p className="text-neutral-500 text-sm max-w-sm leading-relaxed">
-              Leading the way in industrial construction, creating resilient infrastructure for the future. 
-            </p>
-          </div>
-          <div>
-            <h4 className="text-white font-bold tracking-widest uppercase text-xs mb-6">Registered Office</h4>
-            <p className="text-neutral-500 text-sm leading-relaxed">
-              7-8-9, Millenium Arcade,<br/>
-              Opp. SVM Engineering College,<br/>
-              Old National Highway No 8,<br/>
-              Bharuch, Gujarat 392002
-            </p>
-          </div>
-          <div>
-            <h4 className="text-white font-bold tracking-widest uppercase text-xs mb-6">Contact Us</h4>
-            <ul className="text-neutral-500 text-sm space-y-2">
-              <li>+91 98791 00355</li>
-              <li>business@bdbuildcon.com</li>
-              <li>www.bdbuildcon.com</li>
-            </ul>
-          </div>
-        </div>
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 text-center text-xs text-neutral-600 font-light tracking-wider">
-          &copy; {new Date().getFullYear()} BD BUILDCON LLP. ALL RIGHTS RESERVED.
-        </div>
-      </footer>
-    </main>
-  );
+      <CTABand />
+    </>
+  )
 }
 
-function StatBox({ value, label, accent = false }: { value: string, label: string, accent?: boolean }) {
+function HomeEnquiryForm() {
   return (
-    <div className="flex flex-col items-center justify-center text-center group pl-6 first:pl-0">
-      <div className={`text-4xl md:text-5xl font-serif font-bold mb-3 transition-colors ${accent ? 'text-[#16A8B8]' : 'text-white group-hover:text-[#16A8B8]'}`}>
-        {value}
+    <form
+      action="/api/contact"
+      method="POST"
+      className="bg-white rounded-card border border-hairline shadow-card p-8 space-y-5"
+    >
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
+          <label htmlFor="hq-name" className="block font-body text-label-md text-ink mb-2 uppercase tracking-wider">
+            Name <span className="text-brand-red">*</span>
+          </label>
+          <input id="hq-name" name="name" type="text" required placeholder="Your full name" className="form-field" />
+        </div>
+        <div>
+          <label htmlFor="hq-company" className="block font-body text-label-md text-ink mb-2 uppercase tracking-wider">
+            Company
+          </label>
+          <input id="hq-company" name="company" type="text" placeholder="Your company name" className="form-field" />
+        </div>
       </div>
-      <div className="text-xs uppercase tracking-[0.2em] font-semibold text-neutral-500">
-        {label}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
+          <label htmlFor="hq-sector" className="block font-body text-label-md text-ink mb-2 uppercase tracking-wider">
+            Sector
+          </label>
+          <select id="hq-sector" name="sector" className="form-field">
+            <option value="">Select sector</option>
+            {['Chemical', 'Pharma', 'Petroleum', 'Fertiliser', 'Glass', 'Tyre', 'Food', 'Residential', 'Other'].map((s) => (
+              <option key={s} value={s}>{s}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="hq-type" className="block font-body text-label-md text-ink mb-2 uppercase tracking-wider">
+            Project Type
+          </label>
+          <select id="hq-type" name="projectType" className="form-field">
+            <option value="">Select type</option>
+            {['Greenfield Plant', 'Plant Expansion', 'PEB Structure', 'Piping & Mechanical', 'Civil Works', 'Roads & Earthwork', 'Other'].map((t) => (
+              <option key={t} value={t}>{t}</option>
+            ))}
+          </select>
+        </div>
       </div>
-    </div>
-  );
-}
-
-function ServiceCard({ title, desc, img }: { title: string, desc: string, img: string }) {
-  return (
-    <div className="group relative rounded-3xl overflow-hidden bg-[#0a0a0a] border border-white/5 aspect-[4/3] md:aspect-auto md:h-[400px]">
-      <Image 
-        src={img} 
-        alt={title} 
-        fill 
-        className="object-cover opacity-40 transition-transform duration-700 group-hover:scale-105 group-hover:opacity-50"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end">
-        <h3 className="text-2xl font-serif font-bold text-white mb-3">{title}</h3>
-        <p className="text-neutral-400 text-sm leading-relaxed max-w-sm">{desc}</p>
+      <div>
+        <label htmlFor="hq-message" className="block font-body text-label-md text-ink mb-2 uppercase tracking-wider">
+          Message
+        </label>
+        <textarea id="hq-message" name="message" rows={4} placeholder="Brief project description..." className="form-field" />
       </div>
-    </div>
-  );
+      <button type="submit" className="btn-primary w-full sm:w-auto">
+        Send Enquiry
+      </button>
+    </form>
+  )
 }
