@@ -14,6 +14,9 @@ import { services } from '@/content/services'
 import { BlueprintReveal } from '@/components/motion/BlueprintReveal'
 import { ConstructionDraw } from '@/components/motion/ConstructionDraw'
 import { RisingFloors, type StatFloor } from '@/components/motion/RisingFloors'
+import { StaggerReveal } from '@/components/motion/StaggerReveal'
+import { SlideIn } from '@/components/motion/SlideIn'
+import { ParallaxLayer } from '@/components/motion/ParallaxLayer'
 
 export const metadata: Metadata = {
   title: 'BD Buildcon LLP | Industrial EPC Contractor, Bharuch, Gujarat',
@@ -169,11 +172,13 @@ export default function HomePage() {
       <BlueprintReveal>
       <section className="section-pad bg-white" aria-label="Services overview">
         <div className="container-max">
-          <SectionHeading
-            title="What We Build"
-            subtitle="Precision engineering and robust construction across specialised industrial disciplines."
-          />
-          <FadeRise className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <SlideIn from="bottom">
+            <SectionHeading
+              title="What We Build"
+              subtitle="Precision engineering and robust construction across specialised industrial disciplines."
+            />
+          </SlideIn>
+          <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" direction="up" stagger={0.12}>
             {services.map((svc) => (
               <div
                 key={svc.id}
@@ -195,7 +200,7 @@ export default function HomePage() {
                 </div>
               </div>
             ))}
-          </FadeRise>
+          </StaggerReveal>
         </div>
       </section>
       </BlueprintReveal>
@@ -203,17 +208,19 @@ export default function HomePage() {
       {/* ── Pillars Band ── */}
       <section className="bg-surface border-y border-hairline py-20" aria-label="Company pillars">
         <div className="container-max">
-          <FadeRise className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {pillars.map((p) => (
+          <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" direction="up" stagger={0.15}>
+            {pillars.map((p, i) => (
               <div key={p.title} className="flex flex-col items-center text-center gap-4">
-                <div className="w-16 h-16 rounded-full bg-teal/10 flex items-center justify-center">
-                  {p.icon}
-                </div>
+                <SlideIn from="bottom" delay={i * 0.07}>
+                  <div className="w-16 h-16 rounded-full bg-teal/10 flex items-center justify-center">
+                    {p.icon}
+                  </div>
+                </SlideIn>
                 <h3 className="font-display text-headline-sm text-ink">{p.title}</h3>
                 <p className="font-body text-body-md text-body">{p.body}</p>
               </div>
             ))}
-          </FadeRise>
+          </StaggerReveal>
         </div>
       </section>
 
@@ -222,20 +229,22 @@ export default function HomePage() {
         <div className="container-max">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* SVG structural frame */}
-            <FadeRiseItem>
-              <ConstructionDraw className="w-full max-w-lg mx-auto text-teal opacity-90" />
-            </FadeRiseItem>
+            <SlideIn from="left">
+              <ParallaxLayer yRange={-30}>
+                <ConstructionDraw className="w-full max-w-lg mx-auto text-teal opacity-90" />
+              </ParallaxLayer>
+            </SlideIn>
 
             {/* Text */}
             <div>
-              <FadeRiseItem>
+              <SlideIn from="right">
                 <span className="font-body text-label-md text-teal uppercase tracking-widest block mb-4">
                   How We Build
                 </span>
                 <h2 className="font-display text-headline-lg text-white leading-snug mb-6">
                   Every structure starts with a precise drawing.
                 </h2>
-              </FadeRiseItem>
+              </SlideIn>
               <FadeRiseItem delay={0.1}>
                 <div className="space-y-4 font-body text-body-lg text-white/60 leading-relaxed mb-8">
                   <p>
@@ -249,20 +258,18 @@ export default function HomePage() {
                   </p>
                 </div>
               </FadeRiseItem>
-              <FadeRiseItem delay={0.15}>
-                <div className="grid grid-cols-3 gap-4">
-                  {[
-                    { phase: '01', title: 'Design & Plan' },
-                    { phase: '02', title: 'Fabricate & Build' },
-                    { phase: '03', title: 'Commission' },
-                  ].map((step) => (
-                    <div key={step.phase} className="border border-teal/20 rounded-card p-4 hover:border-teal/50 transition-colors">
-                      <div className="font-body text-teal text-[10px] uppercase tracking-widest mb-1">{step.phase}</div>
-                      <div className="font-display text-white text-body-md font-semibold">{step.title}</div>
-                    </div>
-                  ))}
-                </div>
-              </FadeRiseItem>
+              <StaggerReveal className="grid grid-cols-3 gap-4" direction="up" stagger={0.12} delay={0.1}>
+                {[
+                  { phase: '01', title: 'Design & Plan' },
+                  { phase: '02', title: 'Fabricate & Build' },
+                  { phase: '03', title: 'Commission' },
+                ].map((step) => (
+                  <div key={step.phase} className="border border-teal/20 rounded-card p-4 hover:border-teal/50 transition-colors">
+                    <div className="font-body text-teal text-[10px] uppercase tracking-widest mb-1">{step.phase}</div>
+                    <div className="font-display text-white text-body-md font-semibold">{step.title}</div>
+                  </div>
+                ))}
+              </StaggerReveal>
             </div>
           </div>
         </div>
@@ -272,20 +279,24 @@ export default function HomePage() {
       <section className="section-pad bg-white" aria-label="Featured projects">
         <div className="container-max">
           <div className="flex items-end justify-between mb-12">
-            <SectionHeading title="Featured Projects" centered={false} className="mb-0" />
-            <Link href="/projects" className="hidden sm:flex items-center gap-2 font-body text-label-md text-teal uppercase tracking-wider hover:gap-3 transition-all">
-              See all projects
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </Link>
+            <SlideIn from="left">
+              <SectionHeading title="Featured Projects" centered={false} className="mb-0" />
+            </SlideIn>
+            <SlideIn from="right">
+              <Link href="/projects" className="hidden sm:flex items-center gap-2 font-body text-label-md text-teal uppercase tracking-wider hover:gap-3 transition-all">
+                See all projects
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </SlideIn>
           </div>
 
-          <FadeRise className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" direction="up" stagger={0.13}>
             {featuredProjects.map((project, i) => (
               <ProjectCard key={project.slug} project={project} priority={i === 0} featured={i === 0} />
             ))}
-          </FadeRise>
+          </StaggerReveal>
 
           <div className="mt-8 text-center sm:hidden">
             <Link href="/projects" className="btn-ghost text-sm">
@@ -312,46 +323,52 @@ export default function HomePage() {
         <div className="container-max">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Director photo */}
-            <RevealImage
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=900&auto=format&fit=crop"
-              alt="Director of BD Buildcon LLP"
-              fill
-              wrapperClassName="relative aspect-[3/4] rounded-card overflow-hidden"
-              className="object-cover object-top"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              parallax
-            />
+            <SlideIn from="left">
+              <ParallaxLayer yRange={-40}>
+                <RevealImage
+                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=900&auto=format&fit=crop"
+                  alt="Director of BD Buildcon LLP"
+                  fill
+                  wrapperClassName="relative aspect-[3/4] rounded-card overflow-hidden"
+                  className="object-cover object-top"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  parallax
+                />
+              </ParallaxLayer>
+            </SlideIn>
 
             {/* Message */}
-            <div>
-              <FadeRiseItem>
-                <span className="font-body text-label-md text-teal uppercase tracking-widest block mb-4">
-                  Desk of Directors
-                </span>
-                <div className="text-[72px] leading-none text-teal/20 font-display select-none mb-2" aria-hidden="true">
-                  &ldquo;
-                </div>
-                <blockquote className="font-display text-headline-sm text-white leading-snug mb-6">
-                  Every project we undertake must be delivered safely, on time, and to the highest quality standards.
-                  There are no shortcuts when people&apos;s lives and industrial operations depend on what we build.
-                </blockquote>
-                <p className="font-body text-body-lg text-white/55 leading-relaxed mb-8">
-                  Over 35 years, we have grown from a regional civil contractor into a full-service turnkey EPC
-                  partner recognised across Gujarat and beyond — earned project by project through transparent
-                  communication, technical depth and the resilience to deliver under pressure.
-                </p>
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="h-px w-10 bg-teal shrink-0" aria-hidden="true" />
-                  <div>
-                    <p className="font-display font-bold text-white text-body-lg">Kiran Majmudar</p>
-                    <p className="font-body text-body-md text-white/45">Director, BD Buildcon LLP · Est. 1995</p>
+            <SlideIn from="right">
+              <div>
+                <FadeRiseItem>
+                  <span className="font-body text-label-md text-teal uppercase tracking-widest block mb-4">
+                    Desk of Directors
+                  </span>
+                  <div className="text-[72px] leading-none text-teal/20 font-display select-none mb-2" aria-hidden="true">
+                    &ldquo;
                   </div>
-                </div>
-                <Link href="/about" className="btn-ghost-white text-sm">
-                  About BD Buildcon
-                </Link>
-              </FadeRiseItem>
-            </div>
+                  <blockquote className="font-display text-headline-sm text-white leading-snug mb-6">
+                    Every project we undertake must be delivered safely, on time, and to the highest quality standards.
+                    There are no shortcuts when people&apos;s lives and industrial operations depend on what we build.
+                  </blockquote>
+                  <p className="font-body text-body-lg text-white/55 leading-relaxed mb-8">
+                    Over 35 years, we have grown from a regional civil contractor into a full-service turnkey EPC
+                    partner recognised across Gujarat and beyond — earned project by project through transparent
+                    communication, technical depth and the resilience to deliver under pressure.
+                  </p>
+                  <div className="flex items-center gap-4 mb-8">
+                    <div className="h-px w-10 bg-teal shrink-0" aria-hidden="true" />
+                    <div>
+                      <p className="font-display font-bold text-white text-body-lg">Kiran Majmudar</p>
+                      <p className="font-body text-body-md text-white/45">Director, BD Buildcon LLP · Est. 1995</p>
+                    </div>
+                  </div>
+                  <Link href="/about" className="btn-ghost-white text-sm">
+                    About BD Buildcon
+                  </Link>
+                </FadeRiseItem>
+              </div>
+            </SlideIn>
           </div>
         </div>
       </section>
@@ -387,23 +404,27 @@ export default function HomePage() {
       {/* ── Testimonials ── */}
       <section className="section-pad bg-surface" aria-label="Client testimonials">
         <div className="container-max">
-          <SectionHeading
-            title="What Our Clients Say"
-            subtitle="Trusted by leading names across chemical, pharma, petroleum and industrial sectors."
-          />
-          <FadeRise className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <SlideIn from="bottom">
+            <SectionHeading
+              title="What Our Clients Say"
+              subtitle="Trusted by leading names across chemical, pharma, petroleum and industrial sectors."
+            />
+          </SlideIn>
+          <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" direction="up" stagger={0.14}>
             {testimonials.slice(0, 3).map((t) => (
               <TestimonialCard key={t.id} testimonial={t} />
             ))}
-          </FadeRise>
+          </StaggerReveal>
         </div>
       </section>
 
       {/* ── Clients Logo Grid ── */}
       <section className="section-pad bg-white border-y border-hairline" aria-label="Our clients">
         <div className="container-max">
-          <SectionHeading title="Trusted By" subtitle="Industry leaders who partner with BD Buildcon for mission-critical construction." />
-          <FadeRise className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+          <SlideIn from="bottom">
+            <SectionHeading title="Trusted By" subtitle="Industry leaders who partner with BD Buildcon for mission-critical construction." />
+          </SlideIn>
+          <StaggerReveal className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6" direction="up" stagger={0.07}>
             {clients.map((client) => (
               <div
                 key={client.id}
@@ -418,7 +439,7 @@ export default function HomePage() {
                 <span className="font-body text-xs text-body">{client.sector}</span>
               </div>
             ))}
-          </FadeRise>
+          </StaggerReveal>
         </div>
       </section>
 

@@ -6,6 +6,9 @@ import { CTABand } from '@/components/layout/CTABand'
 import { FadeRise, FadeRiseItem } from '@/components/motion/FadeRise'
 import { RevealImage } from '@/components/motion/RevealImage'
 import { CountUp } from '@/components/motion/CountUp'
+import { SlideIn } from '@/components/motion/SlideIn'
+import { StaggerReveal } from '@/components/motion/StaggerReveal'
+import { ParallaxLayer } from '@/components/motion/ParallaxLayer'
 
 export const metadata: Metadata = {
   title: 'Why Us',
@@ -86,18 +89,22 @@ export default function WhyUsPage() {
               }`}
             >
               {/* Image */}
-              <RevealImage
-                src={reason.image}
-                alt={reason.imageAlt}
-                fill
-                wrapperClassName="aspect-[16/10] rounded-card overflow-hidden"
-                className="object-cover"
-                parallax
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
+              <SlideIn from={reason.reverse ? 'right' : 'left'}>
+                <ParallaxLayer yRange={-25}>
+                  <RevealImage
+                    src={reason.image}
+                    alt={reason.imageAlt}
+                    fill
+                    wrapperClassName="aspect-[16/10] rounded-card overflow-hidden"
+                    className="object-cover"
+                    parallax
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                </ParallaxLayer>
+              </SlideIn>
 
               {/* Text */}
-              <FadeRiseItem>
+              <SlideIn from={reason.reverse ? 'left' : 'right'}>
                 <span className="font-body text-label-md text-teal uppercase tracking-widest block mb-3">
                   {reason.label}
                 </span>
@@ -105,7 +112,7 @@ export default function WhyUsPage() {
                   {reason.heading}
                 </h2>
                 <p className="font-body text-body-lg text-body leading-relaxed">{reason.body}</p>
-              </FadeRiseItem>
+              </SlideIn>
             </div>
           </div>
         ))}
@@ -114,8 +121,10 @@ export default function WhyUsPage() {
       {/* Stats differentiator */}
       <section className="section-pad bg-teal text-white" aria-label="Key differentiators">
         <div className="container-max">
-          <SectionHeading title="By the Numbers" subtitle="Our track record speaks for itself." />
-          <FadeRise className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <SlideIn from="bottom">
+            <SectionHeading title="By the Numbers" subtitle="Our track record speaks for itself." />
+          </SlideIn>
+          <StaggerReveal className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center" direction="up" stagger={0.12}>
             {differentiators.map((d) => (
               <div key={d.label}>
                 <div className="font-display font-extrabold text-display-lg text-white leading-none mb-3">
@@ -126,24 +135,22 @@ export default function WhyUsPage() {
                 </div>
               </div>
             ))}
-          </FadeRise>
+          </StaggerReveal>
 
           {/* Certifications */}
-          <FadeRiseItem delay={0.2}>
-            <div className="mt-12 flex flex-wrap justify-center gap-6">
-              {['ISO 9001:2015', 'CRISIL SME 3 Rated', 'Zero Accidents Since 1995'].map((badge) => (
-                <div
-                  key={badge}
-                  className="flex items-center gap-2 bg-white/10 rounded-full px-5 py-2.5 backdrop-blur-sm"
-                >
-                  <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span className="font-body text-label-md text-white uppercase tracking-wider">{badge}</span>
-                </div>
-              ))}
-            </div>
-          </FadeRiseItem>
+          <StaggerReveal className="mt-12 flex flex-wrap justify-center gap-6" direction="up" stagger={0.1} delay={0.2}>
+            {['ISO 9001:2015', 'CRISIL SME 3 Rated', 'Zero Accidents Since 1995'].map((badge) => (
+              <div
+                key={badge}
+                className="flex items-center gap-2 bg-white/10 rounded-full px-5 py-2.5 backdrop-blur-sm"
+              >
+                <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span className="font-body text-label-md text-white uppercase tracking-wider">{badge}</span>
+              </div>
+            ))}
+          </StaggerReveal>
         </div>
       </section>
 

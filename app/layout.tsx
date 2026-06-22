@@ -4,6 +4,7 @@ import './globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { SmoothCursor } from '@/components/motion/SmoothCursor'
+import { LenisProvider } from '@/components/motion/LenisProvider'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -31,10 +32,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${hanken.variable}`}>
       <body className="font-body text-ink bg-white antialiased">
-        <SmoothCursor />
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <LenisProvider>
+          <SmoothCursor />
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </LenisProvider>
       </body>
     </html>
   )
