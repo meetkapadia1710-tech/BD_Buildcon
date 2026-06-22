@@ -67,7 +67,7 @@ export function SmoothCursor() {
 
     // Use ref so these handlers don't need hovered in their closure
     const onMouseDown = () => gsap.to(ring, { scale: 0.75, duration: 0.15 })
-    const onMouseUp   = () => gsap.to(ring, { scale: hoveredRef.current ? 1.8 : 1, duration: 0.2 })
+    const onMouseUp   = () => gsap.to(ring, { scale: hoveredRef.current ? 1.6 : 1, duration: 0.2 })
 
     window.addEventListener('mousemove',  onMouseMove,        { passive: true })
     document.addEventListener('mouseover',  onMouseOver)
@@ -102,13 +102,13 @@ export function SmoothCursor() {
         ref={ringRef}
         className="fixed top-0 left-0 pointer-events-none rounded-full z-[600]"
         style={{
-          width: 32,
-          height: 32,
+          width: 28,
+          height: 28,
           border: '1.5px solid #16A8B8',
-          boxShadow: '0 0 0 1.5px white',
-          opacity: visible && !isInput ? 0.85 : 0,
+          boxShadow: '0 0 0 1px white',
+          opacity: visible && !isInput ? 0.8 : 0,
           backgroundColor: hovered ? 'rgba(22,168,184,0.12)' : 'transparent',
-          transform: hovered ? 'scale(1.8)' : 'scale(1)',
+          transform: hovered ? 'scale(1.6)' : 'scale(1)',
           transition: 'opacity 0.25s, background-color 0.25s, transform 0.25s ease-out',
           willChange: 'transform',
         }}
@@ -122,7 +122,7 @@ export function SmoothCursor() {
           width: 6,
           height: 6,
           backgroundColor: '#16A8B8',
-          boxShadow: '0 0 0 1.5px white, 0 0 8px rgba(22,168,184,0.7)',
+          boxShadow: '0 0 0 1px white, 0 0 6px rgba(22,168,184,0.6)',
           opacity: visible && !isInput && !hovered ? 1 : 0,
           transition: 'opacity 0.25s',
           willChange: 'transform',
