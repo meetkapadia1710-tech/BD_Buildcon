@@ -154,7 +154,6 @@ export default function ProjectsPage() {
                   key={project.slug}
                   project={project}
                   priority={i < 3}
-                  featured={i === 0}
                 />
               ))}
             </motion.div>

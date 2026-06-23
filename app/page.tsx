@@ -8,6 +8,7 @@ import { SectionHeading } from '@/components/layout/SectionHeading'
 import { CTABand } from '@/components/layout/CTABand'
 import { TestimonialCard } from '@/components/ui/TestimonialCard'
 import { ProjectCard } from '@/components/ui/ProjectCard'
+import { CustomSelect } from '@/components/ui/CustomSelect'
 import { projects } from '@/content/projects'
 import { testimonials } from '@/content/testimonials'
 import { clients } from '@/content/clients'
@@ -218,7 +219,9 @@ export default function HomePage() {
                     {p.icon}
                   </motion.div>
                 </SlideIn>
-                <h3 className="font-display text-headline-sm text-ink">{p.title}</h3>
+                <div className="h-16 flex items-center">
+                  <h3 className="font-display text-headline-sm text-ink">{p.title}</h3>
+                </div>
                 <p className="font-body text-body-md text-body">{p.body}</p>
               </div>
             ))}
@@ -296,7 +299,7 @@ export default function HomePage() {
 
           <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" direction="up" stagger={0.13}>
             {featuredProjects.map((project, i) => (
-              <ProjectCard key={project.slug} project={project} priority={i === 0} featured={i === 0} />
+              <ProjectCard key={project.slug} project={project} priority={i === 0} />
             ))}
           </StaggerReveal>
 
@@ -504,23 +507,23 @@ function HomeEnquiryForm() {
           <label htmlFor="hq-sector" className="block font-body text-label-md text-ink mb-2 uppercase tracking-wider">
             Sector
           </label>
-          <select id="hq-sector" name="sector" className="form-field">
-            <option value="">Select sector</option>
-            {['Chemical', 'Pharma', 'Petroleum', 'Fertiliser', 'Glass', 'Tyre', 'Food', 'Residential', 'Other'].map((s) => (
-              <option key={s} value={s}>{s}</option>
-            ))}
-          </select>
+          <CustomSelect
+            id="hq-sector"
+            name="sector"
+            placeholder="Select sector"
+            options={['Chemical', 'Pharma', 'Petroleum', 'Fertiliser', 'Glass', 'Tyre', 'Food', 'Residential', 'Other'].map(s => ({ label: s, value: s }))}
+          />
         </div>
         <div>
           <label htmlFor="hq-type" className="block font-body text-label-md text-ink mb-2 uppercase tracking-wider">
             Project Type
           </label>
-          <select id="hq-type" name="projectType" className="form-field">
-            <option value="">Select type</option>
-            {['Greenfield Plant', 'Plant Expansion', 'PEB Structure', 'Piping & Mechanical', 'Civil Works', 'Roads & Earthwork', 'Other'].map((t) => (
-              <option key={t} value={t}>{t}</option>
-            ))}
-          </select>
+          <CustomSelect
+            id="hq-type"
+            name="projectType"
+            placeholder="Select type"
+            options={['Greenfield Plant', 'Plant Expansion', 'PEB Structure', 'Piping & Mechanical', 'Civil Works', 'Roads & Earthwork', 'Other'].map(t => ({ label: t, value: t }))}
+          />
         </div>
       </div>
       <div>
