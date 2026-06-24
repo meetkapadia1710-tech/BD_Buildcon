@@ -1,6 +1,9 @@
 import { ImageResponse } from 'next/og'
 
 // Branded social-share card — replaces the previously hot-linked Unsplash image.
+// Edge runtime: avoids @vercel/og's Node font-resolution (which breaks on paths
+// containing spaces) and works on any deploy target.
+export const runtime = 'edge'
 export const alt = 'BD Buildcon LLP — Industrial EPC Contractor, Bharuch, Gujarat'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'

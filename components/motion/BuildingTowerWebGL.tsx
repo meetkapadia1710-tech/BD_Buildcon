@@ -481,7 +481,7 @@ export default function BuildingTowerWebGL({ progress, isMobile, paused }: Build
       >
         <CameraSetup isMobile={isMobile} />
 
-        <hemisphereLight skyColor="#ffffff" groundColor="#e0e0e0" intensity={0.7} />
+        <hemisphereLight color="#ffffff" groundColor="#e0e0e0" intensity={0.7} />
         <directionalLight
           castShadow
           position={[28, 50, 22]}

@@ -109,6 +109,7 @@ export function Header() {
     if (!mobileOpen) return
     const drawer = drawerRef.current
     if (!drawer) return
+    const trigger = hamburgerRef.current
 
     const getFocusable = () =>
       Array.from(
@@ -139,7 +140,7 @@ export function Header() {
     document.addEventListener('keydown', onKeyDown)
     return () => {
       document.removeEventListener('keydown', onKeyDown)
-      hamburgerRef.current?.focus()
+      trigger?.focus()
     }
   }, [mobileOpen])
 
