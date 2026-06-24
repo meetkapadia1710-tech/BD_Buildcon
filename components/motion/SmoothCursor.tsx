@@ -13,10 +13,15 @@ export function SmoothCursor() {
 
   useEffect(() => {
     if (!window.matchMedia('(pointer: fine)').matches) return
+    // Respect reduced-motion: keep the native cursor.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const dot = dotRef.current
     const ring = ringRef.current
     if (!dot || !ring) return
+
+    // Only now do we hide the native cursor (see globals.css).
+    document.documentElement.classList.add('has-custom-cursor')
 
     gsap.set(dot, { xPercent: -50, yPercent: -50, x: -100, y: -100 })
     gsap.set(ring, { xPercent: -50, yPercent: -50, x: -100, y: -100 })
@@ -92,6 +97,7 @@ export function SmoothCursor() {
     document.addEventListener('mouseenter', onMouseEnter)
 
     return () => {
+      document.documentElement.classList.remove('has-custom-cursor')
       window.removeEventListener('mousemove', onMouseMove)
       document.removeEventListener('mouseover', onMouseOver)
       document.removeEventListener('mouseout', onMouseOut)

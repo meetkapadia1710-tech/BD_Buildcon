@@ -13,6 +13,8 @@
   --teal: #16a8b8;
   --teal-hover: #0e8c9b;
   --teal-deep: #0c7a88;
+  --accent: #fdb913;
+  --accent-hover: #e5a50c;
   --blue: #2f5da0;
   --red: #e23a2e;
   --orange: #f2a33a;
@@ -51,14 +53,16 @@ h4 {
   text-wrap: balance;
 }
 
-/* Hide native cursor on fine-pointer (mouse) devices — SmoothCursor replaces it */
+/* Hide native cursor only once SmoothCursor has actually mounted (it adds the
+   `has-custom-cursor` class on fine-pointer, non-reduced-motion devices). This
+   guarantees a visible cursor with JS disabled, on errors, or reduced motion. */
 @media (pointer: fine) {
-  html,
-  body,
-  a,
-  button,
-  select,
-  [role='button'] {
+  html.has-custom-cursor,
+  html.has-custom-cursor body,
+  html.has-custom-cursor a,
+  html.has-custom-cursor button,
+  html.has-custom-cursor select,
+  html.has-custom-cursor [role='button'] {
     cursor: none;
   }
 }

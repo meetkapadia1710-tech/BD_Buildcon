@@ -26,8 +26,8 @@ export function StaggerReveal({
   children,
   className = '',
   direction = 'up',
-  stagger = 0.1,
-  distance = 48,
+  stagger = 0.06,
+  distance = 28,
   delay = 0,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null)
@@ -41,24 +41,32 @@ export function StaggerReveal({
     if (!items.length) return
 
     const fromVars: gsap.TweenVars = { opacity: 0 }
-    if (direction === 'up')    { fromVars.y = distance }
-    if (direction === 'down')  { fromVars.y = -distance }
-    if (direction === 'left')  { fromVars.x = distance }
-    if (direction === 'right') { fromVars.x = -distance }
+    if (direction === 'up') {
+      fromVars.y = distance
+    }
+    if (direction === 'down') {
+      fromVars.y = -distance
+    }
+    if (direction === 'left') {
+      fromVars.x = distance
+    }
+    if (direction === 'right') {
+      fromVars.x = -distance
+    }
 
-    gsap.set(items, { ...fromVars, scale: 0.97 })
+    gsap.set(items, { ...fromVars, scale: 0.985 })
 
     const trigger = ScrollTrigger.create({
       trigger: container,
-      start: 'top 82%',
+      start: 'top 88%',
       onEnter: () => {
         gsap.to(items, {
           opacity: 1,
           x: 0,
           y: 0,
           scale: 1,
-          duration: 0.9,
-          ease: 'expo.out',
+          duration: 0.55,
+          ease: 'power3.out',
           stagger,
           delay,
         })

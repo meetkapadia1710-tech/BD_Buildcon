@@ -16,6 +16,11 @@ const config: Config = {
           deep: '#0C7A88',
           light: '#e0f7fa',
         },
+        accent: {
+          DEFAULT: '#FDB913', // brand amber — secondary accent (stats, emphasis)
+          hover: '#E5A50C',
+          deep: '#C98F08',
+        },
         brand: {
           blue: '#2F5DA0',
           red: '#E23A2E',

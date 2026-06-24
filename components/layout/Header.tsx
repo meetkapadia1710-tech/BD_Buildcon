@@ -81,6 +81,8 @@ export function Header() {
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false)
   const pathname = usePathname()
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const hamburgerRef = useRef<HTMLButtonElement>(null)
+  const drawerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -102,6 +104,45 @@ export function Header() {
     }
   }, [mobileOpen])
 
+  // Mobile drawer: focus management + trap + Escape-to-close
+  useEffect(() => {
+    if (!mobileOpen) return
+    const drawer = drawerRef.current
+    if (!drawer) return
+
+    const getFocusable = () =>
+      Array.from(
+        drawer.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), input, [tabindex]:not([tabindex="-1"])'),
+      ).filter((el) => el.offsetParent !== null)
+
+    getFocusable()[0]?.focus()
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMobileOpen(false)
+        return
+      }
+      if (e.key !== 'Tab') return
+      const items = getFocusable()
+      if (items.length === 0) return
+      const first = items[0]
+      const last = items[items.length - 1]
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault()
+        last.focus()
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault()
+        first.focus()
+      }
+    }
+
+    document.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.removeEventListener('keydown', onKeyDown)
+      hamburgerRef.current?.focus()
+    }
+  }, [mobileOpen])
+
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/'
     return pathname.startsWith(href)
@@ -113,6 +154,12 @@ export function Header() {
   }
   const handleAboutLeave = () => {
     closeTimer.current = setTimeout(() => setAboutOpen(false), 150)
+  }
+  // Keyboard: close the dropdown when focus leaves the whole About group.
+  const handleAboutBlur = (e: React.FocusEvent<HTMLDivElement>) => {
+    if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+      setAboutOpen(false)
+    }
   }
 
   return (
@@ -139,6 +186,11 @@ export function Header() {
                   className="relative flex items-stretch"
                   onMouseEnter={handleAboutEnter}
                   onMouseLeave={handleAboutLeave}
+                  onFocus={handleAboutEnter}
+                  onBlur={handleAboutBlur}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Escape') setAboutOpen(false)
+                  }}
                 >
                   <Link
                     href={link.href}
@@ -281,6 +333,7 @@ export function Header() {
 
           {/* ── Mobile Hamburger ── */}
           <button
+            ref={hamburgerRef}
             onClick={() => setMobileOpen((o) => !o)}
             aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileOpen}
@@ -327,6 +380,10 @@ export function Header() {
             {/* Drawer */}
             <motion.div
               key="drawer"
+              ref={drawerRef}
+              role="dialog"
+              aria-modal="true"
+              aria-label="Site menu"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}

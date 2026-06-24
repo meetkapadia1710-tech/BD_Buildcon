@@ -11,7 +11,49 @@ const contactSchema = z.object({
   company: z.string().optional(),
   sector: z.string().optional(),
   projectType: z.string().optional(),
+  // Honeypot — must stay empty (bots fill it).
+  website: z.string().optional(),
 })
+
+type Lead = z.infer<typeof contactSchema>
+
+/**
+ * Delivers a validated lead. Works end-to-end today (logs the lead); going live
+ * is a one-line change — set RESEND_API_KEY in the environment and uncomment the
+ * Resend block below (`npm install resend`).
+ */
+async function sendLead(data: Lead): Promise<void> {
+  const apiKey = process.env.RESEND_API_KEY
+
+  if (!apiKey) {
+    console.warn(
+      '[Contact] No RESEND_API_KEY set — lead logged but NOT emailed. ' +
+        'Add RESEND_API_KEY to .env.local to deliver leads.',
+    )
+    console.log('[Contact Form Submission]', { timestamp: new Date().toISOString(), ...data })
+    return
+  }
+
+  // import { Resend } from 'resend'
+  // const resend = new Resend(apiKey)
+  // await resend.emails.send({
+  //   from: 'website@bdbuildcon.com',
+  //   to: 'business@bdbuildcon.com',
+  //   replyTo: data.email,
+  //   subject: `New Enquiry: ${data.subject}`,
+  //   text: [
+  //     `Name: ${data.name}`,
+  //     `Email: ${data.email}`,
+  //     `Phone: ${data.phone ?? 'N/A'}`,
+  //     `Company: ${data.company ?? 'N/A'}`,
+  //     `Sector: ${data.sector ?? 'N/A'}`,
+  //     `Project Type: ${data.projectType ?? 'N/A'}`,
+  //     `Subject: ${data.subject}`,
+  //     '',
+  //     data.message,
+  //   ].join('\n'),
+  // })
+}
 
 // Simple in-memory rate limiter: max 5 submissions per IP per minute.
 // For multi-instance deployments replace with an external store (e.g. Upstash Redis).
@@ -47,34 +89,12 @@ export async function POST(req: NextRequest) {
   try {
     const data = contactSchema.parse(body)
 
-    // Log the submission for now
-    console.log('[Contact Form Submission]', {
-      timestamp: new Date().toISOString(),
-      ...data,
-    })
+    // Honeypot tripped → silently accept so the bot thinks it succeeded.
+    if (data.website && data.website.trim() !== '') {
+      return NextResponse.json({ success: true }, { status: 200 })
+    }
 
-    // TODO: Wire email service here — e.g. Resend or Nodemailer:
-    //
-    // import { Resend } from 'resend'
-    // const resend = new Resend(process.env.RESEND_API_KEY)
-    // await resend.emails.send({
-    //   from: 'website@bdbuildcon.com',
-    //   to: 'business@bdbuildcon.com',
-    //   replyTo: data.email,
-    //   subject: `New Enquiry: ${data.subject}`,
-    //   text: `
-    //     Name: ${data.name}
-    //     Email: ${data.email}
-    //     Phone: ${data.phone ?? 'N/A'}
-    //     Company: ${data.company ?? 'N/A'}
-    //     Sector: ${data.sector ?? 'N/A'}
-    //     Project Type: ${data.projectType ?? 'N/A'}
-    //     Subject: ${data.subject}
-    //
-    //     Message:
-    //     ${data.message}
-    //   `,
-    // })
+    await sendLead(data)
 
     return NextResponse.json({ success: true }, { status: 200 })
   } catch (err) {

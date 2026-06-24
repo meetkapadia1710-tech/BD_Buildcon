@@ -11,6 +11,7 @@ import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { motion, AnimatePresence } from 'framer-motion'
 import { TestimonialCard } from '@/components/ui/TestimonialCard'
 import { testimonials } from '@/content/testimonials'
+import { stats } from '@/content/company'
 
 const reasons = [
   {
@@ -86,10 +87,10 @@ const reasons = [
 ]
 
 const differentiators = [
-  { value: 35, suffix: '+', label: 'Years of Experience' },
-  { value: 0, suffix: '', label: 'Accidents Recorded' },
-  { value: 70, suffix: '%', label: 'Repeat Client Ratio' },
-  { value: 50, suffix: '+', label: 'Major Projects Completed' },
+  { value: stats.yearsExperience, suffix: '+', label: 'Years of Experience' },
+  { value: stats.accidents, suffix: '', label: 'Accidents Recorded' },
+  { value: stats.repeatClientPct, suffix: '%', label: 'Repeat Client Ratio' },
+  { value: stats.projects, suffix: '+', label: 'Major Projects Completed' },
 ]
 
 export default function WhyUsPage() {
@@ -101,7 +102,7 @@ export default function WhyUsPage() {
       <PageTitleBand
         title="Why BD Buildcon?"
         breadcrumbs={[{ label: 'Why Us' }]}
-        description="The BD Buildcon team has 35+ years of experience and a proven track record, ensuring projects are completed in a timely, quality and professional manner."
+        description="The BD Buildcon team has 30+ years of experience and a proven track record, ensuring projects are completed in a timely, quality and professional manner."
       />
 
       {/* ── Interactive Reasons ── */}

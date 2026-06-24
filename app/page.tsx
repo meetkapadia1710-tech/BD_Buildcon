@@ -2,12 +2,14 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { FadeRise, FadeRiseItem } from '@/components/motion/FadeRise'
+import { FadeRiseItem } from '@/components/motion/FadeRise'
 import { RevealImage } from '@/components/motion/RevealImage'
 import { SectionHeading } from '@/components/layout/SectionHeading'
 import { CTABand } from '@/components/layout/CTABand'
 import { CustomSelect } from '@/components/ui/CustomSelect'
+import { ClientLogo } from '@/components/ui/ClientLogo'
 import { clients } from '@/content/clients'
+import { stats, statsDisplay } from '@/content/company'
 import { services } from '@/content/services'
 import { BlueprintReveal } from '@/components/motion/BlueprintReveal'
 import { ConstructionDraw } from '@/components/motion/ConstructionDraw'
@@ -21,6 +23,9 @@ import { useState } from 'react'
 import { toast } from 'sonner'
 
 const RisingFloors = dynamic(() => import('@/components/motion/RisingFloors').then((mod) => mod.RisingFloors), {
+  ssr: false,
+})
+const BuildingScroll = dynamic(() => import('@/components/motion/BuildingScroll').then((mod) => mod.BuildingScroll), {
   ssr: false,
 })
 const sectors = [
@@ -129,10 +134,10 @@ const pillars = [
 ]
 
 const floorStats: StatFloor[] = [
-  { value: 50, suffix: '+', label: 'Projects Completed', heightPct: 72 },
-  { value: 35, suffix: '+', label: 'Years Experience', heightPct: 58 },
-  { value: 0, suffix: '', label: 'Accidents Recorded', heightPct: 88 },
-  { value: 70, suffix: '%', label: 'Repeat Client Ratio', heightPct: 80 },
+  { value: stats.projects, suffix: '+', label: 'Projects Completed', heightPct: 72 },
+  { value: stats.yearsExperience, suffix: '+', label: 'Years Experience', heightPct: 58 },
+  { value: stats.accidents, suffix: '', label: 'Accidents Recorded', heightPct: 88 },
+  { value: stats.repeatClientPct, suffix: '%', label: 'Repeat Client Ratio', heightPct: 80 },
 ]
 
 export default function HomePage() {
@@ -179,13 +184,14 @@ export default function HomePage() {
           <FadeRiseItem delay={0.2}>
             <h1 className="font-display text-display-lg text-white leading-[1.05] tracking-tight mb-8">
               All our projects, <span className="block">completed on deadline —</span>
-              <span className="text-teal">with zero accidents.</span>
+              <span className="text-accent">with zero accidents.</span>
             </h1>
           </FadeRiseItem>
 
           <FadeRiseItem delay={0.35}>
             <p className="font-body text-body-lg text-white/70 max-w-2xl mx-auto mb-10">
-              35+ years · ISO 9001:2015 · CRISIL SME 3 · ₹200+ Cr delivered
+              {statsDisplay.yearsExperience} years · ISO 9001:2015 · CRISIL SME 3 · {statsDisplay.valueDelivered}{' '}
+              delivered
             </p>
           </FadeRiseItem>
 
@@ -344,6 +350,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── Scroll-Linked 3D WebGL Construction ── */}
+      <BuildingScroll />
+
       {/* ── Stats Band — rising floors ── */}
       <section className="bg-teal text-white py-20 overflow-hidden relative" aria-label="Key statistics">
         <ParallaxLayer yRange={-20} className="absolute inset-0 z-0 opacity-10 pointer-events-none">
@@ -360,7 +369,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Desk of Directors ── */}
-      <section className="section-pad bg-footer" aria-label="Message from the Director">
+      <section className="section-pad bg-dark-bg" aria-label="Message from the Director">
         <div className="container-max">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Director photo */}
@@ -396,15 +405,15 @@ export default function HomePage() {
                     There are no shortcuts when people&apos;s lives and industrial operations depend on what we build.
                   </blockquote>
                   <p className="font-body text-body-lg text-white/55 leading-relaxed mb-8">
-                    Over 35 years, we have grown from a regional civil contractor into a full-service turnkey EPC
-                    partner recognised across Gujarat and beyond — earned project by project through transparent
-                    communication, technical depth and the resilience to deliver under pressure.
+                    Over {stats.yearsExperience} years, we have grown from a regional civil contractor into a
+                    full-service turnkey EPC partner recognised across Gujarat and beyond — earned project by project
+                    through transparent communication, technical depth and the resilience to deliver under pressure.
                   </p>
                   <div className="flex items-center gap-4 mb-8">
                     <div className="h-px w-10 bg-teal shrink-0" aria-hidden="true" />
                     <div>
                       <p className="font-display font-bold text-white text-body-lg">Kiran Majmudar</p>
-                      <p className="font-body text-body-md text-white/45">Director, BD Buildcon LLP · Est. 1995</p>
+                      <p className="font-body text-body-md text-white/60">Director, BD Buildcon LLP · Est. 1995</p>
                     </div>
                   </div>
                   <Link href="/about" className="btn-ghost-white text-sm">
@@ -418,7 +427,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Safety Band ── */}
-      <section className="relative overflow-hidden bg-footer py-20 lg:py-28" aria-label="Safety commitment">
+      <section className="relative overflow-hidden bg-dark-bg py-20 lg:py-28" aria-label="Safety commitment">
         <ParallaxLayer yRange={-30} className="absolute inset-0">
           <Image
             src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop"
@@ -465,20 +474,9 @@ export default function HomePage() {
               subtitle="Industry leaders who partner with BD Buildcon for mission-critical construction."
             />
           </SlideIn>
-          <StaggerReveal className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6" direction="up" stagger={0.07}>
+          <StaggerReveal className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6" direction="up" stagger={0.05}>
             {clients.map((client) => (
-              <div
-                key={client.id}
-                className="flex flex-col items-center justify-center p-6 rounded-card border border-hairline bg-surface hover:border-teal/30 hover:bg-teal/5 transition-all duration-300 text-center gap-2"
-              >
-                <div className="w-12 h-12 rounded-full bg-teal/10 flex items-center justify-center">
-                  <span className="font-display font-bold text-teal text-sm">
-                    {client.name.slice(0, 2).toUpperCase()}
-                  </span>
-                </div>
-                <span className="font-body text-body-md text-ink font-semibold leading-tight">{client.name}</span>
-                <span className="font-body text-xs text-body">{client.sector}</span>
-              </div>
+              <ClientLogo key={client.id} client={client} />
             ))}
           </StaggerReveal>
         </div>
@@ -528,7 +526,19 @@ function HomeEnquiryForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-card border border-hairline shadow-card p-8 space-y-5">
+    <form
+      onSubmit={handleSubmit}
+      className="relative bg-white rounded-card border border-hairline shadow-card p-8 space-y-5"
+    >
+      {/* Honeypot — hidden from users, catches bots. Leave empty. */}
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute left-[-9999px] h-0 w-0 opacity-0"
+      />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="hq-name" className="block font-body text-label-md text-ink mb-2 uppercase tracking-wider">
@@ -537,10 +547,31 @@ function HomeEnquiryForm() {
           <input id="hq-name" name="name" type="text" required placeholder="Your full name" className="form-field" />
         </div>
         <div>
+          <label htmlFor="hq-email" className="block font-body text-label-md text-ink mb-2 uppercase tracking-wider">
+            Email <span className="text-brand-red">*</span>
+          </label>
+          <input
+            id="hq-email"
+            name="email"
+            type="email"
+            required
+            placeholder="your.email@example.com"
+            className="form-field"
+          />
+        </div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
           <label htmlFor="hq-company" className="block font-body text-label-md text-ink mb-2 uppercase tracking-wider">
             Company
           </label>
           <input id="hq-company" name="company" type="text" placeholder="Your company name" className="form-field" />
+        </div>
+        <div>
+          <label htmlFor="hq-phone" className="block font-body text-label-md text-ink mb-2 uppercase tracking-wider">
+            Phone
+          </label>
+          <input id="hq-phone" name="phone" type="tel" placeholder="+91 XXX XXX XXXX" className="form-field" />
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -553,13 +584,13 @@ function HomeEnquiryForm() {
             name="sector"
             placeholder="Select sector"
             options={[
-              'Chemical',
+              'Chemicals',
               'Pharma',
               'Petroleum',
               'Fertiliser',
               'Glass',
               'Tyre',
-              'Food',
+              'Food Processing',
               'Residential',
               'Other',
             ].map((s) => ({ label: s, value: s }))}
@@ -587,13 +618,15 @@ function HomeEnquiryForm() {
       </div>
       <div>
         <label htmlFor="hq-message" className="block font-body text-label-md text-ink mb-2 uppercase tracking-wider">
-          Message
+          Message <span className="text-brand-red">*</span>
         </label>
         <textarea
           id="hq-message"
           name="message"
           rows={4}
-          placeholder="Brief project description..."
+          required
+          minLength={10}
+          placeholder="Brief project description (at least 10 characters)..."
           className="form-field"
         />
       </div>

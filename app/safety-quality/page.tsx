@@ -11,7 +11,7 @@ import { ParallaxLayer } from '@/components/motion/ParallaxLayer'
 
 const safetyStats = [
   { value: '0', label: 'Accidents Recorded' },
-  { value: '35+', label: 'Years Safety Culture' },
+  { value: '30+', label: 'Years Safety Culture' },
   { value: '50+', label: 'Projects Delivered Safely' },
   { value: '100%', label: 'PTW Compliance Rate' },
 ]
@@ -194,7 +194,7 @@ export default function SafetyQualityPage() {
           <SlideIn from="left">
             <div>
               <div
-                className="font-display font-black leading-none text-teal mb-4 tabular-nums select-none"
+                className="font-display font-black leading-none text-accent mb-4 tabular-nums select-none"
                 style={{ fontSize: 'clamp(6rem, 14vw, 11rem)' }}
                 aria-label="Zero accidents"
               >
@@ -203,7 +203,7 @@ export default function SafetyQualityPage() {
               <p className="font-display text-headline-md text-white leading-snug">
                 accidents recorded
                 <br />
-                across 35+ years
+                across 30+ years
                 <br />
                 and 50+ projects.
               </p>
@@ -222,7 +222,7 @@ export default function SafetyQualityPage() {
               </h2>
               <p className="font-body text-body-lg text-white/70 leading-relaxed mb-5">
                 At BD Buildcon, safety is engineered into every protocol, every morning meeting and every permit issued.
-                Our zero-accident record across 35 years is not luck — it is the direct result of a non-negotiable
+                Our zero-accident record across 30 years is not luck — it is the direct result of a non-negotiable
                 safety culture that starts at the boardroom and reaches every worker on site.
               </p>
               <p className="font-body text-body-lg text-white/70 leading-relaxed">
@@ -262,7 +262,9 @@ export default function SafetyQualityPage() {
             {safetyPractices.map((p, i) => (
               <div
                 key={p.title}
-                className="bg-white flex items-start gap-4 px-6 py-5 hover:bg-teal/[0.025] transition-colors group"
+                className={`flex items-start gap-4 px-6 py-5 transition-colors group ${
+                  i === 0 ? 'bg-teal/[0.05]' : 'bg-white hover:bg-teal/[0.025]'
+                }`}
               >
                 <div className="shrink-0 mt-0.5 w-9 h-9 rounded-lg bg-teal/10 flex items-center justify-center text-teal group-hover:bg-teal group-hover:text-white transition-colors duration-200">
                   {p.icon}
@@ -283,7 +285,7 @@ export default function SafetyQualityPage() {
       </section>
 
       {/* ── Safety Quote ── */}
-      <section className="bg-footer py-20 text-center" aria-label="Safety commitment quote">
+      <section className="bg-dark-bg py-20 text-center" aria-label="Safety commitment quote">
         <div className="container-max max-w-3xl">
           <FadeRiseItem>
             <div className="text-[5rem] leading-none text-teal/30 font-display select-none mb-2" aria-hidden="true">
@@ -372,7 +374,9 @@ export default function SafetyQualityPage() {
             {qualityPractices.map((p, i) => (
               <div
                 key={p.title}
-                className="bg-white flex items-start gap-4 px-6 py-5 hover:bg-teal/[0.025] transition-colors group"
+                className={`flex items-start gap-4 px-6 py-5 transition-colors group ${
+                  i === 0 ? 'bg-teal/[0.05]' : 'bg-white hover:bg-teal/[0.025]'
+                }`}
               >
                 <div className="shrink-0 mt-0.5 w-9 h-9 rounded-lg bg-teal/10 flex items-center justify-center text-teal group-hover:bg-teal group-hover:text-white transition-colors duration-200">
                   {p.icon}

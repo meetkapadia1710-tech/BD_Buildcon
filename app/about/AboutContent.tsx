@@ -13,6 +13,7 @@ import { DataTable } from '@/components/ui/DataTable'
 import { CertificationGallery } from '@/components/ui/CertificationGallery'
 import { machinery } from '@/content/machinery'
 import { equipment } from '@/content/equipment'
+import { statsDisplay } from '@/content/company'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const tabs = [
@@ -108,7 +109,7 @@ const values = [
   },
   {
     title: 'Safety',
-    body: 'Safety is our primary focus. Our zero-accident track record across 35+ years and 50+ projects reflects a culture where safety programmes, permit-to-work systems and daily toolbox talks are non-negotiable.',
+    body: 'Safety is our primary focus. Our zero-accident track record across 30+ years and 50+ projects reflects a culture where safety programmes, permit-to-work systems and daily toolbox talks are non-negotiable.',
   },
   {
     title: 'Continuous Improvement',
@@ -253,9 +254,9 @@ function OverviewPanel() {
             <FadeRiseItem delay={0.1}>
               <div className="mt-8 flex gap-6 pl-5 border-l-4 border-teal">
                 {[
-                  { num: '35+', label: 'Years Experience' },
-                  { num: '50+', label: 'Projects Delivered' },
-                  { num: '70%', label: 'Repeat Clients' },
+                  { num: statsDisplay.yearsExperience, label: 'Years Experience' },
+                  { num: statsDisplay.projects, label: 'Projects Delivered' },
+                  { num: statsDisplay.repeatClientPct, label: 'Repeat Clients' },
                 ].map((s) => (
                   <div key={s.label}>
                     <span className="block font-display font-bold text-headline-md text-ink">{s.num}</span>

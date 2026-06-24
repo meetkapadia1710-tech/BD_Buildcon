@@ -19,13 +19,7 @@ type Props = {
  * Animates a single element sliding in from the specified direction when it
  * enters the viewport. Perfect for headings, images, and feature panels.
  */
-export function SlideIn({
-  children,
-  className = '',
-  from = 'bottom',
-  delay = 0,
-  distance = 56,
-}: Props) {
+export function SlideIn({ children, className = '', from = 'bottom', delay = 0, distance = 32 }: Props) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -34,23 +28,23 @@ export function SlideIn({
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const fromVars: gsap.TweenVars = { opacity: 0 }
-    if (from === 'left')   fromVars.x = -distance
-    if (from === 'right')  fromVars.x = distance
+    if (from === 'left') fromVars.x = -distance
+    if (from === 'right') fromVars.x = distance
     if (from === 'bottom') fromVars.y = distance
-    if (from === 'top')    fromVars.y = -distance
+    if (from === 'top') fromVars.y = -distance
 
     gsap.set(el, fromVars)
 
     const trigger = ScrollTrigger.create({
       trigger: el,
-      start: 'top 88%',
+      start: 'top 90%',
       onEnter: () => {
         gsap.to(el, {
           opacity: 1,
           x: 0,
           y: 0,
-          duration: 1.1,
-          ease: 'expo.out',
+          duration: 0.6,
+          ease: 'power3.out',
           delay,
         })
       },

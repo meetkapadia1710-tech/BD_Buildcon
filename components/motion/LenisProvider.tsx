@@ -39,7 +39,8 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReduced) return
 
-    const lenis = new Lenis({ lerp: 0.09, smoothWheel: true })
+    // Higher lerp = snappier / less floaty (better for a B2B audience).
+    const lenis = new Lenis({ lerp: 0.12, smoothWheel: true })
     lenisRef.current = lenis
 
     lenis.on('scroll', ScrollTrigger.update)

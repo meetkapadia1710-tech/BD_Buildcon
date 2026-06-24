@@ -1,0 +1,3 @@
+# Drop real client logos here (SVG preferred, or transparent PNG).
+# Then set the `logo` field in content/clients.ts, e.g. logo: '/images/clients/gnfc.svg'
+# ClientLogo renders them grayscale → colour on hover automatically.

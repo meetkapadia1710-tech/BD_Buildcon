@@ -63,7 +63,7 @@ export default function ProjectDetailPage({ params }: Props) {
               name: 'BD Buildcon LLP',
               logo: {
                 '@type': 'ImageObject',
-                url: 'https://bdbuildcon.com/logo.png',
+                url: 'https://bdbuildcon.com/logo.svg',
               },
             },
           }),

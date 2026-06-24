@@ -18,9 +18,9 @@ type FadeRiseProps = {
 export function FadeRise({
   children,
   className = '',
-  stagger = 0.1,
+  stagger = 0.06,
   delay = 0,
-  y = 32,
+  y = 20,
   as: Tag = 'div',
 }: FadeRiseProps) {
   const ref = useRef<HTMLElement>(null)
@@ -35,18 +35,17 @@ export function FadeRise({
     const items = Array.from(container.children)
     if (!items.length) return
 
-    gsap.set(items, { opacity: 0, y, filter: 'blur(6px)' })
+    gsap.set(items, { opacity: 0, y })
 
     const trigger = ScrollTrigger.create({
       trigger: container,
-      start: 'top 85%',
+      start: 'top 90%',
       onEnter: () => {
         gsap.to(items, {
           opacity: 1,
           y: 0,
-          filter: 'blur(0px)',
-          duration: 1.0,
-          ease: 'expo.out',
+          duration: 0.6,
+          ease: 'power3.out',
           stagger,
           delay,
         })
@@ -80,18 +79,17 @@ export function FadeRiseItem({ children, className = '', delay = 0 }: FadeRiseIt
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduced) return
 
-    gsap.set(el, { opacity: 0, y: 32, filter: 'blur(6px)' })
+    gsap.set(el, { opacity: 0, y: 20 })
 
     const trigger = ScrollTrigger.create({
       trigger: el,
-      start: 'top 88%',
+      start: 'top 90%',
       onEnter: () => {
         gsap.to(el, {
           opacity: 1,
           y: 0,
-          filter: 'blur(0px)',
-          duration: 1.0,
-          ease: 'expo.out',
+          duration: 0.6,
+          ease: 'power3.out',
           delay,
         })
       },

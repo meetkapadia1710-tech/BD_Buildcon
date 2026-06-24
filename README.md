@@ -10,7 +10,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3002](http://localhost:3002).
 
 ## Project Structure
 
@@ -18,13 +18,7 @@ Open [http://localhost:3000](http://localhost:3000).
 bd-buildcon/
 ├── app/                    # Next.js App Router pages and API routes
 │   ├── page.tsx            # Home
-│   ├── about/
-│   │   ├── overview/       # Company overview
-│   │   ├── ideology/       # Vision & mission
-│   │   ├── directors/      # Director's message
-│   │   ├── certification/  # Recommendation letters (lightbox gallery)
-│   │   ├── plant-machinery/# Plant & machinery data table
-│   │   └── equipment/      # Equipment & accessories data table
+│   ├── about/              # Single tabbed page: Overview · Ideology · Certifications · Plant & Equipment
 │   ├── why-us/             # Why choose BD Buildcon
 │   ├── projects/           # Filterable project gallery + detail pages
 │   ├── employee-area/      # Staff portal links
@@ -33,10 +27,11 @@ bd-buildcon/
 │   ├── not-found.tsx       # 404 page
 │   └── api/contact/        # Contact form API handler (stub — wire email here)
 ├── components/
-│   ├── layout/             # UtilityBar, Header, Footer, PageTitleBand, SectionHeading, CTABand
+│   ├── layout/             # Header, Footer, PageTitleBand, SectionHeading, CTABand
 │   ├── motion/             # LenisProvider, RevealText, RevealImage, FadeRise, CountUp, MagneticButton
 │   └── ui/                 # DataTable, ProjectCard, TestimonialCard, Lightbox
 ├── content/                # Typed data files (edit these to update site content)
+│   ├── company.ts          # Headline stats (years, projects, repeat %) — single source of truth
 │   ├── projects.ts         # Project portfolio data
 │   ├── machinery.ts        # Plant & machinery inventory
 │   ├── equipment.ts        # Equipment & accessories inventory
@@ -106,6 +101,7 @@ npm install resend
 ```
 
 Add to `.env.local`:
+
 ```
 RESEND_API_KEY=re_xxxxxxxxxxxxxxxx
 ```
@@ -133,14 +129,14 @@ npm start
 
 Key CSS variables are defined in `app/globals.css` and mirrored in `tailwind.config.ts`:
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--teal` | `#16A8B8` | CTAs, links, accents |
-| `--teal-hover` | `#0E8C9B` | Button hover |
-| `--ink` | `#2E353B` | Headings |
-| `--body` | `#6B7177` | Body text |
-| `--surface` | `#F6F8F8` | Section backgrounds |
-| `--footer` | `#1F2124` | Footer background |
+| Token          | Value     | Usage                |
+| -------------- | --------- | -------------------- |
+| `--teal`       | `#16A8B8` | CTAs, links, accents |
+| `--teal-hover` | `#0E8C9B` | Button hover         |
+| `--ink`        | `#2E353B` | Headings             |
+| `--body`       | `#6B7177` | Body text            |
+| `--surface`    | `#F6F8F8` | Section backgrounds  |
+| `--footer`     | `#1F2124` | Footer background    |
 
 ## Tech Stack
 

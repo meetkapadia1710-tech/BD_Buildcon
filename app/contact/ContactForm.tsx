@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
 const schema = z.object({
@@ -12,13 +13,15 @@ const schema = z.object({
   phone: z.string().optional(),
   subject: z.string().min(2, 'Subject is required'),
   message: z.string().min(10, 'Please provide more detail (min 10 characters)'),
+  // Honeypot — hidden from users, catches bots. Leave empty.
+  website: z.string().optional(),
 })
 
 type FormData = z.infer<typeof schema>
 
 export function ContactForm() {
+  const router = useRouter()
   const [sending, setSending] = useState(false)
-  const [error, setError] = useState<string | null>(null)
 
   const {
     register,
@@ -30,7 +33,6 @@ export function ContactForm() {
 
   const onSubmit = async (data: FormData) => {
     setSending(true)
-    setError(null)
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -38,8 +40,7 @@ export function ContactForm() {
         body: JSON.stringify(data),
       })
       if (!res.ok) throw new Error('Failed to send message')
-      toast.success('Message sent successfully! We will get back to you shortly.')
-      setSending(false)
+      router.push('/thank-you')
     } catch {
       toast.error('Something went wrong. Please try again or call us directly.')
       setSending(false)
@@ -47,7 +48,16 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
+    <form onSubmit={handleSubmit(onSubmit)} noValidate className="relative space-y-5">
+      {/* Honeypot — hidden from users, catches bots. Leave empty. */}
+      <input
+        type="text"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute left-[-9999px] h-0 w-0 opacity-0"
+        {...register('website')}
+      />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="name" className="block font-body text-label-md text-ink uppercase tracking-wider mb-2">

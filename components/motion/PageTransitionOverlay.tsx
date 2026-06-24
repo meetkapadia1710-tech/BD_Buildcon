@@ -41,9 +41,9 @@ export function PageTransitionOverlay() {
     const tl = gsap.timeline({ onComplete: onDone, defaults: { ease: 'expo.inOut' } })
     tlRef.current = tl
 
-    tl.to(panel, { y: '0vh', duration: 0.45 })
-    tl.to(line, { scaleX: 1, duration: 0.35, ease: 'power3.out' }, '-=0.15')
-    tl.to(mark, { opacity: 1, scale: 1, y: 0, duration: 0.3, ease: 'back.out(1.5)' }, '-=0.2')
+    tl.to(panel, { y: '0vh', duration: 0.28 })
+    tl.to(line, { scaleX: 1, duration: 0.22, ease: 'power3.out' }, '-=0.12')
+    tl.to(mark, { opacity: 1, scale: 1, y: 0, duration: 0.18, ease: 'back.out(1.5)' }, '-=0.16')
   }
 
   const reveal = () => {
@@ -57,9 +57,9 @@ export function PageTransitionOverlay() {
     const tl = gsap.timeline({ defaults: { ease: 'expo.inOut' } })
     tlRef.current = tl
 
-    tl.to(mark, { opacity: 0, scale: 1.05, y: -10, duration: 0.22, ease: 'power2.in' })
-    tl.to(line, { scaleX: 0, transformOrigin: 'right center', duration: 0.25, ease: 'power3.in' }, '-=0.1')
-    tl.to(panel, { y: '-100vh', duration: 0.45 }, '-=0.15')
+    tl.to(mark, { opacity: 0, scale: 1.05, y: -10, duration: 0.14, ease: 'power2.in' })
+    tl.to(line, { scaleX: 0, transformOrigin: 'right center', duration: 0.16, ease: 'power3.in' }, '-=0.08')
+    tl.to(panel, { y: '-100vh', duration: 0.32 }, '-=0.12')
   }
 
   // ── intercept all internal link clicks (capture phase) ───────────────────
