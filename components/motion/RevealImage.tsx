@@ -67,11 +67,12 @@ export function RevealImage({
         duration: 1.2,
         ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
       },
-      '<'
+      '<',
     )
 
+    let parallaxTrigger: ReturnType<typeof ScrollTrigger.create> | undefined
     if (parallax) {
-      ScrollTrigger.create({
+      parallaxTrigger = ScrollTrigger.create({
         trigger: wrapper,
         start: 'top bottom',
         end: 'bottom top',
@@ -82,7 +83,10 @@ export function RevealImage({
       })
     }
 
-    return () => { tl.kill() }
+    return () => {
+      tl.kill()
+      parallaxTrigger?.kill()
+    }
   }, [delay, parallax])
 
   return (

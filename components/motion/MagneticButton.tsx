@@ -2,30 +2,34 @@
 
 import React, { useRef, useCallback } from 'react'
 
-type Props = {
+type BaseProps = {
   children: React.ReactNode
   className?: string
   strength?: number
-  as?: 'button' | 'a'
-  href?: string
   onClick?: () => void
-  type?: 'button' | 'submit' | 'reset'
-  disabled?: boolean
   'aria-label'?: string
 }
 
-export function MagneticButton({
-  children,
-  className = '',
-  strength = 0.3,
-  as: Tag = 'button',
-  href,
-  onClick,
-  type = 'button',
-  disabled,
-  'aria-label': ariaLabel,
-}: Props) {
-  const ref = useRef<HTMLButtonElement & HTMLAnchorElement>(null)
+type ButtonVariant = BaseProps & {
+  as?: 'button'
+  href?: never
+  type?: 'button' | 'submit' | 'reset'
+  disabled?: boolean
+}
+
+type AnchorVariant = BaseProps & {
+  as: 'a'
+  href: string
+  type?: never
+  disabled?: never
+}
+
+type Props = ButtonVariant | AnchorVariant
+
+export function MagneticButton(props: Props) {
+  const { children, className = '', strength = 0.3, as: Tag = 'button', onClick, 'aria-label': ariaLabel } = props
+
+  const ref = useRef<HTMLElement>(null)
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent) => {
@@ -41,7 +45,7 @@ export function MagneticButton({
 
       el.style.transform = `translate(${x * strength}px, ${y * strength}px)`
     },
-    [strength]
+    [strength],
   )
 
   const handleMouseLeave = useCallback(() => {
@@ -57,19 +61,31 @@ export function MagneticButton({
     el.style.transition = 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
   }, [])
 
-  const props = {
-    ref,
+  const sharedProps = {
     className,
     onMouseMove: handleMouseMove,
     onMouseLeave: handleMouseLeave,
     onMouseEnter: handleMouseEnter,
     onClick,
     'aria-label': ariaLabel,
-    ...(Tag === 'button' ? { type, disabled } : { href }),
   }
 
-  const AnyTag = Tag as 'button'
+  if (Tag === 'a') {
+    return (
+      <a ref={ref as React.Ref<HTMLAnchorElement>} href={(props as AnchorVariant).href} {...sharedProps}>
+        {children}
+      </a>
+    )
+  }
+
   return (
-    <AnyTag {...(props as React.ComponentPropsWithRef<'button'>)}>{children}</AnyTag>
+    <button
+      ref={ref as React.Ref<HTMLButtonElement>}
+      type={(props as ButtonVariant).type ?? 'button'}
+      disabled={(props as ButtonVariant).disabled}
+      {...sharedProps}
+    >
+      {children}
+    </button>
   )
 }

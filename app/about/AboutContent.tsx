@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import { SectionHeading } from '@/components/layout/SectionHeading'
 import { FadeRiseItem } from '@/components/motion/FadeRise'
 import { SlideIn } from '@/components/motion/SlideIn'
@@ -118,6 +118,7 @@ const values = [
 
 export default function AboutContent() {
   const searchParams = useSearchParams()
+  const router = useRouter()
   const tabParam = searchParams.get('tab')
   const [active, setActive] = useState(() => (tabParam && tabParam in tabIndex ? tabIndex[tabParam] : 0))
 
@@ -125,6 +126,11 @@ export default function AboutContent() {
     const idx = tabParam && tabParam in tabIndex ? tabIndex[tabParam] : 0
     setActive(idx)
   }, [tabParam])
+
+  function handleTabClick(i: number, tabId: string) {
+    setActive(i)
+    router.replace(`/about?tab=${tabId}`, { scroll: false })
+  }
 
   return (
     <>
@@ -135,7 +141,7 @@ export default function AboutContent() {
             {tabs.map((tab, i) => (
               <button
                 key={tab.id}
-                onClick={() => setActive(i)}
+                onClick={() => handleTabClick(i, tab.id)}
                 className={`relative pb-4 pt-5 px-6 font-body text-[11px] font-semibold uppercase tracking-[0.12em] whitespace-nowrap transition-colors duration-200 ${
                   active === i ? 'text-teal' : 'text-body hover:text-ink'
                 }`}

@@ -41,7 +41,7 @@ export default function ProjectDetailPage({ params }: Props) {
   if (projectIndex === -1) notFound()
 
   const project = projects[projectIndex]
-  const next = projects[(projectIndex + 1) % projects.length]
+  const next = projects.length > 1 ? projects[(projectIndex + 1) % projects.length] : null
 
   return (
     <>
@@ -169,30 +169,32 @@ export default function ProjectDetailPage({ params }: Props) {
       </section>
 
       {/* Next project */}
-      <section className="bg-surface border-t border-hairline py-10">
-        <div className="max-w-container mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div>
-            <p className="font-body text-label-md text-teal uppercase tracking-widest mb-1">Next Project</p>
-            <h3 className="font-display text-headline-sm text-ink">{next.name}</h3>
-          </div>
-          <Link
-            href={`/projects/${next.slug}`}
-            className="flex items-center gap-2 font-body text-label-md text-teal uppercase tracking-wider hover:gap-3 transition-all"
-          >
-            View project
-            <svg
-              className="w-4 h-4"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              aria-hidden="true"
+      {next && (
+        <section className="bg-surface border-t border-hairline py-10">
+          <div className="max-w-container mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <p className="font-body text-label-md text-teal uppercase tracking-widest mb-1">Next Project</p>
+              <h3 className="font-display text-headline-sm text-ink">{next.name}</h3>
+            </div>
+            <Link
+              href={`/projects/${next.slug}`}
+              className="flex items-center gap-2 font-body text-label-md text-teal uppercase tracking-wider hover:gap-3 transition-all"
             >
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </Link>
-        </div>
-      </section>
+              View project
+              <svg
+                className="w-4 h-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </Link>
+          </div>
+        </section>
+      )}
 
       <CTABand />
     </>

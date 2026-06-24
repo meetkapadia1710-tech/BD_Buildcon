@@ -4,25 +4,25 @@ import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 
 export function SmoothCursor() {
-  const dotRef      = useRef<HTMLDivElement>(null)
-  const ringRef     = useRef<HTMLDivElement>(null)
-  const hoveredRef  = useRef(false)
-  const [visible, setVisible]   = useState(false)
-  const [hovered, setHovered]   = useState(false)
-  const [isInput,  setIsInput]  = useState(false)
+  const dotRef = useRef<HTMLDivElement>(null)
+  const ringRef = useRef<HTMLDivElement>(null)
+  const hoveredRef = useRef(false)
+  const [visible, setVisible] = useState(false)
+  const [hovered, setHovered] = useState(false)
+  const [isInput, setIsInput] = useState(false)
 
   useEffect(() => {
     if (!window.matchMedia('(pointer: fine)').matches) return
 
-    const dot  = dotRef.current
+    const dot = dotRef.current
     const ring = ringRef.current
     if (!dot || !ring) return
 
-    gsap.set(dot,  { xPercent: -50, yPercent: -50, x: -100, y: -100 })
+    gsap.set(dot, { xPercent: -50, yPercent: -50, x: -100, y: -100 })
     gsap.set(ring, { xPercent: -50, yPercent: -50, x: -100, y: -100 })
 
-    const setDotX  = gsap.quickTo(dot,  'x', { duration: 0.02, ease: 'none' })
-    const setDotY  = gsap.quickTo(dot,  'y', { duration: 0.02, ease: 'none' })
+    const setDotX = gsap.quickTo(dot, 'x', { duration: 0.02, ease: 'none' })
+    const setDotY = gsap.quickTo(dot, 'y', { duration: 0.02, ease: 'none' })
     const setRingX = gsap.quickTo(ring, 'x', { duration: 0.15, ease: 'power2.out' })
     const setRingY = gsap.quickTo(ring, 'y', { duration: 0.15, ease: 'power2.out' })
 
@@ -38,10 +38,16 @@ export function SmoothCursor() {
       const target = e.target as HTMLElement
       if (!target) return
 
-      const isText = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' ||
-        target.isContentEditable || !!target.closest('input, textarea, [contenteditable="true"]')
+      const isText =
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.isContentEditable ||
+        !!target.closest('input, textarea, [contenteditable="true"]')
 
-      if (isText) { setIsInput(true); return }
+      if (isText) {
+        setIsInput(true)
+        return
+      }
 
       if (target.closest('a, button, select, option, [role="button"], .clickable')) {
         hoveredRef.current = true
@@ -55,8 +61,11 @@ export function SmoothCursor() {
       const target = e.target as HTMLElement
       if (!target) return
 
-      const isText = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' ||
-        target.isContentEditable || !!target.closest('input, textarea, [contenteditable="true"]')
+      const isText =
+        target.tagName === 'INPUT' ||
+        target.tagName === 'TEXTAREA' ||
+        target.isContentEditable ||
+        !!target.closest('input, textarea, [contenteditable="true"]')
 
       if (isText) setIsInput(false)
 
@@ -69,22 +78,27 @@ export function SmoothCursor() {
 
     // Use ref so these handlers don't need hovered in their closure
     const onMouseDown = () => gsap.to(ring, { scale: 0.75, duration: 0.15, ease: 'power2.out' })
-    const onMouseUp   = () => gsap.to(ring, { scale: hoveredRef.current ? 1.8 : 1, duration: 0.2, ease: 'power2.out' })
+    const onMouseUp = () => gsap.to(ring, { scale: hoveredRef.current ? 1.8 : 1, duration: 0.2, ease: 'power2.out' })
 
-    window.addEventListener('mousemove',  onMouseMove,        { passive: true })
-    document.addEventListener('mouseover',  onMouseOver)
-    document.addEventListener('mouseout',   onMouseOut)
-    window.addEventListener('mousedown',  onMouseDown)
-    window.addEventListener('mouseup',    onMouseUp)
-    document.addEventListener('mouseleave', () => setVisible(false))
-    document.addEventListener('mouseenter', () => setVisible(true))
+    const onMouseLeave = () => setVisible(false)
+    const onMouseEnter = () => setVisible(true)
+
+    window.addEventListener('mousemove', onMouseMove, { passive: true })
+    document.addEventListener('mouseover', onMouseOver)
+    document.addEventListener('mouseout', onMouseOut)
+    window.addEventListener('mousedown', onMouseDown)
+    window.addEventListener('mouseup', onMouseUp)
+    document.addEventListener('mouseleave', onMouseLeave)
+    document.addEventListener('mouseenter', onMouseEnter)
 
     return () => {
-      window.removeEventListener('mousemove',  onMouseMove)
-      document.removeEventListener('mouseover',  onMouseOver)
-      document.removeEventListener('mouseout',   onMouseOut)
-      window.removeEventListener('mousedown',  onMouseDown)
-      window.removeEventListener('mouseup',    onMouseUp)
+      window.removeEventListener('mousemove', onMouseMove)
+      document.removeEventListener('mouseover', onMouseOver)
+      document.removeEventListener('mouseout', onMouseOut)
+      window.removeEventListener('mousedown', onMouseDown)
+      window.removeEventListener('mouseup', onMouseUp)
+      document.removeEventListener('mouseleave', onMouseLeave)
+      document.removeEventListener('mouseenter', onMouseEnter)
     }
   }, []) // runs once
 

@@ -28,7 +28,11 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
 
   // Scroll to top on every page navigation while the transition overlay covers the screen
   useEffect(() => {
-    lenisRef.current?.scrollTo(0, { immediate: true } as Parameters<Lenis['scrollTo']>[1])
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true } as Parameters<Lenis['scrollTo']>[1])
+    } else {
+      window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
+    }
   }, [pathname])
 
   useEffect(() => {

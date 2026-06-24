@@ -13,9 +13,38 @@ const contactSchema = z.object({
   projectType: z.string().optional(),
 })
 
+// Simple in-memory rate limiter: max 5 submissions per IP per minute.
+// For multi-instance deployments replace with an external store (e.g. Upstash Redis).
+const rateLimitMap = new Map<string, { count: number; resetAt: number }>()
+const LIMIT = 5
+const WINDOW_MS = 60_000
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now()
+  const entry = rateLimitMap.get(ip)
+  if (!entry || now > entry.resetAt) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + WINDOW_MS })
+    return false
+  }
+  if (entry.count >= LIMIT) return true
+  entry.count++
+  return false
+}
+
 export async function POST(req: NextRequest) {
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown'
+  if (isRateLimited(ip)) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429 })
+  }
+
+  let body: unknown
   try {
-    const body = await req.json()
+    body = await req.json()
+  } catch {
+    return NextResponse.json({ error: 'Invalid request body' }, { status: 400 })
+  }
+
+  try {
     const data = contactSchema.parse(body)
 
     // Log the submission for now
