@@ -11,6 +11,8 @@ import { SlideIn } from '@/components/motion/SlideIn'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { ParallaxLayer } from '@/components/motion/ParallaxLayer'
 import { motion } from 'framer-motion'
+import { TestimonialCard } from '@/components/ui/TestimonialCard'
+import { testimonials } from '@/content/testimonials'
 const reasons = [
   {
     id: 'size',
@@ -89,7 +91,7 @@ export default function WhyUsPage() {
                 <ParallaxLayer yRange={-25}>
                   <motion.div
                     whileHover={{ scale: 1.02, rotate: reason.reverse ? -1 : 1 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                     className="aspect-[16/10] rounded-card overflow-hidden shadow-card"
                   >
                     <RevealImage
@@ -110,9 +112,7 @@ export default function WhyUsPage() {
                 <span className="font-body text-label-md text-teal uppercase tracking-widest block mb-3">
                   {reason.label}
                 </span>
-                <h2 className="font-display text-headline-md text-ink mb-5 leading-snug">
-                  {reason.heading}
-                </h2>
+                <h2 className="font-display text-headline-md text-ink mb-5 leading-snug">{reason.heading}</h2>
                 <p className="font-body text-body-lg text-body leading-relaxed">{reason.body}</p>
               </SlideIn>
             </div>
@@ -132,9 +132,7 @@ export default function WhyUsPage() {
                 <div className="font-display font-extrabold text-display-lg text-white leading-none mb-3">
                   <CountUp target={d.value} suffix={d.suffix} />
                 </div>
-                <div className="font-body text-label-md uppercase tracking-wider text-white/80">
-                  {d.label}
-                </div>
+                <div className="font-body text-label-md uppercase tracking-wider text-white/80">{d.label}</div>
               </div>
             ))}
           </StaggerReveal>
@@ -151,6 +149,23 @@ export default function WhyUsPage() {
                 </svg>
                 <span className="font-body text-label-md text-white uppercase tracking-wider">{badge}</span>
               </div>
+            ))}
+          </StaggerReveal>
+        </div>
+      </section>
+
+      {/* ── Testimonials ── */}
+      <section className="section-pad bg-surface" aria-label="Client testimonials">
+        <div className="container-max">
+          <SlideIn from="bottom">
+            <SectionHeading
+              title="What Our Clients Say"
+              subtitle="Trusted by leading names across chemical, pharma, petroleum and industrial sectors."
+            />
+          </SlideIn>
+          <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" direction="up" stagger={0.14}>
+            {testimonials.map((t) => (
+              <TestimonialCard key={t.id} testimonial={t} />
             ))}
           </StaggerReveal>
         </div>

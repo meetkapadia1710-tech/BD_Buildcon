@@ -6,34 +6,68 @@ import { FadeRise, FadeRiseItem } from '@/components/motion/FadeRise'
 import { RevealImage } from '@/components/motion/RevealImage'
 import { SectionHeading } from '@/components/layout/SectionHeading'
 import { CTABand } from '@/components/layout/CTABand'
-import { TestimonialCard } from '@/components/ui/TestimonialCard'
-import { ProjectCard } from '@/components/ui/ProjectCard'
 import { CustomSelect } from '@/components/ui/CustomSelect'
-import { projects } from '@/content/projects'
-import { testimonials } from '@/content/testimonials'
 import { clients } from '@/content/clients'
 import { services } from '@/content/services'
 import { BlueprintReveal } from '@/components/motion/BlueprintReveal'
 import { ConstructionDraw } from '@/components/motion/ConstructionDraw'
-import { RisingFloors, type StatFloor } from '@/components/motion/RisingFloors'
+import type { StatFloor } from '@/components/motion/RisingFloors'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { SlideIn } from '@/components/motion/SlideIn'
 import { ParallaxLayer } from '@/components/motion/ParallaxLayer'
 import { motion } from 'framer-motion'
+import dynamic from 'next/dynamic'
+import { useState } from 'react'
+import { toast } from 'sonner'
+
+const RisingFloors = dynamic(() => import('@/components/motion/RisingFloors').then((mod) => mod.RisingFloors), {
+  ssr: false,
+})
 const sectors = [
-  'Chemicals', 'Pharma', 'Petroleum', 'Fertiliser', 'Glass',
-  'Tyre', 'Food Processing', 'Industrial Gases', 'Insulation',
-  'Adhesives', 'Natural Fibres', 'Infrastructure', 'Residential',
-  'Chemicals', 'Pharma', 'Petroleum', 'Fertiliser', 'Glass',
-  'Tyre', 'Food Processing', 'Industrial Gases', 'Insulation',
-  'Adhesives', 'Natural Fibres', 'Infrastructure', 'Residential',
+  'Chemicals',
+  'Pharma',
+  'Petroleum',
+  'Fertiliser',
+  'Glass',
+  'Tyre',
+  'Food Processing',
+  'Industrial Gases',
+  'Insulation',
+  'Adhesives',
+  'Natural Fibres',
+  'Infrastructure',
+  'Residential',
+  'Chemicals',
+  'Pharma',
+  'Petroleum',
+  'Fertiliser',
+  'Glass',
+  'Tyre',
+  'Food Processing',
+  'Industrial Gases',
+  'Insulation',
+  'Adhesives',
+  'Natural Fibres',
+  'Infrastructure',
+  'Residential',
 ]
 
 const pillars = [
   {
     icon: (
-      <svg className="w-7 h-7 text-teal" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+      <svg
+        className="w-7 h-7 text-teal"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+        />
       </svg>
     ),
     title: 'Zero Accidents',
@@ -41,7 +75,14 @@ const pillars = [
   },
   {
     icon: (
-      <svg className="w-7 h-7 text-teal" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+      <svg
+        className="w-7 h-7 text-teal"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
         <circle cx="12" cy="12" r="10" />
         <polyline points="12 6 12 12 16 14" />
       </svg>
@@ -51,7 +92,14 @@ const pillars = [
   },
   {
     icon: (
-      <svg className="w-7 h-7 text-teal" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+      <svg
+        className="w-7 h-7 text-teal"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
         <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
         <circle cx="9" cy="7" r="4" />
         <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
@@ -62,7 +110,14 @@ const pillars = [
   },
   {
     icon: (
-      <svg className="w-7 h-7 text-teal" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+      <svg
+        className="w-7 h-7 text-teal"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
         <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
         <line x1="8" y1="21" x2="16" y2="21" />
         <line x1="12" y1="17" x2="12" y2="21" />
@@ -74,19 +129,20 @@ const pillars = [
 ]
 
 const floorStats: StatFloor[] = [
-  { value: 50,  suffix: '+', label: 'Projects Completed', heightPct: 72 },
-  { value: 35,  suffix: '+', label: 'Years Experience',   heightPct: 58 },
-  { value: 0,   suffix: '',  label: 'Accidents Recorded', heightPct: 88 },
-  { value: 70,  suffix: '%', label: 'Repeat Client Ratio',heightPct: 80 },
+  { value: 50, suffix: '+', label: 'Projects Completed', heightPct: 72 },
+  { value: 35, suffix: '+', label: 'Years Experience', heightPct: 58 },
+  { value: 0, suffix: '', label: 'Accidents Recorded', heightPct: 88 },
+  { value: 70, suffix: '%', label: 'Repeat Client Ratio', heightPct: 80 },
 ]
 
 export default function HomePage() {
-  const featuredProjects = projects.slice(0, 4)
-
   return (
     <>
       {/* ── Hero ── */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-dark-bg" aria-label="Hero">
+      <section
+        className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-dark-bg"
+        aria-label="Hero"
+      >
         {/* Background image with Parallax */}
         <div className="absolute inset-0 z-0">
           <ParallaxLayer yRange={-60} className="absolute inset-0">
@@ -122,8 +178,7 @@ export default function HomePage() {
 
           <FadeRiseItem delay={0.2}>
             <h1 className="font-display text-display-lg text-white leading-[1.05] tracking-tight mb-8">
-              All our projects,{' '}
-              <span className="block">completed on deadline —</span>
+              All our projects, <span className="block">completed on deadline —</span>
               <span className="text-teal">with zero accidents.</span>
             </h1>
           </FadeRiseItem>
@@ -148,17 +203,19 @@ export default function HomePage() {
       </section>
 
       {/* ── Sector Marquee ── */}
-      <section
-        className="bg-surface border-b border-hairline py-4 overflow-hidden"
-        aria-label="Sectors we serve"
-      >
+      <section className="bg-surface border-b border-hairline py-4 overflow-hidden" aria-label="Sectors we serve">
         <div className="flex marquee-fade">
           <div className="flex gap-10 animate-marquee whitespace-nowrap pr-10">
             {sectors.map((s, i) => (
-              <span key={i} className="flex items-center gap-10 font-body text-label-md text-body uppercase tracking-widest">
+              <span
+                key={i}
+                className="flex items-center gap-10 font-body text-label-md text-body uppercase tracking-widest"
+              >
                 {s}
                 {i < sectors.length - 1 && (
-                  <span className="text-teal text-xl" aria-hidden="true">·</span>
+                  <span className="text-teal text-xl" aria-hidden="true">
+                    ·
+                  </span>
                 )}
               </span>
             ))}
@@ -168,40 +225,44 @@ export default function HomePage() {
 
       {/* ── What We Build ── */}
       <BlueprintReveal>
-      <section className="section-pad bg-white" aria-label="Services overview">
-        <div className="container-max">
-          <SlideIn from="bottom">
-            <SectionHeading
-              title="What We Build"
-              subtitle="Precision engineering and robust construction across specialised industrial disciplines."
-            />
-          </SlideIn>
-          <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" direction="up" stagger={0.12}>
-            {services.map((svc) => (
-              <div
-                key={svc.id}
-                className="group relative aspect-[4/5] overflow-hidden rounded-card bg-dark-bg cursor-pointer card"
-              >
-                <Image
-                  src={svc.image}
-                  alt={svc.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-t from-teal/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-0 left-0 p-6 z-10">
-                  <h3 className="font-display text-headline-sm text-white mb-2">{svc.shortTitle}</h3>
-                  <p className="font-body text-body-md text-white/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">
-                    {svc.description.slice(0, 80)}…
-                  </p>
+        <section className="section-pad bg-white" aria-label="Services overview">
+          <div className="container-max">
+            <SlideIn from="bottom">
+              <SectionHeading
+                title="What We Build"
+                subtitle="Precision engineering and robust construction across specialised industrial disciplines."
+              />
+            </SlideIn>
+            <StaggerReveal
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"
+              direction="up"
+              stagger={0.12}
+            >
+              {services.map((svc) => (
+                <div
+                  key={svc.id}
+                  className="group relative aspect-[4/5] overflow-hidden rounded-card bg-dark-bg cursor-pointer card"
+                >
+                  <Image
+                    src={svc.image}
+                    alt={svc.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-teal/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute bottom-0 left-0 p-6 z-10">
+                    <h3 className="font-display text-headline-sm text-white mb-2">{svc.shortTitle}</h3>
+                    <p className="font-body text-body-md text-white/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">
+                      {svc.description.slice(0, 80)}…
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </StaggerReveal>
-        </div>
-      </section>
+              ))}
+            </StaggerReveal>
+          </div>
+        </section>
       </BlueprintReveal>
 
       {/* ── Pillars Band ── */}
@@ -253,13 +314,13 @@ export default function HomePage() {
               <FadeRiseItem delay={0.1}>
                 <div className="space-y-4 font-body text-body-lg text-white/60 leading-relaxed mb-8">
                   <p>
-                    From foundation to roof, each phase of an EPC project follows a
-                    carefully engineered sequence — structural steel, floor slabs, bracing
-                    systems and crane logistics planned before a single bolt is tightened.
+                    From foundation to roof, each phase of an EPC project follows a carefully engineered sequence —
+                    structural steel, floor slabs, bracing systems and crane logistics planned before a single bolt is
+                    tightened.
                   </p>
                   <p>
-                    Our in-house design and execution teams work from the same drawing set,
-                    eliminating the coordination gaps that delay lesser contractors.
+                    Our in-house design and execution teams work from the same drawing set, eliminating the coordination
+                    gaps that delay lesser contractors.
                   </p>
                 </div>
               </FadeRiseItem>
@@ -269,44 +330,16 @@ export default function HomePage() {
                   { phase: '02', title: 'Fabricate & Build' },
                   { phase: '03', title: 'Commission' },
                 ].map((step) => (
-                  <div key={step.phase} className="border border-teal/20 rounded-card p-4 hover:border-teal/50 transition-colors bg-white/5">
+                  <div
+                    key={step.phase}
+                    className="border border-teal/20 rounded-card p-4 hover:border-teal/50 transition-colors bg-white/5"
+                  >
                     <div className="font-body text-teal text-[10px] uppercase tracking-widest mb-1">{step.phase}</div>
                     <div className="font-display text-white text-body-md font-semibold">{step.title}</div>
                   </div>
                 ))}
               </StaggerReveal>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Featured Projects ── */}
-      <section className="section-pad bg-white" aria-label="Featured projects">
-        <div className="container-max">
-          <div className="flex items-end justify-between mb-12">
-            <SlideIn from="left">
-              <SectionHeading title="Featured Projects" centered={false} className="mb-0" />
-            </SlideIn>
-            <SlideIn from="right">
-              <Link href="/projects" className="hidden sm:flex items-center gap-2 font-body text-label-md text-teal uppercase tracking-wider hover:gap-3 transition-all link-underline">
-                See all projects
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </Link>
-            </SlideIn>
-          </div>
-
-          <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" direction="up" stagger={0.13}>
-            {featuredProjects.map((project, i) => (
-              <ProjectCard key={project.slug} project={project} priority={i === 0} />
-            ))}
-          </StaggerReveal>
-
-          <div className="mt-8 text-center sm:hidden">
-            <Link href="/projects" className="btn-ghost text-sm">
-              See all projects
-            </Link>
           </div>
         </div>
       </section>
@@ -352,7 +385,10 @@ export default function HomePage() {
                   <span className="font-body text-label-md text-teal uppercase tracking-widest block mb-4">
                     Desk of Directors
                   </span>
-                  <div className="text-[72px] leading-none text-teal/20 font-display select-none mb-2" aria-hidden="true">
+                  <div
+                    className="text-[72px] leading-none text-teal/20 font-display select-none mb-2"
+                    aria-hidden="true"
+                  >
                     &ldquo;
                   </div>
                   <blockquote className="font-display text-headline-sm text-white leading-snug mb-6">
@@ -392,25 +428,24 @@ export default function HomePage() {
             sizes="100vw"
           />
         </ParallaxLayer>
-        
+
         <motion.div
           className="relative z-10 container-max text-center"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: '-100px' }}
           variants={{
             hidden: { opacity: 0, scale: 0.95 },
-            visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeOut" } }
+            visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: 'easeOut' } },
           }}
         >
           <FadeRiseItem>
-            <h2 className="font-display text-headline-lg text-white mb-4">
-              A zero-accident standard.
-            </h2>
+            <h2 className="font-display text-headline-lg text-white mb-4">A zero-accident standard.</h2>
           </FadeRiseItem>
           <FadeRiseItem delay={0.1}>
             <p className="font-body text-body-lg text-white/70 max-w-2xl mx-auto mb-8">
-              &ldquo;Safety is not a department — it&apos;s the culture we build every morning before the first concrete is poured.&rdquo;
+              &ldquo;Safety is not a department — it&apos;s the culture we build every morning before the first concrete
+              is poured.&rdquo;
             </p>
           </FadeRiseItem>
           <FadeRiseItem delay={0.2}>
@@ -421,28 +456,14 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* ── Testimonials ── */}
-      <section className="section-pad bg-surface" aria-label="Client testimonials">
-        <div className="container-max">
-          <SlideIn from="bottom">
-            <SectionHeading
-              title="What Our Clients Say"
-              subtitle="Trusted by leading names across chemical, pharma, petroleum and industrial sectors."
-            />
-          </SlideIn>
-          <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" direction="up" stagger={0.14}>
-            {testimonials.slice(0, 3).map((t) => (
-              <TestimonialCard key={t.id} testimonial={t} />
-            ))}
-          </StaggerReveal>
-        </div>
-      </section>
-
       {/* ── Clients Logo Grid ── */}
       <section className="section-pad bg-white border-y border-hairline" aria-label="Our clients">
         <div className="container-max">
           <SlideIn from="bottom">
-            <SectionHeading title="Trusted By" subtitle="Industry leaders who partner with BD Buildcon for mission-critical construction." />
+            <SectionHeading
+              title="Trusted By"
+              subtitle="Industry leaders who partner with BD Buildcon for mission-critical construction."
+            />
           </SlideIn>
           <StaggerReveal className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6" direction="up" stagger={0.07}>
             {clients.map((client) => (
@@ -482,12 +503,32 @@ export default function HomePage() {
 }
 
 function HomeEnquiryForm() {
+  const [sending, setSending] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setSending(true)
+    const formData = new FormData(e.currentTarget)
+    const data = Object.fromEntries(formData.entries())
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      if (!res.ok) throw new Error('Failed to send')
+      toast.success('Enquiry sent successfully! We will get back to you shortly.')
+      ;(e.target as HTMLFormElement).reset()
+    } catch {
+      toast.error('Failed to send enquiry. Please try again.')
+    } finally {
+      setSending(false)
+    }
+  }
+
   return (
-    <form
-      action="/api/contact"
-      method="POST"
-      className="bg-white rounded-card border border-hairline shadow-card p-8 space-y-5"
-    >
+    <form onSubmit={handleSubmit} className="bg-white rounded-card border border-hairline shadow-card p-8 space-y-5">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="hq-name" className="block font-body text-label-md text-ink mb-2 uppercase tracking-wider">
@@ -511,7 +552,17 @@ function HomeEnquiryForm() {
             id="hq-sector"
             name="sector"
             placeholder="Select sector"
-            options={['Chemical', 'Pharma', 'Petroleum', 'Fertiliser', 'Glass', 'Tyre', 'Food', 'Residential', 'Other'].map(s => ({ label: s, value: s }))}
+            options={[
+              'Chemical',
+              'Pharma',
+              'Petroleum',
+              'Fertiliser',
+              'Glass',
+              'Tyre',
+              'Food',
+              'Residential',
+              'Other',
+            ].map((s) => ({ label: s, value: s }))}
           />
         </div>
         <div>
@@ -522,7 +573,15 @@ function HomeEnquiryForm() {
             id="hq-type"
             name="projectType"
             placeholder="Select type"
-            options={['Greenfield Plant', 'Plant Expansion', 'PEB Structure', 'Piping & Mechanical', 'Civil Works', 'Roads & Earthwork', 'Other'].map(t => ({ label: t, value: t }))}
+            options={[
+              'Greenfield Plant',
+              'Plant Expansion',
+              'PEB Structure',
+              'Piping & Mechanical',
+              'Civil Works',
+              'Roads & Earthwork',
+              'Other',
+            ].map((t) => ({ label: t, value: t }))}
           />
         </div>
       </div>
@@ -530,10 +589,16 @@ function HomeEnquiryForm() {
         <label htmlFor="hq-message" className="block font-body text-label-md text-ink mb-2 uppercase tracking-wider">
           Message
         </label>
-        <textarea id="hq-message" name="message" rows={4} placeholder="Brief project description..." className="form-field" />
+        <textarea
+          id="hq-message"
+          name="message"
+          rows={4}
+          placeholder="Brief project description..."
+          className="form-field"
+        />
       </div>
-      <button type="submit" className="btn-primary w-full sm:w-auto">
-        Send Enquiry
+      <button type="submit" disabled={sending} className="btn-primary w-full sm:w-auto disabled:opacity-60">
+        {sending ? 'Sending...' : 'Send Enquiry'}
       </button>
     </form>
   )

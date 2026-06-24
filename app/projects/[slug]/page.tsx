@@ -19,8 +19,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = projects.find((p) => p.slug === params.slug)
   if (!project) return {}
   return {
-    title: project.name,
+    title: `${project.name} | BD Buildcon`,
     description: project.excerpt,
+    openGraph: {
+      type: 'article',
+      url: `https://bdbuildcon.com/projects/${project.slug}`,
+      title: `${project.name} | BD Buildcon`,
+      description: project.excerpt,
+      images: [
+        {
+          url: project.image,
+          alt: project.name,
+        },
+      ],
+    },
   }
 }
 
@@ -33,6 +45,30 @@ export default function ProjectDetailPage({ params }: Props) {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Article',
+            headline: project.name,
+            description: project.excerpt,
+            image: project.image,
+            author: {
+              '@type': 'Organization',
+              name: 'BD Buildcon LLP',
+            },
+            publisher: {
+              '@type': 'Organization',
+              name: 'BD Buildcon LLP',
+              logo: {
+                '@type': 'ImageObject',
+                url: 'https://bdbuildcon.com/logo.png',
+              },
+            },
+          }),
+        }}
+      />
       {/* Cinematic hero */}
       <section
         className="relative h-[70vh] flex items-end overflow-hidden bg-dark-bg"
@@ -52,9 +88,7 @@ export default function ProjectDetailPage({ params }: Props) {
             <span className="inline-block px-3 py-1 bg-teal text-white text-xs font-body font-semibold uppercase tracking-widest rounded-full mb-4">
               {project.sector}
             </span>
-            <h1 className="font-display text-display-lg text-white leading-tight mb-2">
-              {project.name}
-            </h1>
+            <h1 className="font-display text-display-lg text-white leading-tight mb-2">{project.name}</h1>
             <p className="font-body text-body-lg text-white/70">
               {project.client} · {project.location}
             </p>
@@ -146,7 +180,14 @@ export default function ProjectDetailPage({ params }: Props) {
             className="flex items-center gap-2 font-body text-label-md text-teal uppercase tracking-wider hover:gap-3 transition-all"
           >
             View project
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <svg
+              className="w-4 h-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              aria-hidden="true"
+            >
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </Link>

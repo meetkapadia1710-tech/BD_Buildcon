@@ -1,31 +1,40 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import type { Project } from '@/content/projects'
+import { cn } from '@/lib/utils'
 
 type Props = { project: Project; priority?: boolean; featured?: boolean }
 
 export function ProjectCard({ project, priority = false, featured = false }: Props) {
   return (
     <motion.div
-      className={`group relative block overflow-hidden rounded-card bg-ink ${
-        featured ? 'aspect-[16/10]' : 'aspect-[4/3]'
-      }`}
+      className={cn(
+        'group relative block overflow-hidden rounded-card bg-ink',
+        featured ? 'aspect-[16/10]' : 'aspect-[4/3]',
+      )}
       whileHover={{ y: -6, scale: 1.015, boxShadow: '0 20px 56px rgba(22,168,184,0.22)' }}
       transition={{ type: 'spring', stiffness: 260, damping: 22 }}
     >
       <Link href={`/projects/${project.slug}`} className="absolute inset-0 z-10" aria-label={project.name} />
 
       {/* Image */}
-      <motion.img
-        src={project.image}
-        alt={`${project.name} — ${project.client}`}
-        className="absolute inset-0 w-full h-full object-cover"
+      <motion.div
+        className="absolute inset-0 w-full h-full"
         style={{ willChange: 'transform' }}
         whileHover={{ scale: 1.07 }}
         transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-      />
+      >
+        <Image
+          src={project.image}
+          alt={`${project.name} — ${project.client}`}
+          fill
+          className="object-cover"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        />
+      </motion.div>
 
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
@@ -57,7 +66,7 @@ export function ProjectCard({ project, priority = false, featured = false }: Pro
         whileHover={{ y: 0 }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
       >
-        <h3 className={`font-display text-white mb-1 ${featured ? 'text-headline-md' : 'text-headline-sm'}`}>
+        <h3 className={cn('font-display text-white mb-1', featured ? 'text-headline-md' : 'text-headline-sm')}>
           {project.name}
         </h3>
         <p className="font-body text-body-md text-white/70">{project.location}</p>

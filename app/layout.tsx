@@ -8,6 +8,7 @@ import { LenisProvider } from '@/components/motion/LenisProvider'
 import { PageTransitionOverlay } from '@/components/motion/PageTransitionOverlay'
 import { PageWrapper } from '@/components/motion/PageWrapper'
 import { ScrollProgress } from '@/components/motion/ScrollProgress'
+import { Toaster } from 'sonner'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -25,6 +26,23 @@ export const metadata: Metadata = {
   title: 'BD Buildcon LLP | Industrial EPC Contractor, Bharuch, Gujarat',
   description:
     'Turnkey industrial EPC contractor since 1995. All projects completed on deadline with zero accidents. ISO 9001:2015 certified · CRISIL SME 3 rated · ₹200+ Cr delivered.',
+  openGraph: {
+    type: 'website',
+    locale: 'en_IN',
+    url: 'https://bdbuildcon.com',
+    siteName: 'BD Buildcon LLP',
+    title: 'BD Buildcon LLP | Industrial EPC Contractor',
+    description:
+      'Turnkey industrial EPC contractor since 1995. All projects completed on deadline with zero accidents.',
+    images: [
+      {
+        url: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1200&h=630&fit=crop',
+        width: 1200,
+        height: 630,
+        alt: 'BD Buildcon Industrial Plant Construction',
+      },
+    ],
+  },
 }
 
 export const viewport = {
@@ -33,14 +51,36 @@ export const viewport = {
   maximumScale: 1,
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${hanken.variable}`}>
       <body className="font-body text-ink bg-white antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'ConstructionCompany',
+              name: 'BD Buildcon LLP',
+              url: 'https://bdbuildcon.com',
+              logo: 'https://bdbuildcon.com/logo.png',
+              description: 'Turnkey industrial EPC contractor since 1995.',
+              address: {
+                '@type': 'PostalAddress',
+                streetAddress: 'Millenium Arcade, Opp SVM Engineering College, Old National Highway 8',
+                addressLocality: 'Bharuch',
+                addressRegion: 'Gujarat',
+                postalCode: '392002',
+                addressCountry: 'IN',
+              },
+              contactPoint: {
+                '@type': 'ContactPoint',
+                telephone: '+91-2642-230501',
+                contactType: 'customer service',
+              },
+            }),
+          }}
+        />
         <LenisProvider>
           <SmoothCursor />
           <ScrollProgress />
@@ -50,6 +90,7 @@ export default function RootLayout({
             <main>{children}</main>
           </PageWrapper>
           <Footer />
+          <Toaster position="bottom-right" richColors />
         </LenisProvider>
       </body>
     </html>

@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 
 const schema = z.object({
   name: z.string().min(2, 'Name is required'),
@@ -17,7 +17,6 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>
 
 export function ContactForm() {
-  const router = useRouter()
   const [sending, setSending] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -39,9 +38,10 @@ export function ContactForm() {
         body: JSON.stringify(data),
       })
       if (!res.ok) throw new Error('Failed to send message')
-      router.push('/thank-you')
+      toast.success('Message sent successfully! We will get back to you shortly.')
+      setSending(false)
     } catch {
-      setError('Something went wrong. Please try again or call us directly.')
+      toast.error('Something went wrong. Please try again or call us directly.')
       setSending(false)
     }
   }
@@ -91,13 +91,7 @@ export function ContactForm() {
         <label htmlFor="phone" className="block font-body text-label-md text-ink uppercase tracking-wider mb-2">
           Phone Number
         </label>
-        <input
-          id="phone"
-          type="tel"
-          placeholder="+91 XXX XXX XXXX"
-          {...register('phone')}
-          className="form-field"
-        />
+        <input id="phone" type="tel" placeholder="+91 XXX XXX XXXX" {...register('phone')} className="form-field" />
       </div>
 
       <div>
@@ -149,11 +143,7 @@ export function ContactForm() {
         <span className="font-body text-xs text-body">reCAPTCHA</span>
       </div>
 
-      {error && (
-        <div role="alert" className="bg-brand-red/10 border border-brand-red/30 text-brand-red rounded-lg px-4 py-3 font-body text-body-md">
-          {error}
-        </div>
-      )}
+      {/* Error state removed as it is now handled by toast */}
 
       <button
         type="submit"
@@ -171,7 +161,14 @@ export function ContactForm() {
         ) : (
           <>
             Send Message
-            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <svg
+              className="w-4 h-4"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              aria-hidden="true"
+            >
               <line x1="22" y1="2" x2="11" y2="13" />
               <polygon points="22 2 15 22 11 13 2 9 22 2" />
             </svg>
