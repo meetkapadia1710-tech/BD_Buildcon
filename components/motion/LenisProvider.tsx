@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, createContext, useContext } from 'react'
+import { usePathname } from 'next/navigation'
 import Lenis from 'lenis'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -23,6 +24,12 @@ export function useLenis() {
 /* ── Provider ─────────────────────────────────────────────────── */
 export function LenisProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null)
+  const pathname = usePathname()
+
+  // Scroll to top on every page navigation while the transition overlay covers the screen
+  useEffect(() => {
+    lenisRef.current?.scrollTo(0, { immediate: true } as Parameters<Lenis['scrollTo']>[1])
+  }, [pathname])
 
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -64,9 +71,5 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
     })
   }
 
-  return (
-    <LenisContext.Provider value={{ scrollTo }}>
-      {children}
-    </LenisContext.Provider>
-  )
+  return <LenisContext.Provider value={{ scrollTo }}>{children}</LenisContext.Provider>
 }

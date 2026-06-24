@@ -7,30 +7,33 @@ import Logo from '@/components/ui/Logo'
 
 export function PageTransitionOverlay() {
   const pathname = usePathname()
-  const router   = useRouter()
+  const router = useRouter()
 
   const panelRef = useRef<HTMLDivElement>(null)
-  const lineRef  = useRef<HTMLDivElement>(null)
-  const markRef  = useRef<HTMLDivElement>(null)
-  const tlRef    = useRef<gsap.core.Timeline | null>(null)
+  const lineRef = useRef<HTMLDivElement>(null)
+  const markRef = useRef<HTMLDivElement>(null)
+  const tlRef = useRef<gsap.core.Timeline | null>(null)
 
   // ── helpers ──────────────────────────────────────────────────────────────
 
   const resetPanel = () => {
     const panel = panelRef.current
-    const line  = lineRef.current
-    const mark  = markRef.current
+    const line = lineRef.current
+    const mark = markRef.current
     if (!panel || !line || !mark) return
     gsap.set(panel, { y: '100vh' })
-    gsap.set(line,  { scaleX: 0, transformOrigin: 'left center' })
-    gsap.set(mark,  { opacity: 0, scale: 0.95, y: 10 })
+    gsap.set(line, { scaleX: 0, transformOrigin: 'left center' })
+    gsap.set(mark, { opacity: 0, scale: 0.95, y: 10 })
   }
 
   const cover = (onDone: () => void) => {
     const panel = panelRef.current
-    const line  = lineRef.current
-    const mark  = markRef.current
-    if (!panel || !line || !mark) { onDone(); return }
+    const line = lineRef.current
+    const mark = markRef.current
+    if (!panel || !line || !mark) {
+      onDone()
+      return
+    }
 
     if (tlRef.current) tlRef.current.kill()
     resetPanel()
@@ -39,14 +42,14 @@ export function PageTransitionOverlay() {
     tlRef.current = tl
 
     tl.to(panel, { y: '0vh', duration: 0.45 })
-    tl.to(line,  { scaleX: 1, duration: 0.35, ease: 'power3.out' }, '-=0.15')
-    tl.to(mark,  { opacity: 1, scale: 1, y: 0, duration: 0.3, ease: 'back.out(1.5)' }, '-=0.2')
+    tl.to(line, { scaleX: 1, duration: 0.35, ease: 'power3.out' }, '-=0.15')
+    tl.to(mark, { opacity: 1, scale: 1, y: 0, duration: 0.3, ease: 'back.out(1.5)' }, '-=0.2')
   }
 
   const reveal = () => {
     const panel = panelRef.current
-    const line  = lineRef.current
-    const mark  = markRef.current
+    const line = lineRef.current
+    const mark = markRef.current
     if (!panel || !line || !mark) return
 
     if (tlRef.current) tlRef.current.kill()
@@ -54,8 +57,8 @@ export function PageTransitionOverlay() {
     const tl = gsap.timeline({ defaults: { ease: 'expo.inOut' } })
     tlRef.current = tl
 
-    tl.to(mark,  { opacity: 0, scale: 1.05, y: -10, duration: 0.22, ease: 'power2.in' })
-    tl.to(line,  { scaleX: 0, transformOrigin: 'right center', duration: 0.25, ease: 'power3.in' }, '-=0.1')
+    tl.to(mark, { opacity: 0, scale: 1.05, y: -10, duration: 0.22, ease: 'power2.in' })
+    tl.to(line, { scaleX: 0, transformOrigin: 'right center', duration: 0.25, ease: 'power3.in' }, '-=0.1')
     tl.to(panel, { y: '-100vh', duration: 0.45 }, '-=0.15')
   }
 
@@ -67,9 +70,15 @@ export function PageTransitionOverlay() {
       if (!anchor) return
 
       const href = anchor.getAttribute('href')
-      if (!href || !href.startsWith('/')) return   // skip external / hash
+      if (!href || !href.startsWith('/')) return // skip external / hash
       if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return
       if (anchor.getAttribute('target') === '_blank') return
+
+      // Skip same-pathname navigations (query-param-only changes like ?tab=)
+      // — the overlay's reveal() watches pathname, so it would never fire and the
+      // panel would cover the screen permanently.
+      const targetPathname = new URL(href, window.location.origin).pathname
+      if (targetPathname === pathnameRef.current) return
 
       // Stop the browser AND Next.js from navigating immediately
       e.preventDefault()
@@ -84,6 +93,12 @@ export function PageTransitionOverlay() {
   }, [router]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── reveal once the new page is in the DOM ───────────────────────────────
+  // Track current pathname in a ref so the click handler always has the latest value
+  const pathnameRef = useRef(pathname)
+  useEffect(() => {
+    pathnameRef.current = pathname
+  }, [pathname])
+
   const isFirstMount = useRef(true)
   useEffect(() => {
     if (isFirstMount.current) {
@@ -104,7 +119,7 @@ export function PageTransitionOverlay() {
       aria-hidden="true"
     >
       {/* Soft radial glow */}
-      <div 
+      <div
         className="absolute w-[500px] h-[500px] rounded-full pointer-events-none opacity-20 filter blur-[80px]"
         style={{
           background: 'radial-gradient(circle, #16A8B8 0%, transparent 70%)',

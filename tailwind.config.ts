@@ -40,6 +40,7 @@ const config: Config = {
         'label-md': ['14px', { lineHeight: '1.2', letterSpacing: '0.06em', fontWeight: '600' }],
         'body-lg': ['18px', { lineHeight: '1.7', fontWeight: '400' }],
         'body-md': ['16px', { lineHeight: '1.6', fontWeight: '400' }],
+        'body-sm': ['14px', { lineHeight: '1.5', fontWeight: '400' }],
       },
       maxWidth: {
         container: '1280px',

@@ -1,13 +1,12 @@
 'use client'
 
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MagneticButton } from '@/components/motion/MagneticButton'
 import { contactInfo } from '@/content/links'
 import Logo from '@/components/ui/Logo'
-import { useLenis } from '@/components/motion/LenisProvider'
 
 const aboutSubLinks = [
   {
@@ -81,8 +80,6 @@ export function Header() {
   const [aboutOpen, setAboutOpen] = useState(false)
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false)
   const pathname = usePathname()
-  const router = useRouter()
-  const { scrollTo } = useLenis()
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
@@ -117,26 +114,6 @@ export function Header() {
   const handleAboutLeave = () => {
     closeTimer.current = setTimeout(() => setAboutOpen(false), 150)
   }
-
-  const handleSubLinkClick = useCallback(
-    (href: string) => {
-      setAboutOpen(false)
-      setMobileOpen(false)
-      setMobileAboutOpen(false)
-      const [path, hash] = href.split('#')
-      if (!hash) {
-        router.push(path)
-        return
-      }
-      if (pathname === path || pathname.startsWith(path)) {
-        scrollTo(`#${hash}`, { offset: -90, duration: 1.4 })
-      } else {
-        router.push(path)
-        setTimeout(() => scrollTo(`#${hash}`, { offset: -90, duration: 1.4 }), 600)
-      }
-    },
-    [pathname, router, scrollTo],
-  )
 
   return (
     <>
@@ -204,9 +181,14 @@ export function Header() {
                       >
                         <div className="p-2">
                           {aboutSubLinks.map((sub) => (
-                            <button
+                            <Link
                               key={sub.href}
-                              onClick={() => handleSubLinkClick(sub.href)}
+                              href={sub.href}
+                              onClick={() => {
+                                setAboutOpen(false)
+                                setMobileOpen(false)
+                                setMobileAboutOpen(false)
+                              }}
                               className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-teal/5 group transition-colors duration-150 text-left"
                             >
                               <div className="w-8 h-8 rounded-lg bg-teal/8 flex items-center justify-center text-teal shrink-0 group-hover:bg-teal group-hover:text-white transition-colors duration-150">
@@ -218,7 +200,7 @@ export function Header() {
                                 </p>
                                 <p className="font-body text-[11px] text-body/70 leading-snug mt-0.5">{sub.desc}</p>
                               </div>
-                            </button>
+                            </Link>
                           ))}
                         </div>
                         <div className="border-t border-hairline px-4 py-2.5 bg-surface/60 flex items-center justify-between">
@@ -410,14 +392,19 @@ export function Header() {
                           >
                             <div className="ml-4 mt-1 mb-2 pl-3 border-l-2 border-teal/20 flex flex-col gap-0.5">
                               {aboutSubLinks.map((sub) => (
-                                <button
+                                <Link
                                   key={sub.href}
-                                  onClick={() => handleSubLinkClick(sub.href)}
+                                  href={sub.href}
+                                  onClick={() => {
+                                    setAboutOpen(false)
+                                    setMobileOpen(false)
+                                    setMobileAboutOpen(false)
+                                  }}
                                   className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-body hover:text-teal hover:bg-teal/5 transition-colors text-left w-full"
                                 >
                                   <span className="text-teal shrink-0">{sub.icon}</span>
                                   <span className="font-body text-[13px] font-medium">{sub.label}</span>
-                                </button>
+                                </Link>
                               ))}
                             </div>
                           </motion.div>

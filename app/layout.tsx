@@ -23,6 +23,7 @@ const hanken = Hanken_Grotesk({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://bdbuildcon.com'),
   title: 'BD Buildcon LLP | Industrial EPC Contractor, Bharuch, Gujarat',
   description:
     'Turnkey industrial EPC contractor since 1995. All projects completed on deadline with zero accidents. ISO 9001:2015 certified · CRISIL SME 3 rated · ₹200+ Cr delivered.',
@@ -42,6 +43,13 @@ export const metadata: Metadata = {
         alt: 'BD Buildcon Industrial Plant Construction',
       },
     ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'BD Buildcon LLP | Industrial EPC Contractor',
+    description:
+      'Turnkey industrial EPC contractor since 1995. All projects completed on deadline with zero accidents.',
+    images: ['https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1200&h=630&fit=crop'],
   },
 }
 
@@ -75,7 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               },
               contactPoint: {
                 '@type': 'ContactPoint',
-                telephone: '+91-2642-230501',
+                telephone: '+919879100355',
                 contactType: 'customer service',
               },
             }),
