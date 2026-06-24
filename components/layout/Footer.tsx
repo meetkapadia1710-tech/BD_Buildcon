@@ -26,22 +26,33 @@ export function Footer() {
 
       <div className="relative z-10 max-w-container mx-auto px-gutter py-20 lg:py-24">
         <StaggerReveal className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8" stagger={0.15}>
-          
           {/* About — 5 cols */}
           <div className="md:col-span-5 lg:pr-12">
             <h3 className="font-display text-headline-sm text-white mb-2">About Us</h3>
             <span className="block w-12 h-[3px] rounded-full bg-teal mb-6" />
             <p className="font-body text-body-md text-white/70 leading-relaxed max-w-md">
-              BD Buildcon LLP (Formerly known as Bhumi Developers) has professional human resource
-              commensurate with the required expertise and state-of-the-art construction quality
-              testing equipment required for successful execution of any project it undertakes.
+              BD Buildcon LLP (Formerly known as Bhumi Developers) has professional human resource commensurate with the
+              required expertise and state-of-the-art construction quality testing equipment required for successful
+              execution of any project it undertakes.
             </p>
             {/* Social */}
             <div className="flex gap-4 mt-8">
               {[
-                { href: socialLinks.twitter, label: 'Twitter', icon: "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.737-8.857-8.166-10.643H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z" },
-                { href: socialLinks.facebook, label: 'Facebook', icon: "M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" },
-                { href: socialLinks.linkedin, label: 'LinkedIn', icon: "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" }
+                {
+                  href: socialLinks.twitter,
+                  label: 'Twitter',
+                  icon: 'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.737-8.857-8.166-10.643H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z',
+                },
+                {
+                  href: socialLinks.facebook,
+                  label: 'Facebook',
+                  icon: 'M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z',
+                },
+                {
+                  href: socialLinks.linkedin,
+                  label: 'LinkedIn',
+                  icon: 'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z',
+                },
               ].map((social) => (
                 <motion.a
                   key={social.label}
@@ -70,9 +81,11 @@ export function Footer() {
               {[
                 { label: 'Home', href: '/' },
                 { label: 'About Us', href: '/about' },
-                { label: 'Projects', href: '/projects' },
-                { label: 'Contact Us', href: '/contact' },
                 { label: 'Why Us', href: '/why-us' },
+                { label: 'Safety & Quality', href: '/safety-quality' },
+                { label: 'Projects', href: '/projects' },
+                { label: 'Employee Area', href: '/employee-area' },
+                { label: 'Contact Us', href: '/contact' },
               ].map((link) => (
                 <Link
                   key={link.href}
@@ -100,7 +113,7 @@ export function Footer() {
                   {contactInfo.address}
                 </p>
               </div>
-              
+
               <a href={`tel:${contactInfo.phoneTel}`} className="flex items-center gap-4 group">
                 <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-teal group-hover:text-white transition-colors text-teal">
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
@@ -141,7 +154,14 @@ export function Footer() {
               className="w-6 h-6 rounded-full bg-teal/10 flex items-center justify-center group-hover:bg-teal"
               whileHover={{ y: -3 }}
             >
-              <svg className="w-3 h-3 text-teal group-hover:text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true">
+              <svg
+                className="w-3 h-3 text-teal group-hover:text-white"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                aria-hidden="true"
+              >
                 <polyline points="18 15 12 9 6 15" />
               </svg>
             </motion.div>
@@ -151,4 +171,3 @@ export function Footer() {
     </footer>
   )
 }
-
