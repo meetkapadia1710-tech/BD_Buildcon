@@ -1,324 +1,113 @@
-'use client'
-
-import Image from 'next/image'
-import { useState } from 'react'
+import type { Metadata } from 'next'
 import { PageTitleBand } from '@/components/layout/PageTitleBand'
-import { SectionHeading } from '@/components/layout/SectionHeading'
 import { CTABand } from '@/components/layout/CTABand'
-import { CountUp } from '@/components/motion/CountUp'
-import { SlideIn } from '@/components/motion/SlideIn'
-import { StaggerReveal } from '@/components/motion/StaggerReveal'
-import { motion, AnimatePresence } from 'framer-motion'
-import { TestimonialCard } from '@/components/ui/TestimonialCard'
-import { testimonials } from '@/content/testimonials'
-import { stats } from '@/content/company'
+
+export const metadata: Metadata = {
+  title: 'Why Us — BD Buildcon LLP',
+  description:
+    'What separates a dependable EPC partner from a contractor — and why 70% of our clients come back.',
+}
 
 const reasons = [
-  {
-    id: 'size',
-    num: '01',
-    label: 'Company Size',
-    heading: 'Scale that delivers.',
-    body: 'A large-scale turnkey contracting company focused on safety, quality and timely completion. Our size and owned resources ensure projects finish within the deadline — without dependency on third-party subcontractors for critical works.',
-    bullets: [
-      'Owned plant, cranes and heavy machinery — no rental delays',
-      'In-house specialist teams for every discipline',
-      'Single contract, single point of accountability',
-    ],
-    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1200&auto=format&fit=crop',
-    imageAlt: 'Large industrial construction site with heavy machinery',
-  },
-  {
-    id: 'safety',
-    num: '02',
-    label: 'Safety',
-    heading: 'Zero accidents. Always.',
-    body: 'Safety is of utmost importance. Our zero-accident track record means your project is in reliable hands. Regular safety programmes, daily toolbox talks and rigorous permit-to-work systems protect everyone on site.',
-    bullets: [
-      'Zero recorded accidents across all projects since 1995',
-      'Daily toolbox talks and on-site safety audits',
-      'Rigorous permit-to-work systems at every stage',
-    ],
-    image: 'https://images.unsplash.com/photo-1621619856624-42fd193a0661?q=80&w=1200&auto=format&fit=crop',
-    imageAlt: 'Workers in hi-vis gear conducting a safety briefing',
-  },
-  {
-    id: 'schedule',
-    num: '03',
-    label: 'On-Time Delivery',
-    heading: 'On time. Every time.',
-    body: 'We commit to timely completion using the latest tools, techniques and technology. Detailed scheduling, weekly progress reviews and proactive risk mitigation are embedded in our project management approach.',
-    bullets: [
-      '100 % on-time project delivery — no exceptions',
-      'Weekly progress reviews shared directly with clients',
-      'Risk mitigation planned before ground breaks',
-    ],
-    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1200&auto=format&fit=crop',
-    imageAlt: 'Industrial plant nearing completion on schedule',
-  },
-  {
-    id: 'technology',
-    num: '04',
-    label: 'Technology',
-    heading: 'Everything under one roof.',
-    body: 'Owned plant and machinery, in-house testing laboratory, and specialist teams for civil, mechanical, PEB and piping — all under one contract. This eliminates coordination gaps and gives you a single accountable partner.',
-    bullets: [
-      'In-house testing laboratory — no third-party queue',
-      'Owned fleet removes rental dependency entirely',
-      'Civil, mechanical, PEB and piping teams under one roof',
-    ],
-    image: 'https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?q=80&w=1200&auto=format&fit=crop',
-    imageAlt: 'Construction machinery and equipment yard',
-  },
-  {
-    id: 'quality-cost',
-    num: '05',
-    label: 'Quality & Cost',
-    heading: 'Quality you can measure.',
-    body: 'All works are executed under a formal Quality Assurance Plan. We test in our own laboratory — removing third-party delays. Value engineering delivers a leaner cost structure without compromising specification.',
-    bullets: [
-      'Formal QAP on every project, independently audited',
-      'ISO 9001:2015 certified processes throughout',
-      'Value engineering — savings from efficiency, not cut corners',
-    ],
-    image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?q=80&w=1200&auto=format&fit=crop',
-    imageAlt: 'Quality testing laboratory and site inspection',
-  },
+  { num: '01', title: 'Zero-Accident Record', body: 'Every project delivered without a single lost-time incident — safety engineered into daily protocols, not bolted on.' },
+  { num: '02', title: 'On-Time, Every Time', body: 'Owned plant, in-house teams and rigorous scheduling mean deadlines are commitments, not estimates.' },
+  { num: '03', title: 'Everything Under One Roof', body: 'Civil, structural, PEB, piping and mechanical — one accountable partner instead of a chain of subcontractors.' },
+  { num: '04', title: 'Owned Equipment Fleet', body: 'Cranes, batching plants and testing lab in-house — no third-party availability risk on your critical path.' },
+  { num: '05', title: 'ISO 9001:2015 & CRISIL SME 3', body: 'Certified quality management and independently rated financial strength.' },
+  { num: '06', title: '70% Repeat Clients', body: 'GNFC, Pidilite, Thermax and Birla Cellulose keep coming back — the strongest endorsement in this industry.' },
 ]
 
-const differentiators = [
-  { value: stats.yearsExperience, suffix: '+', label: 'Years of Experience' },
-  { value: stats.accidents, suffix: '', label: 'Accidents Recorded' },
-  { value: stats.repeatClientPct, suffix: '%', label: 'Repeat Client Ratio' },
-  { value: stats.projects, suffix: '+', label: 'Major Projects Completed' },
+const compareRows = [
+  { label: 'Safety record', us: 'Zero accidents, 30+ years', them: 'Incidents tolerated as "normal"' },
+  { label: 'Schedule reliability', us: 'Deadline is contractual', them: 'Slippage passed to client' },
+  { label: 'Scope coverage', us: 'Turnkey EPC in-house', them: 'Layers of subcontractors' },
+  { label: 'Equipment', us: 'Owned fleet & testing lab', them: 'Rented, availability risk' },
+  { label: 'Quality systems', us: 'ISO 9001:2015 certified', them: 'Informal QA' },
+]
+
+const testimonials = [
+  { quote: 'BD Buildcon delivered our plant expansion ahead of schedule with zero safety incidents. Their coordination between civil and mechanical teams was seamless.', name: 'Project Head', role: 'Chemical Manufacturing Client' },
+  { quote: 'What sets them apart is ownership. One point of contact, one accountable team — from earthwork to commissioning.', name: 'Plant Director', role: 'Fertiliser Sector Client' },
+  { quote: 'We have engaged BD Buildcon on four consecutive projects. Their quality documentation and testing discipline meet our corporate audit standards every time.', name: 'Engineering Manager', role: 'Adhesives Sector Client' },
 ]
 
 export default function WhyUsPage() {
-  const [active, setActive] = useState(0)
-  const reason = reasons[active]
-
   return (
     <>
       <PageTitleBand
-        title="Why BD Buildcon?"
+        title="Why BD Buildcon"
         breadcrumbs={[{ label: 'Why Us' }]}
-        description="The BD Buildcon team has 30+ years of experience and a proven track record, ensuring projects are completed in a timely, quality and professional manner."
+        description="What separates a dependable EPC partner from a contractor — and why 70% of our clients come back."
       />
 
-      {/* ── Interactive Reasons ── */}
-      <section className="section-pad bg-white" aria-label="Why choose BD Buildcon">
-        <div className="container-max">
-          {/* Tab navigation */}
-          <div className="overflow-x-auto scrollbar-none -mx-4 px-4 mb-10">
-            <div className="flex gap-0 border-b border-hairline min-w-max">
-              {reasons.map((r, i) => (
-                <button
-                  key={r.id}
-                  onClick={() => setActive(i)}
-                  className={`relative pb-4 px-5 font-body text-label-md uppercase tracking-wider whitespace-nowrap transition-colors duration-200 ${
-                    active === i ? 'text-teal' : 'text-body hover:text-ink'
-                  }`}
-                >
-                  <span className="font-display text-[10px] opacity-50 mr-1.5">{r.num}</span>
-                  {r.label}
-                  {active === i && (
-                    <motion.span
-                      layoutId="tab-underline"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-teal"
-                      transition={{ type: 'spring', stiffness: 500, damping: 40 }}
-                    />
-                  )}
-                </button>
-              ))}
-            </div>
+      {/* ── Differentiators ── */}
+      <section aria-label="Differentiators" className="py-[96px] bg-white">
+        <div className="max-w-container mx-auto px-gutter">
+          <div className="text-center mb-[56px]">
+            <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-ink mb-[16px]">Six Reasons Clients Return</h2>
+            <div className="w-[56px] h-[3px] bg-teal rounded-full mx-auto" />
           </div>
-
-          {/* Animated content panel */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.32, ease: 'easeOut' }}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center"
-            >
-              {/* Image */}
-              <div className="relative aspect-[4/3] rounded-card overflow-hidden shadow-card group">
-                <Image
-                  src={reason.image}
-                  alt={reason.imageAlt}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                {/* Label badge */}
-                <div className="absolute top-5 left-5 flex items-center gap-2 bg-black/40 backdrop-blur-md border border-white/10 rounded-full px-4 py-1.5">
-                  <span className="font-display font-bold text-teal text-sm">{reason.num}</span>
-                  <span className="font-body text-white/80 text-xs uppercase tracking-wider">{reason.label}</span>
-                </div>
-                {/* Progress dots */}
-                <div className="absolute bottom-5 left-0 right-0 flex justify-center gap-2">
-                  {reasons.map((_, i) => (
-                    <button
-                      key={i}
-                      onClick={() => setActive(i)}
-                      className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                        i === active ? 'bg-teal w-4' : 'bg-white/40 hover:bg-white/70'
-                      }`}
-                      aria-label={`Go to ${reasons[i].label}`}
-                    />
-                  ))}
-                </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
+            {reasons.map((r, i) => (
+              <div key={i} className="border border-hairline rounded-card p-[32px] flex flex-col gap-[14px] transition-all duration-200 hover:border-teal/40 hover:shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
+                <span className="font-display font-[800] text-[15px] text-teal tracking-[0.08em]">{r.num}</span>
+                <h3 className="font-display font-bold text-[20px] text-ink m-0">{r.title}</h3>
+                <p className="text-[15px] leading-[1.65] text-body m-0">{r.body}</p>
               </div>
-
-              {/* Text */}
-              <div className="relative">
-                {/* Giant faded number */}
-                <span
-                  className="absolute -top-8 -left-4 font-display font-black text-[9rem] leading-none text-teal/[0.06] select-none pointer-events-none"
-                  aria-hidden="true"
-                >
-                  {reason.num}
-                </span>
-
-                <span className="font-body text-label-md text-teal uppercase tracking-widest block mb-4 relative">
-                  {reason.label}
-                </span>
-                <h2 className="font-display text-headline-lg text-ink leading-snug mb-5 relative">{reason.heading}</h2>
-                <p className="font-body text-body-lg text-body leading-relaxed mb-8 relative">{reason.body}</p>
-
-                {/* Bullet points */}
-                <ul className="space-y-3 mb-8 relative">
-                  {reason.bullets.map((b) => (
-                    <li key={b} className="flex items-start gap-3">
-                      <span className="mt-0.5 w-5 h-5 rounded-full bg-teal/10 flex items-center justify-center shrink-0">
-                        <svg
-                          className="w-3 h-3 text-teal"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="3"
-                          aria-hidden="true"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </span>
-                      <span className="font-body text-body-md text-ink">{b}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Prev / Next nav */}
-                <div className="flex items-center gap-3 relative">
-                  <button
-                    onClick={() => setActive((a) => Math.max(0, a - 1))}
-                    disabled={active === 0}
-                    className="w-10 h-10 rounded-full border border-hairline flex items-center justify-center text-body hover:border-teal hover:text-teal transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                    aria-label="Previous"
-                  >
-                    <svg
-                      className="w-4 h-4"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      aria-hidden="true"
-                    >
-                      <path d="M19 12H5M12 5l-7 7 7 7" />
-                    </svg>
-                  </button>
-                  <button
-                    onClick={() => setActive((a) => Math.min(reasons.length - 1, a + 1))}
-                    disabled={active === reasons.length - 1}
-                    className="w-10 h-10 rounded-full border border-hairline flex items-center justify-center text-body hover:border-teal hover:text-teal transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
-                    aria-label="Next"
-                  >
-                    <svg
-                      className="w-4 h-4"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      aria-hidden="true"
-                    >
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                  <span className="font-body text-label-md text-body ml-2">
-                    {active + 1} / {reasons.length}
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ── Stats Band ── */}
-      <section className="relative section-pad bg-teal text-white overflow-hidden" aria-label="Key differentiators">
-        {/* Subtle grid pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.06] pointer-events-none"
-          style={{
-            backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
-            backgroundSize: '32px 32px',
-          }}
-          aria-hidden="true"
-        />
-        <div className="container-max relative z-10">
-          <SlideIn from="bottom">
-            <SectionHeading
-              title="By the Numbers"
-              subtitle="Our track record speaks for itself."
-              className="[&_h2]:text-white [&_p]:text-white/70"
-            />
-          </SlideIn>
-          <StaggerReveal className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center" direction="up" stagger={0.12}>
-            {differentiators.map((d) => (
-              <div key={d.label} className="relative group">
-                <div className="font-display font-extrabold text-display-lg text-white leading-none mb-3 tabular-nums">
-                  <CountUp target={d.value} suffix={d.suffix} />
-                </div>
-                <div className="font-body text-label-md uppercase tracking-wider text-white/70">{d.label}</div>
-                <div className="mt-4 mx-auto w-8 h-px bg-white/20 group-hover:w-16 group-hover:bg-white/50 transition-all duration-300" />
+      {/* ── Comparison ── */}
+      <section aria-label="Comparison" className="bg-dark-bg py-[96px]">
+        <div className="max-w-[980px] mx-auto px-gutter">
+          <div className="text-center mb-[56px]">
+            <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-white mb-[16px]">The BD Buildcon Standard</h2>
+            <div className="w-[56px] h-[3px] bg-teal rounded-full mx-auto" />
+          </div>
+          
+          <div className="flex flex-col gap-[2px] rounded-card overflow-hidden">
+            <div className="grid grid-cols-[1.4fr_1fr_1fr] bg-white/5 p-[16px_28px]">
+              <span className="text-[12px] font-semibold uppercase tracking-[0.1em] text-white/50">Criteria</span>
+              <span className="text-[12px] font-semibold uppercase tracking-[0.1em] text-[#5BD6E2]">BD Buildcon</span>
+              <span className="text-[12px] font-semibold uppercase tracking-[0.1em] text-white/50">Typical Contractor</span>
+            </div>
+            
+            {compareRows.map((row, i) => (
+              <div key={i} className="grid grid-cols-[1.4fr_1fr_1fr] bg-white/[0.03] p-[18px_28px] items-center">
+                <span className="text-[15px] font-semibold text-white">{row.label}</span>
+                <span className="text-[14.5px] text-[#5BD6E2]">{row.us}</span>
+                <span className="text-[14.5px] text-white/50">{row.them}</span>
               </div>
             ))}
-          </StaggerReveal>
-
-          {/* Certifications */}
-          <StaggerReveal className="mt-14 flex flex-wrap justify-center gap-4" direction="up" stagger={0.1} delay={0.2}>
-            {['ISO 9001:2015', 'CRISIL SME 3 Rated', 'Zero Accidents Since 1995'].map((badge) => (
-              <div
-                key={badge}
-                className="flex items-center gap-2 bg-white/10 border border-white/10 rounded-full px-5 py-2.5 backdrop-blur-sm hover:bg-white/20 transition-colors"
-              >
-                <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span className="font-body text-label-md text-white uppercase tracking-wider">{badge}</span>
-              </div>
-            ))}
-          </StaggerReveal>
+          </div>
         </div>
       </section>
 
       {/* ── Testimonials ── */}
-      <section className="section-pad bg-surface" aria-label="Client testimonials">
-        <div className="container-max">
-          <SlideIn from="bottom">
-            <SectionHeading
-              title="What Our Clients Say"
-              subtitle="Trusted by leading names across chemical, pharma, petroleum and industrial sectors."
-            />
-          </SlideIn>
-          <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" direction="up" stagger={0.14}>
-            {testimonials.map((t) => (
-              <TestimonialCard key={t.id} testimonial={t} />
+      <section aria-label="Testimonials" className="bg-surface py-[96px]">
+        <div className="max-w-container mx-auto px-gutter">
+          <div className="text-center mb-[56px]">
+            <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-ink mb-[16px]">What Clients Say</h2>
+            <div className="w-[56px] h-[3px] bg-teal rounded-full mx-auto" />
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
+            {testimonials.map((t, i) => (
+              <figure key={i} className="bg-white border border-hairline rounded-card p-[32px] m-0 flex flex-col gap-[20px]">
+                <svg width="28" height="20" viewBox="0 0 28 20" fill="#16A8B8" className="opacity-[0.35]" aria-hidden="true">
+                  <path d="M0 20V12.4C0 5.9 3.6 1.6 10 0l1.6 3.2C7.4 4.6 5.4 7 5.2 10H11v10H0zm17 0V12.4C17 5.9 20.6 1.6 27 0l1 3.2c-4.2 1.4-6.2 3.8-6.4 6.8H27v10H17z" />
+                </svg>
+                <blockquote className="text-[15.5px] leading-[1.7] text-body m-0 flex-1">{t.quote}</blockquote>
+                <figcaption>
+                  <p className="font-display font-bold text-[15px] text-ink m-0">{t.name}</p>
+                  <p className="text-[13px] text-body mt-[3px] mb-0">{t.role}</p>
+                </figcaption>
+              </figure>
             ))}
-          </StaggerReveal>
+          </div>
         </div>
       </section>
 

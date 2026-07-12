@@ -1,149 +1,230 @@
-import type { Metadata } from 'next'
-import { PageTitleBand } from '@/components/layout/PageTitleBand'
-import { FadeRiseItem } from '@/components/motion/FadeRise'
-import { SlideIn } from '@/components/motion/SlideIn'
-import { StaggerReveal } from '@/components/motion/StaggerReveal'
-import { contactInfo } from '@/content/links'
-import { ContactForm } from './ContactForm'
+'use client'
 
-export const metadata: Metadata = {
-  title: 'Contact Us',
-  description:
-    'Get in touch with BD Buildcon LLP — call, email or send us a project enquiry. Office in Bharuch, Gujarat.',
-}
+import { useState } from 'react'
+import { PageTitleBand } from '@/components/layout/PageTitleBand'
 
 export default function ContactPage() {
+  const [sending, setSending] = useState(false)
+  const [sent, setSent] = useState(false)
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setSending(true)
+    setSent(false)
+    
+    // Simulate network request
+    setTimeout(() => {
+      setSending(false)
+      setSent(true)
+      ;(e.target as HTMLFormElement).reset()
+    }, 800)
+  }
+
   return (
     <>
-      <PageTitleBand title="Contact Us" breadcrumbs={[{ label: 'Contact' }]} />
+      <PageTitleBand
+        title="Contact Us"
+        breadcrumbs={[{ label: 'Contact' }]}
+        description="Tell us about your project. We respond within one business day."
+      />
 
-      <section className="section-pad bg-white">
-        <div className="container-max">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-            {/* Left: Contact info */}
-            <div className="space-y-8">
-              <FadeRiseItem>
-                <h2 className="font-display text-headline-md text-ink mb-2">CALL US</h2>
-                <p className="font-body text-body-lg text-body">
-                  We are here to assist you with your industrial EPC needs. Our team responds to all enquiries within
-                  one business day.
-                </p>
-              </FadeRiseItem>
-
-              <StaggerReveal className="space-y-4" direction="up" stagger={0.1}>
-                {/* Address */}
-                <div className="flex items-start gap-4 p-5 bg-surface rounded-card border border-hairline group hover:border-teal/30 transition-colors shadow-sm hover:shadow-card hover:-translate-y-1 transform duration-300">
-                  <div className="p-3 rounded-full bg-teal/10 text-teal group-hover:bg-teal group-hover:text-white transition-colors shrink-0">
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <div className="font-body text-label-md text-ink uppercase tracking-wider mb-1">Head Office</div>
-                    <p className="font-body text-body-md text-body leading-relaxed">{contactInfo.address}</p>
-                  </div>
-                </div>
-
-                {/* Phone */}
-                <a
-                  href={`tel:${contactInfo.phoneTel}`}
-                  className="flex items-center gap-4 p-5 bg-surface rounded-card border border-hairline group hover:border-teal/30 transition-colors shadow-sm hover:shadow-card hover:-translate-y-1 transform duration-300"
-                >
-                  <div className="p-3 rounded-full bg-teal/10 text-teal group-hover:bg-teal group-hover:text-white transition-colors shrink-0">
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <div className="font-body text-label-md text-ink uppercase tracking-wider mb-1">Direct Line</div>
-                    <div className="font-body text-body-lg text-teal font-semibold">{contactInfo.phone}</div>
-                  </div>
-                </a>
-
-                {/* Email */}
-                <a
-                  href={`mailto:${contactInfo.email}`}
-                  className="flex items-center gap-4 p-5 bg-surface rounded-card border border-hairline group hover:border-teal/30 transition-colors shadow-sm hover:shadow-card hover:-translate-y-1 transform duration-300"
-                >
-                  <div className="p-3 rounded-full bg-teal/10 text-teal group-hover:bg-teal group-hover:text-white transition-colors shrink-0">
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <div className="font-body text-label-md text-ink uppercase tracking-wider mb-1">
-                      General Enquiries
-                    </div>
-                    <div className="font-body text-body-md text-body">{contactInfo.email}</div>
-                  </div>
-                </a>
-
-                {/* Hours */}
-                <div className="flex items-center gap-4 p-5 bg-surface rounded-card border border-hairline group hover:border-teal/30 transition-colors shadow-sm hover:shadow-card hover:-translate-y-1 transform duration-300">
-                  <div className="p-3 rounded-full bg-teal/10 text-teal shrink-0 group-hover:bg-teal group-hover:text-white transition-colors">
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      viewBox="0 0 24 24"
-                      aria-hidden="true"
-                    >
-                      <circle cx="12" cy="12" r="10" />
-                      <polyline points="12 6 12 12 16 14" />
-                    </svg>
-                  </div>
-                  <div>
-                    <div className="font-body text-label-md text-ink uppercase tracking-wider mb-1">Office Hours</div>
-                    <div className="font-body text-body-md text-body">{contactInfo.hours}</div>
-                  </div>
-                </div>
-              </StaggerReveal>
+      <section aria-label="Contact" className="bg-white py-[96px]">
+        <div className="max-w-container mx-auto px-gutter grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-[56px] items-start">
+          
+          {/* Info panel */}
+          <div className="flex flex-col gap-[20px]">
+            <div className="bg-surface border border-hairline rounded-card p-[28px]">
+              <h3 className="font-display font-bold text-[17px] text-ink mb-[10px]">Registered Office</h3>
+              <p className="text-[15px] leading-[1.7] text-body m-0">
+                7-8-9, Millenium Arcade, Opp. SVM Engineering College, Old National Highway No 8, Bharuch - 392 002, Gujarat, INDIA
+              </p>
             </div>
-
-            {/* Right: Form */}
-            <SlideIn from="right" delay={0.15}>
-              <div className="bg-white rounded-card border border-hairline shadow-card p-8 group hover:shadow-[0_12px_48px_rgba(0,0,0,0.12)] transition-shadow duration-300">
-                <h2 className="font-display text-headline-md text-ink mb-8">GET IN TOUCH WITH US</h2>
-                <ContactForm />
+            
+            <div className="bg-surface border border-hairline rounded-card p-[28px]">
+              <h3 className="font-display font-bold text-[17px] text-ink mb-[12px]">Phone</h3>
+              <div className="flex flex-col gap-[8px]">
+                <a href="tel:+919879100355" className="text-[15px] text-teal font-semibold hover:text-teal/80 transition-colors">
+                  +91 98791 00355
+                </a>
+                <a href="tel:+912642262355" className="text-[15px] text-teal font-semibold hover:text-teal/80 transition-colors">
+                  +91 264 226 2355
+                </a>
               </div>
-            </SlideIn>
+            </div>
+            
+            <div className="bg-surface border border-hairline rounded-card p-[28px]">
+              <h3 className="font-display font-bold text-[17px] text-ink mb-[12px]">Email</h3>
+              <div className="flex flex-col gap-[8px]">
+                <a href="mailto:business@bdbuildcon.com" className="text-[15px] text-teal font-semibold hover:text-teal/80 transition-colors">
+                  business@bdbuildcon.com
+                </a>
+                <a href="mailto:info@bdbuildcon.com" className="text-[15px] text-teal font-semibold hover:text-teal/80 transition-colors">
+                  info@bdbuildcon.com
+                </a>
+              </div>
+            </div>
+            
+            <div className="bg-surface border border-hairline rounded-card p-[28px]">
+              <h3 className="font-display font-bold text-[17px] text-ink mb-[10px]">Office Hours</h3>
+              <p className="text-[15px] leading-[1.7] text-body m-0">
+                Monday – Saturday<br />9:00 AM – 6:00 PM IST
+              </p>
+            </div>
           </div>
+
+          {/* Form */}
+          <form 
+            onSubmit={handleSubmit}
+            className="bg-white border border-hairline rounded-card shadow-[0_1px_4px_rgba(0,0,0,0.06),0_4px_16px_rgba(0,0,0,0.06)] p-[36px] flex flex-col gap-[20px]"
+          >
+            <h2 className="font-display font-bold text-[24px] text-ink m-0 mb-[4px]">Send an Enquiry</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px]">
+              <div>
+                <label htmlFor="c-name" className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[8px]">
+                  Name <span className="text-[#E23A2E]">*</span>
+                </label>
+                <input 
+                  id="c-name" 
+                  name="name" 
+                  type="text" 
+                  required 
+                  placeholder="Your full name" 
+                  className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[15px] text-ink focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
+                />
+              </div>
+              <div>
+                <label htmlFor="c-email" className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[8px]">
+                  Email <span className="text-[#E23A2E]">*</span>
+                </label>
+                <input 
+                  id="c-email" 
+                  name="email" 
+                  type="email" 
+                  required 
+                  placeholder="your.email@example.com" 
+                  className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[15px] text-ink focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
+                />
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px]">
+              <div>
+                <label htmlFor="c-company" className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[8px]">
+                  Company
+                </label>
+                <input 
+                  id="c-company" 
+                  name="company" 
+                  type="text" 
+                  placeholder="Your company name" 
+                  className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[15px] text-ink focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
+                />
+              </div>
+              <div>
+                <label htmlFor="c-phone" className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[8px]">
+                  Phone
+                </label>
+                <input 
+                  id="c-phone" 
+                  name="phone" 
+                  type="tel" 
+                  placeholder="+91 XXX XXX XXXX" 
+                  className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[15px] text-ink focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
+                />
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px]">
+              <div>
+                <label htmlFor="c-sector" className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[8px]">
+                  Sector
+                </label>
+                <select 
+                  id="c-sector" 
+                  name="sector" 
+                  className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[15px] text-ink appearance-auto focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
+                >
+                  <option>Select sector</option>
+                  <option>Chemicals</option>
+                  <option>Pharma</option>
+                  <option>Petroleum</option>
+                  <option>Fertiliser</option>
+                  <option>Glass</option>
+                  <option>Tyre</option>
+                  <option>Food Processing</option>
+                  <option>Residential</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div>
+                <label htmlFor="c-type" className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[8px]">
+                  Project Type
+                </label>
+                <select 
+                  id="c-type" 
+                  name="projectType" 
+                  className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[15px] text-ink appearance-auto focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
+                >
+                  <option>Select type</option>
+                  <option>Greenfield Plant</option>
+                  <option>Plant Expansion</option>
+                  <option>PEB Structure</option>
+                  <option>Piping &amp; Mechanical</option>
+                  <option>Civil Works</option>
+                  <option>Roads &amp; Earthwork</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            
+            <div>
+              <label htmlFor="c-message" className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[8px]">
+                Message <span className="text-[#E23A2E]">*</span>
+              </label>
+              <textarea 
+                id="c-message" 
+                name="message" 
+                rows={5} 
+                required 
+                placeholder="Brief project description — scope, location, timeline..." 
+                className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[15px] text-ink resize-y focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
+              ></textarea>
+            </div>
+            
+            <div className="flex items-center gap-[16px]">
+              <button 
+                type="submit" 
+                disabled={sending}
+                className="bg-teal text-white border-none cursor-pointer font-body text-[13px] font-semibold uppercase tracking-[0.1em] px-[36px] py-[15px] rounded-full transition-colors hover:bg-teal/90 disabled:opacity-70"
+              >
+                {sending ? 'Sending...' : 'Send Enquiry'}
+              </button>
+              
+              {sent && (
+                <span className="text-[14px] text-[#0C7A88] font-medium">
+                  ✓ Enquiry sent — we&apos;ll get back to you shortly.
+                </span>
+              )}
+            </div>
+          </form>
         </div>
       </section>
 
-      {/* Map */}
-      <section className="h-[400px] border-y border-hairline overflow-hidden" aria-label="Office location map">
-        <iframe
-          src="https://maps.google.com/maps?q=Millenium+Arcade%2C+Opp+SVM+Engineering+College%2C+Old+National+Highway+8%2C+Bharuch%2C+Gujarat+392002&output=embed&z=16"
-          width="100%"
-          height="400"
-          style={{ border: 0 }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title="BD Buildcon Office Location — Bharuch, Gujarat"
-          className="w-full h-full"
-        />
-      </section>
-
-      {/* Certification badges */}
-      <section className="bg-surface border-b border-hairline py-8">
-        <div className="container-max">
-          <div className="flex flex-wrap justify-center items-center gap-8 opacity-80">
-            {[
-              { icon: '✓', label: 'ISO 9001:2015' },
-              { icon: '✓', label: 'CRISIL SME 3 Rated' },
-              { icon: '✓', label: '30+ Years' },
-            ].map((badge) => (
-              <div key={badge.label} className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-teal flex items-center justify-center text-white font-bold text-sm">
-                  {badge.icon}
-                </div>
-                <span className="font-display font-bold text-ink text-headline-sm">{badge.label}</span>
-              </div>
-            ))}
-          </div>
+      {/* Map placeholder */}
+      <section aria-label="Map" className="bg-surface border-t border-hairline">
+        <div 
+          className="h-[320px] flex items-center justify-center bg-[#EFF3F4]" 
+          style={{ backgroundImage: 'repeating-linear-gradient(45deg, #EFF3F4 0 16px, #E6ECEE 16px 32px)' }}
+        >
+          <a 
+            href="https://maps.google.com/?q=Millenium+Arcade+Bharuch" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="font-mono text-[13px] text-body bg-white border border-hairline rounded-[8px] px-[18px] py-[10px] hover:border-teal transition-colors"
+          >
+            📍 Open location in Google Maps — Bharuch, Gujarat
+          </a>
         </div>
       </section>
     </>

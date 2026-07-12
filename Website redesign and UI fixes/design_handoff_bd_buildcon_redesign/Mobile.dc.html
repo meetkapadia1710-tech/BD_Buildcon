@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Mobile — BD Buildcon LLP</title>
+  <meta name="design_doc_mode" content="canvas">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; background: #E9EDEE; font-family: 'Inter', sans-serif; color: #2E353B; }
+    a { text-decoration: none; color: #16A8B8; }
+    a:hover { color: #0E8C9B; }
+    * { box-sizing: border-box; }
+  </style>
+</helmet>
+
+<div style="display: flex; gap: 64px; align-items: flex-start; padding: 64px; flex-wrap: wrap;">
+
+  <!-- Mobile Home -->
+  <div style="display: flex; flex-direction: column; gap: 20px;">
+    <span style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6B7177;">Home — Mobile</span>
+    <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" title="" hint-size="393px,852px">
+      <div style="height: 100%; overflow-y: auto; background: #fff;">
+        <!-- mobile header -->
+        <div style="position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid #E5E7E8; display: flex; align-items: center; justify-content: space-between; padding: 14px 18px;">
+          <span style="display: flex; align-items: center; gap: 8px;">
+            <span style="display: flex; gap: 2.5px; align-items: flex-end;">
+              <span style="width: 4px; height: 19px; border-radius: 2px; background: #009FDF; display: block;"></span>
+              <span style="width: 4px; height: 19px; border-radius: 2px; background: #FDB913; display: block;"></span>
+              <span style="width: 4px; height: 19px; border-radius: 2px; background: #E32322; display: block;"></span>
+            </span>
+            <span style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 800; font-size: 15px; color: #005579;">BD BUILDCON <span style="font-weight: 400; font-size: 10px;">LLP</span></span>
+          </span>
+          <span aria-label="Open menu" style="width: 44px; height: 44px; display: flex; flex-direction: column; gap: 5px; align-items: center; justify-content: center;">
+            <span style="width: 20px; height: 2px; background: #2E353B; border-radius: 2px; display: block;"></span>
+            <span style="width: 20px; height: 2px; background: #2E353B; border-radius: 2px; display: block;"></span>
+            <span style="width: 14px; height: 2px; background: #2E353B; border-radius: 2px; display: block; align-self: flex-start; margin-left: 12px;"></span>
+          </span>
+        </div>
+        <!-- hero -->
+        <div style="position: relative; min-height: 480px; display: flex; align-items: flex-end; background: #2a3137; overflow: hidden;">
+          <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&amp;w=1200&amp;auto=format&amp;fit=crop" alt="Industrial plant at twilight" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+          <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15,20,23,0.4), rgba(15,20,23,0.8));"></div>
+          <div style="position: relative; padding: 32px 22px 40px;">
+            <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 999px; padding: 6px 14px; color: rgba(255,255,255,0.85); font-size: 10.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 20px;">
+              <span style="width: 6px; height: 6px; background: #16A8B8; border-radius: 50%; display: block;"></span>
+              ISO 9001:2015 · CRISIL SME 3
+            </div>
+            <h1 style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 800; font-size: 32px; line-height: 1.12; letter-spacing: -0.01em; color: #fff; margin: 0 0 16px;">All our projects, completed on deadline — <span style="color: #5BD6E2;">with zero accidents.</span></h1>
+            <p style="font-size: 14.5px; line-height: 1.65; color: rgba(255,255,255,0.72); margin: 0 0 24px;">30+ years · ₹200+ Cr delivered · Turnkey industrial EPC.</p>
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <span style="background: #16A8B8; color: #fff; text-align: center; font-size: 12.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 15px 0; border-radius: 999px; display: block;">Start your project</span>
+              <span style="border: 2px solid rgba(255,255,255,0.9); color: #fff; text-align: center; font-size: 12.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 13px 0; border-radius: 999px; display: block;">See the work</span>
+            </div>
+          </div>
+        </div>
+        <!-- services -->
+        <div style="padding: 48px 22px;">
+          <h2 style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 700; font-size: 26px; color: #2E353B; margin: 0 0 6px;">What We Build</h2>
+          <div style="width: 44px; height: 3px; background: #16A8B8; border-radius: 999px; margin-bottom: 24px;"></div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <sc-for list="{{ services }}" as="s" hint-placeholder-count="4">
+              <div style="position: relative; aspect-ratio: 4/5; border-radius: 10px; overflow: hidden; background: #2a3137;">
+                <img src="{{ s.image }}" alt="{{ s.title }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+                <span style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.82), transparent 60%);"></span>
+                <span style="position: absolute; bottom: 0; left: 0; right: 0; padding: 14px; font-family: 'Hanken Grotesk', sans-serif; font-weight: 700; font-size: 15px; color: #fff;">{{ s.title }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <!-- stats -->
+        <div style="background: #16A8B8; padding: 44px 22px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 28px; text-align: center;">
+            <sc-for list="{{ stats }}" as="st" hint-placeholder-count="4">
+              <div>
+                <div style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 800; font-size: 40px; line-height: 1; color: #fff; margin-bottom: 8px;">{{ st.value }}</div>
+                <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.75);">{{ st.label }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <!-- footer -->
+        <div style="background: #1F2124; padding: 40px 22px; border-top: 3px solid #16A8B8;">
+          <p style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 700; font-size: 16px; color: #fff; margin: 0 0 12px;">BD Buildcon LLP</p>
+          <p style="font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.65); margin: 0 0 16px;">Millenium Arcade, Old NH-8, Bharuch, Gujarat<br>+91 98791 00355 · business@bdbuildcon.com</p>
+          <p style="font-size: 11.5px; color: rgba(255,255,255,0.5); margin: 0;">© 2026 BD Buildcon LLP</p>
+        </div>
+      </div>
+    </x-import>
+  </div>
+
+  <!-- Mobile Contact -->
+  <div style="display: flex; flex-direction: column; gap: 20px;">
+    <span style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #6B7177;">Contact — Mobile</span>
+    <x-import component-from-global-scope="IOSDevice" from="./ios-frame.jsx" title="" hint-size="393px,852px">
+      <div style="height: 100%; overflow-y: auto; background: #fff;">
+        <div style="position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,0.96); backdrop-filter: blur(8px); border-bottom: 1px solid #E5E7E8; display: flex; align-items: center; justify-content: space-between; padding: 14px 18px;">
+          <span style="display: flex; align-items: center; gap: 8px;">
+            <span style="display: flex; gap: 2.5px; align-items: flex-end;">
+              <span style="width: 4px; height: 19px; border-radius: 2px; background: #009FDF; display: block;"></span>
+              <span style="width: 4px; height: 19px; border-radius: 2px; background: #FDB913; display: block;"></span>
+              <span style="width: 4px; height: 19px; border-radius: 2px; background: #E32322; display: block;"></span>
+            </span>
+            <span style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 800; font-size: 15px; color: #005579;">BD BUILDCON <span style="font-weight: 400; font-size: 10px;">LLP</span></span>
+          </span>
+          <span aria-label="Open menu" style="width: 44px; height: 44px; display: flex; flex-direction: column; gap: 5px; align-items: center; justify-content: center;">
+            <span style="width: 20px; height: 2px; background: #2E353B; border-radius: 2px; display: block;"></span>
+            <span style="width: 20px; height: 2px; background: #2E353B; border-radius: 2px; display: block;"></span>
+            <span style="width: 14px; height: 2px; background: #2E353B; border-radius: 2px; display: block; align-self: flex-start; margin-left: 12px;"></span>
+          </span>
+        </div>
+        <div style="background: #2a3137; padding: 36px 22px;">
+          <h1 style="font-family: 'Hanken Grotesk', sans-serif; font-weight: 800; font-size: 30px; color: #fff; margin: 0 0 10px;">Contact Us</h1>
+          <p style="font-size: 14.5px; line-height: 1.65; color: rgba(255,255,255,0.7); margin: 0;">Tell us about your project. We respond within one business day.</p>
+        </div>
+        <div style="padding: 28px 22px; display: flex; flex-direction: column; gap: 16px;">
+          <div>
+            <label style="display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #2E353B; margin-bottom: 7px;">Name <span style="color: #E23A2E;">*</span></label>
+            <div style="background: #F6F8F8; border: 1px solid #E5E7E8; border-radius: 8px; padding: 14px 16px; font-size: 14px; color: #9AA1A7;">Your full name</div>
+          </div>
+          <div>
+            <label style="display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #2E353B; margin-bottom: 7px;">Email <span style="color: #E23A2E;">*</span></label>
+            <div style="background: #F6F8F8; border: 1px solid #E5E7E8; border-radius: 8px; padding: 14px 16px; font-size: 14px; color: #9AA1A7;">your.email@example.com</div>
+          </div>
+          <div>
+            <label style="display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #2E353B; margin-bottom: 7px;">Phone</label>
+            <div style="background: #F6F8F8; border: 1px solid #E5E7E8; border-radius: 8px; padding: 14px 16px; font-size: 14px; color: #9AA1A7;">+91 XXX XXX XXXX</div>
+          </div>
+          <div>
+            <label style="display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #2E353B; margin-bottom: 7px;">Message <span style="color: #E23A2E;">*</span></label>
+            <div style="background: #F6F8F8; border: 1px solid #E5E7E8; border-radius: 8px; padding: 14px 16px; font-size: 14px; color: #9AA1A7; min-height: 96px;">Brief project description...</div>
+          </div>
+          <span style="background: #16A8B8; color: #fff; text-align: center; font-size: 12.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 16px 0; border-radius: 999px; display: block; margin-top: 6px;">Send Enquiry</span>
+          <div style="background: #F6F8F8; border: 1px solid #E5E7E8; border-radius: 10px; padding: 18px; margin-top: 10px;">
+            <p style="font-size: 13px; line-height: 1.7; color: #6B7177; margin: 0;"><strong style="color: #2E353B;">Prefer to call?</strong><br>+91 98791 00355 · Mon–Sat, 9 AM – 6 PM IST</p>
+          </div>
+        </div>
+      </div>
+    </x-import>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      services: [
+        { title: 'Civil & Structural', image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600&auto=format&fit=crop' },
+        { title: 'PEB Structures', image: 'https://images.unsplash.com/photo-1565008447742-97f6f38c985c?q=80&w=600&auto=format&fit=crop' },
+        { title: 'Piping & Mechanical', image: 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?q=80&w=600&auto=format&fit=crop' },
+        { title: 'Piling & Roads', image: 'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?q=80&w=600&auto=format&fit=crop' },
+      ],
+      stats: [
+        { value: '50+', label: 'Projects' },
+        { value: '30+', label: 'Years' },
+        { value: '0', label: 'Accidents' },
+        { value: '70%', label: 'Repeat Clients' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>

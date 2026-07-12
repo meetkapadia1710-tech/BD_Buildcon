@@ -1,35 +1,21 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 import { contactInfo, socialLinks } from '@/content/links'
-import { StaggerReveal } from '@/components/motion/StaggerReveal'
-import { useLenis } from '@/components/motion/LenisProvider'
 
 export function Footer() {
-  const { scrollTo } = useLenis()
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
 
   return (
-    <footer className="bg-footer text-white relative overflow-hidden">
-      {/* Top teal border */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-teal-deep via-teal to-teal-deep" />
-
-      {/* Subtle background texture */}
-      <div
-        className="absolute inset-0 opacity-[0.02]"
-        style={{
-          backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
-          backgroundSize: '32px 32px',
-        }}
-        aria-hidden="true"
-      />
-
+    <footer className="bg-footer text-white relative overflow-hidden border-t-[3px] border-teal">
       <div className="relative z-10 max-w-container mx-auto px-gutter py-20 lg:py-24">
-        <StaggerReveal className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8" stagger={0.15}>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8">
           {/* About — 5 cols */}
           <div className="md:col-span-5 lg:pr-12">
             <h3 className="font-display text-headline-sm text-white mb-2">About Us</h3>
-            <span className="block w-12 h-[3px] rounded-full bg-teal mb-6" />
+            <span className="block w-[44px] h-[3px] rounded-full bg-teal mb-6" />
             <p className="font-body text-body-md text-white/70 leading-relaxed max-w-md">
               BD Buildcon LLP (Formerly known as Bhumi Developers) has professional human resource commensurate with the
               required expertise and state-of-the-art construction quality testing equipment required for successful
@@ -56,21 +42,18 @@ export function Footer() {
               ]
                 .filter((social) => social.href)
                 .map((social) => (
-                  <motion.a
+                  <a
                     key={social.label}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:text-white"
-                    whileHover={{ scale: 1.15, rotate: 5, backgroundColor: '#16A8B8', borderColor: '#16A8B8' }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                    className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-teal hover:border-teal transition-all duration-300"
                   >
                     <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
                       <path d={social.icon} />
                     </svg>
-                  </motion.a>
+                  </a>
                 ))}
             </div>
           </div>
@@ -78,7 +61,7 @@ export function Footer() {
           {/* Company Links — 3 cols */}
           <div className="md:col-span-3">
             <h3 className="font-display text-headline-sm text-white mb-2">Company Links</h3>
-            <span className="block w-12 h-[3px] rounded-full bg-teal mb-6" />
+            <span className="block w-[44px] h-[3px] rounded-full bg-teal mb-6" />
             <nav className="flex flex-col gap-3">
               {[
                 { label: 'Home', href: '/' },
@@ -92,7 +75,7 @@ export function Footer() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="font-body text-body-md text-white/70 hover:text-white transition-colors duration-200 w-fit link-underline"
+                  className="font-body text-body-md text-white/70 hover:text-white transition-colors duration-200 w-fit hover:underline underline-offset-4 decoration-teal"
                 >
                   {link.label}
                 </Link>
@@ -103,7 +86,7 @@ export function Footer() {
           {/* Contact Info — 4 cols */}
           <div className="md:col-span-4">
             <h3 className="font-display text-headline-sm text-white mb-2">Contact Info</h3>
-            <span className="block w-12 h-[3px] rounded-full bg-teal mb-6" />
+            <span className="block w-[44px] h-[3px] rounded-full bg-teal mb-6" />
             <div className="flex flex-col gap-5">
               <div className="flex gap-4 group">
                 <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-teal group-hover:text-white transition-colors text-teal">
@@ -139,7 +122,7 @@ export function Footer() {
               </a>
             </div>
           </div>
-        </StaggerReveal>
+        </div>
 
         {/* Bottom bar */}
         <div className="mt-20 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
@@ -147,26 +130,14 @@ export function Footer() {
             © {new Date().getFullYear()} BD Buildcon LLP. All rights reserved.
           </p>
           <button
-            onClick={() => scrollTo(0, { duration: 1.5 })}
+            onClick={scrollToTop}
             aria-label="Back to top"
-            className="group flex items-center gap-2 text-teal hover:text-white transition-colors font-body text-label-md uppercase tracking-widest"
+            className="group flex items-center gap-2 text-[#5BD6E2] hover:text-white transition-colors font-body text-[13px] uppercase tracking-[0.08em] font-semibold"
           >
             Back to top
-            <motion.div
-              className="w-6 h-6 rounded-full bg-teal/10 flex items-center justify-center group-hover:bg-teal"
-              whileHover={{ y: -3 }}
-            >
-              <svg
-                className="w-3 h-3 text-teal group-hover:text-white"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                aria-hidden="true"
-              >
-                <polyline points="18 15 12 9 6 15" />
-              </svg>
-            </motion.div>
+            <div className="flex items-center justify-center transition-transform group-hover:-translate-y-1">
+              ↑
+            </div>
           </button>
         </div>
       </div>
