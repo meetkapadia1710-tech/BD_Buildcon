@@ -290,4 +290,209 @@ export const projects: Project[] = [
     outcome:
       "Plant commissioned on schedule. Client cited BD Buildcon's project management capability and quality workmanship.",
   },
+  {
+    slug: 'acume-chemical',
+    name: 'Chemical plant civil works',
+    client: 'Acume Chemical',
+    sector: 'Chemicals',
+    location: 'Gujarat',
+    scope: 'Civil, Structural, Mechanical',
+    duration: '12 months',
+    year: '2024',
+    safetyRecord: 'Zero accidents',
+    image: '/brochurephotos/site photos/acume chemical/DocScanner Sep 9, 2025 5-45 PM_1(130).webp',
+    images: ['/brochurephotos/site photos/acume chemical/DocScanner Sep 9, 2025 5-45 PM_1(130).webp'],
+    excerpt:
+      'Chemical processing facility for Acume Chemical — civil, structural and mechanical package delivered to specification with a clean safety record.',
+    challenge:
+      'Building a chemical processing environment demanded precise foundations, chemical-resistant finishes and close coordination between civil and mechanical disciplines throughout the programme.',
+    whatWeBuilt:
+      'RCC equipment foundations, structural buildings, mechanical equipment erection, utilities and site infrastructure.',
+    outcome: 'Works completed on programme with zero safety incidents and quality cleared at handover.',
+  },
+  {
+    slug: 'agrotech',
+    name: 'Agro processing facility',
+    client: 'Agrotech',
+    sector: 'Food Processing',
+    location: 'Gujarat',
+    scope: 'Civil, Structural, PEB Structure',
+    duration: '12 months',
+    year: '2023',
+    safetyRecord: 'Zero accidents',
+    image: '/brochurephotos/site photos/agrotech/p2.webp',
+    images: ['/brochurephotos/site photos/agrotech/p2.webp'],
+    excerpt:
+      'Agro processing facility — civil foundations and PEB structural works delivered for a modern food and agro processing plant.',
+    challenge:
+      'Food and agro processing environments require hygienic finishes, large clear-span structures and careful sequencing to meet the client programme.',
+    whatWeBuilt:
+      'RCC foundations, PEB structural buildings, processing hall civil works, utilities and site infrastructure.',
+    outcome: 'Facility handed over on programme, ready for process equipment installation.',
+  },
+  {
+    slug: 'atg-tires',
+    name: 'Tyre manufacturing plant',
+    client: 'ATG Tires',
+    sector: 'Tyre',
+    location: 'Dahej, Gujarat',
+    scope: 'Civil, Structural, PEB Structure, Piping',
+    duration: '18 months',
+    year: '2022',
+    safetyRecord: 'Zero accidents',
+    image: '/brochurephotos/site photos/atg tires/15-big.webp',
+    images: ['/brochurephotos/site photos/atg tires/15-big.webp'],
+    excerpt:
+      'Off-highway tyre manufacturing plant — heavy civil, structural steel and PEB works for a large-scale tyre production facility.',
+    challenge:
+      'Tyre manufacturing demands heavy equipment foundations, large-span production halls and precise coordination of civil, structural and piping works across an extensive plot.',
+    whatWeBuilt:
+      'Mass earthwork, heavy RCC equipment foundations, structural steel and PEB production buildings, process piping and full site infrastructure.',
+    outcome: 'Civil and structural works cleared for equipment installation on schedule with zero safety incidents.',
+  },
+  {
+    slug: 'bostik',
+    name: 'Adhesives plant',
+    client: 'Bostik',
+    sector: 'Chemicals',
+    location: 'Gujarat',
+    scope: 'Civil, Mechanical, Piping, Structural Steel',
+    duration: '14 months',
+    year: '2021',
+    safetyRecord: 'Zero accidents',
+    image: '/brochurephotos/site photos/bostik/5-big.webp',
+    images: ['/brochurephotos/site photos/bostik/5-big.webp'],
+    excerpt:
+      'Adhesives manufacturing plant for Bostik — civil, mechanical and piping package delivered to international quality standards.',
+    challenge:
+      'Adhesives production requires precise process foundations, specialist piping and a high standard of quality control across all construction disciplines.',
+    whatWeBuilt:
+      'RCC equipment foundations, structural steel frame, process piping systems, mechanical equipment erection, utilities and site infrastructure.',
+    outcome: 'Works completed on programme and passed client quality inspection with zero safety incidents.',
+  },
+  {
+    slug: 'deepak-chemtech',
+    name: 'Chemtech plant',
+    client: 'Deepak Chemtech',
+    sector: 'Chemicals',
+    location: 'Gujarat',
+    scope: 'Civil, Mechanical, Piping, Structural Steel',
+    duration: '16 months',
+    year: '2024',
+    safetyRecord: 'Zero accidents',
+    image: '/brochurephotos/site photos/deepak chemtech/deepak_310739.webp',
+    images: ['/brochurephotos/site photos/deepak chemtech/deepak_310739.webp'],
+    excerpt:
+      'Chemical manufacturing facility for Deepak Chemtech — multi-discipline civil, mechanical and piping package for a modern process plant.',
+    challenge:
+      'Simultaneous execution of civil, structural, mechanical and piping works across multiple process areas within a demanding programme.',
+    whatWeBuilt:
+      'RCC equipment foundations, structural steel buildings, process piping systems, mechanical equipment erection, utilities and site infrastructure.',
+    outcome: 'Works handed over on programme with zero safety incidents and quality cleared at inspection.',
+  },
+  {
+    slug: 'deepak-nitrite',
+    name: 'Chemical plant',
+    client: 'Deepak Nitrite Ltd.',
+    sector: 'Chemicals',
+    location: 'Gujarat',
+    scope: 'Civil, Mechanical, Piping, Structural Steel',
+    duration: '18 months',
+    year: '2022',
+    safetyRecord: 'Zero accidents',
+    image: '/brochurephotos/site photos/deepak nitride/Deepak_Nitrite.webp',
+    images: ['/brochurephotos/site photos/deepak nitride/Deepak_Nitrite.webp'],
+    excerpt:
+      'Chemical processing plant for Deepak Nitrite — large-scale civil, mechanical and piping package delivered to exacting standards.',
+    challenge:
+      'A complex chemical processing environment required heavy equipment foundations, specialist piping and rigorous safety discipline across multiple process units.',
+    whatWeBuilt:
+      'Mass earthwork, RCC equipment foundations, structural steel frame, process piping, mechanical equipment erection, utilities and site infrastructure.',
+    outcome: 'Works handed over on programme with a zero-accident safety record and quality cleared at handover.',
+  },
+  {
+    slug: 'eurecat',
+    name: 'Catalyst facility',
+    client: 'Eurecat',
+    sector: 'Chemicals',
+    location: 'Gujarat',
+    scope: 'Civil, Mechanical, Piping',
+    duration: '12 months',
+    year: '2023',
+    safetyRecord: 'Zero accidents',
+    image: '/brochurephotos/site photos/eurecat/p-1.webp',
+    images: ['/brochurephotos/site photos/eurecat/p-1.webp'],
+    excerpt:
+      'Catalyst regeneration and processing facility for Eurecat — civil, mechanical and piping works for a specialist process plant.',
+    challenge:
+      'Catalyst processing demands precise equipment foundations, specialist piping and careful coordination of civil and mechanical works.',
+    whatWeBuilt:
+      'RCC equipment foundations, structural works, process piping, mechanical equipment erection and site utilities.',
+    outcome: 'Facility handed over on programme with zero safety incidents.',
+  },
+  {
+    slug: 'khemani-distilleries',
+    name: 'Distillery plant',
+    client: 'Khemani Distilleries',
+    sector: 'Distillery',
+    location: 'Gujarat',
+    scope: 'Civil, Structural, Mechanical, Piping',
+    duration: '16 months',
+    year: '2023',
+    safetyRecord: 'Zero accidents',
+    image: '/brochurephotos/site photos/khemani distilleries/p-1 (1).webp',
+    images: ['/brochurephotos/site photos/khemani distilleries/p-1 (1).webp'],
+    excerpt:
+      'Distillery and processing plant for Khemani Distilleries — civil, structural and mechanical package for a modern distillation facility.',
+    challenge:
+      'Distillery construction required tall structural supports, heavy tank and vessel foundations and integrated process piping across the facility.',
+    whatWeBuilt:
+      'RCC foundations for tanks and vessels, structural steel frames, process piping, mechanical equipment erection, utilities and site infrastructure.',
+    outcome: 'Works completed on programme with zero safety incidents.',
+  },
+  {
+    slug: 'reliance-jamnagar',
+    name: 'Refinery works, Jamnagar',
+    client: 'Reliance Industries Ltd.',
+    sector: 'Petrochemicals',
+    location: 'Jamnagar, Gujarat',
+    scope: 'Civil, Mechanical, Piping, Structural Steel',
+    duration: '20 months',
+    year: '2021',
+    safetyRecord: 'Zero accidents',
+    image: '/brochurephotos/site photos/reliance jamnagar/Screenshot 2026-07-03 205518.webp',
+    images: [
+      '/brochurephotos/site photos/reliance jamnagar/Screenshot 2026-07-03 205518.webp',
+      '/brochurephotos/site photos/reliance jamnagar/Screenshot 2026-07-03 205717.webp',
+      '/brochurephotos/site photos/reliance jamnagar/Screenshot 2026-07-03 205739.webp',
+    ],
+    excerpt:
+      'Refinery and petrochemical works at the Reliance Jamnagar complex — civil, mechanical, piping and structural steel package executed to the highest safety standards.',
+    challenge:
+      "Working within one of the world's largest refinery complexes demanded stringent safety compliance, precise coordination and specialist construction across live and greenfield process areas.",
+    whatWeBuilt:
+      'RCC equipment foundations, structural steel erection, process piping systems, mechanical equipment installation, utilities and site infrastructure.',
+    outcome:
+      'Works delivered on programme with a zero-accident safety record within a demanding operating environment.',
+  },
+  {
+    slug: 'royal-palm',
+    name: 'Royal Palm development',
+    client: 'Royal Palm',
+    sector: 'Commercial',
+    location: 'Gujarat',
+    scope: 'Civil, Structural, Architectural Finishing',
+    duration: '18 months',
+    year: '2022',
+    safetyRecord: 'Zero accidents',
+    image: '/brochurephotos/site photos/royal palm/16-big.webp',
+    images: ['/brochurephotos/site photos/royal palm/16-big.webp'],
+    excerpt:
+      'Royal Palm development — complete civil, structural and architectural finishing works for a modern commercial and hospitality development.',
+    challenge:
+      'Delivering a high-quality finished development required tight coordination of civil, structural and architectural trades to exacting aesthetic and quality standards.',
+    whatWeBuilt:
+      'Civil and structural frame, exterior facade works, architectural finishing, and supporting site infrastructure.',
+    outcome: 'Development delivered to a high standard of finish with zero safety incidents.',
+  },
 ]
