@@ -70,6 +70,10 @@ const config: Config = {
         form: '0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06)',
         'teal-glow': '0 4px 16px rgba(22, 168, 184, 0.4)',
       },
+      transitionTimingFunction: {
+        'out-quart': 'var(--ease-out-quart)',
+        spring: 'var(--ease-spring)',
+      },
       keyframes: {
         marquee: {
           '0%': { transform: 'translateX(0)' },

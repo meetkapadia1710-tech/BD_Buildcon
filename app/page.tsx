@@ -119,7 +119,7 @@ export default function HomePage() {
       >
         <div className="absolute inset-0 w-full h-full">
           <Image
-            src="/brochurephotos/general photo/2I2A7705.JPG"
+            src="/brochurephotos/general photo/2I2A7705.webp"
             alt="Industrial plant construction site at twilight"
             fill
             className="object-cover"

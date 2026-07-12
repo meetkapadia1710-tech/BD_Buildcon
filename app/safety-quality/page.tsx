@@ -96,16 +96,16 @@ export default function SafetyQualityPage() {
           <div className="grid grid-cols-2 gap-4 pr-0 lg:pr-8">
             <div className="grid gap-4 self-center">
               <div className="relative aspect-[4/3] rounded-card overflow-hidden shadow-sm border border-hairline">
-                <Image src="/brochurephotos/safety/67.jpeg" alt="Safety assembly" fill className="object-cover" />
+                <Image src="/brochurephotos/safety/67.webp" alt="Safety assembly" fill className="object-cover" />
               </div>
               <div className="relative aspect-square rounded-card overflow-hidden shadow-sm border border-hairline">
-                <Image src="/brochurephotos/safety/62.jpeg" alt="Safety award" fill className="object-cover" />
+                <Image src="/brochurephotos/safety/62.webp" alt="Safety award" fill className="object-cover" />
               </div>
             </div>
             <div className="grid gap-4 mt-8 md:mt-12">
               <div className="relative aspect-[4/5] rounded-card overflow-hidden shadow-sm border border-hairline">
                 <Image
-                  src="/brochurephotos/safety/safety-park.jpeg"
+                  src="/brochurephotos/safety/safety-park.webp"
                   alt="Safety training session"
                   fill
                   className="object-cover"
@@ -114,7 +114,7 @@ export default function SafetyQualityPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="relative aspect-square rounded-card overflow-hidden shadow-sm border border-hairline">
                   <Image
-                    src="/brochurephotos/safety/image15.png"
+                    src="/brochurephotos/safety/image15.webp"
                     alt="Safety equipment demo"
                     fill
                     className="object-cover"
@@ -122,7 +122,7 @@ export default function SafetyQualityPage() {
                 </div>
                 <div className="relative aspect-square rounded-card overflow-hidden shadow-sm border border-hairline">
                   <Image
-                    src="/brochurephotos/safety/image16.png"
+                    src="/brochurephotos/safety/image16.webp"
                     alt="Material storage safety"
                     fill
                     className="object-cover"
