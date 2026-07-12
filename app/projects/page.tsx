@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import Image from 'next/image'
 import { PageTitleBand } from '@/components/layout/PageTitleBand'
 import { CTABand } from '@/components/layout/CTABand'
@@ -26,14 +25,7 @@ const allProjects = projects.map((p) => ({
   image: p.image,
 }))
 
-const categories = ['All', ...Array.from(new Set(allProjects.map((p) => p.category)))].sort()
-
 export default function ProjectsPage() {
-  const [activeFilter, setActiveFilter] = useState('All')
-
-  const displayedProjects =
-    activeFilter === 'All' ? allProjects : allProjects.filter((p) => p.category === activeFilter)
-
   return (
     <>
       <PageTitleBand
@@ -44,31 +36,9 @@ export default function ProjectsPage() {
 
       <section aria-label="Projects Grid" className="bg-white py-[72px] pb-[96px]">
         <div className="max-w-container mx-auto px-gutter">
-          {/* Filter */}
-          <div role="tablist" aria-label="Filter projects by category" className="flex flex-wrap gap-[10px] mb-[48px]">
-            {categories.map((c) => {
-              const isActive = c === activeFilter
-              return (
-                <button
-                  key={c}
-                  type="button"
-                  onClick={() => setActiveFilter(c)}
-                  className={`cursor-pointer font-body text-[13px] font-semibold px-[20px] py-[10px] rounded-full transition-all duration-150 border
-                    ${
-                      isActive
-                        ? 'bg-teal border-teal text-white'
-                        : 'bg-white border-hairline text-[#4d545a] hover:border-teal/40'
-                    }`}
-                >
-                  {c}
-                </button>
-              )
-            })}
-          </div>
-
           {/* Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[24px]">
-            {displayedProjects.map((p, i) => (
+            {allProjects.map((p, i) => (
               <article
                 key={i}
                 className="border border-hairline rounded-card overflow-hidden bg-white flex flex-col transition-all duration-200 hover:shadow-[0_8px_28px_rgba(0,0,0,0.08)] hover:border-teal/40"
