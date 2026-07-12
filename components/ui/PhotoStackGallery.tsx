@@ -1,10 +1,21 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 export function PhotoStackGallery({ photos }: { photos: string[] }) {
   const [isOpen, setIsOpen] = useState(false)
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
 
   if (!photos || photos.length === 0) return null
 
@@ -61,7 +72,7 @@ export function PhotoStackGallery({ photos }: { photos: string[] }) {
 
       {/* ── The Modal Gallery ── */}
       {isOpen && (
-        <div className="fixed inset-0 z-50 bg-white/95 backdrop-blur-sm overflow-y-auto">
+        <div className="fixed inset-0 z-50 bg-white/95 backdrop-blur-sm overflow-y-auto" data-lenis-prevent="true">
           <div className="sticky top-0 bg-white/80 backdrop-blur-md border-b border-hairline px-6 py-4 flex items-center justify-between z-10">
             <h3 className="font-display font-bold text-[24px] text-ink">Plant & Machinery Gallery</h3>
             <button
