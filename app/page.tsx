@@ -204,8 +204,8 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[20px]">
-            {services.slice(0, 4).map((svc) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[20px]">
+            {services.map((svc) => (
               <Link
                 key={svc.id}
                 href="/projects"

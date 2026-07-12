@@ -10,24 +10,41 @@ export const metadata: Metadata = {
 }
 
 const milestones = [
-  { year: '1995', title: 'Founded as Bhumi Developers', body: 'Civil contracting firm established in Bharuch, Gujarat.' },
-  { year: '2005', title: 'Industrial EPC expansion', body: 'Entered structural steel, PEB and mechanical works for chemical plants.' },
+  {
+    year: '1995',
+    title: 'Founded as Bhumi Developers',
+    body: 'Civil contracting firm established in Bharuch, Gujarat.',
+  },
+  {
+    year: '2005',
+    title: 'Industrial EPC expansion',
+    body: 'Entered structural steel, PEB and mechanical works for chemical plants.',
+  },
   { year: '2015', title: 'ISO 9001:2015 certified', body: 'Formalised quality systems; CRISIL SME 3 rating earned.' },
-  { year: '2021', title: 'BD Buildcon LLP', body: 'Reorganised as an LLP; full turnkey EPC capability under one roof.' },
+  {
+    year: '2021',
+    title: 'BD Buildcon LLP',
+    body: 'Reorganised as an LLP; full turnkey EPC capability under one roof.',
+  },
 ]
 
-const leaders = [
-  { name: 'Kiran Majmudar', role: 'Director' },
-  { name: 'Designated Partner', role: 'Operations & Execution' },
-  { name: 'Designated Partner', role: 'Engineering & QA' },
+const peopleCare = [
+  {
+    title: 'Labour Colony',
+    body: 'Our labour force is our biggest asset, and their well-being is our top priority. We provide clean and well-maintained labour colonies with water, electricity, cooking areas, and comfortable accommodation — with play areas for children so families can live in a safe and pleasant environment. A healthy, motivated workforce gives its best every day.',
+  },
+  {
+    title: 'Our Site Team',
+    body: 'Our site team is the backbone of every project. Many of our engineers and staff live away from their families to deliver projects on time. To support their commitment, we provide company accommodation with comfortable living, four nutritious meals a day, laundry, housekeeping, and other essential facilities — so the team stays focused, productive, and committed to quality.',
+  },
 ]
 
 export default function AboutPage() {
   return (
     <>
-      <PageTitleBand 
-        title="About BD Buildcon" 
-        breadcrumbs={[{ label: 'About Us' }]} 
+      <PageTitleBand
+        title="About BD Buildcon"
+        breadcrumbs={[{ label: 'About Us' }]}
         description="Three decades of turnkey industrial construction — from Bhumi Developers to BD Buildcon LLP."
       />
 
@@ -42,15 +59,26 @@ export default function AboutPage() {
               Built project by project since 1995.
             </h2>
             <p className="text-[17px] leading-[1.75] text-body mb-[16px]">
-              BD Buildcon LLP began as Bhumi Developers, a civil contracting firm serving the industrial belt of Bharuch, Gujarat. Over 30 years we have grown into a full-service turnkey EPC contractor — handling civil, structural, PEB, piping, mechanical and infrastructure works under one roof.
+              BD Buildcon LLP is a leading turnkey contracting company based in Bharuch, Gujarat, specializing in
+              industrial, commercial, and corporate building projects. With a reputation for excellence and a proven
+              track record of delivering high-quality work, we have established ourselves as the preferred contractor in
+              the Gujarat region for industrial construction projects.
+            </p>
+            <p className="text-[17px] leading-[1.75] text-body mb-[16px]">
+              We bring together a team of skilled engineers and professionals with expertise across civil, mechanical,
+              structural, PEB (Pre-Engineered Buildings), infrastructure, and other engineering disciplines — a diverse
+              knowledge base that enables us to provide comprehensive solutions tailored to each client&apos;s unique
+              needs.
             </p>
             <p className="text-[17px] leading-[1.75] text-body m-0">
-              With professional human resources, an owned equipment fleet, and state-of-the-art construction quality testing equipment, we execute mission-critical projects for chemical, pharma, petroleum and manufacturing clients across India.
+              As a turnkey contractor, we provide end-to-end services — project planning, procurement, construction, and
+              project management — delivering projects within agreed timelines and budgets while maintaining the highest
+              standards of quality.
             </p>
           </div>
           <div className="relative rounded-card overflow-hidden aspect-[4/3]">
-            <Image 
-              src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1200&auto=format&fit=crop" 
+            <Image
+              src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1200&auto=format&fit=crop"
               alt="Construction team reviewing drawings on site"
               fill
               className="object-cover"
@@ -86,7 +114,9 @@ export default function AboutPage() {
               Mission
             </span>
             <p className="font-display font-semibold text-[22px] leading-[1.5] text-white m-0">
-              Deliver every industrial project safely, on schedule, and to uncompromising quality — earning repeat trust from India&apos;s leading manufacturers.
+              To transform complex industrial challenges into successful outcomes through client-focused service,
+              uncompromising integrity, zero-compromise safety, engineering excellence, and an unwavering commitment to
+              delivering every project successfully.
             </p>
           </div>
           <div className="bg-teal rounded-card p-[48px]">
@@ -94,31 +124,57 @@ export default function AboutPage() {
               Vision
             </span>
             <p className="font-display font-semibold text-[22px] leading-[1.5] text-white m-0">
-              To be the most dependable turnkey EPC partner in Western India — where zero accidents and on-time delivery are the standard, not the goal.
+              To become a leading industrial turnkey contractor recognized for safe, innovative, and sustainable
+              engineering solutions — delivering excellence, timely execution, and lasting client relationships across
+              India and beyond.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ── Leadership ── */}
-      <section aria-label="Leadership" className="bg-surface border-t border-hairline py-[96px]">
+      {/* ── Our Team ── */}
+      <section aria-label="Our Team" className="bg-surface border-t border-hairline py-[96px]">
         <div className="max-w-container mx-auto px-gutter">
-          <div className="text-center mb-[56px]">
-            <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-ink mb-[16px]">Leadership</h2>
+          <div className="text-center mb-[48px]">
+            <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-ink mb-[16px]">Our Team</h2>
             <div className="w-[56px] h-[3px] bg-teal rounded-full mx-auto" />
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-[24px] max-w-[980px] mx-auto">
-            {leaders.map((l, i) => (
-              <div key={i} className="bg-white border border-hairline rounded-card overflow-hidden">
-                <div className="aspect-square flex items-center justify-center bg-[#EFF3F4]" style={{ backgroundImage: 'repeating-linear-gradient(45deg, #EFF3F4 0 14px, #E6ECEE 14px 28px)' }}>
-                  <span className="font-mono text-[12px] text-body bg-white border border-hairline rounded-[6px] px-[10px] py-[5px]">
-                    portrait
-                  </span>
-                </div>
-                <div className="p-[22px] text-center">
-                  <p className="font-display font-bold text-[18px] text-ink mb-[4px]">{l.name}</p>
-                  <p className="text-[14px] text-teal font-semibold m-0">{l.role}</p>
-                </div>
+          <div className="max-w-[860px] mx-auto">
+            <p className="text-[17px] leading-[1.75] text-body mb-[16px]">
+              The dedicated team at BD Buildcon LLP is the driving force behind our success. With a shared vision and
+              unwavering commitment, our team works together like a family, supporting one another&apos;s growth and
+              delivering excellence in every aspect of our work. Our long-standing staff members bring valuable
+              expertise and experience, ensuring the highest levels of dedication and professional proficiency.
+            </p>
+            <p className="text-[17px] leading-[1.75] text-body mb-[16px]">
+              The BD Buildcon LLP team is a diverse group, ranging in age from 20 to 70 years — bringing together fresh
+              perspectives and decades of industry experience. We harness the energy and enthusiasm of our younger team
+              members while valuing the wisdom of our senior professionals. This combination of youthful ambition and
+              seasoned experience has become one of our greatest strengths.
+            </p>
+            <p className="text-[17px] leading-[1.75] text-body m-0">
+              United by a common purpose of transforming ideas into enduring structures, our professionals approach
+              every challenge with determination, precision, and an unwavering commitment to quality — fostering a
+              dynamic, balanced workforce that drives innovation, efficiency, and excellence for our clients.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── People & Welfare ── */}
+      <section aria-label="People and Welfare" className="bg-white border-t border-hairline py-[96px]">
+        <div className="max-w-container mx-auto px-gutter">
+          <div className="text-center mb-[56px]">
+            <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-ink mb-[16px]">
+              Caring for Our People
+            </h2>
+            <div className="w-[56px] h-[3px] bg-teal rounded-full mx-auto" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-[24px] max-w-[980px] mx-auto">
+            {peopleCare.map((p, i) => (
+              <div key={i} className="bg-surface border border-hairline rounded-card p-[36px]">
+                <h3 className="font-display font-bold text-[22px] text-ink mb-[14px]">{p.title}</h3>
+                <p className="text-[15.5px] leading-[1.7] text-body m-0">{p.body}</p>
               </div>
             ))}
           </div>

@@ -9,17 +9,21 @@ export const FOUNDED_YEAR = 1995
 // Numeric values (for CountUp / RisingFloors animations)
 export const stats = {
   yearsExperience: 30, // 1995 → present ≈ 30 years
+  zeroAccidentYears: 35, // per company profile: "35-year zero-accident journey"
   projects: 50,
   repeatClientPct: 70,
   accidents: 0,
+  machinesOwned: 100,
 } as const
 
 // Display strings (for copy / badges)
 export const statsDisplay = {
   yearsExperience: '30+',
+  zeroAccidentYears: '35',
   projects: '50+',
   repeatClientPct: '70%',
   accidents: '0',
+  machinesOwned: '100+',
   valueDelivered: '₹200+ Cr',
 } as const
 
