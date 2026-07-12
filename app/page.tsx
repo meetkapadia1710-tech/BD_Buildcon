@@ -11,6 +11,7 @@ const BuildingScroll = dynamic(() => import('@/components/motion/BuildingScroll'
 import { CTABand } from '@/components/layout/CTABand'
 import { CustomSelect } from '@/components/ui/CustomSelect'
 import { clients } from '@/content/clients'
+import { consultants } from '@/content/consultants'
 import { stats, statsDisplay } from '@/content/company'
 import { services } from '@/content/services'
 
@@ -118,7 +119,7 @@ export default function HomePage() {
       >
         <div className="absolute inset-0 w-full h-full">
           <Image
-            src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop"
+            src="/brochurephotos/general photo/2I2A7705.JPG"
             alt="Industrial plant construction site at twilight"
             fill
             className="object-cover"
@@ -317,7 +318,7 @@ export default function HomePage() {
 
       {/* ── Trusted By ── */}
       <section aria-label="Our clients" className="bg-surface border-top border-hairline py-[96px]">
-        <div className="max-w-container mx-auto px-gutter">
+        <div className="w-full mx-auto px-gutter xl:px-[80px]">
           <div className="text-center mb-[56px]">
             <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-ink mb-[16px]">Trusted By</h2>
             <div className="w-[56px] h-[3px] bg-teal rounded-full mx-auto mb-[20px]" />
@@ -325,16 +326,99 @@ export default function HomePage() {
               Industry leaders who partner with BD Buildcon for mission-critical construction.
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-[20px]">
-            {clients.slice(0, 16).map((c, i) => (
-              <div
-                key={i}
-                className="bg-white border border-hairline rounded-card p-[24px] flex flex-col items-center justify-center gap-[6px] min-h-[104px] text-center transition-all duration-200 hover:border-teal/40 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)]"
-              >
-                <span className="font-display font-bold text-[16px] text-ink">{c.name}</span>
-                <span className="text-[12px] text-body">{c.sector}</span>
+          {/* ── Marquee Rows ── */}
+          <div className="relative overflow-hidden">
+            {/* Gradient masks for smooth fading on edges */}
+            <div className="absolute top-0 left-0 bottom-0 w-[80px] sm:w-[150px] bg-gradient-to-r from-surface to-transparent z-10 pointer-events-none" />
+            <div className="absolute top-0 right-0 bottom-0 w-[80px] sm:w-[150px] bg-gradient-to-l from-surface to-transparent z-10 pointer-events-none" />
+
+            {/* Row 1: Clients (Moves left) */}
+            <div className="flex w-max animate-marquee mb-[24px] hover:pause">
+              <div className="flex gap-[24px] pr-[24px]">
+                {clients.map((c, i) => (
+                  <div
+                    key={`client-1-${i}`}
+                    className="w-[240px] shrink-0 bg-white border border-hairline rounded-card p-[24px] flex flex-col items-center justify-center gap-[16px] min-h-[180px] text-center transition-all duration-200 hover:border-teal/40 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)]"
+                  >
+                    {c.logo && (
+                      <div className="relative w-full max-w-[160px] h-[72px]">
+                        <Image src={c.logo} alt={c.name} fill className="object-contain" />
+                      </div>
+                    )}
+                    <div>
+                      <span className="block font-display font-bold text-[14.5px] leading-[1.2] text-ink">
+                        {c.name}
+                      </span>
+                      <span className="block text-[12px] text-body mt-[6px]">{c.sector}</span>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+              <div className="flex gap-[24px] pr-[24px]" aria-hidden="true">
+                {clients.map((c, i) => (
+                  <div
+                    key={`client-2-${i}`}
+                    className="w-[240px] shrink-0 bg-white border border-hairline rounded-card p-[24px] flex flex-col items-center justify-center gap-[16px] min-h-[180px] text-center transition-all duration-200 hover:border-teal/40 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)]"
+                  >
+                    {c.logo && (
+                      <div className="relative w-full max-w-[160px] h-[72px]">
+                        <Image src={c.logo} alt={c.name} fill className="object-contain" />
+                      </div>
+                    )}
+                    <div>
+                      <span className="block font-display font-bold text-[14.5px] leading-[1.2] text-ink">
+                        {c.name}
+                      </span>
+                      <span className="block text-[12px] text-body mt-[6px]">{c.sector}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Row 2: Consultants (Moves right) */}
+            <div className="flex w-max animate-marquee-reverse hover:[animation-play-state:paused]">
+              <div className="flex gap-[24px] pr-[24px]">
+                {consultants.map((c, i) => (
+                  <div
+                    key={`cons-1-${i}`}
+                    className="w-[240px] shrink-0 bg-white border border-hairline rounded-card p-[24px] flex flex-col items-center justify-center gap-[16px] min-h-[180px] text-center transition-all duration-200 hover:border-teal/40 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)]"
+                  >
+                    {c.logo && (
+                      <div className="relative w-full max-w-[160px] h-[72px]">
+                        <Image src={c.logo} alt={c.name} fill className="object-contain" />
+                      </div>
+                    )}
+                    <div>
+                      <span className="block font-display font-bold text-[14.5px] leading-[1.2] text-ink">
+                        {c.name}
+                      </span>
+                      <span className="block text-[12px] text-body mt-[6px]">{c.sector}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="flex gap-[24px] pr-[24px]" aria-hidden="true">
+                {consultants.map((c, i) => (
+                  <div
+                    key={`cons-2-${i}`}
+                    className="w-[240px] shrink-0 bg-white border border-hairline rounded-card p-[24px] flex flex-col items-center justify-center gap-[16px] min-h-[180px] text-center transition-all duration-200 hover:border-teal/40 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)]"
+                  >
+                    {c.logo && (
+                      <div className="relative w-full max-w-[160px] h-[72px]">
+                        <Image src={c.logo} alt={c.name} fill className="object-contain" />
+                      </div>
+                    )}
+                    <div>
+                      <span className="block font-display font-bold text-[14.5px] leading-[1.2] text-ink">
+                        {c.name}
+                      </span>
+                      <span className="block text-[12px] text-body mt-[6px]">{c.sector}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

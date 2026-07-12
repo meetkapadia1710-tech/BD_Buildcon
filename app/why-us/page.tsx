@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { PageTitleBand } from '@/components/layout/PageTitleBand'
 import { CTABand } from '@/components/layout/CTABand'
+import { PhotoStackGallery } from '@/components/ui/PhotoStackGallery'
 import { testimonials } from '@/content/testimonials'
 import { statsDisplay } from '@/content/company'
 
@@ -47,6 +48,25 @@ const compareRows = [
 ]
 
 const featuredTestimonials = testimonials.slice(0, 6)
+
+const machineryPhotos = [
+  '/brochurephotos/plant and machinery/image17.png',
+  '/brochurephotos/plant and machinery/image44.png',
+  '/brochurephotos/plant and machinery/image45.png',
+  '/brochurephotos/plant and machinery/image46.png',
+  '/brochurephotos/plant and machinery/image48.png',
+  '/brochurephotos/plant and machinery/image6.png',
+  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(106).jpg',
+  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(125).jpg',
+  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(126).jpg',
+  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(155).jpg',
+  '/brochurephotos/plant and machinery/IMG-20150407-WA0003.jpg',
+  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM (1).jpeg',
+  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM (2).jpeg',
+  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM (3).jpeg',
+  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM.jpeg',
+  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.58.08 PM.jpeg',
+]
 
 export default function WhyUsPage() {
   return (
@@ -150,6 +170,15 @@ export default function WhyUsPage() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* ── Photo Gallery Stack ── */}
+        <div className="max-w-container mx-auto px-gutter mt-[96px] pt-[72px] border-t border-hairline flex flex-col items-center">
+          <div className="text-center mb-[48px]">
+            <h3 className="font-display font-bold text-[32px] text-ink mb-[12px]">Explore</h3>
+            <p className="text-[16px] text-body">Click the stack to view our extensive machinery gallery</p>
+          </div>
+          <PhotoStackGallery photos={machineryPhotos} />
         </div>
       </section>
 

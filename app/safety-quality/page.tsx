@@ -92,13 +92,44 @@ export default function SafetyQualityPage() {
       {/* ── Safety Protocols ── */}
       <section aria-label="Safety Protocols" className="bg-surface border-y border-hairline py-[96px]">
         <div className="max-w-container mx-auto px-gutter grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-[72px] items-center">
-          <div className="relative rounded-card overflow-hidden aspect-[4/3]">
-            <Image
-              src="https://images.unsplash.com/photo-1578307985320-34b56dc6b8f6?q=80&w=1200&auto=format&fit=crop"
-              alt="Worker in safety harness and helmet on industrial site"
-              fill
-              className="object-cover"
-            />
+          {/* Safety Photo Collage */}
+          <div className="grid grid-cols-2 gap-4 pr-0 lg:pr-8">
+            <div className="grid gap-4 self-center">
+              <div className="relative aspect-[4/3] rounded-card overflow-hidden shadow-sm border border-hairline">
+                <Image src="/brochurephotos/safety/67.jpeg" alt="Safety assembly" fill className="object-cover" />
+              </div>
+              <div className="relative aspect-square rounded-card overflow-hidden shadow-sm border border-hairline">
+                <Image src="/brochurephotos/safety/62.jpeg" alt="Safety award" fill className="object-cover" />
+              </div>
+            </div>
+            <div className="grid gap-4 mt-8 md:mt-12">
+              <div className="relative aspect-[4/5] rounded-card overflow-hidden shadow-sm border border-hairline">
+                <Image
+                  src="/brochurephotos/safety/safety-park.jpeg"
+                  alt="Safety training session"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="relative aspect-square rounded-card overflow-hidden shadow-sm border border-hairline">
+                  <Image
+                    src="/brochurephotos/safety/image15.png"
+                    alt="Safety equipment demo"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="relative aspect-square rounded-card overflow-hidden shadow-sm border border-hairline">
+                  <Image
+                    src="/brochurephotos/safety/image16.png"
+                    alt="Material storage safety"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
           <div>
             <span className="block text-[13px] font-semibold uppercase tracking-[0.12em] text-teal mb-[16px]">

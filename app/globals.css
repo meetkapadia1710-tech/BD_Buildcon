@@ -53,9 +53,7 @@ h4 {
   text-wrap: balance;
 }
 
-/* Hide native cursor only once SmoothCursor has actually mounted (it adds the
-   `has-custom-cursor` class on fine-pointer, non-reduced-motion devices). This
-   guarantees a visible cursor with JS disabled, on errors, or reduced motion. */
+/* Hide native cursor only once SmoothCursor has actually mounted */
 @media (pointer: fine) {
   html.has-custom-cursor,
   html.has-custom-cursor body,
@@ -120,6 +118,36 @@ img {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--teal-hover);
+}
+
+@layer utilities {
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes marquee-reverse {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  .animate-marquee {
+    animation: marquee 36s linear infinite;
+  }
+  .animate-marquee-reverse {
+    animation: marquee-reverse 36s linear infinite;
+  }
+
+  .animate-marquee:hover,
+  .animate-marquee-reverse:hover {
+    animation-play-state: paused;
+  }
 }
 
 @layer components {
@@ -199,110 +227,33 @@ img {
   .teal-rule {
     @apply block w-12 h-1 bg-teal mt-4 mb-0 rounded-full;
   }
-
-  .card {
-    @apply bg-white rounded-card border border-hairline;
-    box-shadow: var(--shadow-card);
-    transition:
-      transform 0.35s var(--ease-spring),
-      box-shadow 0.3s ease,
-      border-color 0.25s ease;
-  }
-  .card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-card-hover);
-    @apply border-teal/20;
-  }
-
-  .form-field {
-    @apply w-full bg-surface border border-hairline rounded-lg px-4 py-3
-           font-body text-body-md text-ink placeholder:text-body;
-    transition:
-      border-color 0.2s ease,
-      box-shadow 0.2s ease,
-      transform 0.18s ease;
-  }
-  .form-field:focus {
-    @apply border-teal outline-none;
-    box-shadow: 0 0 0 3px rgba(22, 168, 184, 0.12);
-    transform: translateY(-1px);
-  }
-
-  .section-heading {
-    @apply text-center mb-12 lg:mb-16;
-  }
-  .section-heading h2 {
-    @apply font-display text-headline-lg text-ink;
-  }
-  .section-heading .rule {
-    @apply mx-auto;
-  }
-
-  .glass {
-    @apply backdrop-blur-md border border-white/20;
-    background: rgba(255, 255, 255, 0.08);
-  }
-  .glass-dark {
-    @apply backdrop-blur-md border border-white/10;
-    background: rgba(31, 33, 36, 0.7);
-  }
-  .teal-glow {
-    box-shadow: var(--shadow-teal);
-  }
-  .teal-glow-lg {
-    box-shadow: var(--shadow-teal-lg);
-  }
 }
 
-/* Fluid underline — draws left to right on hover */
-.link-underline {
-  position: relative;
+/* Component specifics */
+.glass-panel {
+  @apply bg-white/80 backdrop-blur-md border border-white/40 shadow-card;
 }
-.link-underline::after {
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-teal-deep to-teal-light;
+}
+
+.text-gradient-white {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70;
+}
+
+.hover-lift {
+  @apply transition-transform duration-300 ease-out-quart hover:-translate-y-1 hover:shadow-card-hover;
+}
+
+.hover-glow {
+  @apply transition-all duration-300 hover:shadow-teal hover:border-teal/50;
+}
+
+.image-overlay {
+  @apply relative overflow-hidden;
+}
+.image-overlay::after {
   content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1);
-}
-.link-underline:hover::after {
-  transform: scaleX(1);
-}
-
-/* Image reveal on hover — smooth zoom */
-.img-hover img {
-  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.img-hover:hover img {
-  transform: scale(1.06);
-}
-
-/* Clip path for RevealImage */
-.clip-reveal {
-  clip-path: inset(100% 0 0 0);
-}
-.clip-revealed {
-  clip-path: inset(0% 0 0 0);
-}
-
-.marquee-fade {
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-}
-
-/* Prefers reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+  @apply absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80;
 }

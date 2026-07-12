@@ -32,10 +32,12 @@ const peopleCare = [
   {
     title: 'Labour Colony',
     body: 'Our labour force is our biggest asset, and their well-being is our top priority. We provide clean and well-maintained labour colonies with water, electricity, cooking areas, and comfortable accommodation — with play areas for children so families can live in a safe and pleasant environment. A healthy, motivated workforce gives its best every day.',
+    image: '/brochurephotos/LABOUR COLONY/IMG-20191012-WA0006.jpg',
   },
   {
     title: 'Our Site Team',
     body: 'Our site team is the backbone of every project. Many of our engineers and staff live away from their families to deliver projects on time. To support their commitment, we provide company accommodation with comfortable living, four nutritious meals a day, laundry, housekeeping, and other essential facilities — so the team stays focused, productive, and committed to quality.',
+    image: '/brochurephotos/site photos/technical photos/our-site-team.jpg',
   },
 ]
 
@@ -78,7 +80,7 @@ export default function AboutPage() {
           </div>
           <div className="relative rounded-card overflow-hidden aspect-[4/3]">
             <Image
-              src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1200&auto=format&fit=crop"
+              src="/brochurephotos/site photos/city center/IMG_20200627_125547.jpg"
               alt="Construction team reviewing drawings on site"
               fill
               className="object-cover"
@@ -88,8 +90,31 @@ export default function AboutPage() {
       </section>
 
       {/* ── Timeline ── */}
-      <section aria-label="Milestones" className="bg-surface border-y border-hairline py-[96px]">
-        <div className="max-w-container mx-auto px-gutter">
+      <section
+        aria-label="Milestones"
+        className="relative bg-surface border-y border-hairline py-[96px] overflow-hidden"
+      >
+        {/* Background Growth Graph */}
+        <div className="absolute inset-x-0 bottom-0 top-[20%] pointer-events-none opacity-30">
+          <svg preserveAspectRatio="none" viewBox="0 0 100 100" className="w-full h-full">
+            <path d="M0,100 L0,90 C25,85 40,60 60,50 C80,40 90,20 100,5 L100,100 Z" fill="url(#growth-gradient)" />
+            <path
+              d="M0,90 C25,85 40,60 60,50 C80,40 90,20 100,5"
+              fill="none"
+              stroke="#16A8B8"
+              strokeWidth="2"
+              vectorEffect="non-scaling-stroke"
+            />
+            <defs>
+              <linearGradient id="growth-gradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#16A8B8" stopOpacity="0.5" />
+                <stop offset="100%" stopColor="#16A8B8" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <div className="relative z-10 max-w-container mx-auto px-gutter">
           <div className="text-center mb-[56px]">
             <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-ink mb-[16px]">Milestones</h2>
             <div className="w-[56px] h-[3px] bg-teal rounded-full mx-auto" />
@@ -134,12 +159,15 @@ export default function AboutPage() {
 
       {/* ── Our Team ── */}
       <section aria-label="Our Team" className="bg-surface border-t border-hairline py-[96px]">
-        <div className="max-w-container mx-auto px-gutter">
-          <div className="text-center mb-[48px]">
-            <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-ink mb-[16px]">Our Team</h2>
-            <div className="w-[56px] h-[3px] bg-teal rounded-full mx-auto" />
-          </div>
-          <div className="max-w-[860px] mx-auto">
+        <div className="max-w-container mx-auto px-gutter grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-[64px] items-center">
+          <div>
+            <span className="block text-[13px] font-semibold uppercase tracking-[0.12em] text-teal mb-[16px]">
+              Our People
+            </span>
+            <h2 className="font-display font-bold text-[38px] leading-[1.25] tracking-[-0.01em] text-ink mb-[24px]">
+              Our Team
+            </h2>
+            <div className="w-[56px] h-[3px] bg-teal rounded-full mb-[32px]" />
             <p className="text-[17px] leading-[1.75] text-body mb-[16px]">
               The dedicated team at BD Buildcon LLP is the driving force behind our success. With a shared vision and
               unwavering commitment, our team works together like a family, supporting one another&apos;s growth and
@@ -158,6 +186,16 @@ export default function AboutPage() {
               dynamic, balanced workforce that drives innovation, efficiency, and excellence for our clients.
             </p>
           </div>
+
+          {/* Team Photo */}
+          <div className="relative w-full aspect-[16/10] rounded-card overflow-hidden shadow-card">
+            <Image
+              src="/brochurephotos/general photo/2I2A7705.JPG"
+              alt="The BD Buildcon Team"
+              fill
+              className="object-cover"
+            />
+          </div>
         </div>
       </section>
 
@@ -172,9 +210,14 @@ export default function AboutPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-[24px] max-w-[980px] mx-auto">
             {peopleCare.map((p, i) => (
-              <div key={i} className="bg-surface border border-hairline rounded-card p-[36px]">
+              <div key={i} className="bg-surface border border-hairline rounded-card p-[36px] flex flex-col">
+                {p.image && (
+                  <div className="relative w-full aspect-[4/3] rounded-[8px] overflow-hidden mb-[24px]">
+                    <Image src={p.image} alt={p.title} fill className="object-cover" />
+                  </div>
+                )}
                 <h3 className="font-display font-bold text-[22px] text-ink mb-[14px]">{p.title}</h3>
-                <p className="text-[15.5px] leading-[1.7] text-body m-0">{p.body}</p>
+                <p className="text-[15.5px] leading-[1.7] text-body m-0 flex-grow">{p.body}</p>
               </div>
             ))}
           </div>

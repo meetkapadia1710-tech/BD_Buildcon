@@ -29,7 +29,7 @@ export const services: Service[] = [
       'Storm Water & Drainage Systems',
       'Underground Utility & Service Networks',
     ],
-    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=900&auto=format&fit=crop', // Concrete building structure
+    image: '/brochurephotos/site photos/technical photos/DocScanner Sep 9, 2025 5-45 PM_1(20).jpg', // Concrete building structure
     icon: 'foundation',
   },
   {
@@ -52,7 +52,7 @@ export const services: Service[] = [
       'Industrial Painting',
       'Protective Coating Systems',
     ],
-    image: 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?q=80&w=900&auto=format&fit=crop', // Industrial valves and piping
+    image: '/brochurephotos/structure/WhatsApp Image 2026-07-12 at 12.14.02 PM (1).jpeg', // Industrial valves and piping
     icon: 'plumbing',
   },
   {
@@ -75,7 +75,7 @@ export const services: Service[] = [
       'Project Handover',
       'After-Sales Support',
     ],
-    image: 'https://images.unsplash.com/photo-1565008447742-97f6f38c985c?q=80&w=900&auto=format&fit=crop', // Crane lifting steel frame
+    image: '/brochurephotos/site photos/dic fine chem/DSC_2480.JPG', // Crane lifting steel frame
     icon: 'construction',
   },
 ]
