@@ -10,19 +10,18 @@ export function Footer() {
 
   return (
     <footer className="bg-footer text-white relative overflow-hidden border-t-[3px] border-teal">
-      <div className="relative z-10 max-w-container mx-auto px-gutter py-20 lg:py-24">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8">
+      <div className="relative z-10 max-w-container mx-auto px-gutter py-8 lg:py-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-6">
           {/* About — 5 cols */}
           <div className="md:col-span-5 lg:pr-12">
-            <h3 className="font-display text-headline-sm text-white mb-2">About Us</h3>
-            <span className="block w-[44px] h-[3px] rounded-full bg-teal mb-6" />
-            <p className="font-body text-body-md text-white/70 leading-relaxed max-w-md">
-              BD Buildcon LLP (Formerly known as Bhumi Developers) has professional human resource commensurate with the
-              required expertise and state-of-the-art construction quality testing equipment required for successful
-              execution of any project it undertakes.
+            <h3 className="font-display text-[18px] font-bold text-white mb-1">About Us</h3>
+            <span className="block w-[44px] h-[3px] rounded-full bg-teal mb-3" />
+            <p className="font-body text-body-sm text-white/70 leading-relaxed max-w-md">
+              BD Buildcon LLP (Formerly Bhumi Developers) provides expert construction services backed by
+              state-of-the-art quality testing for successful project execution.
             </p>
             {/* Social */}
-            <div className="flex gap-4 mt-8">
+            <div className="flex gap-3 mt-4">
               {[
                 {
                   href: socialLinks.twitter,
@@ -60,9 +59,9 @@ export function Footer() {
 
           {/* Company Links — 3 cols */}
           <div className="md:col-span-3">
-            <h3 className="font-display text-headline-sm text-white mb-2">Company Links</h3>
-            <span className="block w-[44px] h-[3px] rounded-full bg-teal mb-6" />
-            <nav className="flex flex-col gap-3">
+            <h3 className="font-display text-[18px] font-bold text-white mb-1">Company Links</h3>
+            <span className="block w-[44px] h-[3px] rounded-full bg-teal mb-3" />
+            <nav className="flex flex-col gap-2">
               {[
                 { label: 'Home', href: '/' },
                 { label: 'About Us', href: '/about' },
@@ -85,9 +84,9 @@ export function Footer() {
 
           {/* Contact Info — 4 cols */}
           <div className="md:col-span-4">
-            <h3 className="font-display text-headline-sm text-white mb-2">Contact Info</h3>
-            <span className="block w-[44px] h-[3px] rounded-full bg-teal mb-6" />
-            <div className="flex flex-col gap-5">
+            <h3 className="font-display text-[18px] font-bold text-white mb-1">Contact Info</h3>
+            <span className="block w-[44px] h-[3px] rounded-full bg-teal mb-3" />
+            <div className="flex flex-col gap-4">
               <div className="flex gap-4 group">
                 <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-teal group-hover:text-white transition-colors text-teal">
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
@@ -135,9 +134,7 @@ export function Footer() {
             className="group flex items-center gap-2 text-[#5BD6E2] hover:text-white transition-colors font-body text-[13px] uppercase tracking-[0.08em] font-semibold"
           >
             Back to top
-            <div className="flex items-center justify-center transition-transform group-hover:-translate-y-1">
-              ↑
-            </div>
+            <div className="flex items-center justify-center transition-transform group-hover:-translate-y-1">↑</div>
           </button>
         </div>
       </div>

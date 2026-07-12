@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 type Props = {
   title?: string
@@ -14,7 +15,17 @@ export function CTABand({
   btnHref = '/contact',
 }: Props) {
   return (
-    <section className="relative overflow-hidden bg-teal py-[72px]">
+    <section className="relative overflow-hidden py-[120px] lg:py-[160px]">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/brochurephotos/site photos/ROXUL ROCKWOOL/DSC_8467.webp"
+          alt="Site Construction"
+          fill
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-teal-deep/95 to-teal/90" />
+      </div>
+
       <div className="relative z-10 max-w-container mx-auto px-gutter">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           <div className="text-center lg:text-left flex-1">
@@ -30,7 +41,10 @@ export function CTABand({
               {btnLabel}
               <svg
                 className="w-4 h-4"
-                viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
                 aria-hidden="true"
               >
                 <path d="M5 12h14M12 5l7 7-7 7" />

@@ -468,8 +468,7 @@ export const projects: Project[] = [
     ],
     excerpt:
       'Refinery and petrochemical works at the Reliance Jamnagar complex — civil, mechanical, piping and structural steel package executed to the highest safety standards.',
-    challenge:
-      "Working within one of the world's largest refinery complexes demanded stringent safety compliance, precise coordination and specialist construction across live and greenfield process areas.",
+    challenge: `Working within one of the world's largest refinery complexes demanded stringent safety compliance, precise coordination and specialist construction across live and greenfield process areas.`,
     whatWeBuilt:
       'RCC equipment foundations, structural steel erection, process piping systems, mechanical equipment installation, utilities and site infrastructure.',
     outcome:
