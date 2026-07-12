@@ -32,12 +32,12 @@ const peopleCare = [
   {
     title: 'Labour Colony',
     body: 'Our labour force is our biggest asset, and their well-being is our top priority. We provide clean and well-maintained labour colonies with water, electricity, cooking areas, and comfortable accommodation — with play areas for children so families can live in a safe and pleasant environment. A healthy, motivated workforce gives its best every day.',
-    image: '/brochurephotos/LABOUR COLONY/IMG-20191012-WA0006.jpg',
+    image: '/brochurephotos/LABOUR COLONY/IMG-20191012-WA0006.webp',
   },
   {
     title: 'Our Site Team',
     body: 'Our site team is the backbone of every project. Many of our engineers and staff live away from their families to deliver projects on time. To support their commitment, we provide company accommodation with comfortable living, four nutritious meals a day, laundry, housekeeping, and other essential facilities — so the team stays focused, productive, and committed to quality.',
-    image: '/brochurephotos/site photos/technical photos/our-site-team.jpg',
+    image: '/brochurephotos/site photos/technical photos/our-site-team.webp',
   },
 ]
 
@@ -80,7 +80,7 @@ export default function AboutPage() {
           </div>
           <div className="relative rounded-card overflow-hidden aspect-[4/3]">
             <Image
-              src="/brochurephotos/site photos/city center/IMG_20200627_125547.jpg"
+              src="/brochurephotos/site photos/city center/IMG_20200627_125547.webp"
               alt="Construction team reviewing drawings on site"
               fill
               className="object-cover"
@@ -190,7 +190,7 @@ export default function AboutPage() {
           {/* Team Photo */}
           <div className="relative w-full aspect-[16/10] rounded-card overflow-hidden shadow-card">
             <Image
-              src="/brochurephotos/general photo/2I2A7705.JPG"
+              src="/brochurephotos/general photo/2I2A7705.webp"
               alt="The BD Buildcon Team"
               fill
               className="object-cover"

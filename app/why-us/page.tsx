@@ -50,22 +50,22 @@ const compareRows = [
 const featuredTestimonials = testimonials.slice(0, 6)
 
 const machineryPhotos = [
-  '/brochurephotos/plant and machinery/image17.png',
-  '/brochurephotos/plant and machinery/image44.png',
-  '/brochurephotos/plant and machinery/image45.png',
-  '/brochurephotos/plant and machinery/image46.png',
-  '/brochurephotos/plant and machinery/image48.png',
-  '/brochurephotos/plant and machinery/image6.png',
-  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(106).jpg',
-  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(125).jpg',
-  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(126).jpg',
-  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(155).jpg',
-  '/brochurephotos/plant and machinery/IMG-20150407-WA0003.jpg',
-  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM (1).jpeg',
-  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM (2).jpeg',
-  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM (3).jpeg',
-  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM.jpeg',
-  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.58.08 PM.jpeg',
+  '/brochurephotos/plant and machinery/image17.webp',
+  '/brochurephotos/plant and machinery/image44.webp',
+  '/brochurephotos/plant and machinery/image45.webp',
+  '/brochurephotos/plant and machinery/image46.webp',
+  '/brochurephotos/plant and machinery/image48.webp',
+  '/brochurephotos/plant and machinery/image6.webp',
+  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(106).webp',
+  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(125).webp',
+  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(126).webp',
+  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(155).webp',
+  '/brochurephotos/plant and machinery/IMG-20150407-WA0003.webp',
+  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM (1).webp',
+  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM (2).webp',
+  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM (3).webp',
+  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM.webp',
+  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.58.08 PM.webp',
 ]
 
 export default function WhyUsPage() {
