@@ -40,7 +40,14 @@ export function PhotoStackGallery({ photos }: { photos: string[] }) {
               transitionDelay: `${i * 30}ms`,
             }}
           >
-            <Image src={photo} alt="Plant and machinery photo" fill className="object-cover" />
+            <Image
+              src={photo}
+              alt="Plant and machinery photo"
+              fill
+              sizes="(max-width: 768px) 100vw, 320px"
+              style={{ objectFit: 'cover' }}
+              className="object-cover"
+            />
           </div>
         ))}
 
@@ -85,6 +92,8 @@ export function PhotoStackGallery({ photos }: { photos: string[] }) {
                     src={photo}
                     alt={`Gallery image ${i + 1}`}
                     fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    style={{ objectFit: 'cover' }}
                     className="object-cover hover:scale-110 transition-transform duration-500"
                   />
                 </div>
