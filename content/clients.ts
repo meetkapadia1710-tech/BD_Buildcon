@@ -69,7 +69,7 @@ export const clients: Client[] = [
     id: 'khemani',
     name: 'Khemani Group',
     sector: 'Distillery / Beverages',
-    logo: '/brochurephotos/CLIENT LOGOS/19 KHEMANI LOGO (2).gif',
+    logo: '/brochurephotos/CLIENT LOGOS/19 KHEMANI LOGO (2).webp',
   },
   {
     id: 'meghmani',
@@ -141,7 +141,7 @@ export const clients: Client[] = [
   { id: 'acume', name: 'Acume Chemicals', sector: 'Chemicals', logo: '/brochurephotos/CLIENT LOGOS/acume.webp' },
   { id: 'borosil', name: 'Borosil', sector: 'Glass / Scientific', logo: '/brochurephotos/CLIENT LOGOS/borosil.webp' },
   { id: 'dra', name: 'DRA Narmada', sector: 'Infrastructure', logo: '/brochurephotos/CLIENT LOGOS/dra-narmada.webp' },
-  { id: 'gctpcl', name: 'GCTPCL', sector: 'Port Terminal', logo: '/brochurephotos/CLIENT LOGOS/GCTPCL (2).gif' },
+  { id: 'gctpcl', name: 'GCTPCL', sector: 'Port Terminal', logo: '/brochurephotos/CLIENT LOGOS/GCTPCL (2).webp' },
   {
     id: 'ineos',
     name: 'INEOS Styrolution',

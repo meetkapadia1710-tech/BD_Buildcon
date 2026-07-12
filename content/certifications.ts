@@ -19,7 +19,7 @@ export const certifications: Certification[] = [
     description:
       'Safety certificate from GACL confirming zero accidents across all jobs executed at their facility. Signed by the Dy. General Manager (Civil).',
     image: undefined,
-    documentImage: '/images/certificate_placeholder.png',
+    documentImage: '/images/certificate_placeholder.webp',
   },
   {
     id: 'gfl-rec',
@@ -30,7 +30,7 @@ export const certifications: Certification[] = [
     description:
       'Vendor qualification certificate from GFL confirming BD Buildcon (formerly Bhumi Developers) as an approved contractor for civil construction at GFL Dahej Factory.',
     image: undefined,
-    documentImage: '/images/certificate_placeholder.png',
+    documentImage: '/images/certificate_placeholder.webp',
   },
   {
     id: 'aker-rec',
@@ -41,7 +41,7 @@ export const certifications: Certification[] = [
     description:
       'Completion certificate from Aker Solutions for the successful fabrication and erection of 450 MT of structural steel for a fast-track project at Dahej — executed to specification and on schedule.',
     image: undefined,
-    documentImage: '/images/certificate_placeholder.png',
+    documentImage: '/images/certificate_placeholder.webp',
   },
   {
     id: 'mott-rec',
@@ -52,7 +52,7 @@ export const certifications: Certification[] = [
     description:
       'Appreciation letter from Mott MacDonald recognising BD Buildcon for completing Civil and Structural works with zero accidents, and commending their professionalism and use of modern construction technologies.',
     image: undefined,
-    documentImage: '/images/certificate_placeholder.png',
+    documentImage: '/images/certificate_placeholder.webp',
   },
   {
     id: 'iso',
@@ -63,7 +63,7 @@ export const certifications: Certification[] = [
     description:
       'Quality Management System certification issued by TÜV SÜD South Asia. Scope: Design, Construction and Erection of Pre-Engineered Buildings, Turnkey Real Estate, and Turnkey Industrial Construction Projects.',
     image: undefined,
-    documentImage: '/images/certificate_placeholder.png',
+    documentImage: '/images/certificate_placeholder.webp',
   },
   {
     id: 'crisil',
@@ -74,6 +74,6 @@ export const certifications: Certification[] = [
     description:
       'CRISIL SME Rating of SME 3 awarded by NSIC-CRISIL, indicating an "Above Average" level of creditworthiness adjudged against other SMEs in India.',
     image: undefined,
-    documentImage: '/images/certificate_placeholder.png',
+    documentImage: '/images/certificate_placeholder.webp',
   },
 ]
