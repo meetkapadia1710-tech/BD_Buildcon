@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useRef, useState, useEffect } from 'react'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import {
   motion,
@@ -10,7 +11,9 @@ import {
   useMotionValueEvent,
   useReducedMotion,
 } from 'framer-motion'
-import BuildingTowerWebGL from './BuildingTowerWebGL'
+
+// Load the WebGL canvas only on the client — three.js cannot run during SSR
+const BuildingTowerWebGL = dynamic(() => import('./BuildingTowerWebGL'), { ssr: false })
 
 const EASE = [0.16, 1, 0.3, 1]
 
