@@ -243,7 +243,7 @@ img {
 }
 
 .hover-lift {
-  @apply transition-transform duration-300 ease-out-quart hover:-translate-y-1 hover:shadow-card-hover;
+  @apply transition-transform duration-300 ease-[var(--ease-out-quart)] hover:-translate-y-1 hover:shadow-card-hover;
 }
 
 .hover-glow {
