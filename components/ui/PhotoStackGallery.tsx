@@ -1,11 +1,17 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
 
 export function PhotoStackGallery({ photos }: { photos: string[] }) {
   const [isOpen, setIsOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     if (isOpen) {
@@ -29,6 +35,65 @@ export function PhotoStackGallery({ photos }: { photos: string[] }) {
     'rotate-[-2deg] translate-x-[4px] translate-y-[4px]',
     'rotate-[2deg] translate-x-[0] translate-y-[0]',
   ]
+
+  const modalContent = (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 10 }}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
+          className="fixed inset-0 z-[400] bg-white/95 backdrop-blur-md overflow-y-auto"
+          data-lenis-prevent="true"
+        >
+          <div className="sticky top-0 bg-white/95 backdrop-blur-2xl border-b border-hairline px-6 py-4 flex items-center justify-center z-20 shadow-sm">
+            <h3 className="font-display font-bold text-[20px] sm:text-[24px] text-ink text-center">
+              Plant & Machinery Gallery
+            </h3>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="absolute right-4 md:right-6 w-[40px] h-[40px] flex items-center justify-center rounded-full bg-surface hover:bg-hairline transition-colors"
+              aria-label="Close gallery"
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M12 4L4 12M4 4L12 12"
+                  stroke="#2E353B"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div className="max-w-[1400px] mx-auto p-6 md:p-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {photos.map((photo, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: i * 0.05, ease: 'easeOut' }}
+                  className="relative aspect-square rounded-card overflow-hidden shadow-sm border border-hairline bg-surface"
+                >
+                  <Image
+                    src={photo}
+                    alt={`Gallery image ${i + 1}`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    style={{ objectFit: 'cover' }}
+                    className="object-cover hover:scale-110 transition-transform duration-500"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
 
   return (
     <>
@@ -71,63 +136,8 @@ export function PhotoStackGallery({ photos }: { photos: string[] }) {
         </div>
       </button>
 
-      {/* ── The Modal Gallery ── */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 10 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed inset-0 z-50 bg-white/95 backdrop-blur-md overflow-y-auto"
-            data-lenis-prevent="true"
-          >
-            <div className="sticky top-0 bg-white/95 backdrop-blur-2xl border-b border-hairline px-6 py-4 flex items-center justify-center z-20 shadow-sm">
-              <h3 className="font-display font-bold text-[20px] sm:text-[24px] text-ink text-center">
-                Plant & Machinery Gallery
-              </h3>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="absolute right-4 md:right-6 w-[40px] h-[40px] flex items-center justify-center rounded-full bg-surface hover:bg-hairline transition-colors"
-                aria-label="Close gallery"
-              >
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M12 4L4 12M4 4L12 12"
-                    stroke="#2E353B"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-            </div>
-
-            <div className="max-w-[1400px] mx-auto p-6 md:p-12">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {photos.map((photo, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: i * 0.05, ease: 'easeOut' }}
-                    className="relative aspect-square rounded-card overflow-hidden shadow-sm border border-hairline bg-surface"
-                  >
-                    <Image
-                      src={photo}
-                      alt={`Gallery image ${i + 1}`}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                      style={{ objectFit: 'cover' }}
-                      className="object-cover hover:scale-110 transition-transform duration-500"
-                    />
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* ── The Modal Gallery (Portal) ── */}
+      {mounted ? createPortal(modalContent, document.body) : null}
     </>
   )
 }

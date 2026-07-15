@@ -106,14 +106,13 @@ export default function HomePage() {
       >
         <div className="absolute inset-0 w-full h-full">
           <Image
-            src="/crane-construction.png"
+            src="/new hero image.png"
             alt="Crane lifting steel beams at a BD Buildcon construction site"
             fill
             className="object-cover"
             priority
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
         <div className="relative z-10 w-full h-full flex flex-col justify-end px-gutter pb-[40px] sm:pb-[80px] max-w-container mx-auto mt-auto">
           <h1 className="text-white text-left font-display font-[800] text-[64px] sm:text-[96px] md:text-[120px] lg:text-[140px] leading-[0.85] tracking-tight mb-[32px] sm:mb-[48px]">

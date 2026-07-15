@@ -319,29 +319,11 @@ export default function WhyUsPage() {
               </div>
             </SlideIn>
 
-            <StaggerReveal className="grid grid-cols-2 gap-[20px]" direction="right">
-              {machineryStats.map((s, i) => (
-                <div key={i} className="bg-white border border-hairline rounded-card p-[28px] text-center">
-                  <div className="font-display font-[800] text-[36px] leading-none text-teal mb-[10px] tabular-nums">
-                    {s.numeric !== undefined ? <CountUp target={s.numeric} suffix={s.suffix} /> : s.value}
-                  </div>
-                  <div className="text-[12.5px] font-semibold uppercase tracking-[0.08em] text-body">{s.label}</div>
-                </div>
-              ))}
-            </StaggerReveal>
+            <SlideIn from="right" className="flex justify-center items-center">
+              <PhotoStackGallery photos={machineryPhotos} />
+            </SlideIn>
           </div>
         </BlueprintReveal>
-
-        {/* ── Photo Gallery Stack ── */}
-        <div className="relative max-w-container mx-auto px-gutter mt-[96px] pt-[72px] border-t border-hairline flex flex-col items-center">
-          <SlideIn from="bottom">
-            <div className="text-center mb-[48px]">
-              <h3 className="font-display font-bold text-[32px] text-ink mb-[12px]">Explore</h3>
-              <p className="text-[16px] text-body">Click the stack to view our extensive machinery gallery</p>
-            </div>
-          </SlideIn>
-          <PhotoStackGallery photos={machineryPhotos} />
-        </div>
       </section>
 
       {/* ── Testimonials ── */}

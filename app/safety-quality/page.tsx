@@ -265,9 +265,9 @@ export default function SafetyQualityPage() {
 
       {/* ── Safety Protocols ── */}
       <section aria-label="Safety Protocols" className="bg-surface border-y border-hairline py-[96px]">
-        <div className="max-w-container mx-auto px-gutter grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-[72px] items-center">
+        <div className="max-w-container mx-auto px-gutter grid grid-cols-1 lg:grid-cols-[1.35fr_1fr] gap-[64px] items-center">
           {/* Safety Photo Collage */}
-          <ParallaxLayer yRange={-36} className="grid grid-cols-2 gap-4 pr-0 lg:pr-8">
+          <ParallaxLayer yRange={-36} className="grid grid-cols-2 gap-4">
             <div className="grid gap-4 self-center">
               <RevealImage
                 src="/brochurephotos/safety/67.webp"

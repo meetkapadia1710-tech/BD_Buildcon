@@ -95,19 +95,64 @@ export default function AboutPage() {
         className="relative bg-surface border-y border-hairline py-[96px] overflow-hidden"
       >
         {/* Background Growth Graph */}
-        <div className="absolute inset-x-0 bottom-0 top-[20%] pointer-events-none opacity-30">
+        <div className="absolute inset-x-0 bottom-0 top-[10%] pointer-events-none opacity-40">
           <svg preserveAspectRatio="none" viewBox="0 0 100 100" className="w-full h-full">
-            <path d="M0,100 L0,90 C25,85 40,60 60,50 C80,40 90,20 100,5 L100,100 Z" fill="url(#growth-gradient)" />
-            <path
-              d="M0,90 C25,85 40,60 60,50 C80,40 90,20 100,5"
-              fill="none"
+            {/* Grid Lines */}
+            <line
+              x1="0"
+              y1="25"
+              x2="100"
+              y2="25"
               stroke="#16A8B8"
-              strokeWidth="2"
+              strokeOpacity="0.15"
+              strokeWidth="1"
+              strokeDasharray="1,3"
               vectorEffect="non-scaling-stroke"
             />
+            <line
+              x1="0"
+              y1="50"
+              x2="100"
+              y2="50"
+              stroke="#16A8B8"
+              strokeOpacity="0.15"
+              strokeWidth="1"
+              strokeDasharray="1,3"
+              vectorEffect="non-scaling-stroke"
+            />
+            <line
+              x1="0"
+              y1="75"
+              x2="100"
+              y2="75"
+              stroke="#16A8B8"
+              strokeOpacity="0.15"
+              strokeWidth="1"
+              strokeDasharray="1,3"
+              vectorEffect="non-scaling-stroke"
+            />
+
+            {/* Filled Area */}
+            <path d="M0,100 L0,85 L25,75 L50,55 L75,30 L100,5 L100,100 Z" fill="url(#growth-gradient)" />
+
+            {/* Line */}
+            <path
+              d="M0,85 L25,75 L50,55 L75,30 L100,5"
+              fill="none"
+              stroke="#16A8B8"
+              strokeWidth="3"
+              vectorEffect="non-scaling-stroke"
+            />
+
+            {/* Data Points */}
+            <circle cx="25" cy="75" r="1.5" fill="#16A8B8" />
+            <circle cx="50" cy="55" r="1.5" fill="#16A8B8" />
+            <circle cx="75" cy="30" r="1.5" fill="#16A8B8" />
+            <circle cx="100" cy="5" r="1.5" fill="#16A8B8" />
+
             <defs>
               <linearGradient id="growth-gradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#16A8B8" stopOpacity="0.5" />
+                <stop offset="0%" stopColor="#16A8B8" stopOpacity="0.3" />
                 <stop offset="100%" stopColor="#16A8B8" stopOpacity="0" />
               </linearGradient>
             </defs>

@@ -114,18 +114,10 @@ export function PageTransitionOverlay() {
   return (
     <div
       ref={panelRef}
-      className="fixed inset-0 z-[300] pointer-events-none flex items-center justify-center overflow-hidden"
-      style={{ backgroundColor: '#0e1011', transform: 'translateY(100vh)' }}
+      className="fixed inset-0 z-[300] pointer-events-none flex items-center justify-center overflow-hidden bg-white"
+      style={{ transform: 'translateY(100vh)' }}
       aria-hidden="true"
     >
-      {/* Soft radial glow — breathes continuously while covered */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div
-          className="animate-soft-pulse w-[500px] h-[500px] rounded-full filter blur-[80px]"
-          style={{ background: 'radial-gradient(circle, #16A8B8 0%, transparent 70%)' }}
-        />
-      </div>
-
       {/* Sleek loading bar at the top of the viewport */}
       <div
         ref={lineRef}
@@ -139,31 +131,19 @@ export function PageTransitionOverlay() {
         }}
       />
 
-      {/* Brand mark */}
+      {/* Brand mark and Text */}
       <div
         ref={markRef}
         className="relative z-10 flex flex-col items-center gap-6"
         style={{ opacity: 0, transform: 'translateY(16px)' }}
       >
-        <div className="relative flex items-center justify-center">
-          {/* Spinning ring */}
-          <span
-            className="animate-spin-slow absolute h-[168px] w-[168px] rounded-full border-2 border-teal/15 border-t-teal border-r-teal/50"
-            aria-hidden="true"
-          />
-          <Logo light={false} className="relative h-24 w-auto" />
+        <div className="relative flex items-center justify-center animate-pulse">
+          <Logo light={true} className="relative h-24 w-auto" />
         </div>
 
-        {/* Loading dots */}
-        <div className="flex items-center gap-[7px]" aria-hidden="true">
-          {[0, 0.15, 0.3].map((delay, i) => (
-            <span
-              key={i}
-              className="animate-dot-bounce h-[6px] w-[6px] rounded-full bg-teal"
-              style={{ animationDelay: `${delay}s` }}
-            />
-          ))}
-        </div>
+        <span className="font-body text-[13px] font-semibold uppercase tracking-[0.22em] text-ink/70">
+          Engineering Excellence...
+        </span>
       </div>
     </div>
   )
