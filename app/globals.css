@@ -219,10 +219,10 @@ img {
     @apply py-12 lg:py-16;
   }
   .container-max {
-    @apply max-w-container mx-auto px-6;
+    @apply max-w-container mx-auto px-gutter;
   }
   .container-tight {
-    @apply max-w-3xl mx-auto px-6;
+    @apply max-w-3xl mx-auto px-gutter;
   }
   .teal-rule {
     @apply block w-12 h-1 bg-teal mt-4 mb-0 rounded-full;

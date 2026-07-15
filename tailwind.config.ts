@@ -52,12 +52,12 @@ const config: Config = {
         'label-sm': ['11px', { lineHeight: '1.2', letterSpacing: '0.14em', fontWeight: '600' }],
       },
       maxWidth: {
-        container: '1280px',
+        container: '100%',
       },
       spacing: {
         section: '96px',
         band: '72px',
-        gutter: '24px',
+        gutter: '0px',
       },
       borderRadius: {
         card: '12px',

@@ -48,9 +48,7 @@ export function Header() {
     <>
       <header
         className={`sticky top-0 z-50 w-full transition-all duration-300 h-[72px] flex items-center border-b ${
-          scrolled
-            ? 'bg-white/96 backdrop-blur-md border-hairline shadow-[0_1px_24px_rgba(0,0,0,0.08)]'
-            : 'bg-white/96 backdrop-blur-md border-hairline'
+          scrolled ? 'bg-white border-hairline shadow-[0_1px_24px_rgba(0,0,0,0.08)]' : 'bg-white border-hairline'
         }`}
       >
         <div className="max-w-container w-full mx-auto px-gutter flex items-center justify-between gap-4">
@@ -70,11 +68,7 @@ export function Header() {
                 }`}
               >
                 {link.label}
-                {isActive(link.href) && (
-                  <span
-                    className="absolute bottom-[-1px] left-4 right-4 h-[2px] bg-teal"
-                  />
-                )}
+                {isActive(link.href) && <span className="absolute bottom-[-1px] left-4 right-4 h-[2px] bg-teal" />}
               </Link>
             ))}
           </nav>
@@ -98,7 +92,7 @@ export function Header() {
                 </svg>
               </div>
             </a>
-            
+
             <Link
               href="/contact"
               className="btn-primary text-[13px] font-semibold px-[15px] py-[8px] min-h-[32px] h-[32px]"
@@ -116,9 +110,15 @@ export function Header() {
           >
             <span className="sr-only">{mobileOpen ? 'Close' : 'Menu'}</span>
             <div className="w-6 flex flex-col gap-[5px]">
-              <span className={`block h-[2px] w-full bg-current rounded-full transition-transform ${mobileOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
-              <span className={`block h-[2px] w-full bg-current rounded-full transition-opacity ${mobileOpen ? 'opacity-0' : ''}`} />
-              <span className={`block h-[2px] w-full bg-current rounded-full transition-transform ${mobileOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
+              <span
+                className={`block h-[2px] w-full bg-current rounded-full transition-transform ${mobileOpen ? 'rotate-45 translate-y-[7px]' : ''}`}
+              />
+              <span
+                className={`block h-[2px] w-full bg-current rounded-full transition-opacity ${mobileOpen ? 'opacity-0' : ''}`}
+              />
+              <span
+                className={`block h-[2px] w-full bg-current rounded-full transition-transform ${mobileOpen ? '-rotate-45 -translate-y-[7px]' : ''}`}
+              />
             </div>
           </button>
         </div>
@@ -127,7 +127,7 @@ export function Header() {
       {/* ── Mobile Menu Overlay ── */}
       {mobileOpen && (
         <div className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm lg:hidden" onClick={() => setMobileOpen(false)}>
-          <div 
+          <div
             className="fixed top-0 right-0 bottom-0 w-[300px] bg-white shadow-2xl flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >

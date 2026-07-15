@@ -9,27 +9,14 @@ const BuildingScroll = dynamic(() => import('@/components/motion/BuildingScroll'
   ssr: false,
 })
 import { CTABand } from '@/components/layout/CTABand'
+import { SectorMarquee } from '@/components/layout/SectorMarquee'
 import { CustomSelect } from '@/components/ui/CustomSelect'
 import { clients } from '@/content/clients'
 import { consultants } from '@/content/consultants'
 import { stats, statsDisplay } from '@/content/company'
 import { services } from '@/content/services'
 
-const sectors = [
-  'Chemicals',
-  'Pharma',
-  'Petroleum',
-  'Fertiliser',
-  'Glass',
-  'Tyre',
-  'Food Processing',
-  'Industrial Gases',
-  'Insulation',
-  'Adhesives',
-  'Natural Fibres',
-  'Infrastructure',
-  'Residential',
-]
+// Sectors are now defined inside SectorMarquee component
 
 const pillars = [
   {
@@ -115,121 +102,132 @@ export default function HomePage() {
       {/* ── Hero ── */}
       <section
         aria-label="Hero"
-        className="relative min-h-[620px] flex items-center justify-center overflow-hidden bg-dark-bg"
+        className="relative min-h-[calc(100dvh-72px)] flex items-center justify-center overflow-hidden bg-dark-bg"
       >
         <div className="absolute inset-0 w-full h-full">
           <Image
-            src="/brochurephotos/general photo/2I2A7705.webp"
-            alt="Industrial plant construction site at twilight"
+            src="/crane-construction.png"
+            alt="Crane lifting steel beams at a BD Buildcon construction site"
             fill
             className="object-cover"
             priority
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0f14179e] via-[#0f14178c] to-[#0f1417bf]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
-        <div className="relative z-10 text-center px-6 py-[96px] max-w-[960px] mx-auto">
-          <div className="inline-flex items-center gap-[10px] bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-[18px] py-[8px] text-white/80 font-semibold text-[12px] uppercase tracking-[0.1em] mb-[32px]">
-            <span className="w-[7px] h-[7px] bg-teal rounded-full" />
-            ISO 9001:2015 Certified · CRISIL SME 3 Rated
-          </div>
-
-          <h1 className="font-display font-[800] text-[60px] leading-[1.06] tracking-[-0.02em] text-white mb-[28px]">
-            All our projects, completed
+        <div className="relative z-10 w-full h-full flex flex-col justify-end px-gutter pb-[40px] sm:pb-[80px] max-w-container mx-auto mt-auto">
+          <h1 className="text-white text-left font-display font-[800] text-[64px] sm:text-[96px] md:text-[120px] lg:text-[140px] leading-[0.85] tracking-tight mb-[32px] sm:mb-[48px]">
+            Shaping
             <br />
-            on deadline — <span className="text-[#5BD6E2]">with zero accidents.</span>
+            <span className="font-serif italic font-light text-white/90">Modern</span>
+            <br />
+            Infrastructure
           </h1>
 
-          <p className="text-[18px] leading-[1.7] text-white/70 max-w-[620px] mx-auto mb-[40px]">
-            {statsDisplay.yearsExperience} years · ISO 9001:2015 · CRISIL SME 3 · {statsDisplay.valueDelivered}{' '}
-            delivered
-          </p>
+          <div className="flex flex-col sm:flex-row gap-8 justify-between items-start sm:items-end w-full">
+            <div className="inline-flex items-center gap-[8px] sm:gap-[10px] bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-[14px] sm:px-[18px] py-[7px] sm:py-[8px] text-white/90 font-medium text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
+              <span className="w-[6px] h-[6px] sm:w-[7px] sm:h-[7px] bg-teal rounded-full" />
+              ISO 9001:2015 · CRISIL SME 3
+            </div>
 
-          <div className="flex gap-[16px] justify-center">
-            <Link
-              href="/contact"
-              className="bg-teal text-white text-[13px] font-semibold uppercase tracking-[0.1em] px-[32px] py-[15px] rounded-full transition-all duration-200 hover:bg-[#0E8C9B] hover:shadow-[0_8px_32px_rgba(22,168,184,0.35)]"
-            >
-              Start your project
-            </Link>
-            <Link
-              href="/projects"
-              className="border-[2px] border-white/90 text-white text-[13px] font-semibold uppercase tracking-[0.1em] px-[32px] py-[13px] rounded-full transition-all duration-200 hover:bg-white hover:text-ink"
-            >
-              See the work
-            </Link>
+            <div className="flex gap-[12px] sm:gap-[16px] w-full sm:w-auto">
+              <Link
+                href="/projects"
+                className="border border-white/30 backdrop-blur-sm text-white text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.1em] px-[24px] sm:px-[32px] py-[12px] sm:py-[13px] rounded-full transition-all duration-300 hover:bg-white hover:text-ink w-full sm:w-auto text-center"
+              >
+                See the work
+              </Link>
+              <Link
+                href="/contact"
+                className="bg-white text-ink text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.1em] px-[24px] sm:px-[32px] py-[12px] sm:py-[13px] rounded-full transition-all duration-300 hover:bg-gray-100 hover:scale-105 w-full sm:w-auto text-center"
+              >
+                Start project
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ── Sector Marquee ── */}
-      <section aria-label="Sectors we serve" className="bg-surface border-b border-hairline py-[16px] overflow-hidden">
-        <div className="flex w-max animate-marquee">
-          <div className="flex">
-            {sectors.map((s, i) => (
-              <span
-                key={i}
-                className="flex items-center text-[12.5px] font-semibold uppercase tracking-[0.12em] text-body px-[20px]"
-              >
-                {s}
-                <span className="text-teal text-[16px] ml-[40px]" aria-hidden="true">
-                  ·
-                </span>
-              </span>
-            ))}
-          </div>
-          <div className="flex" aria-hidden="true">
-            {sectors.map((s, i) => (
-              <span
-                key={i}
-                className="flex items-center text-[12.5px] font-semibold uppercase tracking-[0.12em] text-body px-[20px]"
-              >
-                {s}
-                <span className="text-teal text-[16px] ml-[40px]" aria-hidden="true">
-                  ·
-                </span>
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
+      <SectorMarquee />
 
       {/* ── What We Build ── */}
-      <section aria-label="Services overview" className="py-[96px] bg-white">
+      <section aria-label="Services overview" className="py-[72px] sm:py-[96px] bg-white">
         <div className="max-w-container mx-auto px-gutter">
-          <div className="text-center mb-[56px]">
-            <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-ink mb-[16px]">What We Build</h2>
+          <div className="text-center mb-[48px] sm:mb-[64px]">
+            <h2 className="font-display font-bold text-[32px] sm:text-[42px] tracking-[-0.01em] text-ink mb-[16px]">
+              What We Build
+            </h2>
             <div className="w-[56px] h-[3px] bg-teal rounded-full mx-auto mb-[20px]" />
-            <p className="text-[18px] leading-[1.7] text-body max-w-[640px] mx-auto">
+            <p className="text-[16px] sm:text-[18px] leading-[1.7] text-body max-w-[640px] mx-auto">
               Precision engineering and robust construction across specialised industrial disciplines.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[20px]">
-            {services.map((svc) => (
-              <Link
-                key={svc.id}
-                href="/projects"
-                className="group relative block aspect-[4/5] overflow-hidden rounded-card bg-dark-bg"
-              >
-                <Image
-                  src={svc.image}
-                  alt={svc.title}
-                  fill
-                  className="object-cover transition-transform duration-[600ms] ease-out group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-                <span className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <span className="absolute bottom-0 left-0 right-0 p-[24px] block">
-                  <span className="block font-display font-bold text-[21px] text-white mb-[6px]">
-                    {svc.shortTitle || svc.title}
-                  </span>
-                  <span className="block text-[14px] leading-[1.5] text-white/70">
-                    {svc.description.substring(0, 70)}...
-                  </span>
-                </span>
-              </Link>
-            ))}
+          <div className="flex flex-col gap-[48px] sm:gap-[64px]">
+            {services.map((svc, idx) => {
+              const isReversed = idx % 2 !== 0
+              return (
+                <div
+                  key={svc.id}
+                  className={`grid grid-cols-1 lg:grid-cols-2 gap-[24px] lg:gap-[56px] items-center${
+                    idx > 0 ? ' pt-[48px] sm:pt-[64px] border-t border-hairline' : ''
+                  }`}
+                >
+                  {/* Photo */}
+                  <div
+                    className={`relative w-full aspect-[16/10] rounded-card overflow-hidden bg-dark-bg${
+                      isReversed ? ' lg:order-2' : ''
+                    }`}
+                  >
+                    <Image
+                      src={svc.image}
+                      alt={svc.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                  </div>
+
+                  {/* Text */}
+                  <div className={isReversed ? 'lg:order-1' : ''}>
+                    <div className="flex items-center gap-[12px] mb-[16px]">
+                      <span className="font-body text-[11px] font-bold text-teal bg-teal/5 px-[10px] py-[4px] rounded-[4px] border border-teal/15 tracking-[0.05em]">
+                        {String(idx + 1).padStart(2, '0')}
+                      </span>
+                      <span className="font-body text-[11px] tracking-[0.15em] uppercase text-body font-semibold">
+                        Service
+                      </span>
+                    </div>
+
+                    <h3 className="font-display font-bold text-[24px] sm:text-[30px] tracking-[-0.01em] text-ink mb-[12px] sm:mb-[16px]">
+                      {svc.title}
+                    </h3>
+
+                    <p className="text-[15px] sm:text-[17px] leading-[1.7] text-body mb-[20px] sm:mb-[24px]">
+                      {svc.description}
+                    </p>
+
+                    <ul className="flex flex-col gap-[8px] mb-[24px] sm:mb-[32px]">
+                      {svc.bullets.slice(0, 4).map((b, bi) => (
+                        <li key={bi} className="flex items-start gap-[10px] text-[14px] sm:text-[15px] text-body">
+                          <span className="text-teal mt-[3px] shrink-0">✓</span>
+                          {b}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <Link
+                      href="/projects"
+                      className="inline-flex items-center gap-[8px] text-[13px] font-semibold uppercase tracking-[0.1em] text-teal hover:text-[#0E8C9B] transition-colors duration-200"
+                    >
+                      View projects
+                      <span className="text-[16px]">→</span>
+                    </Link>
+                  </div>
+                </div>
+              )
+            })}
           </div>
         </div>
       </section>
