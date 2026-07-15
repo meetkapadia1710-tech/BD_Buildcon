@@ -57,7 +57,7 @@ const config: Config = {
       spacing: {
         section: '96px',
         band: '72px',
-        gutter: 'clamp(20px, 5vw, 48px)',
+        gutter: 'clamp(24px, 8vw, 120px)',
       },
       borderRadius: {
         card: '12px',
