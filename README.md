@@ -12,6 +12,15 @@ npm run dev
 
 Open [http://localhost:3002](http://localhost:3002).
 
+## Recent Updates & Fixes
+
+- **Image Optimisation:** All raster images across the site have been converted to WebP format for optimal loading performance. Links inside `content/` and components have been updated.
+- **Gallery UI/UX Improvements:**
+  - Fixed a Next.js `Image` aspect ratio issue (`objectFit: 'cover'`) where images were appearing squished.
+  - Implemented smooth staggered entrance animations using `framer-motion` for the Plant & Machinery gallery modal.
+  - Fixed a bug where smooth scrolling (Lenis) and modal scrolling were conflicting. Added scroll locks and `data-lenis-prevent="true"`.
+- **Build Fix:** Added missing `ease-out-quart` and `spring` transition configurations to `tailwind.config.ts`.
+
 ## Project Structure
 
 ```

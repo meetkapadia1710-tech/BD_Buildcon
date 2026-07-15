@@ -118,16 +118,13 @@ export function PageTransitionOverlay() {
       style={{ backgroundColor: '#0e1011', transform: 'translateY(100vh)' }}
       aria-hidden="true"
     >
-      {/* Soft radial glow */}
-      <div
-        className="absolute w-[500px] h-[500px] rounded-full pointer-events-none opacity-20 filter blur-[80px]"
-        style={{
-          background: 'radial-gradient(circle, #16A8B8 0%, transparent 70%)',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-        }}
-      />
+      {/* Soft radial glow — breathes continuously while covered */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div
+          className="animate-soft-pulse w-[500px] h-[500px] rounded-full filter blur-[80px]"
+          style={{ background: 'radial-gradient(circle, #16A8B8 0%, transparent 70%)' }}
+        />
+      </div>
 
       {/* Sleek loading bar at the top of the viewport */}
       <div
@@ -145,10 +142,28 @@ export function PageTransitionOverlay() {
       {/* Brand mark */}
       <div
         ref={markRef}
-        className="relative z-10 flex flex-col items-center"
+        className="relative z-10 flex flex-col items-center gap-6"
         style={{ opacity: 0, transform: 'translateY(16px)' }}
       >
-        <Logo light={false} className="h-24 w-auto" />
+        <div className="relative flex items-center justify-center">
+          {/* Spinning ring */}
+          <span
+            className="animate-spin-slow absolute h-[168px] w-[168px] rounded-full border-2 border-teal/15 border-t-teal border-r-teal/50"
+            aria-hidden="true"
+          />
+          <Logo light={false} className="relative h-24 w-auto" />
+        </div>
+
+        {/* Loading dots */}
+        <div className="flex items-center gap-[7px]" aria-hidden="true">
+          {[0, 0.15, 0.3].map((delay, i) => (
+            <span
+              key={i}
+              className="animate-dot-bounce h-[6px] w-[6px] rounded-full bg-teal"
+              style={{ animationDelay: `${delay}s` }}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )
