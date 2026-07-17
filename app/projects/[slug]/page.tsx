@@ -178,7 +178,7 @@ export default function ProjectDetailPage({ params }: Props) {
             </div>
             <Link
               href={`/projects/${next.slug}`}
-              className="flex items-center gap-2 font-body text-label-md text-teal uppercase tracking-wider hover:gap-3 transition-all"
+              className="flex items-center gap-2 py-[14px] -my-[14px] font-body text-label-md text-teal uppercase tracking-wider hover:gap-3 transition-all"
             >
               View project
               <svg

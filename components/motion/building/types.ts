@@ -16,36 +16,32 @@ export interface BuildingProps {
   progress: MotionValue<number>
   progressStart: number
   progressEnd: number
-  glassMat?: THREE.Material
-  cladMat?: THREE.Material
+  glassTint?: THREE.ColorRepresentation
+  quality: QualitySettings
 }
 
-export interface SkeletonFloorProps {
-  floorIndex: number
-  totalFloors: number
-  W: number
-  D: number
-  floorHeight: number
-  groupRef: (el: THREE.Group | null) => void
-}
-
-export interface WindowBandsProps {
-  floors: number
-  floorHeight: number
-  W: number
-  D: number
-  groupRef: React.RefObject<THREE.Group>
-  geometry: THREE.BufferGeometry
-}
-
-/** Render-quality tier derived from device. Drives postprocessing, shadow res, crane detail. */
+/** Render-quality tier derived from device. Drives post, AO, shadows, detail. */
 export interface QualitySettings {
-  tier: 'high' | 'low'
+  tier: 'high' | 'mid' | 'low'
+  /** cinematic post composer (bloom/tone/vignette/SMAA) */
   postprocessing: boolean
+  /** ambient-occlusion pass (desktop-class only) */
+  ao: boolean
+  /** PCSS soft shadows */
+  softShadows: boolean
+  /** baked env reflections from Lightformers */
   environment: boolean
+  /** soft contact shadows under the models */
   contactShadows: boolean
+  /** directional shadow map */
+  shadows: boolean
   shadowMapSize: number
+  /** procedural curtain-wall façade shader (vs flat glass) */
+  facadeShader: boolean
+  /** crane lattice diagonals */
   craneDetail: boolean
+  /** full ground-machine fleet (vs a reduced set) */
+  fullMachines: boolean
   dpr: number
 }
 

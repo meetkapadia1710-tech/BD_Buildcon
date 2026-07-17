@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { RevealText, RevealLine } from '@/components/motion/RevealText'
 
 type Crumb = { label: string; href?: string }
 type Props = { title: string; breadcrumbs?: Crumb[]; description?: string }
@@ -36,7 +37,7 @@ export function PageTitleBand({ title, breadcrumbs = [], description }: Props) {
                 {crumb.href ? (
                   <Link
                     href={crumb.href}
-                    className="hover:text-[#5BD6E2] transition-colors duration-200 uppercase tracking-widest font-semibold"
+                    className="inline-block py-[12px] -my-[12px] hover:text-[#5BD6E2] transition-colors duration-200 uppercase tracking-widest font-semibold"
                   >
                     {crumb.label}
                   </Link>
@@ -51,9 +52,9 @@ export function PageTitleBand({ title, breadcrumbs = [], description }: Props) {
         </nav>
 
         {/* Title */}
-        <div>
-          <h1 className="font-display text-[48px] font-[800] text-white leading-tight">{title}</h1>
-        </div>
+        <RevealText as="h1" className="font-display text-[48px] font-[800] text-white leading-tight">
+          <RevealLine>{title}</RevealLine>
+        </RevealText>
 
         {/* Description */}
         {description && (

@@ -1,6 +1,9 @@
 'use client'
 
+import { useMemo, useEffect } from 'react'
 import { ContactShadows } from '@react-three/drei'
+import * as THREE from 'three'
+import { sitePlanTexture } from './textures'
 import type { QualitySettings } from './types'
 
 interface GroundProps {
@@ -8,27 +11,52 @@ interface GroundProps {
 }
 
 /**
- * "On-page" grounding. There is intentionally no opaque floor plane — the canvas
- * is transparent, so the page's white and the faint teal blueprint grid show
- * through around and behind the structures. The towers are grounded purely by soft
- * contact shadows, which are transparent everywhere except directly beneath the
- * geometry, so nothing reads as a studio "rug" or leaves a visible horizon seam.
+ * Grounds the model on a radial "site-plan" mat (faint survey grid, access road,
+ * teal setting-out marks) that fades to fully transparent at the rim — so the set
+ * sits on something without introducing a hard horizon seam against the page white.
+ * Soft contact shadows sit on top and do the close-range seating.
  */
 export function Ground({ quality }: GroundProps) {
-  if (!quality.contactShadows) return null
-  const csResolution = quality.tier === 'high' ? 1024 : 512
+  const siteTex = useMemo(() => sitePlanTexture(), [])
+  const siteMat = useMemo(
+    () =>
+      siteTex
+        ? new THREE.MeshBasicMaterial({ map: siteTex, transparent: true, depthWrite: false, toneMapped: false })
+        : null,
+    [siteTex],
+  )
+  const siteGeo = useMemo(() => new THREE.CircleGeometry(70, 64), [])
+
+  useEffect(() => {
+    return () => {
+      siteMat?.dispose()
+      siteGeo.dispose()
+    }
+  }, [siteMat, siteGeo])
 
   return (
-    <ContactShadows
-      position={[0, -0.46, 0]}
-      // tight to the footprint, only the lowest few metres of geometry cast, and
-      // light — so it reads as a soft shadow hugging the bases, not a grey slab
-      scale={62}
-      resolution={csResolution}
-      blur={2.4}
-      opacity={0.33}
-      far={9}
-      color="#3a3f45"
-    />
+    <>
+      {siteMat && (
+        <mesh
+          geometry={siteGeo}
+          material={siteMat}
+          rotation={[-Math.PI / 2, 0, 0]}
+          position={[2, -0.475, -1]}
+          renderOrder={-1}
+        />
+      )}
+
+      {quality.contactShadows && (
+        <ContactShadows
+          position={[0, -0.46, 0]}
+          scale={62}
+          resolution={quality.tier === 'high' ? 1024 : 512}
+          blur={2.4}
+          opacity={0.36}
+          far={9}
+          color="#3a3f45"
+        />
+      )}
+    </>
   )
 }

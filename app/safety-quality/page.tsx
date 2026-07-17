@@ -7,6 +7,7 @@ import { SlideIn } from '@/components/motion/SlideIn'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { BlueprintReveal } from '@/components/motion/BlueprintReveal'
 import { CountUp } from '@/components/motion/CountUp'
+import { Spotlight } from '@/components/motion/Spotlight'
 
 export const metadata: Metadata = {
   title: 'Safety & Quality — BD Buildcon LLP',
@@ -394,7 +395,7 @@ export default function SafetyQualityPage() {
           </SlideIn>
           <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[24px]" stagger={0.07}>
             {quality.map((q, i) => (
-              <div
+              <Spotlight
                 key={i}
                 className="group border border-hairline rounded-card p-[30px] transition-all duration-300 hover:border-teal/40 hover:-translate-y-1 hover:shadow-[0_12px_28px_rgba(0,0,0,0.08)]"
               >
@@ -403,7 +404,7 @@ export default function SafetyQualityPage() {
                 </div>
                 <h3 className="font-display font-bold text-[19px] text-ink mb-[10px]">{q.title}</h3>
                 <p className="text-[15px] leading-[1.65] text-body m-0">{q.body}</p>
-              </div>
+              </Spotlight>
             ))}
           </StaggerReveal>
         </BlueprintReveal>

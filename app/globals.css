@@ -240,6 +240,44 @@ img {
   .animate-dot-bounce {
     animation: dot-bounce 1.2s ease-in-out infinite;
   }
+
+  @keyframes skyline-rise {
+    0%,
+    100% {
+      transform: scaleY(0.88);
+    }
+    50% {
+      transform: scaleY(1);
+    }
+  }
+  .animate-skyline-rise {
+    animation: skyline-rise 2.6s ease-in-out infinite;
+  }
+
+  @keyframes crane-sway {
+    0%,
+    100% {
+      transform: rotate(-3deg);
+    }
+    50% {
+      transform: rotate(3deg);
+    }
+  }
+  .animate-crane-sway {
+    animation: crane-sway 5s ease-in-out infinite;
+  }
+
+  @keyframes hero-zoom {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.08);
+    }
+  }
+  .animate-hero-zoom {
+    animation: hero-zoom 20s ease-out forwards;
+  }
 }
 
 @layer components {
@@ -348,4 +386,21 @@ img {
 .image-overlay::after {
   content: '';
   @apply absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80;
+}
+
+/* ── Decorative textures — apply opacity/color via a wrapping className ── */
+.texture-dots {
+  background-image: radial-gradient(currentColor 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
+}
+
+.texture-grid {
+  background-image:
+    linear-gradient(rgba(22, 168, 184, 0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(22, 168, 184, 0.5) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.texture-diagonal {
+  background-image: repeating-linear-gradient(45deg, transparent 0 12px, currentColor 12px 13px);
 }

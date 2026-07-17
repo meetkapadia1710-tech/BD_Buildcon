@@ -113,13 +113,26 @@ function BuildingFoundation({ progress, building }: { progress: MotionValue<numb
         ))}
       </Staged>
 
-      {/* column starter bars — the structure's columns rise out of these */}
+      {/* column starter bars — a tidy 4-bar cage the columns rise out of.
+          Half the old height + thinner, so footings don't read as fat sticks. */}
       <Staged progress={progress} band={starterBand}>
         {cols.map(([x, z], i) => (
           <group key={i}>
-            <mesh geometry={BOX} material={MAT_REBAR} castShadow position={[x, 0.75, z]} scale={[0.14, 2.0, 0.14]} />
-            <mesh geometry={BOX} material={MAT_REBAR} position={[x + 0.16, 0.6, z + 0.16]} scale={[0.07, 1.6, 0.07]} />
-            <mesh geometry={BOX} material={MAT_REBAR} position={[x - 0.16, 0.6, z - 0.16]} scale={[0.07, 1.6, 0.07]} />
+            {[
+              [0.14, 0.14],
+              [-0.14, 0.14],
+              [0.14, -0.14],
+              [-0.14, -0.14],
+            ].map(([ox, oz], j) => (
+              <mesh
+                key={j}
+                geometry={BOX}
+                material={MAT_REBAR}
+                castShadow
+                position={[x + ox, 0.55, z + oz]}
+                scale={[0.05, 1.0, 0.05]}
+              />
+            ))}
           </group>
         ))}
       </Staged>

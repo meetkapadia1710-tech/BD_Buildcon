@@ -316,22 +316,26 @@ function PipeStack({ progress, band, position, rotationY = 0 }: MachineProps) {
 }
 
 // ─── Placement: each cluster gated to the phase it belongs to ───────────────────
-export function GroundMachines({ progress }: { progress: MotionValue<number> }) {
+export function GroundMachines({ progress, full = true }: { progress: MotionValue<number>; full?: boolean }) {
   return (
     // dropped to the site grade so wheels/tracks rest on the ground, not the pad
     <group position={[0, -0.46, 0]}>
-      {/* Foundation — excavator working the first tower's footprint */}
+      {/* Foundation — excavator working the first tower's footprint (always shown) */}
       <Excavator progress={progress} band={[0.0, 0.05, 0.16, 0.22]} position={[0.5, 0, -6]} rotationY={-1.6} />
-      <DumperTruck progress={progress} band={[0.01, 0.06, 0.15, 0.22]} position={[17, 0, 6]} driveOffset={24} />
       <MaterialPiles progress={progress} band={[0.02, 0.07, 0.42, 0.5]} position={[14, 0, 12]} />
 
-      {/* Structure (alongside the crane) */}
-      <RebarStack progress={progress} band={[0.18, 0.24, 0.46, 0.54]} position={[-12, 0, 8]} rotationY={0.3} />
+      {/* Structure — the mixer keys the concrete phase (always shown) */}
       <MixerTruck progress={progress} band={[0.2, 0.26, 0.44, 0.52]} position={[-3, 0, 12]} driveOffset={-24} />
-      <PumpTruck progress={progress} band={[0.22, 0.28, 0.46, 0.54]} position={[5, 0, 12]} driveOffset={24} />
 
-      {/* Services */}
-      <PipeStack progress={progress} band={[0.6, 0.66, 0.82, 0.9]} position={[-14, 0, -3]} rotationY={0.2} />
+      {/* Full-fleet extras (trimmed on the low tier as a perf guardrail) */}
+      {full && (
+        <>
+          <DumperTruck progress={progress} band={[0.01, 0.06, 0.15, 0.22]} position={[17, 0, 6]} driveOffset={24} />
+          <RebarStack progress={progress} band={[0.18, 0.24, 0.46, 0.54]} position={[-12, 0, 8]} rotationY={0.3} />
+          <PumpTruck progress={progress} band={[0.22, 0.28, 0.46, 0.54]} position={[5, 0, 12]} driveOffset={24} />
+          <PipeStack progress={progress} band={[0.6, 0.66, 0.82, 0.9]} position={[-14, 0, -3]} rotationY={0.2} />
+        </>
+      )}
     </group>
   )
 }
