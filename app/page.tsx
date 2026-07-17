@@ -14,11 +14,12 @@ import { CustomSelect } from '@/components/ui/CustomSelect'
 import { CountUp } from '@/components/motion/CountUp'
 import { SlideIn } from '@/components/motion/SlideIn'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
-import { RevealImage } from '@/components/motion/RevealImage'
+import { RevealText, RevealLine } from '@/components/motion/RevealText'
+import { MagneticButton } from '@/components/motion/MagneticButton'
+import { ServicesScroll } from '@/components/motion/ServicesScroll'
 import { clients } from '@/content/clients'
 import { consultants } from '@/content/consultants'
 import { stats, statsDisplay } from '@/content/company'
-import { services } from '@/content/services'
 import { submitEnquiry } from '@/lib/submitEnquiry'
 
 // Sectors are now defined inside SectorMarquee component
@@ -92,13 +93,17 @@ export default function HomePage() {
         </div>
 
         <div className="relative z-10 w-full h-full flex flex-col justify-end px-gutter pb-[40px] sm:pb-[80px] max-w-container mx-auto mt-auto">
-          <h1 className="text-white text-left font-display font-[800] text-[64px] sm:text-[96px] md:text-[120px] lg:text-[140px] leading-[0.85] tracking-tight mb-[32px] sm:mb-[48px]">
-            Shaping
-            <br />
-            <span className="font-serif italic font-light text-white/90">Modern</span>
-            <br />
-            Infrastructure
-          </h1>
+          <RevealText
+            as="h1"
+            className="text-white text-left font-display font-[800] text-[64px] sm:text-[96px] md:text-[120px] lg:text-[140px] leading-[0.85] tracking-tight mb-[32px] sm:mb-[48px]"
+            stagger={0.12}
+          >
+            <RevealLine>Shaping</RevealLine>
+            <RevealLine>
+              <span className="font-serif italic font-light text-white/90">Modern</span>
+            </RevealLine>
+            <RevealLine>Infrastructure</RevealLine>
+          </RevealText>
 
           <div className="flex flex-col sm:flex-row gap-8 justify-between items-start sm:items-end w-full">
             <div className="inline-flex items-center gap-[8px] sm:gap-[10px] bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-[14px] sm:px-[18px] py-[7px] sm:py-[8px] text-white/90 font-medium text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
@@ -107,18 +112,22 @@ export default function HomePage() {
             </div>
 
             <div className="flex gap-[12px] sm:gap-[16px] w-full sm:w-auto">
-              <Link
+              <MagneticButton
+                as="a"
                 href="/projects"
-                className="border border-white/30 backdrop-blur-sm text-white text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.1em] px-[24px] sm:px-[32px] py-[12px] sm:py-[13px] rounded-full transition-all duration-300 hover:bg-white hover:text-ink w-full sm:w-auto text-center"
+                strength={0.35}
+                className="border border-white/30 backdrop-blur-sm text-white text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.1em] px-[24px] sm:px-[32px] py-[12px] sm:py-[13px] rounded-full transition-colors duration-300 hover:bg-white hover:text-ink w-full sm:w-auto text-center"
               >
                 See the work
-              </Link>
-              <Link
+              </MagneticButton>
+              <MagneticButton
+                as="a"
                 href="/contact"
-                className="bg-white text-ink text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.1em] px-[24px] sm:px-[32px] py-[12px] sm:py-[13px] rounded-full transition-all duration-300 hover:bg-gray-100 hover:scale-105 w-full sm:w-auto text-center"
+                strength={0.35}
+                className="bg-white text-ink text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.1em] px-[24px] sm:px-[32px] py-[12px] sm:py-[13px] rounded-full transition-colors duration-300 hover:bg-gray-100 w-full sm:w-auto text-center"
               >
                 Start project
-              </Link>
+              </MagneticButton>
             </div>
           </div>
         </div>
@@ -128,9 +137,9 @@ export default function HomePage() {
       <SectorMarquee />
 
       {/* ── What We Build ── */}
-      <section aria-label="Services overview" className="py-[72px] sm:py-[96px] bg-white">
-        <div className="max-w-container mx-auto px-gutter">
-          <div className="text-center mb-[48px] sm:mb-[64px]">
+      <section aria-label="Services overview" className="bg-white">
+        <div className="max-w-container mx-auto px-gutter pt-[72px] sm:pt-[96px] pb-[48px] sm:pb-[64px]">
+          <div className="text-center">
             <h2 className="font-display font-bold text-[32px] sm:text-[42px] tracking-[-0.01em] text-ink mb-[16px]">
               What We Build
             </h2>
@@ -139,71 +148,9 @@ export default function HomePage() {
               Precision engineering and robust construction across specialised industrial disciplines.
             </p>
           </div>
-
-          <div className="flex flex-col gap-[48px] sm:gap-[64px]">
-            {services.map((svc, idx) => {
-              const isReversed = idx % 2 !== 0
-              return (
-                <div
-                  key={svc.id}
-                  className={`grid grid-cols-1 lg:grid-cols-2 gap-[24px] lg:gap-[56px] items-center${
-                    idx > 0 ? ' pt-[48px] sm:pt-[64px] border-t border-hairline' : ''
-                  }`}
-                >
-                  {/* Photo */}
-                  <RevealImage
-                    src={svc.image}
-                    alt={svc.title}
-                    fill
-                    wrapperClassName={`relative w-full aspect-[16/10] rounded-card bg-dark-bg${
-                      isReversed ? ' lg:order-2' : ''
-                    }`}
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    parallax
-                  />
-
-                  {/* Text */}
-                  <SlideIn from={isReversed ? 'right' : 'left'} className={isReversed ? 'lg:order-1' : ''}>
-                    <div className="flex items-center gap-[12px] mb-[16px]">
-                      <span className="font-body text-[11px] font-bold text-teal bg-teal/5 px-[10px] py-[4px] rounded-[4px] border border-teal/15 tracking-[0.05em]">
-                        {String(idx + 1).padStart(2, '0')}
-                      </span>
-                      <span className="font-body text-[11px] tracking-[0.15em] uppercase text-body font-semibold">
-                        Service
-                      </span>
-                    </div>
-
-                    <h3 className="font-display font-bold text-[24px] sm:text-[30px] tracking-[-0.01em] text-ink mb-[12px] sm:mb-[16px]">
-                      {svc.title}
-                    </h3>
-
-                    <p className="text-[15px] sm:text-[17px] leading-[1.7] text-body mb-[20px] sm:mb-[24px]">
-                      {svc.description}
-                    </p>
-
-                    <ul className="flex flex-col gap-[8px] mb-[24px] sm:mb-[32px]">
-                      {svc.bullets.slice(0, 4).map((b, bi) => (
-                        <li key={bi} className="flex items-start gap-[10px] text-[14px] sm:text-[15px] text-body">
-                          <span className="text-teal mt-[3px] shrink-0">✓</span>
-                          {b}
-                        </li>
-                      ))}
-                    </ul>
-
-                    <Link
-                      href="/projects"
-                      className="inline-flex items-center gap-[8px] text-[13px] font-semibold uppercase tracking-[0.1em] text-teal hover:text-[#0E8C9B] transition-colors duration-200"
-                    >
-                      View projects
-                      <span className="text-[16px]">→</span>
-                    </Link>
-                  </SlideIn>
-                </div>
-              )
-            })}
-          </div>
         </div>
+
+        <ServicesScroll />
       </section>
 
       {/* ── Pillars ── */}
@@ -598,13 +545,15 @@ function HomeEnquiryForm() {
       </div>
       <div className="flex flex-col gap-[10px]">
         <div className="flex items-center gap-[16px]">
-          <button
+          <MagneticButton
+            as="button"
             type="submit"
             disabled={sending}
+            strength={0.3}
             className="bg-teal text-white border-none cursor-pointer font-body text-[13px] font-semibold uppercase tracking-[0.1em] px-[36px] py-[15px] rounded-full transition-colors duration-200 hover:bg-[#0E8C9B] disabled:opacity-70"
           >
             {sending ? 'Sending...' : 'Send Enquiry'}
-          </button>
+          </MagneticButton>
           {sent && (
             <span className="text-[14px] text-success font-medium">
               ✓ Enquiry sent — we&apos;ll get back to you shortly.

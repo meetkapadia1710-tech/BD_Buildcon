@@ -7,6 +7,7 @@ import { SlideIn } from '@/components/motion/SlideIn'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { BlueprintReveal } from '@/components/motion/BlueprintReveal'
 import { ConstructionDraw } from '@/components/motion/ConstructionDraw'
+import { Spotlight } from '@/components/motion/Spotlight'
 import { testimonials } from '@/content/testimonials'
 import { statsDisplay, stats } from '@/content/company'
 
@@ -220,25 +221,62 @@ export default function WhyUsPage() {
             </div>
           </SlideIn>
 
-          <StaggerReveal className="grid grid-cols-1 md:grid-cols-3 gap-[24px]" stagger={0.08}>
-            {reasons.map((r, i) => (
-              <div
-                key={i}
-                className="group relative overflow-hidden border border-hairline rounded-card p-[32px] flex flex-col gap-[14px] transition-all duration-300 hover:border-teal/40 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,0.08)]"
-              >
-                <span
-                  className="absolute -top-3 right-1 font-display font-[800] text-[92px] leading-none text-teal/[0.06] select-none pointer-events-none"
-                  aria-hidden="true"
+          <StaggerReveal
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-2 gap-[20px] lg:h-[560px]"
+            stagger={0.08}
+          >
+            {reasons.map((r, i) => {
+              const isFeatured = i === 1
+              return (
+                <Spotlight
+                  key={i}
+                  color={isFeatured ? 'rgba(91, 214, 226, 0.14)' : 'rgba(22, 168, 184, 0.16)'}
+                  size={isFeatured ? 360 : 220}
+                  className={`rounded-card p-[28px] lg:p-[32px] flex flex-col transition-all duration-300 ${
+                    isFeatured
+                      ? 'lg:col-span-2 lg:row-span-2 bg-dark-bg border border-transparent hover:border-teal/30 justify-center'
+                      : 'group border border-hairline hover:border-teal/40 hover:-translate-y-1 hover:shadow-[0_12px_28px_rgba(0,0,0,0.08)] justify-start gap-[6px]'
+                  }`}
                 >
-                  {r.num}
-                </span>
-                <div className="relative z-10 w-[52px] h-[52px] rounded-full bg-teal/10 flex items-center justify-center text-teal transition-colors duration-300 group-hover:bg-teal group-hover:text-white">
-                  {r.icon}
-                </div>
-                <h3 className="relative z-10 font-display font-bold text-[20px] text-ink m-0">{r.title}</h3>
-                <p className="relative z-10 text-[15px] leading-[1.65] text-body m-0">{r.body}</p>
-              </div>
-            ))}
+                  {isFeatured && (
+                    <div
+                      className="texture-grid pointer-events-none absolute inset-0 z-0 opacity-40"
+                      aria-hidden="true"
+                    />
+                  )}
+                  <div
+                    className={`relative z-10 flex items-center justify-center rounded-full transition-colors duration-300 ${
+                      isFeatured
+                        ? 'w-[64px] h-[64px] bg-teal/15 text-teal mb-[24px]'
+                        : 'w-[46px] h-[46px] bg-teal/10 text-teal group-hover:bg-teal group-hover:text-white mb-[4px]'
+                    }`}
+                  >
+                    {r.icon}
+                  </div>
+                  <span
+                    className={`relative z-10 font-display font-[800] tracking-[0.08em] ${
+                      isFeatured ? 'text-[13px] text-teal mb-[8px]' : 'text-[11px] text-teal/60'
+                    }`}
+                  >
+                    {r.num}
+                  </span>
+                  <h3
+                    className={`relative z-10 font-display font-bold m-0 ${
+                      isFeatured ? 'text-[26px] text-white mb-[14px]' : 'text-[17px] text-ink'
+                    }`}
+                  >
+                    {r.title}
+                  </h3>
+                  <p
+                    className={`relative z-10 leading-[1.6] m-0 ${
+                      isFeatured ? 'text-[16px] text-white/70 max-w-[420px]' : 'text-[13.5px] text-body line-clamp-3'
+                    }`}
+                  >
+                    {r.body}
+                  </p>
+                </Spotlight>
+              )
+            })}
           </StaggerReveal>
         </div>
       </section>

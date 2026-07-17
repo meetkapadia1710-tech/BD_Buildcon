@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { PageTitleBand } from '@/components/layout/PageTitleBand'
 import { SlideIn } from '@/components/motion/SlideIn'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
+import { MagneticButton } from '@/components/motion/MagneticButton'
 import { contactInfo } from '@/content/links'
 import { submitEnquiry } from '@/lib/submitEnquiry'
 
@@ -268,13 +269,15 @@ export default function ContactPage() {
 
               <div className="flex flex-col gap-[10px]">
                 <div className="flex items-center gap-[16px]">
-                  <button
+                  <MagneticButton
+                    as="button"
                     type="submit"
                     disabled={sending}
+                    strength={0.3}
                     className="bg-teal text-white border-none cursor-pointer font-body text-[13px] font-semibold uppercase tracking-[0.1em] px-[36px] py-[15px] rounded-full transition-colors hover:bg-teal/90 disabled:opacity-70"
                   >
                     {sending ? 'Sending...' : 'Send Enquiry'}
-                  </button>
+                  </MagneticButton>
 
                   {sent && (
                     <span className="text-[14px] text-[#0C7A88] font-medium">

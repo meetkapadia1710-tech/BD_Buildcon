@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import Image from 'next/image'
+import { MagneticButton } from '@/components/motion/MagneticButton'
 
 type Props = {
   title?: string
@@ -34,8 +34,10 @@ export function CTABand({
           </div>
 
           <div className="shrink-0">
-            <Link
+            <MagneticButton
+              as="a"
               href={btnHref}
+              strength={0.4}
               className="inline-flex items-center gap-2 px-6 py-4 bg-white text-teal font-body text-[13px] font-semibold uppercase tracking-[0.08em] rounded-full whitespace-nowrap transition-shadow duration-300 hover:shadow-[0_4px_16px_rgba(0,0,0,0.15)]"
             >
               {btnLabel}
@@ -49,7 +51,7 @@ export function CTABand({
               >
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
-            </Link>
+            </MagneticButton>
           </div>
         </div>
       </div>
