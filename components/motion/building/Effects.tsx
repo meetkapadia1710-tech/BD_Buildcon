@@ -6,29 +6,40 @@ import * as THREE from 'three'
 import {
   EffectComposer,
   RenderPass,
+  NormalPass,
   EffectPass,
   BloomEffect,
   VignetteEffect,
   SMAAEffect,
+  SSAOEffect,
   ToneMappingEffect,
   ToneMappingMode,
   KernelSize,
 } from 'postprocessing'
 
+interface EffectsProps {
+  /** add the SSAO pass (desktop-class tier only) */
+  ao?: boolean
+}
+
 /**
- * Cinematic postprocessing (desktop only — Scene gates whether this mounts).
+ * Cinematic postprocessing (Scene gates whether this mounts at all).
  *
- * Uses the vanilla `postprocessing` library directly rather than
- * @react-three/postprocessing: the React wrapper's bundled N8AO/SSR effects
- * statically import `WebGLMultipleRenderTargets`, which three r172+ removed, so
- * it won't build against three 0.184. Driving the composer by hand sidesteps that
- * and gives a real HDR bloom pass.
+ * Driven by the vanilla `postprocessing` composer rather than
+ * @react-three/postprocessing (whose bundled effects statically import a class
+ * three r172+ removed). Passes, in order:
+ *   - RenderPass (+ NormalPass when AO is on)
+ *   - SSAO   — darkens junctions so geometry reads solid (the single biggest
+ *              "is this a render or a toy" lever for architectural scenes)
+ *   - Bloom  — disciplined; only the crane beacon + hot sun glints cross threshold
+ *   - AgX tone mapping — handles bright white scenes with less highlight skew
+ *              than ACES and reads more editorial
+ *   - Vignette + SMAA
  *
- * Tone mapping: while the composer is active the scene renders to a linear HDR
- * target, so we move ACES off the renderer and onto a ToneMappingEffect to avoid
- * double tone mapping. The mobile path (no composer) keeps ACES on the renderer.
+ * While the composer is active the scene renders to a linear HDR target, so tone
+ * mapping moves off the renderer (NoToneMapping) and onto the ToneMappingEffect.
  */
-export function Effects() {
+export function Effects({ ao = false }: EffectsProps) {
   const gl = useThree((s) => s.gl)
   const scene = useThree((s) => s.scene)
   const camera = useThree((s) => s.camera)
@@ -37,19 +48,50 @@ export function Effects() {
   const composer = useMemo(() => {
     const c = new EffectComposer(gl, { frameBufferType: THREE.HalfFloatType, multisampling: 0 })
     c.addPass(new RenderPass(scene, camera))
+
+    const effects = []
+
+    if (ao) {
+      try {
+        const normalPass = new NormalPass(scene, camera)
+        c.addPass(normalPass)
+        const ssao = new SSAOEffect(camera, normalPass.texture, {
+          samples: 16,
+          rings: 4,
+          luminanceInfluence: 0.55,
+          radius: 0.09,
+          intensity: 2.0,
+          bias: 0.03,
+          fade: 0.02,
+          resolutionScale: 0.75,
+          color: new THREE.Color('#20252c'),
+          worldDistanceThreshold: 40,
+          worldDistanceFalloff: 6,
+          worldProximityThreshold: 0.5,
+          worldProximityFalloff: 0.2,
+        })
+        effects.push(ssao)
+      } catch {
+        // SSAO construction can be version-sensitive; degrade to no-AO rather than
+        // taking the whole scene down.
+      }
+    }
+
     const bloom = new BloomEffect({
-      intensity: 0.7,
-      luminanceThreshold: 0.9,
+      intensity: 0.6,
+      luminanceThreshold: 1.0,
       luminanceSmoothing: 0.25,
       mipmapBlur: true,
       kernelSize: KernelSize.LARGE,
     })
-    const tone = new ToneMappingEffect({ mode: ToneMappingMode.ACES_FILMIC })
-    const vignette = new VignetteEffect({ offset: 0.3, darkness: 0.42 })
+    const tone = new ToneMappingEffect({ mode: ToneMappingMode.AGX })
+    const vignette = new VignetteEffect({ offset: 0.3, darkness: 0.4 })
     const smaa = new SMAAEffect()
-    c.addPass(new EffectPass(camera, bloom, tone, vignette, smaa))
+
+    effects.push(bloom, tone, vignette, smaa)
+    c.addPass(new EffectPass(camera, ...effects))
     return c
-  }, [gl, scene, camera])
+  }, [gl, scene, camera, ao])
 
   useEffect(() => {
     composer.setSize(size.width, size.height)
@@ -64,8 +106,8 @@ export function Effects() {
     }
   }, [gl, composer])
 
-  // Render priority > 0 hands the render loop to us; building/crane useFrame
-  // callbacks (priority 0) still run first to update the meshes.
+  // Render priority > 0 hands us the loop; building/crane useFrame (priority 0)
+  // still update meshes first.
   useFrame(() => {
     composer.render()
   }, 1)

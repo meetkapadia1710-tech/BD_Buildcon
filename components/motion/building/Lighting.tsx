@@ -8,32 +8,43 @@ interface LightingProps {
 }
 
 /**
- * Cinematic lighting rig.
- *  - A key directional "sun" at a golden-hour angle that casts the sharp shadows.
- *  - A soft hemisphere fill so shadowed faces don't go black.
- *  - A self-contained image-based environment baked from Lightformers (no external
- *    HDRI fetch) that gives the glass and steel real reflections + soft ambient.
+ * Lighting rig for the "architectural model on a sunlit table" look.
+ *  - A strong golden key "sun" casts the defining shadows; the fill is kept low
+ *    so faces model with real light-to-shadow contrast (the old rig was nearly
+ *    shadowless, which flattened everything).
+ *  - Self-contained image-based environment baked from Lightformers (no HDRI
+ *    fetch) gives glass + steel genuine reflections and soft ambient.
+ *
+ * Note: drei's <SoftShadows> (PCSS) is deliberately NOT used — its shader patch
+ * references unpackRGBAToDepth, which three 0.184 removed, and it breaks every
+ * material's compile. Shadow softness comes from the PCF shadow map + the SSAO
+ * pass + soft contact shadows instead.
  */
 export function Lighting({ quality }: LightingProps) {
   return (
     <>
-      <hemisphereLight color="#ffffff" groundColor="#dfe2e6" intensity={0.55} />
+      <hemisphereLight color="#ffffff" groundColor="#e0dcd3" intensity={0.42} />
 
-      <directionalLight
-        castShadow
-        position={[34, 46, 20]}
-        intensity={1.25}
-        color="#fff4e2"
-        shadow-mapSize-width={quality.shadowMapSize}
-        shadow-mapSize-height={quality.shadowMapSize}
-        shadow-bias={-0.0004}
-        shadow-camera-near={1}
-        shadow-camera-far={160}
-        shadow-camera-left={-40}
-        shadow-camera-right={40}
-        shadow-camera-top={48}
-        shadow-camera-bottom={-20}
-      />
+      {quality.shadows ? (
+        <directionalLight
+          castShadow
+          position={[34, 48, 20]}
+          intensity={1.65}
+          color="#fff2dc"
+          shadow-mapSize-width={quality.shadowMapSize}
+          shadow-mapSize-height={quality.shadowMapSize}
+          shadow-bias={-0.0004}
+          shadow-normalBias={0.02}
+          shadow-camera-near={1}
+          shadow-camera-far={150}
+          shadow-camera-left={-46}
+          shadow-camera-right={46}
+          shadow-camera-top={52}
+          shadow-camera-bottom={-22}
+        />
+      ) : (
+        <directionalLight position={[34, 48, 20]} intensity={1.65} color="#fff2dc" />
+      )}
 
       {quality.environment && (
         <Environment resolution={256} frames={1}>
@@ -47,7 +58,7 @@ export function Lighting({ quality }: LightingProps) {
             rotation={[Math.PI / 2, 0, 0]}
           />
           {/* warm sun disc — hot highlight on glass + steel */}
-          <Lightformer form="circle" intensity={3.2} color="#fff0d6" scale={[7, 7, 1]} position={[14, 11, 9]} />
+          <Lightformer form="circle" intensity={3.4} color="#fff0d6" scale={[7, 7, 1]} position={[14, 11, 9]} />
           {/* cool back-fill for rim separation */}
           <Lightformer form="rect" intensity={0.6} color="#cfe0f0" scale={[14, 10, 1]} position={[-14, 7, -12]} />
           {/* warm ground bounce */}

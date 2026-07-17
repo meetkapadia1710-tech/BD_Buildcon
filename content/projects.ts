@@ -474,24 +474,4 @@ export const projects: Project[] = [
     outcome:
       'Works delivered on programme with a zero-accident safety record within a demanding operating environment.',
   },
-  {
-    slug: 'royal-palm',
-    name: 'Royal Palm development',
-    client: 'Royal Palm',
-    sector: 'Commercial',
-    location: 'Gujarat',
-    scope: 'Civil, Structural, Architectural Finishing',
-    duration: '18 months',
-    year: '2022',
-    safetyRecord: 'Zero accidents',
-    image: '/brochurephotos/site photos/royal palm/16-big.webp',
-    images: ['/brochurephotos/site photos/royal palm/16-big.webp'],
-    excerpt:
-      'Royal Palm development — complete civil, structural and architectural finishing works for a modern commercial and hospitality development.',
-    challenge:
-      'Delivering a high-quality finished development required tight coordination of civil, structural and architectural trades to exacting aesthetic and quality standards.',
-    whatWeBuilt:
-      'Civil and structural frame, exterior facade works, architectural finishing, and supporting site infrastructure.',
-    outcome: 'Development delivered to a high standard of finish with zero safety incidents.',
-  },
 ]
