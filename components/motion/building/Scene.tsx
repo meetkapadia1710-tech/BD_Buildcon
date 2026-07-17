@@ -16,6 +16,7 @@ import { CameraRig } from './CameraRig'
 import { BUILDINGS } from './constants'
 import { disposeTextures } from './textures'
 import { useQuality } from './useQuality'
+import { reportSceneEvent } from './analytics'
 import type { QualitySettings, SceneProps } from './types'
 
 interface BuildingSceneProps extends SceneProps {
@@ -85,12 +86,23 @@ export default function BuildingScene({
   const [quality, setQuality] = useState<QualitySettings>(baseQuality)
   useEffect(() => setQuality(baseQuality), [baseQuality])
 
+  // Report the tier each device actually resolves to.
+  useEffect(() => {
+    reportSceneEvent({ event: 'scene_tier_selected', tier: baseQuality.tier, dpr: baseQuality.dpr })
+  }, [baseQuality.tier, baseQuality.dpr])
+
   const [hud, setHud] = useState({ fps: 0, calls: 0, tris: 0 })
 
   const dropTier = () => {
     setQuality((q) => {
-      if (q.tier === 'high') return { ...q, tier: 'mid', ao: false, softShadows: false, dpr: Math.min(q.dpr, 1.5) }
-      if (q.tier === 'mid') return { ...q, tier: 'low', postprocessing: false, shadows: false, dpr: 1 }
+      if (q.tier === 'high') {
+        reportSceneEvent({ event: 'scene_tier_degraded', from: 'high', to: 'mid' })
+        return { ...q, tier: 'mid', ao: false, softShadows: false, dpr: Math.min(q.dpr, 1.5) }
+      }
+      if (q.tier === 'mid') {
+        reportSceneEvent({ event: 'scene_tier_degraded', from: 'mid', to: 'low' })
+        return { ...q, tier: 'low', postprocessing: false, shadows: false, dpr: 1 }
+      }
       return q
     })
   }
@@ -108,6 +120,7 @@ export default function BuildingScene({
             'webglcontextlost',
             (e) => {
               e.preventDefault()
+              reportSceneEvent({ event: 'scene_context_lost' })
               onContextLost?.()
             },
             { once: true },

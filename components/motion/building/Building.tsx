@@ -27,6 +27,11 @@ import type { BuildingProps } from './types'
 // single-threaded, so a module-level dummy is safe and allocation-free).
 const DUMMY = new THREE.Object3D()
 
+// Hidden instances must be zeroed on ALL axes — scaling a single axis to 0.001
+// leaves the other two at full size, which renders as a floating speck at every
+// unbuilt floor level.
+const ZERO_MATRIX = new THREE.Matrix4().makeScale(0, 0, 0)
+
 const clamp01 = (x: number) => (x < 0 ? 0 : x > 1 ? 1 : x)
 
 /** The 8 perimeter column positions for a W×D bay (matches the foundation grid). */
@@ -155,9 +160,13 @@ export function Building({
         const floorEnd = Math.min(1, floorStart + 1.8 / floors)
         const fp = clamp01((localProg - floorStart) / (floorEnd - floorStart))
         const s = Math.min(1, fp * 1.6)
-        const colH = Math.max(0.001, s * floorHeight)
+        if (s <= 0.02) {
+          for (let c = 0; c < cols.length; c++) columnsRef.current.setMatrixAt(idx++, ZERO_MATRIX)
+          continue
+        }
+        const colH = s * floorHeight
         const base = f * floorHeight
-        if (s > 0.05) topBuiltY = Math.max(topBuiltY, base + colH)
+        topBuiltY = Math.max(topBuiltY, base + colH)
         for (let c = 0; c < cols.length; c++) {
           DUMMY.position.set(cols[c][0], base + colH / 2, cols[c][1])
           DUMMY.scale.set(1, colH, 1)
@@ -176,15 +185,17 @@ export function Building({
         const floorStart = f / floors
         const floorEnd = Math.min(1, floorStart + 1.8 / floors)
         const fp = clamp01((localProg - floorStart) / (floorEnd - floorStart))
-        const bp = Math.max(0, (fp - 0.55) / 0.45)
+        const bp = Math.min(1, Math.max(0, (fp - 0.55) / 0.45))
+        if (bp <= 0.02) {
+          for (let k = 0; k < 4; k++) beamsRef.current.setMatrixAt(idx++, ZERO_MATRIX)
+          continue
+        }
         const y = f * floorHeight + floorHeight
-        const lenX = Math.max(0.001, bp * W)
-        const lenZ = Math.max(0.001, bp * D)
         // two beams spanning X at z = ±hd
         for (const z of [-hd, hd]) {
           DUMMY.position.set(0, y, z)
           DUMMY.rotation.set(0, 0, 0)
-          DUMMY.scale.set(lenX, 1, 1)
+          DUMMY.scale.set(bp * W, 1, 1)
           DUMMY.updateMatrix()
           beamsRef.current.setMatrixAt(idx++, DUMMY.matrix)
         }
@@ -192,7 +203,7 @@ export function Building({
         for (const x of [-hw, hw]) {
           DUMMY.position.set(x, y, 0)
           DUMMY.rotation.set(0, Math.PI / 2, 0)
-          DUMMY.scale.set(lenZ, 1, 1)
+          DUMMY.scale.set(bp * D, 1, 1)
           DUMMY.updateMatrix()
           beamsRef.current.setMatrixAt(idx++, DUMMY.matrix)
         }
@@ -206,10 +217,14 @@ export function Building({
         const floorStart = f / floors
         const floorEnd = Math.min(1, floorStart + 1.8 / floors)
         const fp = clamp01((localProg - floorStart) / (floorEnd - floorStart))
-        const sp = Math.max(0, (fp - 0.65) / 0.35)
+        const sp = Math.min(1, Math.max(0, (fp - 0.65) / 0.35))
+        if (sp <= 0.02) {
+          slabsRef.current.setMatrixAt(f, ZERO_MATRIX)
+          continue
+        }
         DUMMY.position.set(0, f * floorHeight + floorHeight, 0)
         DUMMY.rotation.set(0, 0, 0)
-        DUMMY.scale.set(Math.max(0.001, sp * (W - 0.05)), 1, Math.max(0.001, sp * (D - 0.05)))
+        DUMMY.scale.set(sp * (W - 0.05), 1, sp * (D - 0.05))
         DUMMY.updateMatrix()
         slabsRef.current.setMatrixAt(f, DUMMY.matrix)
       }
@@ -248,7 +263,7 @@ export function Building({
 
   // Init instance matrices once so nothing flashes at full size on first frame.
   useEffect(() => {
-    const zero = new THREE.Matrix4().makeScale(0.001, 0.001, 0.001)
+    const zero = ZERO_MATRIX
     for (const [ref, n] of [
       [columnsRef, COL_COUNT],
       [beamsRef, BEAM_COUNT],

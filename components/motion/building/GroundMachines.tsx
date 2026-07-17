@@ -137,15 +137,21 @@ function Excavator({ progress, band, position, rotationY = 0 }: MachineProps) {
   )
 }
 
+/** Shared truck arrival: scale in quickly while easing over a short approach, so
+ *  vehicles read as "arriving on site" rather than sliding across it full-size. */
+function driveIn(g: THREE.Group, f: number, baseX: number, driveOffset: number) {
+  g.visible = f > 0.001
+  const ease = f * f * (3 - 2 * f)
+  g.position.x = baseX + (1 - ease) * driveOffset
+  g.scale.setScalar(Math.max(0.001, Math.min(1, f * 3)))
+}
+
 // ─── Dumper / tipper truck (foundation: hauls sand) ─────────────────────────────
 function DumperTruck({ progress, band, position, driveOffset = 26 }: MachineProps) {
   const ref = useRef<THREE.Group>(null)
   useFrame(() => {
     const f = stageFactor(progress.get(), band[0], band[1], band[2], band[3])
-    const g = ref.current
-    if (!g) return
-    g.visible = f > 0.001
-    g.position.x = position[0] + (1 - f) * driveOffset
+    if (ref.current) driveIn(ref.current, f, position[0], driveOffset)
   })
   return (
     <group ref={ref} position={position} visible={false}>
@@ -167,8 +173,7 @@ function MixerTruck({ progress, band, position, driveOffset = -26 }: MachineProp
     const f = stageFactor(progress.get(), band[0], band[1], band[2], band[3])
     const g = ref.current
     if (!g) return
-    g.visible = f > 0.001
-    g.position.x = position[0] + (1 - f) * driveOffset
+    driveIn(g, f, position[0], driveOffset)
     if (drumRef.current && f > 0.01) drumRef.current.rotation.y = s.clock.elapsedTime * 1.4
   })
   return (
@@ -190,10 +195,7 @@ function PumpTruck({ progress, band, position, driveOffset = 26 }: MachineProps)
   const ref = useRef<THREE.Group>(null)
   useFrame(() => {
     const f = stageFactor(progress.get(), band[0], band[1], band[2], band[3])
-    const g = ref.current
-    if (!g) return
-    g.visible = f > 0.001
-    g.position.x = position[0] + (1 - f) * driveOffset
+    if (ref.current) driveIn(ref.current, f, position[0], driveOffset)
   })
   return (
     <group ref={ref} position={position} visible={false}>
@@ -325,14 +327,14 @@ export function GroundMachines({ progress, full = true }: { progress: MotionValu
       <MaterialPiles progress={progress} band={[0.02, 0.07, 0.42, 0.5]} position={[14, 0, 12]} />
 
       {/* Structure — the mixer keys the concrete phase (always shown) */}
-      <MixerTruck progress={progress} band={[0.2, 0.26, 0.44, 0.52]} position={[-3, 0, 12]} driveOffset={-24} />
+      <MixerTruck progress={progress} band={[0.2, 0.26, 0.44, 0.52]} position={[-3, 0, 12]} driveOffset={-10} />
 
       {/* Full-fleet extras (trimmed on the low tier as a perf guardrail) */}
       {full && (
         <>
-          <DumperTruck progress={progress} band={[0.01, 0.06, 0.15, 0.22]} position={[17, 0, 6]} driveOffset={24} />
+          <DumperTruck progress={progress} band={[0.01, 0.06, 0.15, 0.22]} position={[17, 0, 6]} driveOffset={10} />
           <RebarStack progress={progress} band={[0.18, 0.24, 0.46, 0.54]} position={[-12, 0, 8]} rotationY={0.3} />
-          <PumpTruck progress={progress} band={[0.22, 0.28, 0.46, 0.54]} position={[5, 0, 12]} driveOffset={24} />
+          <PumpTruck progress={progress} band={[0.22, 0.28, 0.46, 0.54]} position={[5, 0, 12]} driveOffset={10} />
           <PipeStack progress={progress} band={[0.6, 0.66, 0.82, 0.9]} position={[-14, 0, -3]} rotationY={0.2} />
         </>
       )}

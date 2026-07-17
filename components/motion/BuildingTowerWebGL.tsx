@@ -9,6 +9,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Scene } from './building/lazyScene'
 import { ScenePoster } from './building/ScenePoster'
+import { reportSceneEvent } from './building/analytics'
 import type { SceneProps } from './building/types'
 
 export type { SceneProps as BuildingTowerWebGLProps } from './building/types'
@@ -43,7 +44,10 @@ export default function BuildingTowerWebGL(props: SceneProps) {
   const debug = useDebugFlag()
 
   useEffect(() => {
-    setSupported(webglSupported())
+    const ok = webglSupported()
+    setSupported(ok)
+    if (!SCENE_ENABLED) reportSceneEvent({ event: 'scene_fallback_served', reason: 'disabled' })
+    else if (!ok) reportSceneEvent({ event: 'scene_fallback_served', reason: 'no_webgl' })
   }, [])
 
   useEffect(() => {
@@ -78,7 +82,15 @@ export default function BuildingTowerWebGL(props: SceneProps) {
   return (
     <div ref={containerRef} style={{ width: '100%', height: '100%', position: 'relative' }}>
       {SCENE_ENABLED && supported && !crashed && mounted && (
-        <Scene {...props} active={active} debug={debug} onContextLost={() => setCrashed(true)} />
+        <Scene
+          {...props}
+          active={active}
+          debug={debug}
+          onContextLost={() => {
+            reportSceneEvent({ event: 'scene_fallback_served', reason: 'context_lost' })
+            setCrashed(true)
+          }}
+        />
       )}
       {showPoster && (
         <div style={{ position: 'absolute', inset: 0 }}>

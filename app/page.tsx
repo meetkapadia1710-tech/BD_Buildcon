@@ -119,10 +119,6 @@ export default function HomePage() {
                 <span className="w-[6px] h-[6px] bg-[#5BD6E2] rounded-full" />
                 CRISIL SME 3
               </div>
-              <div className="inline-flex items-center gap-[8px] bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-[14px] sm:px-[16px] py-[8px] text-white/90 font-medium text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
-                <span className="w-[6px] h-[6px] bg-[#5BD6E2] rounded-full" />
-                ₹200+ Cr delivered
-              </div>
             </div>
 
             <div className="flex gap-[12px] sm:gap-[16px] w-full sm:w-auto">

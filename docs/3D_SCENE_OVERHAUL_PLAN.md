@@ -209,3 +209,35 @@ Each phase is independently shippable; P1+P2 alone already remove ~70% of the "c
 
 Photorealism, HDRI/GLTF assets, physics, WebGPU, user-orbitable camera (scroll stays the only input),
 and any change to the section's copy/layout in `BuildingScroll.tsx` beyond the canvas itself.
+
+---
+
+## 7. Implementation status (shipped)
+
+All seven phases are implemented and the app builds + typechecks clean. Verified in-browser across the
+foundation (0%) and envelope/services (81%) scroll states.
+
+| Phase  | What landed                                                                                                                                                                                                                                        | Files                                                                    |
+| ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| **P0** | `frameloop` gated by an `IntersectionObserver` via `FrameloopController` (zero GPU off-screen); lazy-mount so three.js only downloads near the section; `?debug3d=1` HUD (tier/fps/calls/tris); WebGL + context-loss poster                        | `Scene.tsx`, `BuildingTowerWebGL.tsx`, `lazyScene.ts`, `ScenePoster.tsx` |
+| **P1** | `RoundedBoxGeometry` chamfers; columns 0.14→0.42, real slab thickness, 4-bar rebar cages; core-lead capped to +2 floors with a climbing-formwork collar; warm off-white/steel/teal palette                                                         | `constants.ts`, `Building.tsx`, `FoundationWorks.tsx`                    |
+| **P2** | Columns/beams/slabs → per-building `InstancedMesh`; crane mast lattice → 3 instanced meshes. ~900→well under budget                                                                                                                                | `Building.tsx`, `TowerCrane.tsx`                                         |
+| **P3** | Procedural canvas noise on concrete; per-building curtain-wall mullion/spandrel shader (`onBeforeCompile`); radial site-plan ground mat                                                                                                            | `textures.ts`, `constants.ts`, `Ground.tsx`                              |
+| **P4** | SSAO via the installed `postprocessing` (no new dep); AgX tone mapping; retuned key/fill + warm fog. **`<SoftShadows>` deliberately dropped** — its PCSS patch calls `unpackRGBAToDepth`, removed in three 0.184, and broke every material compile | `Effects.tsx`, `Lighting.tsx`                                            |
+| **P5** | Scroll-linked damped camera dolly (low hero → orbit → wide reveal); blueprint-wireframe "drawing → built" reveal; idle crane slew + beacon blink                                                                                                   | `CameraRig.tsx`, `Building.tsx`, `TowerCrane.tsx`                        |
+| **P6** | Tier ladder high/mid/low + GPU probe; live `PerformanceMonitor` degradation (verified high→mid under load); `NEXT_PUBLIC_SCENE_V2` kill-switch; `dataLayer` telemetry (tier / degrade / context-loss / fallback)                                   | `useQuality.ts`, `Scene.tsx`, `analytics.ts`, `.env.example`             |
+
+### Verified
+
+- `next build` + `tsc --noEmit` clean; homepage route stays 15.2 kB (three.js is a separate on-demand chunk).
+- Scene renders; blueprint reveal, curtain-wall façade, formwork collar, safety screens, site-plan mat,
+  camera dolly all confirmed on screen.
+- Adaptive tier drop (high→mid, SSAO off) fired correctly under the sandbox's software-WebGL load.
+
+### Remaining (needs real hardware / CI — cannot be done in this environment)
+
+- **Device-matrix pass** (WS6.2): mid-range Android, iPhone SE/11, low-power iOS, Intel-iGPU laptop — confirm
+  ≥40fps mobile / 60fps desktop and no thermal throttle. The sandbox browser is software-rendered (~2fps here),
+  so on-device FPS must be measured on real GPUs.
+- **Playwright visual-regression** (WS6.1): capture progress 0/.25/.5/.75/1 per PR. Needs Playwright added to the
+  repo (no test harness exists yet); the `?debug3d=1` states and stable build order are already in place for it.

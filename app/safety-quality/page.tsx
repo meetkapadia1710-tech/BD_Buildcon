@@ -146,6 +146,8 @@ const quality = [
   {
     title: 'Quality laboratory on every site',
     body: 'Every site is equipped with a dedicated quality laboratory to ensure all materials and workmanship meet the required standards at every stage.',
+    photo: '/brochurephotos/site photos/technical photos/DocScanner Sep 9, 2025 5-45 PM_1(156).webp',
+    photoAlt: 'On-site laboratory and control room with monitoring equipment',
     icon: (
       <svg {...iconProps}>
         <path d="M9 3h6" />
@@ -157,6 +159,8 @@ const quality = [
   {
     title: 'Modern testing equipment',
     body: 'Experienced and qualified engineers closely monitor quality using modern testing equipment and updated machinery.',
+    photo: '/brochurephotos/plant and machinery/image6.webp',
+    photoAlt: 'Site engineer operating a total station for precision setting-out',
     icon: (
       <svg {...iconProps}>
         <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
@@ -166,6 +170,8 @@ const quality = [
   {
     title: 'Material traceability',
     body: 'Every steel and cement batch traceable to mill certificate and receipt inspection.',
+    photo: '/brochurephotos/fabrication yard/WhatsApp Image 2026-07-12 at 11.56.13 AM (1).webp',
+    photoAlt: 'In-house fabrication yard with overhead gantry crane and marked material bays',
     icon: (
       <svg {...iconProps}>
         <path d="M20.59 13.41 12 22l-9.41-9.41A2 2 0 0 1 2 11.17V4a2 2 0 0 1 2-2h7.17a2 2 0 0 1 1.41.59L21 12a2 2 0 0 1 0 2Z" />
@@ -176,6 +182,8 @@ const quality = [
   {
     title: 'Stage-gate inspections',
     body: 'Hold points at reinforcement, shuttering and pre-pour stages with client sign-off.',
+    photo: '/brochurephotos/site photos/technical photos/image33.webp',
+    photoAlt: 'Reinforcement inspection of a raft foundation ahead of a concrete pour',
     icon: (
       <svg {...iconProps}>
         <rect x="6" y="4" width="12" height="17" rx="2" />
@@ -187,6 +195,8 @@ const quality = [
   {
     title: 'QA/QC as a turnkey discipline',
     body: 'Quality Assurance & Quality Control built into project delivery — from material inspection through testing and commissioning.',
+    photo: '/brochurephotos/site photos/technical photos/DocScanner Sep 9, 2025 5-45 PM_1(11).webp',
+    photoAlt: 'RCC structure under construction with date-stamped pour records on the formwork',
     icon: (
       <svg {...iconProps}>
         <polygon points="12 2 2 7 12 12 22 7 12 2" />
@@ -198,6 +208,8 @@ const quality = [
   {
     title: 'Handover dossiers',
     body: 'Complete QA documentation packages delivered with every project handover.',
+    photo: '/brochurephotos/site photos/city center/city-center-night-170.webp',
+    photoAlt: 'City Center — a completed and handed-over BD Buildcon project at night',
     icon: (
       <svg {...iconProps}>
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -397,13 +409,33 @@ export default function SafetyQualityPage() {
             {quality.map((q, i) => (
               <Spotlight
                 key={i}
-                className="group border border-hairline rounded-card p-[30px] transition-all duration-300 hover:border-teal/40 hover:-translate-y-1 hover:shadow-[0_12px_28px_rgba(0,0,0,0.08)]"
+                className="group border border-hairline rounded-card overflow-hidden bg-white transition-all duration-300 hover:border-teal/40 hover:-translate-y-1 hover:shadow-[0_12px_28px_rgba(0,0,0,0.08)]"
               >
-                <div className="w-[46px] h-[46px] rounded-full bg-teal/10 flex items-center justify-center text-teal mb-[18px] transition-colors duration-300 group-hover:bg-teal group-hover:text-white">
-                  {q.icon}
+                {/* Photo header */}
+                <div className="relative aspect-[16/10] w-full overflow-hidden">
+                  <RevealImage
+                    src={q.photo}
+                    alt={q.photoAlt}
+                    fill
+                    wrapperClassName="absolute inset-0"
+                    className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.05]"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                  {/* soft bottom fade so the badge and text sit cleanly */}
+                  <div
+                    className="pointer-events-none absolute inset-x-0 bottom-0 h-[56px] bg-gradient-to-t from-black/25 to-transparent"
+                    aria-hidden="true"
+                  />
                 </div>
-                <h3 className="font-display font-bold text-[19px] text-ink mb-[10px]">{q.title}</h3>
-                <p className="text-[15px] leading-[1.65] text-body m-0">{q.body}</p>
+
+                <div className="relative p-[30px] pt-0">
+                  {/* Icon badge overlapping the photo edge */}
+                  <div className="relative z-10 -mt-[23px] mb-[16px] w-[46px] h-[46px] rounded-full bg-teal text-white flex items-center justify-center ring-4 ring-white shadow-[0_4px_12px_rgba(22,168,184,0.35)]">
+                    {q.icon}
+                  </div>
+                  <h3 className="font-display font-bold text-[19px] text-ink mb-[10px]">{q.title}</h3>
+                  <p className="text-[15px] leading-[1.65] text-body m-0">{q.body}</p>
+                </div>
               </Spotlight>
             ))}
           </StaggerReveal>

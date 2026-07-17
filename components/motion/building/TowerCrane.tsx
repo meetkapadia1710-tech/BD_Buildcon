@@ -13,8 +13,21 @@ import {
   MAT_FOUNDATION,
   MAT_CAB_GLASS,
   MAT_BEACON,
+  BUILDINGS,
 } from './constants'
 import { stageFactor, type StageBand } from './staging'
+
+const clamp01 = (x: number) => (x < 0 ? 0 : x > 1 ? 1 : x)
+
+/** Tallest built (structural) height across the site at scroll progress p. */
+function siteBuiltHeight(p: number): number {
+  let h = 0
+  for (const b of BUILDINGS) {
+    const lp = clamp01((p - b.progressStart) / (b.progressEnd - b.progressStart))
+    h = Math.max(h, lp * b.config.floors * b.config.floorHeight)
+  }
+  return h
+}
 
 // One shared unit cube — every crane member is this geometry, scaled/rotated.
 const GEO_UNIT = new THREE.BoxGeometry(1, 1, 1)
@@ -42,9 +55,12 @@ const JIB_BOT_Y = -0.25
 const TROLLEY_X = 14
 const HOOK_DROP = 11
 
-const DEFAULT_BAND: StageBand = [0.14, 0.22, 0.54, 0.62]
+// Crane presence: erects as the first tower starts, stays through the structural
+// phase, dismantles only once the frames have topped out (towerA ends at 0.85).
+const DEFAULT_BAND: StageBand = [0.13, 0.2, 0.78, 0.86]
 
-const ZERO_MATRIX = new THREE.Matrix4().makeScale(0.0001, 0.0001, 0.0001)
+const ZERO_MATRIX = new THREE.Matrix4().makeScale(0, 0, 0)
+const DUMMY_CRANE = new THREE.Object3D()
 
 interface TowerCraneProps {
   progress: MotionValue<number>
@@ -224,6 +240,9 @@ export function TowerCrane({
   const chordRef = useRef<THREE.InstancedMesh>(null)
   const rungRef = useRef<THREE.InstancedMesh>(null)
   const diagRef = useRef<THREE.InstancedMesh>(null)
+  const hoistRef = useRef<THREE.Group>(null)
+  const cableRef = useRef<THREE.Mesh>(null)
+  const hookRef = useRef<THREE.Group>(null)
 
   const { chords, rungs, diags, seg } = useMastMatrices(detail)
 
@@ -234,34 +253,66 @@ export function TowerCrane({
     if (rootRef.current) rootRef.current.visible = f > 0.001
     if (f <= 0.001) return
 
-    const visSeg = Math.max(0, Math.min(MAX_SEG, Math.round(f * MAX_SEG)))
+    // The mast tracks construction: it stays ~5m above the tallest built floor
+    // (a real crane climbs with the building), scaled by the erect/dismantle
+    // factor. The top segment telescopes smoothly instead of popping in.
+    const builtH = siteBuiltHeight(p)
+    const mastH = Math.min(MAX_SEG * SEG_H, Math.max(2 * SEG_H, builtH + 5)) * f
+    const fullSeg = Math.min(MAX_SEG, Math.floor(mastH / SEG_H))
+    const fracH = Math.min(SEG_H, mastH - fullSeg * SEG_H)
 
-    // Reveal/hide instances per segment by zeroing hidden ones.
     if (chordRef.current) {
       for (let i = 0; i < chords.length; i++) {
-        chordRef.current.setMatrixAt(i, seg[i] < visSeg ? chords[i] : ZERO_MATRIX)
+        const s = seg[i]
+        if (s < fullSeg) {
+          chordRef.current.setMatrixAt(i, chords[i])
+        } else if (s === fullSeg && fracH > 0.2) {
+          // partial top segment: grow the 4 chords up from the segment base
+          const [cx, cz] = CORNERS[i % 4]
+          DUMMY_CRANE.position.set(cx, s * SEG_H + fracH / 2, cz)
+          DUMMY_CRANE.rotation.set(0, 0, 0)
+          DUMMY_CRANE.scale.set(0.14, fracH, 0.14)
+          DUMMY_CRANE.updateMatrix()
+          chordRef.current.setMatrixAt(i, DUMMY_CRANE.matrix)
+        } else {
+          chordRef.current.setMatrixAt(i, ZERO_MATRIX)
+        }
       }
       chordRef.current.instanceMatrix.needsUpdate = true
     }
+    // rungs + diagonals only appear once their segment is complete
     if (rungRef.current) {
       for (let i = 0; i < rungs.length; i++) {
-        chordSegHide(rungRef.current, i, Math.floor(i / 4) < visSeg ? rungs[i] : ZERO_MATRIX)
+        rungRef.current.setMatrixAt(i, Math.floor(i / 4) < fullSeg ? rungs[i] : ZERO_MATRIX)
       }
       rungRef.current.instanceMatrix.needsUpdate = true
     }
     if (diagRef.current && diags.length) {
       for (let i = 0; i < diags.length; i++) {
-        chordSegHide(diagRef.current, i, Math.floor(i / 4) < visSeg ? diags[i] : ZERO_MATRIX)
+        diagRef.current.setMatrixAt(i, Math.floor(i / 4) < fullSeg ? diags[i] : ZERO_MATRIX)
       }
       diagRef.current.instanceMatrix.needsUpdate = true
     }
 
+    const slewY = Math.max(SEG_H * 0.8, mastH)
     if (slewRef.current) {
-      slewRef.current.visible = visSeg > 0
-      slewRef.current.position.y = visSeg * SEG_H
+      slewRef.current.position.y = slewY
       // gentle idle slew so the crane feels alive without dominating
       slewRef.current.rotation.y = baseYaw + Math.sin(state.clock.elapsedTime * 0.12) * 0.05
     }
+
+    // Hoist: the load hangs just above the current working floor, not in mid-air.
+    const drop = Math.max(1.6, Math.min(slewY - 1.2, slewY + JIB_BOT_Y - (builtH + 2.2)))
+    if (cableRef.current) {
+      cableRef.current.scale.y = drop
+      cableRef.current.position.y = JIB_BOT_Y - drop / 2
+    }
+    if (hookRef.current) hookRef.current.position.y = JIB_BOT_Y - drop
+    if (hoistRef.current) {
+      // slight pendulum sway
+      hoistRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.6) * 0.012
+    }
+
     // beacon blink
     if (beaconRef.current) {
       const blink = 0.6 + 0.4 * Math.sin(state.clock.elapsedTime * 3.0)
@@ -302,47 +353,31 @@ export function TowerCrane({
         <Jib />
         <CounterJib />
 
-        {/* trolley + hoist + hook block + slung steel load */}
-        <mesh
-          geometry={GEO_UNIT}
-          material={MAT_CRANE_DARK}
-          position={[TROLLEY_X, JIB_BOT_Y - 0.05, 0]}
-          scale={[0.7, 0.4, 0.9]}
-        />
-        <mesh
-          geometry={GEO_UNIT}
-          material={MAT_CABLE}
-          position={[TROLLEY_X, JIB_BOT_Y - HOOK_DROP / 2, 0]}
-          scale={[0.05, HOOK_DROP, 0.05]}
-        />
-        {/* hook block */}
-        <mesh
-          geometry={GEO_UNIT}
-          material={MAT_CRANE_DARK}
-          castShadow
-          position={[TROLLEY_X, JIB_BOT_Y - HOOK_DROP, 0]}
-          scale={[0.4, 0.55, 0.4]}
-        />
-        <mesh
-          geometry={GEO_UNIT}
-          material={MAT_CRANE_ACCENT}
-          position={[TROLLEY_X, JIB_BOT_Y - HOOK_DROP - 0.28, 0]}
-          scale={[0.28, 0.14, 0.28]}
-        />
-        {/* slung steel load */}
-        <mesh
-          geometry={GEO_UNIT}
-          material={MAT_STEEL}
-          castShadow
-          position={[TROLLEY_X, JIB_BOT_Y - HOOK_DROP - 0.62, 0]}
-          scale={[3.6, 0.4, 0.5]}
-        />
+        {/* trolley + hoist — cable length and hook height driven per frame so the
+            load hovers just above the working floor */}
+        <group ref={hoistRef} position={[TROLLEY_X, 0, 0]}>
+          <mesh
+            geometry={GEO_UNIT}
+            material={MAT_CRANE_DARK}
+            position={[0, JIB_BOT_Y - 0.05, 0]}
+            scale={[0.7, 0.4, 0.9]}
+          />
+          <mesh ref={cableRef} geometry={GEO_UNIT} material={MAT_CABLE} scale={[0.05, HOOK_DROP, 0.05]} />
+          <group ref={hookRef}>
+            {/* hook block */}
+            <mesh geometry={GEO_UNIT} material={MAT_CRANE_DARK} castShadow scale={[0.4, 0.55, 0.4]} />
+            <mesh geometry={GEO_UNIT} material={MAT_CRANE_ACCENT} position={[0, -0.28, 0]} scale={[0.28, 0.14, 0.28]} />
+            {/* slung steel load */}
+            <mesh
+              geometry={GEO_UNIT}
+              material={MAT_STEEL}
+              castShadow
+              position={[0, -0.62, 0]}
+              scale={[3.6, 0.4, 0.5]}
+            />
+          </group>
+        </group>
       </group>
     </group>
   )
-}
-
-// setMatrixAt helper kept terse to avoid repeating the ref guard inline
-function chordSegHide(im: THREE.InstancedMesh, i: number, m: THREE.Matrix4) {
-  im.setMatrixAt(i, m)
 }
