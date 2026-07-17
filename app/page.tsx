@@ -11,24 +11,22 @@ const BuildingScroll = dynamic(() => import('@/components/motion/BuildingScroll'
 import { CTABand } from '@/components/layout/CTABand'
 import { SectorMarquee } from '@/components/layout/SectorMarquee'
 import { CustomSelect } from '@/components/ui/CustomSelect'
+import { CountUp } from '@/components/motion/CountUp'
+import { SlideIn } from '@/components/motion/SlideIn'
+import { StaggerReveal } from '@/components/motion/StaggerReveal'
+import { RevealImage } from '@/components/motion/RevealImage'
 import { clients } from '@/content/clients'
 import { consultants } from '@/content/consultants'
 import { stats, statsDisplay } from '@/content/company'
 import { services } from '@/content/services'
+import { submitEnquiry } from '@/lib/submitEnquiry'
 
 // Sectors are now defined inside SectorMarquee component
 
 const pillars = [
   {
     icon: (
-      <svg
-        className="w-7 h-7 text-teal"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-      >
+      <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -41,14 +39,7 @@ const pillars = [
   },
   {
     icon: (
-      <svg
-        className="w-7 h-7 text-teal"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-      >
+      <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M12 2a10 10 0 100 20 10 10 0 000-20z M12 6v6l4 2" />
       </svg>
     ),
@@ -57,14 +48,7 @@ const pillars = [
   },
   {
     icon: (
-      <svg
-        className="w-7 h-7 text-teal"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-      >
+      <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2 M9 3a4 4 0 100 8 4 4 0 000-8z M23 21v-2a4 4 0 00-3-3.87 M16 3.13a4 4 0 010 7.75" />
       </svg>
     ),
@@ -73,14 +57,7 @@ const pillars = [
   },
   {
     icon: (
-      <svg
-        className="w-7 h-7 text-teal"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-      >
+      <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
         <path d="M2 3h20v14H2z M8 21h8 M12 17v4" />
       </svg>
     ),
@@ -90,10 +67,10 @@ const pillars = [
 ]
 
 const trackStats = [
-  { value: `${stats.projects}+`, label: 'Projects Completed' },
-  { value: `${stats.yearsExperience}+`, label: 'Years Experience' },
-  { value: `${stats.accidents}`, label: 'Accidents Recorded' },
-  { value: `${stats.repeatClientPct}%`, label: 'Repeat Client Ratio' },
+  { value: stats.projects, suffix: '+', label: 'Projects Completed' },
+  { value: stats.yearsExperience, suffix: '+', label: 'Years Experience' },
+  { value: stats.accidents, suffix: '', label: 'Accidents Recorded' },
+  { value: stats.repeatClientPct, suffix: '%', label: 'Repeat Client Ratio' },
 ]
 
 export default function HomePage() {
@@ -104,12 +81,12 @@ export default function HomePage() {
         aria-label="Hero"
         className="relative min-h-[calc(100dvh-72px)] flex items-center justify-center overflow-hidden bg-dark-bg"
       >
-        <div className="absolute inset-0 w-full h-full">
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
           <Image
             src="/new hero image.png"
             alt="Crane lifting steel beams at a BD Buildcon construction site"
             fill
-            className="object-cover"
+            className="object-cover animate-hero-zoom"
             priority
           />
         </div>
@@ -174,22 +151,20 @@ export default function HomePage() {
                   }`}
                 >
                   {/* Photo */}
-                  <div
-                    className={`relative w-full aspect-[16/10] rounded-card overflow-hidden bg-dark-bg${
+                  <RevealImage
+                    src={svc.image}
+                    alt={svc.title}
+                    fill
+                    wrapperClassName={`relative w-full aspect-[16/10] rounded-card bg-dark-bg${
                       isReversed ? ' lg:order-2' : ''
                     }`}
-                  >
-                    <Image
-                      src={svc.image}
-                      alt={svc.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                  </div>
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    parallax
+                  />
 
                   {/* Text */}
-                  <div className={isReversed ? 'lg:order-1' : ''}>
+                  <SlideIn from={isReversed ? 'right' : 'left'} className={isReversed ? 'lg:order-1' : ''}>
                     <div className="flex items-center gap-[12px] mb-[16px]">
                       <span className="font-body text-[11px] font-bold text-teal bg-teal/5 px-[10px] py-[4px] rounded-[4px] border border-teal/15 tracking-[0.05em]">
                         {String(idx + 1).padStart(2, '0')}
@@ -223,7 +198,7 @@ export default function HomePage() {
                       View projects
                       <span className="text-[16px]">→</span>
                     </Link>
-                  </div>
+                  </SlideIn>
                 </div>
               )
             })}
@@ -232,97 +207,116 @@ export default function HomePage() {
       </section>
 
       {/* ── Pillars ── */}
-      <section aria-label="Company pillars" className="bg-surface border-y border-hairline py-[80px]">
-        <div className="max-w-container mx-auto px-gutter grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[32px]">
+      <section
+        aria-label="Company pillars"
+        className="relative overflow-hidden bg-surface border-y border-hairline py-[80px]"
+      >
+        <div className="texture-dots pointer-events-none absolute inset-0 text-teal/[0.07]" aria-hidden="true" />
+        <StaggerReveal
+          className="relative max-w-container mx-auto px-gutter grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[32px]"
+          stagger={0.08}
+        >
           {pillars.map((p, i) => (
-            <div key={i} className="flex flex-col items-center text-center gap-[14px]">
-              <div className="w-[60px] h-[60px] rounded-full bg-teal/10 flex items-center justify-center text-teal">
+            <div key={i} className="group flex flex-col items-center text-center gap-[14px]">
+              <div className="w-[60px] h-[60px] rounded-full bg-teal/10 flex items-center justify-center text-teal transition-all duration-300 group-hover:bg-teal group-hover:text-white group-hover:scale-110">
                 {p.icon}
               </div>
               <h3 className="font-display font-bold text-[19px] text-ink m-0">{p.title}</h3>
               <p className="text-[15px] leading-[1.6] text-body m-0">{p.body}</p>
             </div>
           ))}
-        </div>
+        </StaggerReveal>
       </section>
 
       {/* ── How we build ── */}
       <BuildingScroll />
 
       {/* ── Stats ── */}
-      <section aria-label="Key statistics" className="bg-teal py-[88px]">
-        <div className="max-w-container mx-auto px-gutter">
-          <div className="text-center mb-[56px]">
-            <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-white mb-[16px]">
-              Our Track Record
-            </h2>
-            <div className="w-[56px] h-[3px] bg-white/50 rounded-full mx-auto mb-[20px]" />
-            <p className="text-[18px] text-white/75 m-0">Numbers that have been earned on site — not in a brochure.</p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-[32px] text-center">
+      <section aria-label="Key statistics" className="relative overflow-hidden bg-teal py-[88px]">
+        <div className="texture-dots pointer-events-none absolute inset-0 text-white/[0.08]" aria-hidden="true" />
+        <div className="relative max-w-container mx-auto px-gutter">
+          <SlideIn from="bottom">
+            <div className="text-center mb-[56px]">
+              <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-white mb-[16px]">
+                Our Track Record
+              </h2>
+              <div className="w-[56px] h-[3px] bg-white/50 rounded-full mx-auto mb-[20px]" />
+              <p className="text-[18px] text-white/75 m-0">
+                Numbers that have been earned on site — not in a brochure.
+              </p>
+            </div>
+          </SlideIn>
+          <StaggerReveal className="grid grid-cols-2 md:grid-cols-4 gap-[32px] text-center" stagger={0.1}>
             {trackStats.map((s, i) => (
               <div key={i}>
                 <div className="font-display font-[800] text-[64px] leading-none text-white mb-[12px] font-variant-numeric tabular-nums">
-                  {s.value}
+                  <CountUp target={s.value} suffix={s.suffix} />
                 </div>
                 <div className="text-[13px] font-semibold uppercase tracking-[0.1em] text-white/75">{s.label}</div>
               </div>
             ))}
-          </div>
+          </StaggerReveal>
         </div>
       </section>
 
       {/* ── Director ── */}
       <section aria-label="Message from the Director" className="bg-white py-[96px]">
         <div className="max-w-container mx-auto px-gutter grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-[72px] items-center">
-          <div
-            className="relative aspect-[3/4] rounded-card overflow-hidden bg-[#EFF3F4] flex items-center justify-center"
-            style={{ backgroundImage: 'repeating-linear-gradient(45deg, #EFF3F4 0 14px, #E6ECEE 14px 28px)' }}
-          >
-            <span className="font-mono text-[13px] color-body bg-white border border-hairline rounded-[6px] px-[12px] py-[6px]">
-              director portrait
-            </span>
-          </div>
-          <div>
-            <span className="block text-[13px] font-semibold uppercase tracking-[0.12em] text-teal mb-[20px]">
-              Desk of Directors
-            </span>
-            <blockquote className="font-display font-semibold text-[26px] leading-[1.45] text-ink mb-[24px]">
-              &ldquo;Every project we undertake must be delivered safely, on time, and to the highest quality standards.
-              There are no shortcuts when people&apos;s lives and industrial operations depend on what we build.&rdquo;
-            </blockquote>
-            <p className="text-[17px] leading-[1.75] text-body mb-[32px]">
-              Over {stats.yearsExperience} years, we have grown from a regional civil contractor into a full-service
-              turnkey EPC partner recognised across Gujarat and beyond — earned project by project through transparent
-              communication, technical depth and the resilience to deliver under pressure.
-            </p>
-            <div className="flex items-center gap-[16px] mb-[32px]">
-              <span className="w-[40px] h-[2px] bg-teal block" />
-              <div>
-                <p className="font-display font-bold text-[17px] text-ink m-0">Kiran Majmudar</p>
-                <p className="text-[14px] text-body mt-[2px] mb-0">Director, BD Buildcon LLP · Est. 1995</p>
-              </div>
-            </div>
-            <Link
-              href="/about"
-              className="inline-block border-[2px] border-teal text-teal text-[13px] font-semibold uppercase tracking-[0.1em] px-[30px] py-[13px] rounded-full transition-colors duration-200 hover:bg-teal hover:text-white"
+          <SlideIn from="left">
+            <div
+              className="relative aspect-[3/4] rounded-card overflow-hidden bg-[#EFF3F4] flex items-center justify-center"
+              style={{ backgroundImage: 'repeating-linear-gradient(45deg, #EFF3F4 0 14px, #E6ECEE 14px 28px)' }}
             >
-              About BD Buildcon
-            </Link>
-          </div>
+              <span className="font-mono text-[13px] color-body bg-white border border-hairline rounded-[6px] px-[12px] py-[6px]">
+                director portrait
+              </span>
+            </div>
+          </SlideIn>
+          <SlideIn from="right" delay={0.1}>
+            <div>
+              <span className="block text-[13px] font-semibold uppercase tracking-[0.12em] text-teal mb-[20px]">
+                Desk of Directors
+              </span>
+              <blockquote className="font-display font-semibold text-[26px] leading-[1.45] text-ink mb-[24px]">
+                &ldquo;Every project we undertake must be delivered safely, on time, and to the highest quality
+                standards. There are no shortcuts when people&apos;s lives and industrial operations depend on what we
+                build.&rdquo;
+              </blockquote>
+              <p className="text-[17px] leading-[1.75] text-body mb-[32px]">
+                Over {stats.yearsExperience} years, we have grown from a regional civil contractor into a full-service
+                turnkey EPC partner recognised across Gujarat and beyond — earned project by project through transparent
+                communication, technical depth and the resilience to deliver under pressure.
+              </p>
+              <div className="flex items-center gap-[16px] mb-[32px]">
+                <span className="w-[40px] h-[2px] bg-teal block" />
+                <div>
+                  <p className="font-display font-bold text-[17px] text-ink m-0">Kiran Majmudar</p>
+                  <p className="text-[14px] text-body mt-[2px] mb-0">Director, BD Buildcon LLP · Est. 1995</p>
+                </div>
+              </div>
+              <Link
+                href="/about"
+                className="inline-block border-[2px] border-teal text-teal text-[13px] font-semibold uppercase tracking-[0.1em] px-[30px] py-[13px] rounded-full transition-colors duration-200 hover:bg-teal hover:text-white"
+              >
+                About BD Buildcon
+              </Link>
+            </div>
+          </SlideIn>
         </div>
       </section>
 
       {/* ── Trusted By ── */}
       <section aria-label="Our clients" className="bg-surface border-top border-hairline py-[96px]">
         <div className="w-full mx-auto px-gutter xl:px-[80px]">
-          <div className="text-center mb-[56px]">
-            <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-ink mb-[16px]">Trusted By</h2>
-            <div className="w-[56px] h-[3px] bg-teal rounded-full mx-auto mb-[20px]" />
-            <p className="text-[18px] text-body m-0">
-              Industry leaders who partner with BD Buildcon for mission-critical construction.
-            </p>
-          </div>
+          <SlideIn from="bottom">
+            <div className="text-center mb-[56px]">
+              <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-ink mb-[16px]">Trusted By</h2>
+              <div className="w-[56px] h-[3px] bg-teal rounded-full mx-auto mb-[20px]" />
+              <p className="text-[18px] text-body m-0">
+                Industry leaders who partner with BD Buildcon for mission-critical construction.
+              </p>
+            </div>
+          </SlideIn>
           {/* ── Marquee Rows ── */}
           <div className="relative overflow-hidden">
             {/* Gradient masks for smooth fading on edges */}
@@ -423,15 +417,17 @@ export default function HomePage() {
       {/* ── Enquiry form ── */}
       <section aria-label="Quick enquiry form" className="bg-white py-[96px]">
         <div className="max-w-[720px] mx-auto px-gutter">
-          <div className="text-center mb-[48px]">
-            <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-ink mb-[16px]">
-              Start a Conversation
-            </h2>
-            <div className="w-[56px] h-[3px] bg-teal rounded-full mx-auto mb-[20px]" />
-            <p className="text-[18px] text-body m-0">
-              Tell us about your project — we respond within one business day.
-            </p>
-          </div>
+          <SlideIn from="bottom">
+            <div className="text-center mb-[48px]">
+              <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-ink mb-[16px]">
+                Start a Conversation
+              </h2>
+              <div className="w-[56px] h-[3px] bg-teal rounded-full mx-auto mb-[20px]" />
+              <p className="text-[18px] text-body m-0">
+                Tell us about your project — we respond within one business day.
+              </p>
+            </div>
+          </SlideIn>
 
           <HomeEnquiryForm />
         </div>
@@ -446,16 +442,23 @@ export default function HomePage() {
 function HomeEnquiryForm() {
   const [sending, setSending] = useState(false)
   const [sent, setSent] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const form = e.currentTarget
     setSending(true)
     setSent(false)
-    setTimeout(() => {
-      setSending(false)
+    setError(null)
+
+    const result = await submitEnquiry(form)
+    setSending(false)
+    if (result.ok) {
       setSent(true)
-      ;(e.target as HTMLFormElement).reset()
-    }, 800)
+      form.reset()
+    } else {
+      setError(result.error ?? 'Something went wrong. Please try again.')
+    }
   }
 
   return (
@@ -593,19 +596,22 @@ function HomeEnquiryForm() {
           className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[15px] text-ink resize-y focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
         ></textarea>
       </div>
-      <div className="flex items-center gap-[16px]">
-        <button
-          type="submit"
-          disabled={sending}
-          className="bg-teal text-white border-none cursor-pointer font-body text-[13px] font-semibold uppercase tracking-[0.1em] px-[36px] py-[15px] rounded-full transition-colors duration-200 hover:bg-[#0E8C9B] disabled:opacity-70"
-        >
-          {sending ? 'Sending...' : 'Send Enquiry'}
-        </button>
-        {sent && (
-          <span className="text-[14px] text-success font-medium">
-            ✓ Enquiry sent — we&apos;ll get back to you shortly.
-          </span>
-        )}
+      <div className="flex flex-col gap-[10px]">
+        <div className="flex items-center gap-[16px]">
+          <button
+            type="submit"
+            disabled={sending}
+            className="bg-teal text-white border-none cursor-pointer font-body text-[13px] font-semibold uppercase tracking-[0.1em] px-[36px] py-[15px] rounded-full transition-colors duration-200 hover:bg-[#0E8C9B] disabled:opacity-70"
+          >
+            {sending ? 'Sending...' : 'Send Enquiry'}
+          </button>
+          {sent && (
+            <span className="text-[14px] text-success font-medium">
+              ✓ Enquiry sent — we&apos;ll get back to you shortly.
+            </span>
+          )}
+        </div>
+        {error && <span className="text-[14px] text-error font-medium">{error}</span>}
       </div>
     </form>
   )

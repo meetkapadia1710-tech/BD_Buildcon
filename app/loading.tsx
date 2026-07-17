@@ -1,4 +1,5 @@
 import Logo from '@/components/ui/Logo'
+import { AbstractSkyline } from '@/components/ui/AbstractSkyline'
 
 export default function Loading() {
   return (
@@ -10,6 +11,9 @@ export default function Loading() {
         aria-label="Loading page"
         className="relative flex min-h-[320px] w-full items-center justify-center overflow-hidden bg-white py-[96px]"
       >
+        {/* Abstract skyline horizon */}
+        <AbstractSkyline className="pointer-events-none absolute inset-x-0 bottom-0 h-[64px] w-full text-teal/[0.16] sm:h-[84px]" />
+
         <div className="relative z-10 flex flex-col items-center gap-7">
           <div className="relative flex items-center justify-center animate-pulse">
             <Logo light={true} className="relative h-24 w-auto" />

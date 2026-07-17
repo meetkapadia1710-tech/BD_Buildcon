@@ -11,10 +11,13 @@ gsap.registerPlugin(ScrollTrigger)
 /* ── Context ──────────────────────────────────────────────────── */
 type LenisContextValue = {
   scrollTo: (target: string | HTMLElement | number, opts?: { offset?: number; duration?: number }) => void
+  /** Snaps scroll to the top instantly — safe to call before a route change. */
+  resetScroll: () => void
 }
 
 const LenisContext = createContext<LenisContextValue>({
   scrollTo: () => {},
+  resetScroll: () => {},
 })
 
 export function useLenis() {
@@ -26,14 +29,21 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null)
   const pathname = usePathname()
 
-  // Scroll to top on every page navigation while the transition overlay covers the screen
-  useEffect(() => {
+  const resetScroll = () => {
     if (lenisRef.current) {
+      // Lenis tracks its own animated/target scroll position — nudging native
+      // scrollTop directly leaves Lenis unaware, and it'll fight back on the
+      // next raf tick. Going through Lenis's own API keeps both in sync.
       lenisRef.current.scrollTo(0, { immediate: true } as Parameters<Lenis['scrollTo']>[1])
     } else {
       window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
     }
-  }, [pathname])
+  }
+
+  // Scroll to top on every page navigation while the transition overlay covers the screen
+  useEffect(() => {
+    resetScroll()
+  }, [pathname]) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -76,5 +86,5 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
     })
   }
 
-  return <LenisContext.Provider value={{ scrollTo }}>{children}</LenisContext.Provider>
+  return <LenisContext.Provider value={{ scrollTo, resetScroll }}>{children}</LenisContext.Provider>
 }

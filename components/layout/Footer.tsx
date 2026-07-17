@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { contactInfo, socialLinks } from '@/content/links'
+import { FadeRise } from '@/components/motion/FadeRise'
 
 export function Footer() {
   const scrollToTop = () => {
@@ -11,7 +12,7 @@ export function Footer() {
   return (
     <footer className="bg-footer text-white relative overflow-hidden border-t-[3px] border-teal">
       <div className="relative z-10 max-w-container mx-auto px-gutter py-8 lg:py-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-6">
+        <FadeRise className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-6" stagger={0.1} y={16}>
           {/* About — 5 cols */}
           <div className="md:col-span-5 lg:pr-12">
             <h3 className="font-display text-[18px] font-bold text-white mb-1">About Us</h3>
@@ -121,7 +122,7 @@ export function Footer() {
               </a>
             </div>
           </div>
-        </div>
+        </FadeRise>
 
         {/* Bottom bar */}
         <div className="mt-20 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">

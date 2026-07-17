@@ -4,10 +4,13 @@ import { useEffect, useRef } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { gsap } from 'gsap'
 import Logo from '@/components/ui/Logo'
+import { AbstractSkyline } from '@/components/ui/AbstractSkyline'
+import { useLenis } from '@/components/motion/LenisProvider'
 
 export function PageTransitionOverlay() {
   const pathname = usePathname()
   const router = useRouter()
+  const { resetScroll } = useLenis()
 
   const panelRef = useRef<HTMLDivElement>(null)
   const lineRef = useRef<HTMLDivElement>(null)
@@ -84,13 +87,17 @@ export function PageTransitionOverlay() {
       e.preventDefault()
       e.stopPropagation()
 
-      // 1. Cover screen → 2. Navigate (new page renders behind panel)
-      cover(() => router.push(href))
+      // 1. Cover screen → 2. Reset scroll (Lenis-aware, so it can't fight back
+      // on the next raf tick) → 3. Navigate (new page renders behind panel, already at the top)
+      cover(() => {
+        resetScroll()
+        router.push(href)
+      })
     }
 
     document.addEventListener('click', handleClick, true) // capture = fires first
     return () => document.removeEventListener('click', handleClick, true)
-  }, [router]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [router, resetScroll]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── reveal once the new page is in the DOM ───────────────────────────────
   // Track current pathname in a ref so the click handler always has the latest value
@@ -118,6 +125,9 @@ export function PageTransitionOverlay() {
       style={{ transform: 'translateY(100vh)' }}
       aria-hidden="true"
     >
+      {/* Abstract skyline horizon */}
+      <AbstractSkyline className="pointer-events-none absolute inset-x-0 bottom-0 h-[80px] w-full text-teal/[0.14] sm:h-[110px]" />
+
       {/* Sleek loading bar at the top of the viewport */}
       <div
         ref={lineRef}
