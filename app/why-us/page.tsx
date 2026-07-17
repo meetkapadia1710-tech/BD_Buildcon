@@ -33,6 +33,7 @@ const reasons = [
     num: '01',
     title: 'Custom Solutions',
     body: 'Tailored services to meet specific client requirements, ensuring flexibility at every stage of the project.',
+    image: 'https://images.unsplash.com/photo-1541888081682-154ed8d49a62?q=80&w=600&auto=format&fit=crop',
     icon: (
       <svg {...iconProps}>
         <line x1="4" y1="21" x2="4" y2="14" />
@@ -51,6 +52,7 @@ const reasons = [
     num: '02',
     title: 'Innovation & Technology',
     body: 'Use of the latest construction technology — BIM (Building Information Modelling), ERP systems, and digital project management tools — for precision, efficiency, and timely execution.',
+    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=600&auto=format&fit=crop',
     icon: (
       <svg {...iconProps}>
         <rect x="4" y="4" width="16" height="16" rx="2" />
@@ -70,6 +72,7 @@ const reasons = [
     num: '03',
     title: 'On-Time Delivery',
     body: 'A proven track record of meeting project timelines without compromising on quality.',
+    image: 'https://images.unsplash.com/photo-1506484381205-f7945653044d?q=80&w=600&auto=format&fit=crop',
     icon: (
       <svg {...iconProps}>
         <circle cx="12" cy="12" r="10" />
@@ -81,6 +84,7 @@ const reasons = [
     num: '04',
     title: 'Cost Efficiency',
     body: 'Value-engineered solutions for specific clients, ensuring cost-effective durability.',
+    image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=600&auto=format&fit=crop',
     icon: (
       <svg {...iconProps}>
         <polyline points="23 18 13.5 8.5 8.5 13.5 1 6" />
@@ -92,10 +96,23 @@ const reasons = [
     num: '05',
     title: 'Safety & Compliance',
     body: 'Adherence to stringent safety protocols, ISO certifications, and all statutory and environmental compliance.',
+    image: 'https://images.unsplash.com/photo-1533033589417-66fb10b70d74?q=80&w=600&auto=format&fit=crop',
     icon: (
       <svg {...iconProps}>
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
         <path d="m9 12 2 2 4-4" />
+      </svg>
+    ),
+  },
+  {
+    num: '06',
+    title: 'Workmanship',
+    body: 'Executing projects with uncompromising precision, guided by international engineering parameters to ensure structural excellence and lasting durability.',
+    image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=600&auto=format&fit=crop',
+    icon: (
+      <svg {...iconProps}>
+        <circle cx="12" cy="12" r="3" />
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
       </svg>
     ),
   },
@@ -250,7 +267,7 @@ export default function WhyUsPage() {
           style={{ background: 'radial-gradient(circle, #16A8B8, transparent 70%)' }}
           aria-hidden="true"
         />
-        <div className="relative max-w-[980px] mx-auto px-gutter">
+        <div className="relative max-w-[1200px] mx-auto px-gutter">
           <SlideIn from="bottom">
             <div className="text-center mb-[56px]">
               <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-white mb-[16px]">
@@ -261,7 +278,7 @@ export default function WhyUsPage() {
           </SlideIn>
 
           <div className="flex flex-col gap-[2px] rounded-card overflow-hidden">
-            <div className="grid grid-cols-[1.4fr_1fr_1fr] bg-white/5 p-[16px_28px]">
+            <div className="grid grid-cols-[1fr_1.2fr_1.2fr] bg-white/5 p-[16px_28px]">
               <span className="text-[12px] font-semibold uppercase tracking-[0.1em] text-white/50">Criteria</span>
               <span className="text-[12px] font-semibold uppercase tracking-[0.1em] text-[#5BD6E2]">BD Buildcon</span>
               <span className="text-[12px] font-semibold uppercase tracking-[0.1em] text-white/50">
@@ -271,7 +288,7 @@ export default function WhyUsPage() {
 
             <StaggerReveal direction="left" stagger={0.07} className="flex flex-col gap-[2px]">
               {compareRows.map((row, i) => (
-                <div key={i} className="grid grid-cols-[1.4fr_1fr_1fr] bg-white/[0.03] p-[18px_28px] items-center">
+                <div key={i} className="grid grid-cols-[1fr_1.2fr_1.2fr] bg-white/[0.03] p-[18px_28px] items-center">
                   <span className="text-[15px] font-semibold text-white">{row.label}</span>
                   <span className="flex items-center gap-[10px] text-[14.5px] text-[#5BD6E2] font-medium">
                     <CheckChip />

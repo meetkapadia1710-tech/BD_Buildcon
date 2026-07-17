@@ -51,7 +51,7 @@ export default function AboutPage() {
       />
 
       {/* ── Story ── */}
-      <section aria-label="Our Story" className="py-[96px] bg-white">
+      <section aria-label="Our Story" className="pt-[64px] pb-[96px] bg-white">
         <div className="max-w-container mx-auto px-gutter grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-[72px] items-center">
           <div>
             <span className="block text-[13px] font-semibold uppercase tracking-[0.12em] text-teal mb-[16px]">

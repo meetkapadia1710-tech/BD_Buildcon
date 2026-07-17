@@ -47,7 +47,7 @@ export function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 w-full transition-all duration-300 h-[72px] flex items-center border-b ${
+        className={`sticky top-0 z-50 w-full transition-all duration-300 h-[60px] flex items-center border-b ${
           scrolled ? 'bg-white border-hairline shadow-[0_1px_24px_rgba(0,0,0,0.08)]' : 'bg-white border-hairline'
         }`}
       >
@@ -58,12 +58,12 @@ export function Header() {
           </Link>
 
           {/* ── Desktop Nav ── */}
-          <nav className="hidden lg:flex items-stretch flex-1 justify-center h-[72px]" aria-label="Main navigation">
+          <nav className="hidden lg:flex items-stretch flex-1 justify-end pr-8 h-[60px]" aria-label="Main navigation">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative flex items-center px-4 h-full font-body text-[12.5px] font-semibold uppercase tracking-[0.08em] whitespace-nowrap transition-colors duration-200 ${
+                className={`relative flex items-center px-4 h-full font-body text-[11px] font-semibold uppercase tracking-[0.08em] whitespace-nowrap transition-colors duration-200 ${
                   isActive(link.href) ? 'text-teal' : 'text-nav hover:text-ink'
                 }`}
               >
@@ -132,7 +132,7 @@ export function Header() {
             onClick={(e) => e.stopPropagation()}
           >
             {/* Drawer header */}
-            <div className="flex items-center justify-between px-5 py-4 border-b border-hairline shrink-0 h-[72px]">
+            <div className="flex items-center justify-between px-5 py-4 border-b border-hairline shrink-0 h-[60px]">
               <Link href="/" onClick={() => setMobileOpen(false)}>
                 <Logo light={true} className="h-8 w-auto" />
               </Link>

@@ -43,12 +43,7 @@ export const consultants: Consultant[] = [
     sector: 'Consultant',
     logo: '/brochurephotos/CONSULTANT LOGOS/CONS - IBI CHEMATUR LTD.webp',
   },
-  {
-    id: 'ihi',
-    name: 'IHI Corporation',
-    sector: 'Consultant',
-    logo: '/brochurephotos/CONSULTANT LOGOS/CONS - ISHIKAWAJIMA HARIMA HEAVY INDUSTRIES CO LTD.webp',
-  },
+
   {
     id: 'knexir',
     name: 'Knexir Consultants',
@@ -102,7 +97,7 @@ export const consultants: Consultant[] = [
   { id: 'hcp', name: 'HCP', sector: 'Consultant', logo: '/brochurephotos/CONSULTANT LOGOS/hcp.webp' },
   { id: 'aaj', name: 'AAJ Associates', sector: 'Consultant', logo: '/brochurephotos/CONSULTANT LOGOS/image77.webp' },
   { id: 'mecon', name: 'MECON', sector: 'Consultant', logo: '/brochurephotos/CONSULTANT LOGOS/image86.webp' },
-  { id: 'modi', name: 'Modi Architects', sector: 'Consultant', logo: '/brochurephotos/CONSULTANT LOGOS/image87.webp' },
+
   {
     id: 'jones-lang',
     name: 'Jones Lang LaSalle',

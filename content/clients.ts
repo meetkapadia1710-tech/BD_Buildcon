@@ -72,12 +72,6 @@ export const clients: Client[] = [
     logo: '/brochurephotos/CLIENT LOGOS/19 KHEMANI LOGO (2).webp',
   },
   {
-    id: 'meghmani',
-    name: 'Meghmani Organics',
-    sector: 'Agrochemicals',
-    logo: '/brochurephotos/CLIENT LOGOS/22. MEGHMANI (2).webp',
-  },
-  {
     id: 'navin',
     name: 'Navin Fluorine',
     sector: 'Fluorochemicals',

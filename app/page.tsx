@@ -114,19 +114,31 @@ export default function HomePage() {
           />
         </div>
 
-        <div className="relative z-10 w-full h-full flex flex-col justify-end px-gutter pb-[40px] sm:pb-[80px] max-w-container mx-auto mt-auto">
-          <h1 className="text-white text-left font-display font-[800] text-[64px] sm:text-[96px] md:text-[120px] lg:text-[140px] leading-[0.85] tracking-tight mb-[32px] sm:mb-[48px]">
-            Shaping
-            <br />
-            <span className="font-serif italic font-light text-white/90">Modern</span>
-            <br />
-            Infrastructure
+        <div className="relative z-10 w-full h-full flex flex-col justify-end pb-[40px] sm:pb-[80px] mt-auto">
+          <h1 className="text-white text-left font-display font-[800] text-[32px] sm:text-[48px] md:text-[64px] lg:text-[80px] leading-[1.05] tracking-tight mb-[32px] sm:mb-[48px] px-4 sm:px-8 lg:px-12 w-full max-w-[1400px]">
+            All our projects, <br className="hidden md:block" />
+            completed on deadline <br />
+            <span className="font-serif italic font-light text-white/90">with zero accidents.</span>
           </h1>
 
-          <div className="flex flex-col sm:flex-row gap-8 justify-between items-start sm:items-end w-full">
-            <div className="inline-flex items-center gap-[8px] sm:gap-[10px] bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-[14px] sm:px-[18px] py-[7px] sm:py-[8px] text-white/90 font-medium text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
-              <span className="w-[6px] h-[6px] sm:w-[7px] sm:h-[7px] bg-teal rounded-full" />
-              ISO 9001:2015 · CRISIL SME 3
+          <div className="flex flex-col sm:flex-row gap-8 justify-between items-start sm:items-end w-full px-gutter max-w-container mx-auto">
+            <div className="flex flex-wrap items-center gap-[12px] sm:gap-[16px] max-w-[600px]">
+              <div className="inline-flex items-center gap-[8px] bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-[14px] sm:px-[16px] py-[8px] text-white/90 font-medium text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
+                <span className="w-[6px] h-[6px] bg-[#5BD6E2] rounded-full" />
+                30+ years
+              </div>
+              <div className="inline-flex items-center gap-[8px] bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-[14px] sm:px-[16px] py-[8px] text-white/90 font-medium text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
+                <span className="w-[6px] h-[6px] bg-[#5BD6E2] rounded-full" />
+                ISO 9001:2015
+              </div>
+              <div className="inline-flex items-center gap-[8px] bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-[14px] sm:px-[16px] py-[8px] text-white/90 font-medium text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
+                <span className="w-[6px] h-[6px] bg-[#5BD6E2] rounded-full" />
+                CRISIL SME 3
+              </div>
+              <div className="inline-flex items-center gap-[8px] bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-[14px] sm:px-[16px] py-[8px] text-white/90 font-medium text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
+                <span className="w-[6px] h-[6px] bg-[#5BD6E2] rounded-full" />
+                ₹200+ Cr delivered
+              </div>
             </div>
 
             <div className="flex gap-[12px] sm:gap-[16px] w-full sm:w-auto">
