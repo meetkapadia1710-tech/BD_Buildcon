@@ -427,7 +427,7 @@ function HomeEnquiryForm() {
             type="text"
             required
             placeholder="Your full name"
-            className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[15px] text-ink focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
+            className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
           />
         </div>
         <div>
@@ -443,7 +443,7 @@ function HomeEnquiryForm() {
             type="email"
             required
             placeholder="your.email@example.com"
-            className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[15px] text-ink focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
+            className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
           />
         </div>
       </div>
@@ -460,7 +460,7 @@ function HomeEnquiryForm() {
             name="company"
             type="text"
             placeholder="Your company name"
-            className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[15px] text-ink focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
+            className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
           />
         </div>
         <div>
@@ -475,7 +475,7 @@ function HomeEnquiryForm() {
             name="phone"
             type="tel"
             placeholder="+91 XXX XXX XXXX"
-            className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[15px] text-ink focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
+            className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
           />
         </div>
       </div>
@@ -490,7 +490,7 @@ function HomeEnquiryForm() {
           <select
             id="hq-sector"
             name="sector"
-            className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[15px] text-ink appearance-auto focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
+            className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink appearance-auto focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
           >
             <option>Select sector</option>
             <option>Chemicals</option>
@@ -514,7 +514,7 @@ function HomeEnquiryForm() {
           <select
             id="hq-type"
             name="projectType"
-            className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[15px] text-ink appearance-auto focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
+            className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink appearance-auto focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
           >
             <option>Select type</option>
             <option>Greenfield Plant</option>
@@ -540,7 +540,7 @@ function HomeEnquiryForm() {
           rows={4}
           required
           placeholder="Brief project description..."
-          className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[15px] text-ink resize-y focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
+          className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink resize-y focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
         ></textarea>
       </div>
       <div className="flex flex-col gap-[10px]">

@@ -25,13 +25,13 @@ const infoCards = [
       <div className="flex flex-col gap-[8px]">
         <a
           href="tel:+919879100355"
-          className="text-[15px] text-teal font-semibold hover:text-teal/80 transition-colors"
+          className="inline-block py-[10px] -my-[10px] text-[15px] text-teal font-semibold hover:text-teal/80 transition-colors"
         >
           +91 98791 00355
         </a>
         <a
           href="tel:+912642262355"
-          className="text-[15px] text-teal font-semibold hover:text-teal/80 transition-colors"
+          className="inline-block py-[10px] -my-[10px] text-[15px] text-teal font-semibold hover:text-teal/80 transition-colors"
         >
           +91 264 226 2355
         </a>
@@ -47,13 +47,13 @@ const infoCards = [
       <div className="flex flex-col gap-[8px]">
         <a
           href="mailto:business@bdbuildcon.com"
-          className="text-[15px] text-teal font-semibold hover:text-teal/80 transition-colors"
+          className="inline-block py-[10px] -my-[10px] text-[15px] text-teal font-semibold hover:text-teal/80 transition-colors"
         >
           business@bdbuildcon.com
         </a>
         <a
           href="mailto:info@bdbuildcon.com"
-          className="text-[15px] text-teal font-semibold hover:text-teal/80 transition-colors"
+          className="inline-block py-[10px] -my-[10px] text-[15px] text-teal font-semibold hover:text-teal/80 transition-colors"
         >
           info@bdbuildcon.com
         </a>
@@ -147,7 +147,7 @@ export default function ContactPage() {
                     type="text"
                     required
                     placeholder="Your full name"
-                    className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[15px] text-ink focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
+                    className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
                   />
                 </div>
                 <div>
@@ -163,7 +163,7 @@ export default function ContactPage() {
                     type="email"
                     required
                     placeholder="your.email@example.com"
-                    className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[15px] text-ink focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
+                    className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
                   />
                 </div>
               </div>
@@ -181,7 +181,7 @@ export default function ContactPage() {
                     name="company"
                     type="text"
                     placeholder="Your company name"
-                    className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[15px] text-ink focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
+                    className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
                   />
                 </div>
                 <div>
@@ -196,7 +196,7 @@ export default function ContactPage() {
                     name="phone"
                     type="tel"
                     placeholder="+91 XXX XXX XXXX"
-                    className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[15px] text-ink focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
+                    className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
                   />
                 </div>
               </div>
@@ -212,7 +212,7 @@ export default function ContactPage() {
                   <select
                     id="c-sector"
                     name="sector"
-                    className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[15px] text-ink appearance-auto focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
+                    className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink appearance-auto focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
                   >
                     <option>Select sector</option>
                     <option>Chemicals</option>
@@ -236,7 +236,7 @@ export default function ContactPage() {
                   <select
                     id="c-type"
                     name="projectType"
-                    className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[15px] text-ink appearance-auto focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
+                    className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink appearance-auto focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
                   >
                     <option>Select type</option>
                     <option>Greenfield Plant</option>
@@ -263,7 +263,7 @@ export default function ContactPage() {
                   rows={5}
                   required
                   placeholder="Brief project description — scope, location, timeline..."
-                  className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[15px] text-ink resize-y focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
+                  className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink resize-y focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
                 ></textarea>
               </div>
 
@@ -306,7 +306,7 @@ export default function ContactPage() {
             href="https://maps.google.com/?q=Millenium+Arcade+Bharuch"
             target="_blank"
             rel="noopener noreferrer"
-            className="absolute bottom-[16px] left-[16px] font-body text-[13px] text-body bg-white border border-hairline rounded-[8px] px-[16px] py-[9px] shadow-[0_2px_10px_rgba(0,0,0,0.08)] hover:border-teal transition-colors"
+            className="absolute bottom-[16px] left-[16px] font-body text-[13px] text-body bg-white border border-hairline rounded-[8px] px-[16px] py-[13px] shadow-[0_2px_10px_rgba(0,0,0,0.08)] hover:border-teal transition-colors"
           >
             📍 Open in Google Maps
           </a>

@@ -102,6 +102,69 @@ const reasons = [
   },
 ]
 
+const workmanshipParams = [
+  {
+    title: 'Design-Code Alignment',
+    body: 'Execution engineered to the design codes and specifications set by our international EPC consultants and multinational clients — not scoped to local minimums.',
+    icon: (
+      <svg {...iconProps}>
+        <circle cx="12" cy="12" r="9" />
+        <circle cx="12" cy="12" r="5" />
+        <circle cx="12" cy="12" r="1" fill="currentColor" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Material Traceability',
+    body: 'Every steel and cement batch traceable to mill certificate and receipt inspection, logged before it ever reaches the pour.',
+    icon: (
+      <svg {...iconProps}>
+        <path d="M20.59 13.41 12 22l-9.41-9.41A2 2 0 0 1 2 11.17V4a2 2 0 0 1 2-2h7.17a2 2 0 0 1 1.41.59L21 12a2 2 0 0 1 0 2Z" />
+        <circle cx="7.5" cy="7.5" r="1.5" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Inspection Hold Points',
+    body: 'Stage-gate inspections at reinforcement, shuttering and pre-pour — each one signed off by the client before work proceeds.',
+    icon: (
+      <svg {...iconProps}>
+        <rect x="6" y="4" width="12" height="17" rx="2" />
+        <path d="M9 4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1H9V4z" />
+        <path d="m9.5 13 2 2 3.5-4" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Digital Precision',
+    body: 'BIM-modelled tolerances and ERP-tracked execution keep every dimension accountable from drawing to as-built.',
+    icon: (
+      <svg {...iconProps}>
+        <rect x="4" y="4" width="16" height="16" rx="2" />
+        <rect x="9" y="9" width="6" height="6" />
+        <line x1="9" y1="1" x2="9" y2="4" />
+        <line x1="15" y1="1" x2="15" y2="4" />
+        <line x1="9" y1="20" x2="9" y2="23" />
+        <line x1="15" y1="20" x2="15" y2="23" />
+        <line x1="20" y1="9" x2="23" y2="9" />
+        <line x1="20" y1="14" x2="23" y2="14" />
+        <line x1="1" y1="9" x2="4" y2="9" />
+        <line x1="1" y1="14" x2="4" y2="14" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Certified Quality System',
+    body: 'ISO 9001:2015-certified QMS spanning design, procurement and construction execution — audited, not self-declared.',
+    icon: (
+      <svg {...iconProps}>
+        <circle cx="12" cy="8" r="6" />
+        <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
+      </svg>
+    ),
+  },
+]
+
 const compareRows = [
   { label: 'Safety record', us: '35-year zero-accident journey', them: 'Incidents tolerated as "normal"' },
   { label: 'Schedule reliability', us: 'Deadline is contractual', them: 'Slippage passed to client' },
@@ -299,7 +362,7 @@ export default function WhyUsPage() {
           </SlideIn>
 
           <div className="flex flex-col gap-[2px] rounded-card overflow-hidden">
-            <div className="grid grid-cols-[1.4fr_1fr_1fr] bg-white/5 p-[16px_28px]">
+            <div className="hidden sm:grid grid-cols-[1.4fr_1fr_1fr] bg-white/5 p-[16px_28px]">
               <span className="text-[12px] font-semibold uppercase tracking-[0.1em] text-white/50">Criteria</span>
               <span className="text-[12px] font-semibold uppercase tracking-[0.1em] text-[#5BD6E2]">BD Buildcon</span>
               <span className="text-[12px] font-semibold uppercase tracking-[0.1em] text-white/50">
@@ -309,16 +372,34 @@ export default function WhyUsPage() {
 
             <StaggerReveal direction="left" stagger={0.07} className="flex flex-col gap-[2px]">
               {compareRows.map((row, i) => (
-                <div key={i} className="grid grid-cols-[1.4fr_1fr_1fr] bg-white/[0.03] p-[18px_28px] items-center">
-                  <span className="text-[15px] font-semibold text-white">{row.label}</span>
-                  <span className="flex items-center gap-[10px] text-[14.5px] text-[#5BD6E2] font-medium">
-                    <CheckChip />
-                    {row.us}
-                  </span>
-                  <span className="flex items-center gap-[10px] text-[14.5px] text-white/45">
-                    <DashChip />
-                    {row.them}
-                  </span>
+                <div key={i} className="bg-white/[0.03]">
+                  {/* Tablet/desktop: table row */}
+                  <div className="hidden sm:grid grid-cols-[1.4fr_1fr_1fr] p-[18px_28px] items-center">
+                    <span className="text-[15px] font-semibold text-white">{row.label}</span>
+                    <span className="flex items-center gap-[10px] text-[14.5px] text-[#5BD6E2] font-medium">
+                      <CheckChip />
+                      {row.us}
+                    </span>
+                    <span className="flex items-center gap-[10px] text-[14.5px] text-white/45">
+                      <DashChip />
+                      {row.them}
+                    </span>
+                  </div>
+
+                  {/* Mobile: self-labelled stacked card */}
+                  <div className="sm:hidden flex flex-col gap-[10px] p-[18px_20px]">
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.1em] text-white/40">
+                      {row.label}
+                    </span>
+                    <div className="flex items-start gap-[10px]">
+                      <CheckChip />
+                      <span className="text-[14px] leading-[1.45] text-[#5BD6E2] font-medium">{row.us}</span>
+                    </div>
+                    <div className="flex items-start gap-[10px]">
+                      <DashChip />
+                      <span className="text-[14px] leading-[1.45] text-white/45">{row.them}</span>
+                    </div>
+                  </div>
                 </div>
               ))}
             </StaggerReveal>
@@ -362,6 +443,78 @@ export default function WhyUsPage() {
             </SlideIn>
           </div>
         </BlueprintReveal>
+      </section>
+
+      {/* ── Workmanship ── */}
+      <section aria-label="Workmanship" className="relative overflow-hidden bg-dark-bg py-[96px]">
+        <div className="texture-grid pointer-events-none absolute inset-0 opacity-[0.3]" aria-hidden="true" />
+        <div
+          className="absolute -right-24 top-1/3 w-80 h-80 rounded-full opacity-20 blur-3xl pointer-events-none"
+          style={{ background: 'radial-gradient(circle, #16A8B8, transparent 70%)' }}
+          aria-hidden="true"
+        />
+
+        <div className="relative max-w-container mx-auto px-gutter grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-[56px] lg:gap-[64px] items-start">
+          <SlideIn from="left">
+            <div>
+              <span className="block text-[13px] font-semibold uppercase tracking-[0.12em] text-teal mb-[16px]">
+                Workmanship
+              </span>
+              <h2 className="font-display font-bold text-[38px] leading-[1.2] text-white mb-[20px]">
+                Built to international engineering parameters.
+              </h2>
+              <p className="text-[16px] leading-[1.7] text-white/65 mb-[32px]">
+                Every weld, pour and connection is executed against the same design codes and inspection discipline our
+                multinational EPC partners specify — not scoped to local minimums.
+              </p>
+              <div className="inline-flex items-center gap-[16px] border border-teal/25 bg-white/5 rounded-card px-[22px] py-[18px]">
+                <svg
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-[#5BD6E2] shrink-0"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="8" r="6" />
+                  <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
+                </svg>
+                <div>
+                  <div className="font-display font-[800] text-[20px] text-[#5BD6E2] leading-none mb-[6px]">
+                    ISO 9001:2015
+                  </div>
+                  <div className="text-[11.5px] text-white/50 uppercase tracking-[0.08em]">
+                    Certified Quality System
+                  </div>
+                </div>
+              </div>
+            </div>
+          </SlideIn>
+
+          <StaggerReveal direction="left" stagger={0.08} className="flex flex-col">
+            {workmanshipParams.map((p, i) => (
+              <div
+                key={i}
+                className="group flex gap-[18px] sm:gap-[20px] items-start py-[22px] sm:py-[24px] border-b border-white/10 last:border-b-0"
+              >
+                <span className="hidden sm:block shrink-0 font-display font-[800] text-[13px] text-teal/50 tracking-[0.1em] mt-[12px]">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span className="shrink-0 w-[44px] h-[44px] rounded-full bg-white/5 flex items-center justify-center text-teal transition-colors duration-300 group-hover:bg-teal group-hover:text-white">
+                  {p.icon}
+                </span>
+                <div>
+                  <h3 className="font-display font-bold text-[17px] sm:text-[18px] text-white mb-[6px]">{p.title}</h3>
+                  <p className="text-[14px] sm:text-[14.5px] leading-[1.65] text-white/60 m-0">{p.body}</p>
+                </div>
+              </div>
+            ))}
+          </StaggerReveal>
+        </div>
       </section>
 
       {/* ── Testimonials ── */}

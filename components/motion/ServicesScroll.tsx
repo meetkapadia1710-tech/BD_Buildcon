@@ -44,7 +44,7 @@ function ServiceCopy({ svc, index }: { svc: (typeof services)[number]; index: nu
       </ul>
       <Link
         href="/projects"
-        className="inline-flex items-center gap-[8px] text-[13px] font-semibold uppercase tracking-[0.1em] text-teal hover:text-[#0E8C9B] transition-colors duration-200"
+        className="inline-flex items-center gap-[8px] py-[10px] -my-[10px] text-[13px] font-semibold uppercase tracking-[0.1em] text-teal hover:text-[#0E8C9B] transition-colors duration-200"
       >
         View projects
         <span className="text-[16px]">→</span>
