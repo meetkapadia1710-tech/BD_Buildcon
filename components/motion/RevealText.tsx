@@ -35,7 +35,7 @@ export function RevealText({
     const lines = el.querySelectorAll<HTMLElement>('[data-line]')
     if (!lines.length) return
 
-    gsap.set(lines, { y: '100%', opacity: 0 })
+    gsap.set(lines, { y: '105%', opacity: 0, filter: 'blur(6px)' })
 
     const trigger = ScrollTrigger.create({
       trigger: el,
@@ -44,7 +44,8 @@ export function RevealText({
         gsap.to(lines, {
           y: 0,
           opacity: 1,
-          duration: 1,
+          filter: 'blur(0px)',
+          duration: 1.1,
           ease: 'cubic-bezier(0.16, 1, 0.3, 1)',
           stagger,
           delay,
@@ -63,13 +64,7 @@ export function RevealText({
   )
 }
 
-export function RevealLine({
-  children,
-  className = '',
-}: {
-  children: React.ReactNode
-  className?: string
-}) {
+export function RevealLine({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return (
     <span className={`block overflow-hidden ${className}`}>
       <span className="block" data-line>

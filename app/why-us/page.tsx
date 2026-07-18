@@ -10,11 +10,20 @@ import { BlueprintReveal } from '@/components/motion/BlueprintReveal'
 import { ConstructionDraw } from '@/components/motion/ConstructionDraw'
 import { testimonials } from '@/content/testimonials'
 import { statsDisplay, stats } from '@/content/company'
+import { breadcrumbJsonLd } from '@/lib/jsonld'
+
+export const dynamic = 'force-static'
 
 export const metadata: Metadata = {
-  title: 'Why Us — BD Buildcon LLP',
+  title: 'Why Choose BD Buildcon',
   description:
-    'Experience and expertise across diverse sectors — industrial, commercial, residential, and infrastructure.',
+    '35-year zero-accident record, ISO 9001:2015 certification, BIM/ERP-driven execution, and 100+ owned machines. See why leading industrials choose BD Buildcon.',
+  alternates: { canonical: 'https://bdbuildcon.com/why-us' },
+  openGraph: {
+    url: 'https://bdbuildcon.com/why-us',
+    title: 'Why Choose BD Buildcon LLP',
+    description: '35-year zero-accident record, ISO 9001:2015, BIM/ERP-driven execution, 100+ owned machines.',
+  },
 }
 
 const iconProps = {
@@ -160,6 +169,12 @@ const machineryPhotos = [
 export default function WhyUsPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbJsonLd([{ name: 'Why BD Buildcon', url: 'https://bdbuildcon.com/why-us' }])),
+        }}
+      />
       <PageTitleBand
         title="Why BD Buildcon"
         breadcrumbs={[{ label: 'Why Us' }]}

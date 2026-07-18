@@ -1,9 +1,25 @@
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import { PageTitleBand } from '@/components/layout/PageTitleBand'
 import { CTABand } from '@/components/layout/CTABand'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { projects } from '@/content/projects'
 import { DimensionLines } from '@/components/ui/BlueprintArtifacts'
+import { breadcrumbJsonLd } from '@/lib/jsonld'
+
+export const dynamic = 'force-static'
+
+export const metadata: Metadata = {
+  title: 'Our Projects',
+  description:
+    '50+ industrial EPC projects delivered across chemicals, pharma, petroleum, tyre, food processing and infrastructure sectors in Gujarat and beyond.',
+  alternates: { canonical: 'https://bdbuildcon.com/projects' },
+  openGraph: {
+    url: 'https://bdbuildcon.com/projects',
+    title: 'Our Projects — BD Buildcon LLP',
+    description: '50+ industrial EPC projects delivered across chemicals, pharma, and infrastructure.',
+  },
+}
 
 const allProjects = projects.map((p) => ({
   name: p.name,
@@ -18,6 +34,12 @@ const allProjects = projects.map((p) => ({
 export default function ProjectsPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbJsonLd([{ name: 'Our Projects', url: 'https://bdbuildcon.com/projects' }])),
+        }}
+      />
       <PageTitleBand
         title="Our Projects"
         breadcrumbs={[{ label: 'Projects' }]}

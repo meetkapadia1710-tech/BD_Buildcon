@@ -7,6 +7,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
+ScrollTrigger.config({ ignoreMobileResize: true })
 
 /* ── Context ──────────────────────────────────────────────────── */
 type LenisContextValue = {
@@ -50,7 +51,7 @@ export function LenisProvider({ children }: { children: React.ReactNode }) {
     if (prefersReduced) return
 
     // Higher lerp = snappier / less floaty (better for a B2B audience).
-    const lenis = new Lenis({ lerp: 0.12, smoothWheel: true })
+    const lenis = new Lenis({ lerp: 0.09, smoothWheel: true })
     lenisRef.current = lenis
 
     lenis.on('scroll', ScrollTrigger.update)

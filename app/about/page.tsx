@@ -5,11 +5,20 @@ import { RevealImage } from '@/components/motion/RevealImage'
 import { SlideIn } from '@/components/motion/SlideIn'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { CraneArtifact, SurveyMark, DimensionLines } from '@/components/ui/BlueprintArtifacts'
+import { breadcrumbJsonLd } from '@/lib/jsonld'
+
+export const dynamic = 'force-static'
 
 export const metadata: Metadata = {
   title: 'About BD Buildcon',
   description:
     'Learn about BD Buildcon LLP — a turnkey industrial EPC contractor with 30+ years, ISO 9001:2015 certified, specialised in Civil, Mechanical, PEB, piling and piping.',
+  alternates: { canonical: 'https://bdbuildcon.com/about' },
+  openGraph: {
+    url: 'https://bdbuildcon.com/about',
+    title: 'About BD Buildcon LLP',
+    description: 'Turnkey industrial EPC contractor since 1995. ISO 9001:2015 certified, 30+ years of delivery.',
+  },
 }
 
 const milestones = [
@@ -47,6 +56,12 @@ const peopleCare = [
 export default function AboutPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbJsonLd([{ name: 'About Us', url: 'https://bdbuildcon.com/about' }])),
+        }}
+      />
       <PageTitleBand
         title="About BD Buildcon"
         breadcrumbs={[{ label: 'About Us' }]}
@@ -191,9 +206,9 @@ export default function AboutPage() {
 
       {/* ── Mission / Vision ── */}
       <section aria-label="Mission and Vision" className="py-[96px] bg-white">
-        <div className="max-w-container mx-auto px-gutter grid grid-cols-1 md:grid-cols-2 gap-[24px]">
-          <SlideIn from="left">
-            <div className="relative overflow-hidden bg-dark-bg rounded-card p-[48px]">
+        <div className="max-w-container mx-auto px-gutter grid grid-cols-1 md:grid-cols-2 gap-[24px] items-stretch">
+          <SlideIn from="left" className="h-full">
+            <div className="relative overflow-hidden bg-dark-bg rounded-card p-[48px] h-full">
               <div className="texture-dots pointer-events-none absolute inset-0 text-white/[0.05]" aria-hidden="true" />
               <span className="relative block text-[13px] font-semibold uppercase tracking-[0.12em] text-[#5BD6E2] mb-[16px]">
                 Mission
@@ -205,8 +220,8 @@ export default function AboutPage() {
               </p>
             </div>
           </SlideIn>
-          <SlideIn from="right" delay={0.1}>
-            <div className="relative overflow-hidden bg-teal rounded-card p-[48px]">
+          <SlideIn from="right" delay={0.1} className="h-full">
+            <div className="relative overflow-hidden bg-teal rounded-card p-[48px] h-full">
               <div className="texture-dots pointer-events-none absolute inset-0 text-white/[0.08]" aria-hidden="true" />
               <span className="relative block text-[13px] font-semibold uppercase tracking-[0.12em] text-white/75 mb-[16px]">
                 Vision

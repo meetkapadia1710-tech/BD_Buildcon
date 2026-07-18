@@ -4,9 +4,13 @@ import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { SlideIn } from '@/components/motion/SlideIn'
 import { SurveyMark } from '@/components/ui/BlueprintArtifacts'
 
+export const dynamic = 'force-static'
+
 export const metadata: Metadata = {
-  title: 'Employee Area — BD Buildcon LLP',
+  title: 'Employee Area',
   description: 'Internal tools for BD Buildcon team members. Access requires company credentials.',
+  alternates: { canonical: 'https://bdbuildcon.com/employee-area' },
+  robots: { index: false, follow: false },
 }
 
 const portals = [

@@ -3,6 +3,7 @@
 import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { DUR, EASE } from '@/lib/motion'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -43,8 +44,8 @@ export function SlideIn({ children, className = '', from = 'bottom', delay = 0, 
           opacity: 1,
           x: 0,
           y: 0,
-          duration: 0.6,
-          ease: 'power3.out',
+          duration: DUR.base,
+          ease: EASE.outStr,
           delay,
         })
       },

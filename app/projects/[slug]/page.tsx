@@ -19,19 +19,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = projects.find((p) => p.slug === params.slug)
   if (!project) return {}
   return {
-    title: `${project.name} | BD Buildcon`,
+    title: project.name,
     description: project.excerpt,
+    alternates: { canonical: `https://bdbuildcon.com/projects/${project.slug}` },
     openGraph: {
       type: 'article',
       url: `https://bdbuildcon.com/projects/${project.slug}`,
-      title: `${project.name} | BD Buildcon`,
+      title: `${project.name} — BD Buildcon LLP`,
       description: project.excerpt,
-      images: [
-        {
-          url: project.image,
-          alt: project.name,
-        },
-      ],
+      images: [{ url: project.image, alt: project.name }],
     },
   }
 }

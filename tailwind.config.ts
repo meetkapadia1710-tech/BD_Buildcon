@@ -66,9 +66,11 @@ const config: Config = {
       },
       boxShadow: {
         card: '0 4px 16px rgba(0,0,0,0.06)',
-        'card-hover': '0 8px 28px rgba(0,0,0,0.08)',
+        'card-hover': '0 8px 28px rgba(0,0,0,0.10), 0 2px 8px rgba(22,168,184,0.06)',
+        hover: '0 12px 36px rgba(0,0,0,0.10), 0 4px 12px rgba(22,168,184,0.08)',
         form: '0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06)',
         'teal-glow': '0 4px 16px rgba(22, 168, 184, 0.4)',
+        'teal-lg': '0 16px 48px rgba(22,168,184,0.28)',
       },
       transitionTimingFunction: {
         'out-quart': 'var(--ease-out-quart)',

@@ -9,11 +9,20 @@ import { BlueprintReveal } from '@/components/motion/BlueprintReveal'
 import { CountUp } from '@/components/motion/CountUp'
 import { Spotlight } from '@/components/motion/Spotlight'
 import { SurveyMark, SiloArtifact } from '@/components/ui/BlueprintArtifacts'
+import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/jsonld'
+
+export const dynamic = 'force-static'
 
 export const metadata: Metadata = {
-  title: 'Safety & Quality — BD Buildcon LLP',
+  title: 'Safety & Quality',
   description:
     'A 35-year zero-accident journey. ISO 9001:2015-certified quality systems and a dedicated quality laboratory on every site.',
+  alternates: { canonical: 'https://bdbuildcon.com/safety-quality' },
+  openGraph: {
+    url: 'https://bdbuildcon.com/safety-quality',
+    title: 'Safety & Quality — BD Buildcon LLP',
+    description: '35-year zero-accident journey. ISO 9001:2015 certified with on-site quality laboratories.',
+  },
 }
 
 const iconProps = {
@@ -244,6 +253,20 @@ function SealIcon() {
 export default function SafetyQualityPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([
+            breadcrumbJsonLd([{ name: 'Safety & Quality', url: 'https://bdbuildcon.com/safety-quality' }]),
+            serviceJsonLd({
+              name: 'Safety & Quality Management',
+              description:
+                'ISO 9001:2015-certified quality systems and zero-accident safety protocols for industrial EPC projects.',
+              url: 'https://bdbuildcon.com/safety-quality',
+            }),
+          ]),
+        }}
+      />
       <PageTitleBand
         title="Safety & Quality"
         breadcrumbs={[{ label: 'Safety & Quality' }]}

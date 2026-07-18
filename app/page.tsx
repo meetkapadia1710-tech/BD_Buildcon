@@ -16,7 +16,7 @@ import { SlideIn } from '@/components/motion/SlideIn'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { RevealText, RevealLine } from '@/components/motion/RevealText'
 import { MagneticButton } from '@/components/motion/MagneticButton'
-import { ServicesScroll } from '@/components/motion/ServicesScroll'
+import { services } from '@/content/services'
 import { clients } from '@/content/clients'
 import { consultants } from '@/content/consultants'
 import { stats, statsDisplay } from '@/content/company'
@@ -96,13 +96,14 @@ export default function HomePage() {
         <div className="relative z-10 w-full h-full flex flex-col justify-end pb-[40px] sm:pb-[80px] mt-auto">
           <RevealText
             as="h1"
-            className="text-white text-left font-display font-[800] text-[32px] sm:text-[48px] md:text-[64px] lg:text-[80px] leading-[1.05] tracking-tight mb-[32px] sm:mb-[48px] px-4 sm:px-8 lg:px-12 w-full max-w-[1400px]"
-            stagger={0.12}
+            className="text-white text-left font-display font-[800] text-[44px] sm:text-[68px] md:text-[88px] lg:text-[112px] leading-[1.0] tracking-tight mb-[32px] sm:mb-[48px] px-4 sm:px-8 lg:px-12 w-full max-w-[1400px]"
+            stagger={0.18}
           >
-            <RevealLine>All our projects, </RevealLine>
-            <RevealLine>completed on deadline </RevealLine>
             <RevealLine>
-              <span className="font-serif italic font-light text-white/90">with zero accidents.</span>
+              Building <span className="font-serif italic font-light text-white/75">modern</span>
+            </RevealLine>
+            <RevealLine>
+              <span className="text-white inline-block animate-hero-word-expand">infrastructure</span>
             </RevealLine>
           </RevealText>
 
@@ -161,7 +162,67 @@ export default function HomePage() {
           </div>
         </div>
 
-        <ServicesScroll />
+        <div className="max-w-container mx-auto px-gutter pb-[72px] sm:pb-[96px]">
+          <div className="flex flex-col gap-[64px] sm:gap-[80px]">
+            {services.map((svc, idx) => {
+              const isReversed = idx % 2 !== 0
+              return (
+                <SlideIn key={svc.id} from={isReversed ? 'right' : 'left'} delay={0.05}>
+                  <div
+                    className={`grid grid-cols-1 lg:grid-cols-2 gap-[32px] lg:gap-[64px] items-center${
+                      idx > 0 ? ' pt-[64px] sm:pt-[80px] border-t border-hairline' : ''
+                    }`}
+                  >
+                    <div
+                      className={`relative w-full aspect-[16/10] rounded-card overflow-hidden bg-dark-bg${
+                        isReversed ? ' lg:order-2' : ''
+                      }`}
+                    >
+                      <Image
+                        src={svc.image}
+                        alt={svc.title}
+                        fill
+                        className="object-cover transition-transform duration-700 hover:scale-[1.03]"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                      />
+                    </div>
+                    <div className={isReversed ? 'lg:order-1' : ''}>
+                      <div className="flex items-center gap-[12px] mb-[16px]">
+                        <span className="font-body text-[11px] font-bold text-teal bg-teal/5 px-[10px] py-[4px] rounded-[4px] border border-teal/15 tracking-[0.05em]">
+                          {String(idx + 1).padStart(2, '0')}
+                        </span>
+                        <span className="font-body text-[11px] tracking-[0.15em] uppercase text-body font-semibold">
+                          Service
+                        </span>
+                      </div>
+                      <h3 className="font-display font-bold text-[24px] sm:text-[30px] tracking-[-0.01em] text-ink mb-[12px] sm:mb-[16px]">
+                        {svc.title}
+                      </h3>
+                      <p className="text-[15px] sm:text-[17px] leading-[1.7] text-body mb-[20px] sm:mb-[24px]">
+                        {svc.description}
+                      </p>
+                      <ul className="flex flex-col gap-[8px] mb-[24px] sm:mb-[32px]">
+                        {svc.bullets.slice(0, 4).map((b, bi) => (
+                          <li key={bi} className="flex items-start gap-[10px] text-[14px] sm:text-[15px] text-body">
+                            <span className="text-teal mt-[3px] shrink-0">✓</span>
+                            {b}
+                          </li>
+                        ))}
+                      </ul>
+                      <Link
+                        href="/projects"
+                        className="inline-flex items-center gap-[8px] py-[10px] -my-[10px] text-[13px] font-semibold uppercase tracking-[0.1em] text-teal hover:text-[#0E8C9B] transition-colors duration-200"
+                      >
+                        View projects
+                        <span className="text-[16px]">→</span>
+                      </Link>
+                    </div>
+                  </div>
+                </SlideIn>
+              )
+            })}
+          </div>
+        </div>
       </section>
 
       {/* ── Pillars ── */}
