@@ -3,6 +3,7 @@ import { PageTitleBand } from '@/components/layout/PageTitleBand'
 import { CTABand } from '@/components/layout/CTABand'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { projects } from '@/content/projects'
+import { DimensionLines } from '@/components/ui/BlueprintArtifacts'
 
 const allProjects = projects.map((p) => ({
   name: p.name,
@@ -23,8 +24,10 @@ export default function ProjectsPage() {
         description="50+ industrial projects delivered across chemicals, pharma, tyre, food processing and infrastructure."
       />
 
-      <section aria-label="Projects Grid" className="bg-white py-[72px] pb-[96px]">
-        <div className="max-w-container mx-auto px-gutter">
+      <section aria-label="Projects Grid" className="relative overflow-hidden bg-white py-[72px] pb-[96px]">
+        {/* Blueprint artifact — DimensionLines right edge */}
+        <DimensionLines className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 h-[60%] w-auto text-teal/[0.09] hidden lg:block" />
+        <div className="relative z-10 max-w-container mx-auto px-gutter">
           {/* Grid */}
           <StaggerReveal className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[24px]" stagger={0.06}>
             {allProjects.map((p, i) => (

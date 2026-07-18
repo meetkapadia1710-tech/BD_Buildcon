@@ -2,12 +2,12 @@ import type { Metadata } from 'next'
 import { PageTitleBand } from '@/components/layout/PageTitleBand'
 import { CTABand } from '@/components/layout/CTABand'
 import { PhotoStackGallery } from '@/components/ui/PhotoStackGallery'
+import { WhyUsMaster } from '@/components/ui/WhyUsMaster'
 import { CountUp } from '@/components/motion/CountUp'
 import { SlideIn } from '@/components/motion/SlideIn'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { BlueprintReveal } from '@/components/motion/BlueprintReveal'
 import { ConstructionDraw } from '@/components/motion/ConstructionDraw'
-import { Spotlight } from '@/components/motion/Spotlight'
 import { testimonials } from '@/content/testimonials'
 import { statsDisplay, stats } from '@/content/company'
 
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
 }
 
 const iconProps = {
-  width: 24,
-  height: 24,
+  width: 22,
+  height: 22,
   viewBox: '0 0 24 24',
   fill: 'none',
   stroke: 'currentColor',
@@ -29,12 +29,76 @@ const iconProps = {
   'aria-hidden': true,
 }
 
-const reasons = [
+// One deduplicated ledger: each pillar merges the related claims that were
+// previously repeated across "Competitive Edge", the comparison table, and
+// "Workmanship" — every fact appears exactly once.
+const standards = [
   {
-    num: '01',
-    title: 'Custom Solutions',
-    body: 'Tailored services to meet specific client requirements, ensuring flexibility at every stage of the project.',
-    image: 'https://images.unsplash.com/photo-1541888081682-154ed8d49a62?q=80&w=600&auto=format&fit=crop',
+    title: 'Safety',
+    proof: '0 accidents · 35 years',
+    us: 'Safety is engineered into every protocol, every day on site — stringent safety systems and full statutory and environmental compliance, proven by a 35-year zero-accident journey.',
+    them: 'Incidents tolerated as "normal"',
+    icon: (
+      <svg {...iconProps}>
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <path d="m9 12 2 2 4-4" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Quality & Workmanship',
+    proof: 'ISO 9001:2015',
+    us: 'One certified quality system governs design, procurement and construction — built to international engineering parameters.',
+    points: [
+      'Design codes set by international EPC consultants',
+      'Every steel & cement batch traceable to mill certificate',
+      'Client-signed hold points at reinforcement, shuttering & pre-pour',
+    ],
+    them: 'Informal QA',
+    icon: (
+      <svg {...iconProps}>
+        <circle cx="12" cy="8" r="6" />
+        <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Technology & Precision',
+    proof: 'BIM + ERP',
+    us: 'BIM modelling, ERP systems and digital project management tools keep every dimension accountable from drawing to as-built.',
+    them: 'Manual, untracked execution',
+    icon: (
+      <svg {...iconProps}>
+        <rect x="4" y="4" width="16" height="16" rx="2" />
+        <rect x="9" y="9" width="6" height="6" />
+        <line x1="9" y1="1" x2="9" y2="4" />
+        <line x1="15" y1="1" x2="15" y2="4" />
+        <line x1="9" y1="20" x2="9" y2="23" />
+        <line x1="15" y1="20" x2="15" y2="23" />
+        <line x1="20" y1="9" x2="23" y2="9" />
+        <line x1="20" y1="14" x2="23" y2="14" />
+        <line x1="1" y1="9" x2="4" y2="9" />
+        <line x1="1" y1="14" x2="4" y2="14" />
+      </svg>
+    ),
+  },
+  {
+    title: 'On-Time Delivery',
+    proof: 'Deadline is contractual',
+    us: 'A proven track record of meeting project timelines without compromising on quality — the deadline is a commitment, not an estimate.',
+    them: 'Slippage passed to client',
+    icon: (
+      <svg {...iconProps}>
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+      </svg>
+    ),
+  },
+  {
+    title: 'Turnkey Scope & Custom Solutions',
+    proof: 'Turnkey EPC in-house',
+    us: 'End-to-end EPC under one roof, tailored to each client’s requirements — flexible at every stage, with value-engineered solutions for cost-effective durability.',
+    them: 'Layers of subcontractors',
     icon: (
       <svg {...iconProps}>
         <line x1="4" y1="21" x2="4" y2="14" />
@@ -50,144 +114,19 @@ const reasons = [
     ),
   },
   {
-    num: '02',
-    title: 'Innovation & Technology',
-    body: 'Use of the latest construction technology — BIM (Building Information Modelling), ERP systems, and digital project management tools — for precision, efficiency, and timely execution.',
-    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=600&auto=format&fit=crop',
+    title: 'Equipment & Resources',
+    proof: `${statsDisplay.machinesOwned} owned machines`,
+    us: 'An owned fleet and in-house testing laboratory give complete operational control — higher equipment availability, zero rental dependency.',
+    them: 'Rented, availability risk',
     icon: (
       <svg {...iconProps}>
-        <rect x="4" y="4" width="16" height="16" rx="2" />
-        <rect x="9" y="9" width="6" height="6" />
-        <line x1="9" y1="1" x2="9" y2="4" />
-        <line x1="15" y1="1" x2="15" y2="4" />
-        <line x1="9" y1="20" x2="9" y2="23" />
-        <line x1="15" y1="20" x2="15" y2="23" />
-        <line x1="20" y1="9" x2="23" y2="9" />
-        <line x1="20" y1="14" x2="23" y2="14" />
-        <line x1="1" y1="9" x2="4" y2="9" />
-        <line x1="1" y1="14" x2="4" y2="14" />
+        <path d="M10 17h4V5H2v12h3" />
+        <path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5v8h1" />
+        <circle cx="7.5" cy="17.5" r="2.5" />
+        <circle cx="17.5" cy="17.5" r="2.5" />
       </svg>
     ),
   },
-  {
-    num: '03',
-    title: 'On-Time Delivery',
-    body: 'A proven track record of meeting project timelines without compromising on quality.',
-    image: 'https://images.unsplash.com/photo-1506484381205-f7945653044d?q=80&w=600&auto=format&fit=crop',
-    icon: (
-      <svg {...iconProps}>
-        <circle cx="12" cy="12" r="10" />
-        <polyline points="12 6 12 12 16 14" />
-      </svg>
-    ),
-  },
-  {
-    num: '04',
-    title: 'Cost Efficiency',
-    body: 'Value-engineered solutions for specific clients, ensuring cost-effective durability.',
-    image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=600&auto=format&fit=crop',
-    icon: (
-      <svg {...iconProps}>
-        <polyline points="23 18 13.5 8.5 8.5 13.5 1 6" />
-        <polyline points="17 18 23 18 23 12" />
-      </svg>
-    ),
-  },
-  {
-    num: '05',
-    title: 'Safety & Compliance',
-    body: 'Adherence to stringent safety protocols, ISO certifications, and all statutory and environmental compliance.',
-    image: 'https://images.unsplash.com/photo-1533033589417-66fb10b70d74?q=80&w=600&auto=format&fit=crop',
-    icon: (
-      <svg {...iconProps}>
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-        <path d="m9 12 2 2 4-4" />
-      </svg>
-    ),
-  },
-  {
-    num: '06',
-    title: 'Workmanship',
-    body: 'Executing projects with uncompromising precision, guided by international engineering parameters to ensure structural excellence and lasting durability.',
-    image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=600&auto=format&fit=crop',
-    icon: (
-      <svg {...iconProps}>
-        <circle cx="12" cy="12" r="3" />
-        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
-      </svg>
-    ),
-  },
-]
-
-const workmanshipParams = [
-  {
-    title: 'Design-Code Alignment',
-    body: 'Execution engineered to the design codes and specifications set by our international EPC consultants and multinational clients — not scoped to local minimums.',
-    icon: (
-      <svg {...iconProps}>
-        <circle cx="12" cy="12" r="9" />
-        <circle cx="12" cy="12" r="5" />
-        <circle cx="12" cy="12" r="1" fill="currentColor" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Material Traceability',
-    body: 'Every steel and cement batch traceable to mill certificate and receipt inspection, logged before it ever reaches the pour.',
-    icon: (
-      <svg {...iconProps}>
-        <path d="M20.59 13.41 12 22l-9.41-9.41A2 2 0 0 1 2 11.17V4a2 2 0 0 1 2-2h7.17a2 2 0 0 1 1.41.59L21 12a2 2 0 0 1 0 2Z" />
-        <circle cx="7.5" cy="7.5" r="1.5" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Inspection Hold Points',
-    body: 'Stage-gate inspections at reinforcement, shuttering and pre-pour — each one signed off by the client before work proceeds.',
-    icon: (
-      <svg {...iconProps}>
-        <rect x="6" y="4" width="12" height="17" rx="2" />
-        <path d="M9 4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1H9V4z" />
-        <path d="m9.5 13 2 2 3.5-4" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Digital Precision',
-    body: 'BIM-modelled tolerances and ERP-tracked execution keep every dimension accountable from drawing to as-built.',
-    icon: (
-      <svg {...iconProps}>
-        <rect x="4" y="4" width="16" height="16" rx="2" />
-        <rect x="9" y="9" width="6" height="6" />
-        <line x1="9" y1="1" x2="9" y2="4" />
-        <line x1="15" y1="1" x2="15" y2="4" />
-        <line x1="9" y1="20" x2="9" y2="23" />
-        <line x1="15" y1="20" x2="15" y2="23" />
-        <line x1="20" y1="9" x2="23" y2="9" />
-        <line x1="20" y1="14" x2="23" y2="14" />
-        <line x1="1" y1="9" x2="4" y2="9" />
-        <line x1="1" y1="14" x2="4" y2="14" />
-      </svg>
-    ),
-  },
-  {
-    title: 'Certified Quality System',
-    body: 'ISO 9001:2015-certified QMS spanning design, procurement and construction execution — audited, not self-declared.',
-    icon: (
-      <svg {...iconProps}>
-        <circle cx="12" cy="8" r="6" />
-        <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
-      </svg>
-    ),
-  },
-]
-
-const compareRows = [
-  { label: 'Safety record', us: '35-year zero-accident journey', them: 'Incidents tolerated as "normal"' },
-  { label: 'Schedule reliability', us: 'Deadline is contractual', them: 'Slippage passed to client' },
-  { label: 'Scope coverage', us: 'Turnkey EPC in-house', them: 'Layers of subcontractors' },
-  { label: 'Equipment', us: 'Owned fleet & testing lab', them: 'Rented, availability risk' },
-  { label: 'Quality systems', us: 'ISO 9001:2015 certified', them: 'Informal QA' },
 ]
 
 const highlightStats = [
@@ -195,13 +134,6 @@ const highlightStats = [
   { value: stats.machinesOwned, suffix: '+', label: 'Owned Machines' },
   { value: stats.repeatClientPct, suffix: '%', label: 'Repeat Clients' },
   { value: stats.projects, suffix: '+', label: 'Projects Completed' },
-]
-
-const machineryStats: { numeric?: number; suffix?: string; value?: string; label: string }[] = [
-  { numeric: stats.machinesOwned, suffix: '+', label: 'Owned Machines & Equipment' },
-  { value: 'RMC', label: 'In-House Batching Plants' },
-  { value: 'BIM', label: 'Digital Project Management' },
-  { value: '24/7', label: 'Equipment Availability' },
 ]
 
 const featuredTestimonials = testimonials.slice(0, 6)
@@ -224,47 +156,6 @@ const machineryPhotos = [
   '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM.webp',
   '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.58.08 PM.webp',
 ]
-
-function CheckChip() {
-  return (
-    <span className="shrink-0 w-[20px] h-[20px] rounded-full bg-teal/15 flex items-center justify-center">
-      <svg
-        width="11"
-        height="11"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="3.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="text-[#5BD6E2]"
-        aria-hidden="true"
-      >
-        <path d="M20 6L9 17l-5-5"></path>
-      </svg>
-    </span>
-  )
-}
-
-function DashChip() {
-  return (
-    <span className="shrink-0 w-[20px] h-[20px] rounded-full bg-white/10 flex items-center justify-center">
-      <svg
-        width="10"
-        height="10"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="3.5"
-        strokeLinecap="round"
-        className="text-white/40"
-        aria-hidden="true"
-      >
-        <line x1="5" y1="12" x2="19" y2="12" />
-      </svg>
-    </span>
-  )
-}
 
 export default function WhyUsPage() {
   return (
@@ -289,140 +180,8 @@ export default function WhyUsPage() {
         </div>
       </section>
 
-      {/* ── Competitive Edge ── */}
-      <section aria-label="Competitive Edge" className="py-[96px] bg-white">
-        <div className="max-w-container mx-auto px-gutter">
-          <SlideIn from="bottom">
-            <div className="text-center mb-[56px]">
-              <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-ink mb-[16px]">
-                Our Competitive Edge
-              </h2>
-              <div className="w-[56px] h-[3px] bg-teal rounded-full mx-auto" />
-            </div>
-          </SlideIn>
-
-          <StaggerReveal
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-2 gap-[20px] lg:h-[560px]"
-            stagger={0.08}
-          >
-            {reasons.map((r, i) => {
-              const isFeatured = i === 1
-              return (
-                <Spotlight
-                  key={i}
-                  color={isFeatured ? 'rgba(91, 214, 226, 0.14)' : 'rgba(22, 168, 184, 0.16)'}
-                  size={isFeatured ? 360 : 220}
-                  className={`rounded-card p-[28px] lg:p-[32px] flex flex-col transition-all duration-300 ${
-                    isFeatured
-                      ? 'lg:col-span-2 lg:row-span-2 bg-dark-bg border border-transparent hover:border-teal/30 justify-center'
-                      : 'group border border-hairline hover:border-teal/40 hover:-translate-y-1 hover:shadow-[0_12px_28px_rgba(0,0,0,0.08)] justify-start gap-[6px]'
-                  }`}
-                >
-                  {isFeatured && (
-                    <div
-                      className="texture-grid pointer-events-none absolute inset-0 z-0 opacity-40"
-                      aria-hidden="true"
-                    />
-                  )}
-                  <div
-                    className={`relative z-10 flex items-center justify-center rounded-full transition-colors duration-300 ${
-                      isFeatured
-                        ? 'w-[64px] h-[64px] bg-teal/15 text-teal mb-[24px]'
-                        : 'w-[46px] h-[46px] bg-teal/10 text-teal group-hover:bg-teal group-hover:text-white mb-[4px]'
-                    }`}
-                  >
-                    {r.icon}
-                  </div>
-                  <span
-                    className={`relative z-10 font-display font-[800] tracking-[0.08em] ${
-                      isFeatured ? 'text-[13px] text-teal mb-[8px]' : 'text-[11px] text-teal/60'
-                    }`}
-                  >
-                    {r.num}
-                  </span>
-                  <h3
-                    className={`relative z-10 font-display font-bold m-0 ${
-                      isFeatured ? 'text-[26px] text-white mb-[14px]' : 'text-[17px] text-ink'
-                    }`}
-                  >
-                    {r.title}
-                  </h3>
-                  <p
-                    className={`relative z-10 leading-[1.6] m-0 ${
-                      isFeatured ? 'text-[16px] text-white/70 max-w-[420px]' : 'text-[13.5px] text-body line-clamp-3'
-                    }`}
-                  >
-                    {r.body}
-                  </p>
-                </Spotlight>
-              )
-            })}
-          </StaggerReveal>
-        </div>
-      </section>
-
-      {/* ── Comparison ── */}
-      <section aria-label="Comparison" className="relative overflow-hidden bg-dark-bg py-[96px]">
-        <div
-          className="absolute -left-32 top-1/2 -translate-y-1/2 w-96 h-96 rounded-full opacity-20 blur-3xl pointer-events-none"
-          style={{ background: 'radial-gradient(circle, #16A8B8, transparent 70%)' }}
-          aria-hidden="true"
-        />
-        <div className="relative max-w-[1200px] mx-auto px-gutter">
-          <SlideIn from="bottom">
-            <div className="text-center mb-[56px]">
-              <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-white mb-[16px]">
-                The BD Buildcon Standard
-              </h2>
-              <div className="w-[56px] h-[3px] bg-teal rounded-full mx-auto" />
-            </div>
-          </SlideIn>
-
-          <div className="flex flex-col gap-[2px] rounded-card overflow-hidden">
-            <div className="hidden sm:grid grid-cols-[1fr_1.2fr_1.2fr] bg-white/5 p-[16px_28px]">
-              <span className="text-[12px] font-semibold uppercase tracking-[0.1em] text-white/50">Criteria</span>
-              <span className="text-[12px] font-semibold uppercase tracking-[0.1em] text-[#5BD6E2]">BD Buildcon</span>
-              <span className="text-[12px] font-semibold uppercase tracking-[0.1em] text-white/50">
-                Typical Contractor
-              </span>
-            </div>
-
-            <StaggerReveal direction="left" stagger={0.07} className="flex flex-col gap-[2px]">
-              {compareRows.map((row, i) => (
-                <div key={i} className="bg-white/[0.03]">
-                  {/* Tablet/desktop: table row */}
-                  <div className="hidden sm:grid grid-cols-[1fr_1.2fr_1.2fr] p-[18px_28px] items-center">
-                    <span className="text-[15px] font-semibold text-white">{row.label}</span>
-                    <span className="flex items-center gap-[10px] text-[14.5px] text-[#5BD6E2] font-medium">
-                      <CheckChip />
-                      {row.us}
-                    </span>
-                    <span className="flex items-center gap-[10px] text-[14.5px] text-white/45">
-                      <DashChip />
-                      {row.them}
-                    </span>
-                  </div>
-
-                  {/* Mobile: self-labelled stacked card */}
-                  <div className="sm:hidden flex flex-col gap-[10px] p-[18px_20px]">
-                    <span className="text-[11px] font-semibold uppercase tracking-[0.1em] text-white/40">
-                      {row.label}
-                    </span>
-                    <div className="flex items-start gap-[10px]">
-                      <CheckChip />
-                      <span className="text-[14px] leading-[1.45] text-[#5BD6E2] font-medium">{row.us}</span>
-                    </div>
-                    <div className="flex items-start gap-[10px]">
-                      <DashChip />
-                      <span className="text-[14px] leading-[1.45] text-white/45">{row.them}</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </StaggerReveal>
-          </div>
-        </div>
-      </section>
+      {/* ── The BD Buildcon Standard — one deduplicated ledger ── */}
+      <WhyUsMaster standards={standards} />
 
       {/* ── Plant & Machinery ── */}
       <section aria-label="Plant and Machinery" className="relative overflow-hidden bg-white py-[96px]">
@@ -460,78 +219,6 @@ export default function WhyUsPage() {
             </SlideIn>
           </div>
         </BlueprintReveal>
-      </section>
-
-      {/* ── Workmanship ── */}
-      <section aria-label="Workmanship" className="relative overflow-hidden bg-dark-bg py-[96px]">
-        <div className="texture-grid pointer-events-none absolute inset-0 opacity-[0.3]" aria-hidden="true" />
-        <div
-          className="absolute -right-24 top-1/3 w-80 h-80 rounded-full opacity-20 blur-3xl pointer-events-none"
-          style={{ background: 'radial-gradient(circle, #16A8B8, transparent 70%)' }}
-          aria-hidden="true"
-        />
-
-        <div className="relative max-w-container mx-auto px-gutter grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-[56px] lg:gap-[64px] items-start">
-          <SlideIn from="left">
-            <div>
-              <span className="block text-[13px] font-semibold uppercase tracking-[0.12em] text-teal mb-[16px]">
-                Workmanship
-              </span>
-              <h2 className="font-display font-bold text-[38px] leading-[1.2] text-white mb-[20px]">
-                Built to international engineering parameters.
-              </h2>
-              <p className="text-[16px] leading-[1.7] text-white/65 mb-[32px]">
-                Every weld, pour and connection is executed against the same design codes and inspection discipline our
-                multinational EPC partners specify — not scoped to local minimums.
-              </p>
-              <div className="inline-flex items-center gap-[16px] border border-teal/25 bg-white/5 rounded-card px-[22px] py-[18px]">
-                <svg
-                  width="32"
-                  height="32"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-[#5BD6E2] shrink-0"
-                  aria-hidden="true"
-                >
-                  <circle cx="12" cy="8" r="6" />
-                  <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
-                </svg>
-                <div>
-                  <div className="font-display font-[800] text-[20px] text-[#5BD6E2] leading-none mb-[6px]">
-                    ISO 9001:2015
-                  </div>
-                  <div className="text-[11.5px] text-white/50 uppercase tracking-[0.08em]">
-                    Certified Quality System
-                  </div>
-                </div>
-              </div>
-            </div>
-          </SlideIn>
-
-          <StaggerReveal direction="left" stagger={0.08} className="flex flex-col">
-            {workmanshipParams.map((p, i) => (
-              <div
-                key={i}
-                className="group flex gap-[18px] sm:gap-[20px] items-start py-[22px] sm:py-[24px] border-b border-white/10 last:border-b-0"
-              >
-                <span className="hidden sm:block shrink-0 font-display font-[800] text-[13px] text-teal/50 tracking-[0.1em] mt-[12px]">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <span className="shrink-0 w-[44px] h-[44px] rounded-full bg-white/5 flex items-center justify-center text-teal transition-colors duration-300 group-hover:bg-teal group-hover:text-white">
-                  {p.icon}
-                </span>
-                <div>
-                  <h3 className="font-display font-bold text-[17px] sm:text-[18px] text-white mb-[6px]">{p.title}</h3>
-                  <p className="text-[14px] sm:text-[14.5px] leading-[1.65] text-white/60 m-0">{p.body}</p>
-                </div>
-              </div>
-            ))}
-          </StaggerReveal>
-        </div>
       </section>
 
       {/* ── Testimonials ── */}

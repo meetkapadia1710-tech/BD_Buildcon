@@ -7,6 +7,7 @@ import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { MagneticButton } from '@/components/motion/MagneticButton'
 import { contactInfo } from '@/content/links'
 import { submitEnquiry } from '@/lib/submitEnquiry'
+import { TrussArtifact } from '@/components/ui/BlueprintArtifacts'
 
 const infoCards = [
   {
@@ -103,8 +104,10 @@ export default function ContactPage() {
         description="Tell us about your project. We respond within one business day."
       />
 
-      <section aria-label="Contact" className="bg-white py-[96px]">
-        <div className="max-w-container mx-auto px-gutter grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-[56px] items-start">
+      <section aria-label="Contact" className="relative overflow-hidden bg-white py-[96px]">
+        {/* Blueprint artifact — TrussArtifact bottom-right behind the info cards */}
+        <TrussArtifact className="pointer-events-none absolute -bottom-4 -right-8 w-[300px] h-auto text-teal/[0.09] hidden lg:block" />
+        <div className="relative z-10 max-w-container mx-auto px-gutter grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-[56px] items-start">
           {/* Info panel */}
           <StaggerReveal direction="left" className="flex flex-col gap-[20px]" stagger={0.08}>
             {infoCards.map((card) => (

@@ -8,6 +8,7 @@ import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { BlueprintReveal } from '@/components/motion/BlueprintReveal'
 import { CountUp } from '@/components/motion/CountUp'
 import { Spotlight } from '@/components/motion/Spotlight'
+import { SurveyMark, SiloArtifact } from '@/components/ui/BlueprintArtifacts'
 
 export const metadata: Metadata = {
   title: 'Safety & Quality — BD Buildcon LLP',
@@ -250,9 +251,12 @@ export default function SafetyQualityPage() {
       />
 
       {/* ── Safety Record ── */}
-      <section aria-label="Safety Record" className="py-[96px] bg-white">
+      <section aria-label="Safety Record" className="relative overflow-hidden py-[96px] bg-white">
+        {/* Blueprint artifacts — SurveyMark corners */}
+        <SurveyMark className="pointer-events-none absolute top-4 left-4 w-12 h-12 text-teal/[0.10] hidden lg:block" />
+        <SurveyMark className="pointer-events-none absolute bottom-4 right-4 w-12 h-12 text-teal/[0.10] hidden lg:block" />
         <StaggerReveal
-          className="max-w-container mx-auto px-gutter grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[24px]"
+          className="relative z-10 max-w-container mx-auto px-gutter grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[24px]"
           stagger={0.08}
         >
           {safetyStats.map((s, i) => (
@@ -444,6 +448,8 @@ export default function SafetyQualityPage() {
 
       {/* ── Certifications ── */}
       <section aria-label="Certifications" className="relative overflow-hidden bg-dark-bg py-[88px]">
+        {/* Blueprint artifact — SiloArtifact left edge, white line-art */}
+        <SiloArtifact className="pointer-events-none absolute -left-8 top-1/2 -translate-y-1/2 h-[90%] w-auto text-white/[0.06] hidden lg:block" />
         <div
           className="absolute -right-24 -bottom-24 w-80 h-80 rounded-full opacity-20 blur-3xl pointer-events-none"
           style={{ background: 'radial-gradient(circle, #16A8B8, transparent 70%)' }}

@@ -4,6 +4,7 @@ import { CTABand } from '@/components/layout/CTABand'
 import { RevealImage } from '@/components/motion/RevealImage'
 import { SlideIn } from '@/components/motion/SlideIn'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
+import { CraneArtifact, SurveyMark, DimensionLines } from '@/components/ui/BlueprintArtifacts'
 
 export const metadata: Metadata = {
   title: 'About BD Buildcon',
@@ -53,8 +54,10 @@ export default function AboutPage() {
       />
 
       {/* ── Story ── */}
-      <section aria-label="Our Story" className="pt-[64px] pb-[96px] bg-white">
-        <div className="max-w-container mx-auto px-gutter grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-[72px] items-center">
+      <section aria-label="Our Story" className="relative overflow-hidden pt-[64px] pb-[96px] bg-white">
+        {/* Blueprint artifact — CraneArtifact top-right, photo overlaps it */}
+        <CraneArtifact className="pointer-events-none absolute -top-6 -right-6 w-[200px] h-auto text-teal/[0.10] hidden lg:block" />
+        <div className="relative z-10 max-w-container mx-auto px-gutter grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-[72px] items-center">
           <SlideIn from="left">
             <div>
               <span className="block text-[13px] font-semibold uppercase tracking-[0.12em] text-teal mb-[16px]">
@@ -264,8 +267,14 @@ export default function AboutPage() {
       </section>
 
       {/* ── People & Welfare ── */}
-      <section aria-label="People and Welfare" className="bg-white border-t border-hairline py-[96px]">
-        <div className="max-w-container mx-auto px-gutter">
+      <section
+        aria-label="People and Welfare"
+        className="relative overflow-hidden bg-white border-t border-hairline py-[96px]"
+      >
+        {/* Blueprint artifacts — SurveyMark + DimensionLines on right edge */}
+        <SurveyMark className="pointer-events-none absolute top-8 right-8 w-14 h-14 text-teal/[0.12] hidden lg:block" />
+        <DimensionLines className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 h-[70%] w-auto text-teal/[0.09] hidden lg:block" />
+        <div className="relative z-10 max-w-container mx-auto px-gutter">
           <SlideIn from="bottom">
             <div className="text-center mb-[56px]">
               <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-ink mb-[16px]">

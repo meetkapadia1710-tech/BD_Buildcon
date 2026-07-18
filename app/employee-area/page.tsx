@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { PageTitleBand } from '@/components/layout/PageTitleBand'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { SlideIn } from '@/components/motion/SlideIn'
+import { SurveyMark } from '@/components/ui/BlueprintArtifacts'
 
 export const metadata: Metadata = {
   title: 'Employee Area — BD Buildcon LLP',
@@ -63,8 +64,10 @@ export default function EmployeeAreaPage() {
         description="Internal tools for BD Buildcon team members. Access requires company credentials."
       />
 
-      <section aria-label="Portals" className="bg-white py-[96px]">
-        <div className="max-w-[980px] mx-auto px-gutter">
+      <section aria-label="Portals" className="relative overflow-hidden bg-white py-[96px]">
+        {/* Blueprint artifact — SurveyMark top-right */}
+        <SurveyMark className="pointer-events-none absolute top-8 right-8 w-14 h-14 text-teal/[0.12] hidden lg:block" />
+        <div className="relative z-10 max-w-[980px] mx-auto px-gutter">
           <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 gap-[24px]" stagger={0.1}>
             {portals.map((p, i) => (
               <a

@@ -21,6 +21,7 @@ import { clients } from '@/content/clients'
 import { consultants } from '@/content/consultants'
 import { stats, statsDisplay } from '@/content/company'
 import { submitEnquiry } from '@/lib/submitEnquiry'
+import { TrussArtifact, DimensionLines, SurveyMark, CraneArtifact } from '@/components/ui/BlueprintArtifacts'
 
 // Sectors are now defined inside SectorMarquee component
 
@@ -191,6 +192,8 @@ export default function HomePage() {
       {/* ── Stats ── */}
       <section aria-label="Key statistics" className="relative overflow-hidden bg-teal py-[88px]">
         <div className="texture-dots pointer-events-none absolute inset-0 text-white/[0.08]" aria-hidden="true" />
+        {/* Blueprint artifact — TrussArtifact bottom-left, white line-art */}
+        <TrussArtifact className="pointer-events-none absolute -bottom-6 -left-6 w-[320px] h-auto text-white/[0.08] hidden lg:block" />
         <div className="relative max-w-container mx-auto px-gutter">
           <SlideIn from="bottom">
             <div className="text-center mb-[56px]">
@@ -217,8 +220,10 @@ export default function HomePage() {
       </section>
 
       {/* ── Director ── */}
-      <section aria-label="Message from the Director" className="bg-white py-[96px]">
-        <div className="max-w-container mx-auto px-gutter grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-[72px] items-center">
+      <section aria-label="Message from the Director" className="relative overflow-hidden bg-white py-[96px]">
+        {/* Blueprint artifact — DimensionLines along left edge */}
+        <DimensionLines className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 h-[80%] w-auto text-teal/[0.10] hidden lg:block" />
+        <div className="relative z-10 max-w-container mx-auto px-gutter grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-[72px] items-center">
           <SlideIn from="left">
             <div
               className="relative aspect-[3/4] rounded-card overflow-hidden bg-[#EFF3F4] flex items-center justify-center"
@@ -372,8 +377,11 @@ export default function HomePage() {
       </section>
 
       {/* ── Enquiry form ── */}
-      <section aria-label="Quick enquiry form" className="bg-white py-[96px]">
-        <div className="max-w-[720px] mx-auto px-gutter">
+      <section aria-label="Quick enquiry form" className="relative overflow-hidden bg-white py-[96px]">
+        {/* Blueprint artifacts — SurveyMark top-right + CraneArtifact bottom-left */}
+        <SurveyMark className="pointer-events-none absolute top-6 right-6 w-16 h-16 text-teal/[0.12] hidden lg:block" />
+        <CraneArtifact className="pointer-events-none absolute -bottom-8 -left-4 w-[180px] h-auto text-teal/[0.10] hidden lg:block" />
+        <div className="relative z-10 max-w-[720px] mx-auto px-gutter">
           <SlideIn from="bottom">
             <div className="text-center mb-[48px]">
               <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-ink mb-[16px]">
