@@ -178,7 +178,7 @@ export default function WhyUsPage() {
       <PageTitleBand
         title="Why BD Buildcon"
         breadcrumbs={[{ label: 'Why Us' }]}
-        description="Experience and expertise across diverse sectors — industrial, commercial, residential, and infrastructure."
+        description="Experience and expertise across diverse sectors — industrial, commercial, institutional, and infrastructure."
       />
 
       {/* ── Highlights strip ── */}
@@ -230,7 +230,11 @@ export default function WhyUsPage() {
             </SlideIn>
 
             <SlideIn from="right" className="flex justify-center items-center">
-              <PhotoStackGallery photos={machineryPhotos} />
+              <PhotoStackGallery
+                photos={machineryPhotos}
+                title="Plant & Machinery Gallery"
+                stackAlt="Plant and machinery photo"
+              />
             </SlideIn>
           </div>
         </BlueprintReveal>

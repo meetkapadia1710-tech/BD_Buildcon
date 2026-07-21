@@ -9,6 +9,7 @@ import { BlueprintReveal } from '@/components/motion/BlueprintReveal'
 import { CountUp } from '@/components/motion/CountUp'
 import { Spotlight } from '@/components/motion/Spotlight'
 import { SurveyMark, SiloArtifact } from '@/components/ui/BlueprintArtifacts'
+import { PhotoStackGallery } from '@/components/ui/PhotoStackGallery'
 import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/jsonld'
 
 export const dynamic = 'force-static'
@@ -306,59 +307,21 @@ export default function SafetyQualityPage() {
       {/* ── Safety Protocols ── */}
       <section aria-label="Safety Protocols" className="bg-surface border-y border-hairline py-[96px]">
         <div className="max-w-container mx-auto px-gutter grid grid-cols-1 lg:grid-cols-[1.35fr_1fr] gap-[64px] items-center">
-          {/* Safety Photo Collage */}
-          <ParallaxLayer yRange={-36} className="grid grid-cols-2 gap-4">
-            <div className="grid gap-4 self-center">
-              <RevealImage
-                src="/brochurephotos/safety/67.webp"
-                alt="Safety assembly"
-                fill
-                wrapperClassName="relative aspect-[4/3] rounded-card shadow-sm border border-hairline"
-                className="object-cover"
-                sizes="(max-width: 1024px) 50vw, 25vw"
-              />
-              <RevealImage
-                src="/brochurephotos/safety/62.webp"
-                alt="Safety award"
-                fill
-                wrapperClassName="relative aspect-square rounded-card shadow-sm border border-hairline"
-                className="object-cover"
-                delay={0.1}
-                sizes="(max-width: 1024px) 50vw, 25vw"
-              />
-            </div>
-            <div className="grid gap-4 mt-8 md:mt-12">
-              <RevealImage
-                src="/brochurephotos/safety/safety-park.webp"
-                alt="Safety training session"
-                fill
-                wrapperClassName="relative aspect-[4/5] rounded-card shadow-sm border border-hairline"
-                className="object-cover"
-                delay={0.15}
-                sizes="(max-width: 1024px) 50vw, 25vw"
-              />
-              <div className="grid grid-cols-2 gap-4">
-                <RevealImage
-                  src="/brochurephotos/safety/image15.webp"
-                  alt="Safety equipment demo"
-                  fill
-                  wrapperClassName="relative aspect-square rounded-card shadow-sm border border-hairline"
-                  className="object-cover"
-                  delay={0.2}
-                  sizes="(max-width: 1024px) 50vw, 25vw"
-                />
-                <RevealImage
-                  src="/brochurephotos/safety/image16.webp"
-                  alt="Material storage safety"
-                  fill
-                  wrapperClassName="relative aspect-square rounded-card shadow-sm border border-hairline"
-                  className="object-cover"
-                  delay={0.25}
-                  sizes="(max-width: 1024px) 50vw, 25vw"
-                />
-              </div>
-            </div>
-          </ParallaxLayer>
+          {/* Safety Photo Stack */}
+          <SlideIn from="left">
+            <PhotoStackGallery
+              photos={[
+                '/brochurephotos/safety/67.webp',
+                '/brochurephotos/safety/62.webp',
+                '/brochurephotos/safety/safety-park.webp',
+                '/brochurephotos/safety/image15.webp',
+                '/brochurephotos/safety/image16.webp',
+              ]}
+              title="Safety on Site Gallery"
+              stackAlt="BD Buildcon safety on site"
+              className="w-full max-w-[480px] aspect-[4/3] mx-auto"
+            />
+          </SlideIn>
 
           <div className="relative">
             {/* Giant watermark shield */}

@@ -124,7 +124,7 @@ export function EnquiryForm() {
               <option>Glass</option>
               <option>Tyre</option>
               <option>Food Processing</option>
-              <option>Residential</option>
+              <option>Institutional</option>
               <option>Other</option>
             </select>
           </div>

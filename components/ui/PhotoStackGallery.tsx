@@ -5,7 +5,20 @@ import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
 
-export function PhotoStackGallery({ photos }: { photos: string[] }) {
+type Props = {
+  photos: string[]
+  title?: string
+  stackAlt?: string
+  /** Sizing classes for the stack itself — overrides the default max-width. */
+  className?: string
+}
+
+export function PhotoStackGallery({
+  photos,
+  title = 'Photo Gallery',
+  stackAlt = 'Gallery photo',
+  className = 'w-full max-w-[320px] aspect-[4/3] mx-auto',
+}: Props) {
   const [isOpen, setIsOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
 
@@ -48,9 +61,7 @@ export function PhotoStackGallery({ photos }: { photos: string[] }) {
           data-lenis-prevent="true"
         >
           <div className="sticky top-0 bg-white/95 backdrop-blur-2xl border-b border-hairline px-6 py-4 flex items-center justify-center z-20 shadow-sm">
-            <h3 className="font-display font-bold text-[20px] sm:text-[24px] text-ink text-center">
-              Plant & Machinery Gallery
-            </h3>
+            <h3 className="font-display font-bold text-[20px] sm:text-[24px] text-ink text-center">{title}</h3>
             <button
               onClick={() => setIsOpen(false)}
               className="absolute right-4 md:right-6 w-[40px] h-[40px] flex items-center justify-center rounded-full bg-surface hover:bg-hairline transition-colors"
@@ -100,7 +111,7 @@ export function PhotoStackGallery({ photos }: { photos: string[] }) {
       {/* ── The Stack ── */}
       <button
         onClick={() => setIsOpen(true)}
-        className="relative group w-full max-w-[320px] aspect-[4/3] mx-auto cursor-pointer focus:outline-none"
+        className={`relative group cursor-pointer focus:outline-none ${className}`}
         aria-label="Open photo gallery"
       >
         <div className="absolute -inset-4 bg-teal/5 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -119,7 +130,7 @@ export function PhotoStackGallery({ photos }: { photos: string[] }) {
           >
             <Image
               src={photo}
-              alt="Plant and machinery photo"
+              alt={stackAlt}
               fill
               sizes="(max-width: 768px) 100vw, 320px"
               style={{ objectFit: 'cover' }}

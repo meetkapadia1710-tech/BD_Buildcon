@@ -15,7 +15,7 @@ const sectors = [
   'Adhesives',
   'Natural Fibres',
   'Infrastructure',
-  'Residential',
+  'Institutional',
 ]
 
 export function SectorMarquee() {

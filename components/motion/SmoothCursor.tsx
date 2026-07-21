@@ -3,6 +3,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 
+// Ring is rendered at its native hover size and scaled *down* for the idle
+// state — scaling a rasterized layer up (28px -> 50px) blurs/pixelates hard
+// edges like the border and box-shadow, while scaling down stays crisp.
+const RING_IDLE = 28
+const RING_HOVER = 50
+const RING_IDLE_SCALE = RING_IDLE / RING_HOVER
+
 export function SmoothCursor() {
   const dotRef = useRef<HTMLDivElement>(null)
   const ringRef = useRef<HTMLDivElement>(null)
@@ -24,7 +31,7 @@ export function SmoothCursor() {
     document.documentElement.classList.add('has-custom-cursor')
 
     gsap.set(dot, { xPercent: -50, yPercent: -50, x: -100, y: -100 })
-    gsap.set(ring, { xPercent: -50, yPercent: -50, x: -100, y: -100 })
+    gsap.set(ring, { xPercent: -50, yPercent: -50, x: -100, y: -100, scale: RING_IDLE_SCALE })
 
     const setDotX = gsap.quickTo(dot, 'x', { duration: 0.02, ease: 'none' })
     const setDotY = gsap.quickTo(dot, 'y', { duration: 0.02, ease: 'none' })
@@ -58,7 +65,7 @@ export function SmoothCursor() {
         hoveredRef.current = true
         setHovered(true)
         setIsInput(false)
-        gsap.to(ring, { scale: 1.8, duration: 0.25, ease: 'power2.out' })
+        gsap.to(ring, { scale: 1, duration: 0.25, ease: 'power2.out' })
       }
     }
 
@@ -77,13 +84,15 @@ export function SmoothCursor() {
       if (target.closest('a, button, select, option, [role="button"], .clickable')) {
         hoveredRef.current = false
         setHovered(false)
-        gsap.to(ring, { scale: 1, duration: 0.25, ease: 'power2.out' })
+        gsap.to(ring, { scale: RING_IDLE_SCALE, duration: 0.25, ease: 'power2.out' })
       }
     }
 
     // Use ref so these handlers don't need hovered in their closure
-    const onMouseDown = () => gsap.to(ring, { scale: 0.75, duration: 0.15, ease: 'power2.out' })
-    const onMouseUp = () => gsap.to(ring, { scale: hoveredRef.current ? 1.8 : 1, duration: 0.2, ease: 'power2.out' })
+    const onMouseDown = () =>
+      gsap.to(ring, { scale: (hoveredRef.current ? 1 : RING_IDLE_SCALE) * 0.75, duration: 0.15, ease: 'power2.out' })
+    const onMouseUp = () =>
+      gsap.to(ring, { scale: hoveredRef.current ? 1 : RING_IDLE_SCALE, duration: 0.2, ease: 'power2.out' })
 
     const onMouseLeave = () => setVisible(false)
     const onMouseEnter = () => setVisible(true)
@@ -115,10 +124,10 @@ export function SmoothCursor() {
         ref={ringRef}
         className="fixed top-0 left-0 pointer-events-none rounded-full z-[600]"
         style={{
-          width: 28,
-          height: 28,
-          border: '1.5px solid #16A8B8',
-          boxShadow: '0 0 0 1px white',
+          width: RING_HOVER,
+          height: RING_HOVER,
+          border: '2.7px solid #16A8B8',
+          boxShadow: '0 0 0 1.8px white',
           opacity: visible && !isInput ? 0.8 : 0,
           backgroundColor: hovered ? 'rgba(22,168,184,0.12)' : 'transparent',
           transition: 'opacity 0.25s, background-color 0.25s',
