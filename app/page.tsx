@@ -96,7 +96,7 @@ export default function HomePage() {
         <div className="relative z-10 w-full h-full flex flex-col justify-end pb-[40px] sm:pb-[80px] mt-auto">
           <RevealText
             as="h1"
-            className="text-white text-left font-display font-[800] text-[44px] sm:text-[68px] md:text-[88px] lg:text-[112px] leading-[1.0] tracking-tight mb-[32px] sm:mb-[48px] px-4 sm:px-8 lg:px-12 w-full max-w-[1400px]"
+            className="text-white text-left font-display font-[800] text-[44px] sm:text-[68px] md:text-[88px] lg:text-[112px] leading-[1.15] tracking-tight mb-[32px] sm:mb-[48px] px-4 sm:px-8 lg:px-12 w-full max-w-[1400px]"
             stagger={0.18}
           >
             <RevealLine>
