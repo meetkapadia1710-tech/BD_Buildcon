@@ -96,7 +96,7 @@ export default function HomePage() {
         <div className="relative z-10 w-full h-full flex flex-col justify-end pb-[40px] sm:pb-[80px] mt-auto">
           <RevealText
             as="h1"
-            className="text-white text-left font-display font-[800] text-[44px] sm:text-[68px] md:text-[88px] lg:text-[112px] leading-[1.0] tracking-tight mb-[32px] sm:mb-[48px] px-4 sm:px-8 lg:px-12 w-full max-w-[1400px]"
+            className="text-white text-left font-display font-[800] text-[44px] sm:text-[68px] md:text-[88px] lg:text-[112px] leading-[1.15] tracking-tight mb-[32px] sm:mb-[48px] px-4 sm:px-8 lg:px-12 w-full max-w-[1400px]"
             stagger={0.18}
           >
             <RevealLine>
@@ -442,7 +442,7 @@ export default function HomePage() {
         {/* Blueprint artifacts — SurveyMark top-right + CraneArtifact bottom-left */}
         <SurveyMark className="pointer-events-none absolute top-6 right-6 w-16 h-16 text-teal/[0.12] hidden lg:block" />
         <CraneArtifact className="pointer-events-none absolute -bottom-8 -left-4 w-[180px] h-auto text-teal/[0.10] hidden lg:block" />
-        <div className="relative z-10 max-w-[720px] mx-auto px-gutter">
+        <div className="relative z-10 max-w-[960px] mx-auto px-6 sm:px-10">
           <SlideIn from="bottom">
             <div className="text-center mb-[48px]">
               <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-ink mb-[16px]">
@@ -490,13 +490,13 @@ function HomeEnquiryForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white border border-hairline rounded-card shadow-[0_1px_4px_rgba(0,0,0,0.06),0_4px_16px_rgba(0,0,0,0.06)] p-[32px] flex flex-col gap-[20px]"
+      className="bg-white border border-hairline rounded-card shadow-[0_1px_4px_rgba(0,0,0,0.06),0_4px_16px_rgba(0,0,0,0.06)] p-[32px] sm:p-[48px] flex flex-col gap-[28px]"
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-[20px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-[24px] gap-y-[28px]">
         <div>
           <label
             htmlFor="hq-name"
-            className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[8px]"
+            className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[10px]"
           >
             Name <span className="text-error">*</span>
           </label>
@@ -506,13 +506,13 @@ function HomeEnquiryForm() {
             type="text"
             required
             placeholder="Your full name"
-            className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
+            className="w-full bg-surface border border-hairline rounded-[10px] px-[18px] py-[14px] font-body text-[15.5px] text-ink focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
           />
         </div>
         <div>
           <label
             htmlFor="hq-email"
-            className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[8px]"
+            className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[10px]"
           >
             Email <span className="text-error">*</span>
           </label>
@@ -521,16 +521,16 @@ function HomeEnquiryForm() {
             name="email"
             type="email"
             required
-            placeholder="your.email@example.com"
-            className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
+            placeholder="you@company.com"
+            className="w-full bg-surface border border-hairline rounded-[10px] px-[18px] py-[14px] font-body text-[15.5px] text-ink focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
           />
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-[20px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-[24px] gap-y-[28px]">
         <div>
           <label
             htmlFor="hq-company"
-            className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[8px]"
+            className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[10px]"
           >
             Company
           </label>
@@ -539,13 +539,13 @@ function HomeEnquiryForm() {
             name="company"
             type="text"
             placeholder="Your company name"
-            className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
+            className="w-full bg-surface border border-hairline rounded-[10px] px-[18px] py-[14px] font-body text-[15.5px] text-ink focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
           />
         </div>
         <div>
           <label
             htmlFor="hq-phone"
-            className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[8px]"
+            className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[10px]"
           >
             Phone
           </label>
@@ -554,22 +554,22 @@ function HomeEnquiryForm() {
             name="phone"
             type="tel"
             placeholder="+91 XXX XXX XXXX"
-            className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
+            className="w-full bg-surface border border-hairline rounded-[10px] px-[18px] py-[14px] font-body text-[15.5px] text-ink focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
           />
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-[20px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-[24px] gap-y-[28px]">
         <div>
           <label
             htmlFor="hq-sector"
-            className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[8px]"
+            className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[10px]"
           >
             Sector
           </label>
           <select
             id="hq-sector"
             name="sector"
-            className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink appearance-auto focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
+            className="w-full bg-surface border border-hairline rounded-[10px] px-[18px] py-[14px] font-body text-[15.5px] text-ink appearance-auto focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
           >
             <option>Select sector</option>
             <option>Chemicals</option>
@@ -579,21 +579,21 @@ function HomeEnquiryForm() {
             <option>Glass</option>
             <option>Tyre</option>
             <option>Food Processing</option>
-            <option>Residential</option>
+            <option>Institutional</option>
             <option>Other</option>
           </select>
         </div>
         <div>
           <label
             htmlFor="hq-type"
-            className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[8px]"
+            className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[10px]"
           >
             Project Type
           </label>
           <select
             id="hq-type"
             name="projectType"
-            className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink appearance-auto focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
+            className="w-full bg-surface border border-hairline rounded-[10px] px-[18px] py-[14px] font-body text-[15.5px] text-ink appearance-auto focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
           >
             <option>Select type</option>
             <option>Greenfield Plant</option>
@@ -609,7 +609,7 @@ function HomeEnquiryForm() {
       <div>
         <label
           htmlFor="hq-message"
-          className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[8px]"
+          className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[10px]"
         >
           Message <span className="text-error">*</span>
         </label>
@@ -619,7 +619,7 @@ function HomeEnquiryForm() {
           rows={4}
           required
           placeholder="Brief project description..."
-          className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink resize-y focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
+          className="w-full bg-surface border border-hairline rounded-[10px] px-[18px] py-[14px] font-body text-[15.5px] text-ink resize-y focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
         ></textarea>
       </div>
       <div className="flex flex-col gap-[10px]">

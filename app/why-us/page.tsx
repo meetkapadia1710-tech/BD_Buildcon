@@ -134,7 +134,6 @@ export default function WhyUsPage() {
           __html: JSON.stringify(breadcrumbJsonLd([{ name: 'Why BD Buildcon', url: 'https://bdbuildcon.com/why-us' }])),
         }}
       />
-
       <PageHero
         image="/brochurephotos/general photo/2I2A7705.webp"
         imageAlt="BD Buildcon industrial site under construction"

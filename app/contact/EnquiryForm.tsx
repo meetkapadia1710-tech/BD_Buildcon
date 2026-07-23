@@ -31,15 +31,15 @@ export function EnquiryForm() {
     <SlideIn from="right">
       <form
         onSubmit={handleSubmit}
-        className="bg-white border border-hairline rounded-card shadow-[0_1px_4px_rgba(0,0,0,0.06),0_4px_16px_rgba(0,0,0,0.06)] p-[36px] flex flex-col gap-[20px]"
+        className="bg-white border border-hairline rounded-card shadow-[0_1px_4px_rgba(0,0,0,0.06),0_4px_16px_rgba(0,0,0,0.06)] p-[36px] sm:p-[48px] flex flex-col gap-[28px]"
       >
         <h2 className="font-display font-bold text-[24px] text-ink m-0 mb-[4px]">Send an Enquiry</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-[24px] gap-y-[28px]">
           <div>
             <label
               htmlFor="c-name"
-              className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[8px]"
+              className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[10px]"
             >
               Name <span className="text-[#E23A2E]">*</span>
             </label>
@@ -49,13 +49,13 @@ export function EnquiryForm() {
               type="text"
               required
               placeholder="Your full name"
-              className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
+              className="w-full bg-surface border border-hairline rounded-[10px] px-[18px] py-[14px] font-body text-[15.5px] text-ink focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
             />
           </div>
           <div>
             <label
               htmlFor="c-email"
-              className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[8px]"
+              className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[10px]"
             >
               Email <span className="text-[#E23A2E]">*</span>
             </label>
@@ -64,17 +64,17 @@ export function EnquiryForm() {
               name="email"
               type="email"
               required
-              placeholder="your.email@example.com"
-              className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
+              placeholder="you@company.com"
+              className="w-full bg-surface border border-hairline rounded-[10px] px-[18px] py-[14px] font-body text-[15.5px] text-ink focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-[24px] gap-y-[28px]">
           <div>
             <label
               htmlFor="c-company"
-              className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[8px]"
+              className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[10px]"
             >
               Company
             </label>
@@ -83,13 +83,13 @@ export function EnquiryForm() {
               name="company"
               type="text"
               placeholder="Your company name"
-              className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
+              className="w-full bg-surface border border-hairline rounded-[10px] px-[18px] py-[14px] font-body text-[15.5px] text-ink focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
             />
           </div>
           <div>
             <label
               htmlFor="c-phone"
-              className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[8px]"
+              className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[10px]"
             >
               Phone
             </label>
@@ -98,23 +98,23 @@ export function EnquiryForm() {
               name="phone"
               type="tel"
               placeholder="+91 XXX XXX XXXX"
-              className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
+              className="w-full bg-surface border border-hairline rounded-[10px] px-[18px] py-[14px] font-body text-[15.5px] text-ink focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[20px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-[24px] gap-y-[28px]">
           <div>
             <label
               htmlFor="c-sector"
-              className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[8px]"
+              className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[10px]"
             >
               Sector
             </label>
             <select
               id="c-sector"
               name="sector"
-              className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink appearance-auto focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
+              className="w-full bg-surface border border-hairline rounded-[10px] px-[18px] py-[14px] font-body text-[15.5px] text-ink appearance-auto focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
             >
               <option>Select sector</option>
               <option>Chemicals</option>
@@ -124,21 +124,21 @@ export function EnquiryForm() {
               <option>Glass</option>
               <option>Tyre</option>
               <option>Food Processing</option>
-              <option>Residential</option>
+              <option>Institutional</option>
               <option>Other</option>
             </select>
           </div>
           <div>
             <label
               htmlFor="c-type"
-              className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[8px]"
+              className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[10px]"
             >
               Project Type
             </label>
             <select
               id="c-type"
               name="projectType"
-              className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink appearance-auto focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
+              className="w-full bg-surface border border-hairline rounded-[10px] px-[18px] py-[14px] font-body text-[15.5px] text-ink appearance-auto focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
             >
               <option>Select type</option>
               <option>Greenfield Plant</option>
@@ -155,7 +155,7 @@ export function EnquiryForm() {
         <div>
           <label
             htmlFor="c-message"
-            className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[8px]"
+            className="block text-[12px] font-semibold uppercase tracking-[0.08em] text-ink mb-[10px]"
           >
             Message <span className="text-[#E23A2E]">*</span>
           </label>
@@ -165,7 +165,7 @@ export function EnquiryForm() {
             rows={5}
             required
             placeholder="Brief project description — scope, location, timeline..."
-            className="w-full bg-surface border border-hairline rounded-[8px] px-[16px] py-[12px] font-body text-[16px] text-ink resize-y focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
+            className="w-full bg-surface border border-hairline rounded-[10px] px-[18px] py-[14px] font-body text-[15.5px] text-ink resize-y focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
           />
         </div>
 
