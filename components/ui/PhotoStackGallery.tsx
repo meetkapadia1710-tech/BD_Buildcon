@@ -8,10 +8,21 @@ import { AnimatePresence, motion } from 'framer-motion'
 export function PhotoStackGallery({ photos }: { photos: string[] }) {
   const [isOpen, setIsOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [currentIndex, setCurrentIndex] = useState(0)
 
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  // Auto-play the stack
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (!isOpen) {
+        setCurrentIndex((prev) => (prev + 1) % photos.length)
+      }
+    }, 3500)
+    return () => clearInterval(timer)
+  }, [isOpen, photos.length])
 
   useEffect(() => {
     if (isOpen) {
@@ -26,15 +37,43 @@ export function PhotoStackGallery({ photos }: { photos: string[] }) {
 
   if (!photos || photos.length === 0) return null
 
-  // Use up to 4 photos for the stack
-  const stackPhotos = photos.slice(0, 4)
-  // Define some random-looking rotations and offsets for the stack effect
-  const transforms = [
-    'rotate-[-6deg] translate-x-[-12px] translate-y-[8px]',
-    'rotate-[4deg] translate-x-[8px] translate-y-[-4px]',
-    'rotate-[-2deg] translate-x-[4px] translate-y-[4px]',
-    'rotate-[2deg] translate-x-[0] translate-y-[0]',
-  ]
+  const cardVariants = {
+    front: {
+      y: 0,
+      scale: 1,
+      zIndex: 40,
+      opacity: 1,
+      rotate: 0,
+    },
+    pos1: {
+      y: -25,
+      scale: 0.95,
+      zIndex: 30,
+      opacity: 0.9,
+      rotate: -2,
+    },
+    pos2: {
+      y: -50,
+      scale: 0.9,
+      zIndex: 20,
+      opacity: 0.7,
+      rotate: 2,
+    },
+    back: {
+      y: -75,
+      scale: 0.85,
+      zIndex: 10,
+      opacity: 0,
+      rotate: -1,
+    },
+    exit: {
+      y: 120, // Drops down
+      scale: 1.05,
+      zIndex: 50, // Stay on top while exiting
+      opacity: 0,
+      rotate: 6,
+    },
+  }
 
   const modalContent = (
     <AnimatePresence>
@@ -98,43 +137,76 @@ export function PhotoStackGallery({ photos }: { photos: string[] }) {
   return (
     <>
       {/* ── The Stack ── */}
-      <button
-        onClick={() => setIsOpen(true)}
-        className="relative group w-full max-w-[320px] aspect-[4/3] mx-auto cursor-pointer focus:outline-none"
-        aria-label="Open photo gallery"
-      >
-        <div className="absolute -inset-4 bg-teal/5 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="relative w-full max-w-[560px] mx-auto pt-[80px] pb-[40px] px-[16px] sm:px-[32px]">
+        {/* Glow effect */}
+        <div className="absolute top-[30%] left-[10%] right-[10%] bottom-[10%] bg-teal/10 rounded-full blur-[60px] pointer-events-none" />
 
-        {stackPhotos.map((photo, i) => (
-          <div
-            key={i}
-            className={`absolute inset-0 rounded-card overflow-hidden border-[4px] border-white shadow-card transition-all duration-300 ease-out origin-center
-              ${transforms[i]}
-              group-hover:scale-[1.05] group-hover:shadow-[0_12px_32px_rgba(0,0,0,0.12)]
-            `}
-            style={{
-              zIndex: i,
-              transitionDelay: `${i * 30}ms`,
-            }}
-          >
-            <Image
-              src={photo}
-              alt="Plant and machinery photo"
-              fill
-              sizes="(max-width: 768px) 100vw, 320px"
-              style={{ objectFit: 'cover' }}
-              className="object-cover"
-            />
+        <div
+          className="relative w-full aspect-[4/3] sm:aspect-[16/11] cursor-pointer group"
+          onClick={() => setIsOpen(true)}
+          role="button"
+          tabIndex={0}
+          aria-label="Open photo gallery"
+        >
+          {photos.map((photo, i) => {
+            let diff = i - currentIndex
+
+            // Handle wrap-around smoothly
+            if (diff < -1) diff += photos.length
+            if (diff > photos.length - 2) diff -= photos.length
+
+            const isVisible = diff >= -1 && diff <= 3
+            if (!isVisible) return null
+
+            let variant = 'back'
+            if (diff === -1) variant = 'exit'
+            if (diff === 0) variant = 'front'
+            if (diff === 1) variant = 'pos1'
+            if (diff === 2) variant = 'pos2'
+
+            return (
+              <motion.div
+                key={photo}
+                initial={false}
+                animate={variant}
+                variants={cardVariants}
+                transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
+                className="absolute inset-0 rounded-xl sm:rounded-2xl overflow-hidden border-[4px] sm:border-[8px] border-white shadow-[0_12px_48px_rgba(0,0,0,0.12)] origin-bottom"
+              >
+                <Image
+                  src={photo}
+                  alt="Plant and machinery photo"
+                  fill
+                  sizes="(max-width: 640px) 90vw, 560px"
+                  style={{ objectFit: 'cover' }}
+                  className="object-cover"
+                />
+              </motion.div>
+            )
+          })}
+
+          {/* Call to action text on hover (desktop only) */}
+          <div className="absolute inset-0 z-[60] hidden sm:flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+            <span className="bg-white/95 backdrop-blur-sm text-ink font-semibold px-5 py-2.5 rounded-full shadow-lg text-[14px] flex items-center gap-2">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              View All {photos.length} Photos
+            </span>
           </div>
-        ))}
-
-        {/* Call to action text on top */}
-        <div className="absolute inset-0 z-10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/20 rounded-card">
-          <span className="bg-white text-ink font-semibold px-4 py-2 rounded-full shadow-lg text-[14px]">
-            View All {photos.length} Photos
-          </span>
         </div>
-      </button>
+      </div>
 
       {/* ── The Modal Gallery (Portal) ── */}
       {mounted ? createPortal(modalContent, document.body) : null}

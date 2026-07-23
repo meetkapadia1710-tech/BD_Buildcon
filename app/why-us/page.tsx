@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
-import { PageTitleBand } from '@/components/layout/PageTitleBand'
+import Image from 'next/image'
+import Link from 'next/link'
 import { CTABand } from '@/components/layout/CTABand'
-import { PhotoStackGallery } from '@/components/ui/PhotoStackGallery'
-import { WhyUsMaster } from '@/components/ui/WhyUsMaster'
-import { CountUp } from '@/components/motion/CountUp'
+import { PageHero } from '@/components/ui/PageHero'
+import { TickerBand } from '@/components/ui/TickerBand'
+import { PillarExplorer } from '@/components/ui/PillarExplorer'
+import { LightboxGallery } from '@/components/ui/LightboxGallery'
+import { QuoteCarousel } from '@/components/ui/QuoteCarousel'
 import { SlideIn } from '@/components/motion/SlideIn'
-import { StaggerReveal } from '@/components/motion/StaggerReveal'
-import { BlueprintReveal } from '@/components/motion/BlueprintReveal'
-import { ConstructionDraw } from '@/components/motion/ConstructionDraw'
 import { testimonials } from '@/content/testimonials'
 import { statsDisplay, stats } from '@/content/company'
 import { breadcrumbJsonLd } from '@/lib/jsonld'
@@ -26,126 +26,77 @@ export const metadata: Metadata = {
   },
 }
 
-const iconProps = {
-  width: 22,
-  height: 22,
-  viewBox: '0 0 24 24',
-  fill: 'none',
-  stroke: 'currentColor',
-  strokeWidth: 1.75,
-  strokeLinecap: 'round' as const,
-  strokeLinejoin: 'round' as const,
-  'aria-hidden': true,
-}
+const heroStats = [
+  {
+    value: String(stats.zeroAccidentYears),
+    numeric: stats.zeroAccidentYears,
+    suffix: '',
+    label: 'Years zero-accident',
+  },
+  { value: statsDisplay.machinesOwned, numeric: stats.machinesOwned, suffix: '+', label: 'Machines we own' },
+  { value: statsDisplay.repeatClientPct, numeric: stats.repeatClientPct, suffix: '%', label: 'Clients who return' },
+  { value: statsDisplay.projects, numeric: stats.projects, suffix: '+', label: 'Projects delivered' },
+]
 
-// One deduplicated ledger: each pillar merges the related claims that were
-// previously repeated across "Competitive Edge", the comparison table, and
-// "Workmanship" — every fact appears exactly once.
-const standards = [
+const tickerItems = [
+  'Zero accidents since 1990',
+  'ISO 9001:2015 certified',
+  'CRISIL SME 3 rated',
+  'Turnkey EPC in-house',
+  `${statsDisplay.valueDelivered} delivered`,
+  'Since 1995 · Bharuch, Gujarat',
+]
+
+const pillars = [
   {
     title: 'Safety',
-    proof: '0 accidents · 35 years',
-    us: 'Safety is engineered into every protocol, every day on site — stringent safety systems and full statutory and environmental compliance, proven by a 35-year zero-accident journey.',
-    them: 'Incidents tolerated as "normal"',
-    icon: (
-      <svg {...iconProps}>
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-        <path d="m9 12 2 2 4-4" />
-      </svg>
-    ),
+    badge: '0 accidents · 35 years',
+    body: 'Safety is engineered into every protocol, every day on site — stringent safety systems and full statutory and environmental compliance, proven by a 35-year zero-accident journey.',
+    them: 'Incidents tolerated as "normal".',
+    photo: '/brochurephotos/safety/image15.webp',
+    photoAlt: 'Worker in full PPE during a safety demonstration',
   },
   {
     title: 'Quality & Workmanship',
-    proof: 'ISO 9001:2015',
-    us: 'One certified quality system governs design, procurement and construction — built to international engineering parameters.',
-    points: [
-      'Design codes set by international EPC consultants',
-      'Every steel & cement batch traceable to mill certificate',
-      'Client-signed hold points at reinforcement, shuttering & pre-pour',
-    ],
-    them: 'Informal QA',
-    icon: (
-      <svg {...iconProps}>
-        <circle cx="12" cy="8" r="6" />
-        <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
-      </svg>
-    ),
+    badge: 'ISO 9001:2015',
+    body: 'One certified quality system governs design, procurement and construction. Design codes set by international EPC consultants; every steel and cement batch traceable to mill certificate; client-signed hold points at reinforcement, shuttering and pre-pour.',
+    them: 'Informal QA, no traceability.',
+    photo: '/brochurephotos/site photos/technical photos/DocScanner Sep 9, 2025 5-45 PM_1(156).webp',
+    photoAlt: 'On-site quality laboratory and control room',
   },
   {
     title: 'Technology & Precision',
-    proof: 'BIM + ERP',
-    us: 'BIM modelling, ERP systems and digital project management tools keep every dimension accountable from drawing to as-built.',
-    them: 'Manual, untracked execution',
-    icon: (
-      <svg {...iconProps}>
-        <rect x="4" y="4" width="16" height="16" rx="2" />
-        <rect x="9" y="9" width="6" height="6" />
-        <line x1="9" y1="1" x2="9" y2="4" />
-        <line x1="15" y1="1" x2="15" y2="4" />
-        <line x1="9" y1="20" x2="9" y2="23" />
-        <line x1="15" y1="20" x2="15" y2="23" />
-        <line x1="20" y1="9" x2="23" y2="9" />
-        <line x1="20" y1="14" x2="23" y2="14" />
-        <line x1="1" y1="9" x2="4" y2="9" />
-        <line x1="1" y1="14" x2="4" y2="14" />
-      </svg>
-    ),
+    badge: 'BIM + ERP',
+    body: 'BIM modelling, ERP systems and digital project management tools keep every dimension accountable from drawing to as-built.',
+    them: 'Manual, untracked execution.',
+    photo: '/brochurephotos/plant and machinery/image6.webp',
+    photoAlt: 'Engineer operating a total station for precision setting-out',
   },
   {
     title: 'On-Time Delivery',
-    proof: 'Deadline is contractual',
-    us: 'A proven track record of meeting project timelines without compromising on quality — the deadline is a commitment, not an estimate.',
-    them: 'Slippage passed to client',
-    icon: (
-      <svg {...iconProps}>
-        <circle cx="12" cy="12" r="10" />
-        <polyline points="12 6 12 12 16 14" />
-      </svg>
-    ),
+    badge: 'Deadline is contractual',
+    body: 'A proven track record of meeting project timelines without compromising on quality — the deadline is a commitment, not an estimate.',
+    them: 'Slippage passed to the client.',
+    photo: '/brochurephotos/site photos/city center/city-center-night-170.webp',
+    photoAlt: 'City Center — a completed project delivered on schedule',
   },
   {
-    title: 'Turnkey Scope & Custom Solutions',
-    proof: 'Turnkey EPC in-house',
-    us: 'End-to-end EPC under one roof, tailored to each client’s requirements — flexible at every stage, with value-engineered solutions for cost-effective durability.',
-    them: 'Layers of subcontractors',
-    icon: (
-      <svg {...iconProps}>
-        <line x1="4" y1="21" x2="4" y2="14" />
-        <line x1="4" y1="10" x2="4" y2="3" />
-        <line x1="12" y1="21" x2="12" y2="12" />
-        <line x1="12" y1="8" x2="12" y2="3" />
-        <line x1="20" y1="21" x2="20" y2="16" />
-        <line x1="20" y1="12" x2="20" y2="3" />
-        <line x1="1" y1="14" x2="7" y2="14" />
-        <line x1="9" y1="8" x2="15" y2="8" />
-        <line x1="17" y1="16" x2="23" y2="16" />
-      </svg>
-    ),
+    title: 'Turnkey Scope',
+    badge: 'Turnkey EPC in-house',
+    body: 'End-to-end EPC under one roof, tailored to each client’s requirements — flexible at every stage, with value-engineered solutions for cost-effective durability.',
+    them: 'Layers of subcontractors.',
+    photo: '/brochurephotos/fabrication yard/WhatsApp Image 2026-07-12 at 11.56.13 AM (1).webp',
+    photoAlt: 'In-house fabrication yard with marked material bays',
   },
   {
     title: 'Equipment & Resources',
-    proof: `${statsDisplay.machinesOwned} owned machines`,
-    us: 'An owned fleet and in-house testing laboratory give complete operational control — higher equipment availability, zero rental dependency.',
-    them: 'Rented, availability risk',
-    icon: (
-      <svg {...iconProps}>
-        <path d="M10 17h4V5H2v12h3" />
-        <path d="M20 17h2v-3.34a4 4 0 0 0-1.17-2.83L19 9h-5v8h1" />
-        <circle cx="7.5" cy="17.5" r="2.5" />
-        <circle cx="17.5" cy="17.5" r="2.5" />
-      </svg>
-    ),
+    badge: `${statsDisplay.machinesOwned} owned machines`,
+    body: 'An owned fleet and in-house testing laboratory give complete operational control — higher equipment availability, zero rental dependency.',
+    them: 'Rented plant, availability risk.',
+    photo: '/brochurephotos/plant and machinery/image17.webp',
+    photoAlt: 'Heavy plant and machinery owned by BD Buildcon',
   },
 ]
-
-const highlightStats = [
-  { value: stats.zeroAccidentYears, suffix: '', label: 'Years Zero-Accident' },
-  { value: stats.machinesOwned, suffix: '+', label: 'Owned Machines' },
-  { value: stats.repeatClientPct, suffix: '%', label: 'Repeat Clients' },
-  { value: stats.projects, suffix: '+', label: 'Projects Completed' },
-]
-
-const featuredTestimonials = testimonials.slice(0, 6)
 
 const machineryPhotos = [
   '/brochurephotos/plant and machinery/image17.webp',
@@ -166,6 +117,14 @@ const machineryPhotos = [
   '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.58.08 PM.webp',
 ]
 
+const fleetSpanPattern = ['col-span-2 row-span-2', '', '', 'row-span-2', '', '', 'col-span-2', '']
+
+const fleetPhotos = machineryPhotos.map((src, i) => ({
+  src,
+  alt: 'BD Buildcon owned machinery',
+  spanClassName: fleetSpanPattern[i % fleetSpanPattern.length],
+}))
+
 export default function WhyUsPage() {
   return (
     <>
@@ -175,103 +134,162 @@ export default function WhyUsPage() {
           __html: JSON.stringify(breadcrumbJsonLd([{ name: 'Why BD Buildcon', url: 'https://bdbuildcon.com/why-us' }])),
         }}
       />
-      <PageTitleBand
-        title="Why BD Buildcon"
-        breadcrumbs={[{ label: 'Why Us' }]}
-        description="Experience and expertise across diverse sectors — industrial, commercial, residential, and infrastructure."
+
+      <PageHero
+        image="/brochurephotos/general photo/2I2A7705.webp"
+        imageAlt="BD Buildcon industrial site under construction"
+        crumbLabel="Why Us"
+        titleLines={[
+          'Proof, poured',
+          <>
+            in <span className="text-[#5BD6E2]">concrete.</span>
+          </>,
+        ]}
+        description="35 years on live industrial plants without a single accident. Every claim on this page is backed by a certificate, a client letter, or a machine we own."
+        primaryCta={{ label: 'Start your project', href: '/contact' }}
+        secondaryCta={{ label: 'See the fleet', href: '#fleet' }}
+        stats={heroStats}
       />
 
-      {/* ── Highlights strip ── */}
-      <section aria-label="Highlights" className="bg-white border-b border-hairline py-[40px]">
-        <div className="max-w-container mx-auto px-gutter grid grid-cols-2 lg:grid-cols-4 gap-[24px] text-center">
-          {highlightStats.map((s, i) => (
-            <div key={i} className="flex flex-col items-center gap-[4px]">
-              <div className="font-display font-[800] text-[38px] leading-none text-teal tabular-nums">
-                <CountUp target={s.value} suffix={s.suffix} />
-              </div>
-              <div className="text-[12px] font-semibold uppercase tracking-[0.08em] text-body">{s.label}</div>
+      <TickerBand items={tickerItems} />
+
+      {/* ── The Standard — interactive pillar explorer ── */}
+      <section aria-label="The BD Buildcon Standard" className="bg-white py-[72px] lg:py-[110px]">
+        <div className="max-w-container mx-auto px-gutter">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-[24px] lg:gap-[32px] mb-[48px] lg:mb-[64px]">
+            <div>
+              <span className="block text-[13px] font-semibold uppercase tracking-[0.14em] text-teal mb-[14px]">
+                The BD Buildcon Standard
+              </span>
+              <h2 className="font-display font-[800] text-[34px] sm:text-[42px] lg:text-[52px] tracking-[-0.02em] leading-[1.08] text-ink m-0 max-w-[14ch]">
+                Six reasons plants call us back.
+              </h2>
             </div>
-          ))}
+            <p className="text-[16px] leading-[1.7] text-body max-w-[380px] m-0">
+              Select a pillar to see how we work — and what the same line item looks like with a typical contractor.
+            </p>
+          </div>
+
+          <SlideIn from="bottom">
+            <PillarExplorer items={pillars} />
+          </SlideIn>
         </div>
       </section>
 
-      {/* ── The BD Buildcon Standard — one deduplicated ledger ── */}
-      <WhyUsMaster standards={standards} />
-
-      {/* ── Plant & Machinery ── */}
-      <section aria-label="Plant and Machinery" className="relative overflow-hidden bg-white py-[96px]">
-        <ConstructionDraw className="pointer-events-none absolute -right-16 bottom-0 hidden w-[560px] h-auto text-teal/[0.14] lg:block" />
-
-        <BlueprintReveal className="max-w-container mx-auto px-gutter">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-[72px] items-center">
-            <SlideIn from="left">
-              <div>
-                <span className="block text-[13px] font-semibold uppercase tracking-[0.12em] text-teal mb-[16px]">
-                  Plant &amp; Machinery
-                </span>
-                <h2 className="font-display font-bold text-[38px] leading-[1.25] tracking-[-0.01em] text-ink mb-[24px]">
-                  {statsDisplay.machinesOwned} owned machines. Zero rental dependency.
-                </h2>
-                <p className="text-[17px] leading-[1.75] text-body mb-[16px]">
-                  We believe that investing in the latest technology and modern construction equipment is key to
-                  delivering superior productivity, precision, and project efficiency. Our modern and diverse fleet
-                  includes an RMC plant, a boom placer, excavators, vibratory rollers, transit mixers, and much more.
-                </p>
-                <p className="text-[17px] leading-[1.75] text-body mb-[16px]">
-                  With {statsDisplay.machinesOwned} owned construction machines and equipment, we maintain complete
-                  operational control without relying on rented machinery — ensuring higher equipment availability,
-                  minimizing project delays, and allowing us to respond quickly to changing site requirements.
-                </p>
-                <p className="text-[17px] leading-[1.75] text-body m-0">
-                  Regular maintenance and timely equipment upgrades ensure reliable performance, while advanced
-                  technology and automation help address labour challenges and keep every project on schedule.
-                </p>
-              </div>
-            </SlideIn>
-
-            <SlideIn from="right" className="flex justify-center items-center">
-              <PhotoStackGallery photos={machineryPhotos} />
-            </SlideIn>
+      {/* ── Fleet — masonry gallery + lightbox ── */}
+      <section
+        id="fleet"
+        aria-label="Plant and Machinery"
+        className="relative overflow-hidden bg-dark-bg py-[72px] lg:py-[110px]"
+      >
+        <div className="texture-grid pointer-events-none absolute inset-0 text-teal/[0.07]" aria-hidden="true" />
+        <div className="relative max-w-container mx-auto px-gutter">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-[24px] lg:gap-[32px] mb-[48px] lg:mb-[56px]">
+            <div>
+              <span className="block text-[13px] font-semibold uppercase tracking-[0.14em] text-[#5BD6E2] mb-[14px]">
+                Plant &amp; Machinery
+              </span>
+              <h2 className="font-display font-[800] text-[34px] sm:text-[42px] lg:text-[52px] tracking-[-0.02em] leading-[1.08] text-white m-0 max-w-[14ch]">
+                {statsDisplay.machinesOwned} machines. All ours.
+              </h2>
+            </div>
+            <p className="text-[16px] leading-[1.7] text-white/60 max-w-[400px] m-0">
+              RMC plant, boom placer, excavators, vibratory rollers, transit mixers — an owned fleet means zero rental
+              dependency and zero waiting. Click any photo to view.
+            </p>
           </div>
-        </BlueprintReveal>
+
+          <LightboxGallery
+            photos={fleetPhotos}
+            groupLabel="Plant & Machinery"
+            gridClassName="grid grid-cols-2 sm:grid-cols-4 auto-rows-[150px] sm:auto-rows-[200px] gap-[14px]"
+          />
+        </div>
       </section>
 
-      {/* ── Testimonials ── */}
-      <section aria-label="Testimonials" className="bg-surface py-[96px]">
+      {/* ── Testimonials — big-quote carousel ── */}
+      <section aria-label="Testimonials" className="bg-surface border-y border-hairline py-[72px] lg:py-[110px]">
         <div className="max-w-container mx-auto px-gutter">
-          <SlideIn from="bottom">
-            <div className="text-center mb-[56px]">
-              <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-ink mb-[16px]">
-                What Clients Say
-              </h2>
-              <div className="w-[56px] h-[3px] bg-teal rounded-full mx-auto" />
-            </div>
-          </SlideIn>
+          <QuoteCarousel quotes={testimonials} />
+        </div>
+      </section>
 
-          <StaggerReveal className="grid grid-cols-1 md:grid-cols-3 gap-[24px]" stagger={0.08}>
-            {featuredTestimonials.map((t) => (
-              <figure
-                key={t.id}
-                className="bg-white border border-hairline rounded-card p-[32px] m-0 flex flex-col gap-[20px] transition-all duration-300 hover:-translate-y-1 hover:border-teal/30 hover:shadow-[0_16px_36px_rgba(0,0,0,0.08)]"
+      {/* ── Join or build — dual CTA ── */}
+      <section aria-label="Join or Build" className="bg-white py-[72px] lg:py-[110px]">
+        <div className="max-w-container mx-auto px-gutter grid grid-cols-1 md:grid-cols-2 gap-[20px]">
+          <div className="relative rounded-card overflow-hidden min-h-[360px] sm:min-h-[440px] flex items-end">
+            <Image
+              src="/brochurephotos/site photos/ROXUL ROCKWOOL/DSC_8467.webp"
+              alt="Industrial construction site"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+            />
+            <div
+              className="absolute inset-0"
+              style={{ background: 'linear-gradient(to top, rgba(12,122,136,0.92), rgba(12,122,136,0.2) 60%)' }}
+            />
+            <div className="relative p-[32px] sm:p-[44px]">
+              <h3 className="font-display font-[800] text-[26px] sm:text-[34px] tracking-[-0.01em] text-white mb-[12px]">
+                Have a plant to build?
+              </h3>
+              <p className="text-[15px] sm:text-[16px] leading-[1.65] text-white/85 max-w-[400px] mb-[24px] sm:mb-[28px]">
+                Tell us about your project — we respond within one business day with a senior engineer, not a sales rep.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-[10px] px-[24px] sm:px-[28px] py-[13px] sm:py-[14px] bg-white text-teal-deep text-[13px] font-semibold uppercase tracking-[0.1em] rounded-pill transition-all duration-[250ms] hover:-translate-y-[2px] hover:shadow-[0_8px_24px_rgba(0,0,0,0.2)]"
               >
+                Start your project
                 <svg
-                  width="28"
-                  height="20"
-                  viewBox="0 0 28 20"
-                  fill="#16A8B8"
-                  className="opacity-[0.35]"
+                  className="w-[15px] h-[15px]"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
                   aria-hidden="true"
                 >
-                  <path d="M0 20V12.4C0 5.9 3.6 1.6 10 0l1.6 3.2C7.4 4.6 5.4 7 5.2 10H11v10H0zm17 0V12.4C17 5.9 20.6 1.6 27 0l1 3.2c-4.2 1.4-6.2 3.8-6.4 6.8H27v10H17z" />
+                  <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
-                <blockquote className="text-[15.5px] leading-[1.7] text-body m-0 flex-1">{t.quote}</blockquote>
-                <figcaption>
-                  <p className="font-display font-bold text-[15px] text-ink m-0">{t.name}</p>
-                  <p className="text-[13px] text-body mt-[3px] mb-0">{t.companyShort}</p>
-                </figcaption>
-              </figure>
-            ))}
-          </StaggerReveal>
+              </Link>
+            </div>
+          </div>
+
+          <div className="relative rounded-card overflow-hidden min-h-[360px] sm:min-h-[440px] flex items-end">
+            <Image
+              src="/brochurephotos/site photos/technical photos/our-site-team.webp"
+              alt="BD Buildcon site team"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover"
+            />
+            <div
+              className="absolute inset-0"
+              style={{ background: 'linear-gradient(to top, rgba(13,20,24,0.92), rgba(13,20,24,0.15) 60%)' }}
+            />
+            <div className="relative p-[32px] sm:p-[44px]">
+              <h3 className="font-display font-[800] text-[26px] sm:text-[34px] tracking-[-0.01em] text-white mb-[12px]">
+                Want to build with us?
+              </h3>
+              <p className="text-[15px] sm:text-[16px] leading-[1.65] text-white/80 max-w-[400px] mb-[24px] sm:mb-[28px]">
+                Engineers, supervisors and operators join a crew that has kept every one of its people safe for 35
+                years.
+              </p>
+              <Link href="/contact" className="btn-ghost-white">
+                Join the team
+                <svg
+                  className="w-[15px] h-[15px]"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 

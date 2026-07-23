@@ -208,9 +208,9 @@ export const projects: Project[] = [
     duration: '12 months',
     year: '2022',
     safetyRecord: 'Zero accidents',
-    image: '/brochurephotos/site photos/renew/WhatsApp Image 2026-07-12 at 12.59.19 PM.webp',
+    image: '/brochurephotos/site photos/renew/WhatsApp Image 2026-07-12 at 12.59.19 PM.jpg',
     images: [
-      '/brochurephotos/site photos/renew/WhatsApp Image 2026-07-12 at 12.59.19 PM.webp',
+      '/brochurephotos/site photos/renew/WhatsApp Image 2026-07-12 at 12.59.19 PM.jpg',
       '/brochurephotos/site photos/renew/WhatsApp Image 2026-07-12 at 12.59.20 PM (1).webp',
       '/brochurephotos/site photos/renew/WhatsApp Image 2026-07-12 at 12.59.20 PM.webp',
     ],
