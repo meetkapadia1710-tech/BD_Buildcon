@@ -24,9 +24,9 @@ export function SpecializedServicesGrid() {
   })
 
   return (
-    <div className="w-full mb-[64px] sm:mb-[80px]">
+    <div className="w-full mb-[48px] sm:mb-[60px]">
       {/* ── Category Filter Tabs (Mobile Responsive & Touch Optimized) ── */}
-      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-[40px] sm:mb-[56px]">
+      <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-[32px] sm:mb-[40px]">
         {categories.map((cat) => {
           const isActive = activeFilter === cat.value
           return (
