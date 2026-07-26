@@ -162,12 +162,12 @@ export default function HomePage() {
       {/* ── Sector Marquee ── */}
       <SectorMarquee />
 
-      {/* ── What We Build ── */}
+      {/* ── Our Services ── */}
       <section aria-label="Services overview" className="bg-white">
         <div className="max-w-container mx-auto px-gutter pt-[72px] sm:pt-[96px] pb-[48px] sm:pb-[64px]">
           <div className="text-center">
             <h2 className="font-display font-bold text-[32px] sm:text-[42px] tracking-[-0.01em] text-ink mb-[16px]">
-              What We Build
+              Our Services
             </h2>
             <div className="w-[56px] h-[3px] bg-teal rounded-full mx-auto mb-[20px]" />
             <p className="text-[16px] sm:text-[18px] leading-[1.7] text-body max-w-[760px] mx-auto">
@@ -182,13 +182,13 @@ export default function HomePage() {
           {/* ── Modern Specialized Services Grid (MVZ Green Infra style, mobile-optimized) ── */}
           <SpecializedServicesGrid />
 
-          {/* ── Core Engineering Divisions (In-Depth Technical Scope) ── */}
+          {/* ── Core Engineering Divisions (What We Build) ── */}
           <div className="text-center pt-[32px] sm:pt-[48px] pb-[40px] border-t border-hairline">
             <span className="font-body text-[11px] font-bold text-teal bg-teal/5 px-[12px] py-[5px] rounded-full border border-teal/15 tracking-[0.1em] uppercase mb-[12px] inline-block">
               Core Divisions
             </span>
-            <h3 className="font-display font-bold text-[24px] sm:text-[32px] tracking-[-0.01em] text-ink mb-[12px]">
-              In-Depth Engineering Scope
+            <h3 className="font-display font-bold text-[32px] sm:text-[40px] tracking-[-0.01em] text-ink mb-[12px]">
+              What We Build
             </h3>
             <p className="text-[15px] sm:text-[17px] leading-[1.6] text-body max-w-[620px] mx-auto">
               Explore our turnkey execution methodology and comprehensive technical capabilities across our three
