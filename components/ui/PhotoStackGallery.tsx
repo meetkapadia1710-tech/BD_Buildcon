@@ -126,15 +126,15 @@ export function PhotoStackGallery({
                   initial={{ opacity: 0, scale: 0.9, y: 20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: i * 0.05, ease: 'easeOut' }}
-                  className="relative aspect-[16/10] rounded-card overflow-hidden shadow-md border border-hairline bg-[#FAFBFB]"
+                  className="relative aspect-[16/10] rounded-card overflow-hidden shadow-md border border-hairline bg-surface"
                 >
                   <Image
                     src={photo}
                     alt={`Gallery image ${i + 1}`}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    style={{ objectFit: 'contain' }}
-                    className="object-contain p-2 hover:scale-105 transition-transform duration-500"
+                    style={{ objectFit: 'cover' }}
+                    className="object-cover hover:scale-108 transition-transform duration-500"
                   />
                 </motion.div>
               ))}
@@ -182,15 +182,15 @@ export function PhotoStackGallery({
                 animate={variant}
                 variants={cardVariants}
                 transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
-                className="absolute inset-0 rounded-xl sm:rounded-2xl overflow-hidden border-[4px] sm:border-[8px] border-white bg-white shadow-[0_12px_48px_rgba(0,0,0,0.12)] origin-bottom"
+                className="absolute inset-0 rounded-xl sm:rounded-2xl overflow-hidden border-[4px] sm:border-[8px] border-white bg-dark-bg shadow-[0_12px_48px_rgba(0,0,0,0.12)] origin-bottom"
               >
                 <Image
                   src={photo}
                   alt={stackAlt}
                   fill
                   sizes="(max-width: 640px) 90vw, 560px"
-                  style={{ objectFit: 'contain' }}
-                  className="object-contain p-2"
+                  style={{ objectFit: 'cover' }}
+                  className="object-cover"
                 />
               </motion.div>
             )

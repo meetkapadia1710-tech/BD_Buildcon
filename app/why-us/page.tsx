@@ -15,22 +15,22 @@ import { FAQSection } from '@/components/ui/FAQSection'
 import { breadcrumbJsonLd, faqJsonLd } from '@/lib/jsonld'
 
 const machineryPhotos = [
-  '/brochurephotos/plant and machinery/image17.webp',
-  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM (1).webp',
-  '/brochurephotos/plant and machinery/image45.webp',
-  '/brochurephotos/plant and machinery/image46.webp',
-  '/brochurephotos/plant and machinery/image48.webp',
-  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM.webp',
-  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(126).webp',
-  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM (3).webp',
-  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.58.08 PM.webp',
-  '/brochurephotos/plant and machinery/image6.webp',
-  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(106).webp',
   '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(125).webp',
+  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(126).webp',
   '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(155).webp',
-  '/brochurephotos/plant and machinery/IMG-20150407-WA0003.webp',
-  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM (2).webp',
-  '/brochurephotos/plant and machinery/image44.webp',
+  '/brochurephotos/plant and machinery/image48.webp',
+  '/brochurephotos/site photos/technical photos/image33.webp',
+  '/brochurephotos/site photos/technical photos/image35.webp',
+  '/brochurephotos/site photos/technical photos/image36.webp',
+  '/brochurephotos/site photos/technical photos/image37.webp',
+  '/brochurephotos/site photos/technical photos/DocScanner Sep 9, 2025 5-45 PM_1(11).webp',
+  '/brochurephotos/site photos/technical photos/DocScanner Sep 9, 2025 5-45 PM_1(116).webp',
+  '/brochurephotos/site photos/technical photos/DocScanner Sep 9, 2025 5-45 PM_1(120).webp',
+  '/brochurephotos/site photos/technical photos/DocScanner Sep 9, 2025 5-45 PM_1(127).webp',
+  '/brochurephotos/fabrication yard/DocScanner Sep 9, 2025 5-45 PM_1(165).webp',
+  '/brochurephotos/fabrication yard/DocScanner Sep 9, 2025 5-45 PM_1(184).webp',
+  '/brochurephotos/structure/DocScanner Sep 9, 2025 5-45 PM_1(135).webp',
+  '/brochurephotos/structure/DocScanner Sep 9, 2025 5-45 PM_1(142).webp',
 ]
 
 export const dynamic = 'force-static'
