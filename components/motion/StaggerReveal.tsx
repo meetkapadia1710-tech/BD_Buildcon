@@ -10,6 +10,7 @@ gsap.registerPlugin(ScrollTrigger)
 type Props = {
   children: React.ReactNode
   className?: string
+  style?: React.CSSProperties
   /** Direction from which child cards enter */
   direction?: 'up' | 'down' | 'left' | 'right'
   /** Stagger delay between each child */
@@ -26,6 +27,7 @@ type Props = {
 export function StaggerReveal({
   children,
   className = '',
+  style,
   direction = 'up',
   stagger = 0.06,
   distance = 28,
@@ -78,7 +80,7 @@ export function StaggerReveal({
   }, [direction, stagger, distance, delay])
 
   return (
-    <div ref={ref} className={className}>
+    <div ref={ref} className={className} style={style}>
       {children}
     </div>
   )

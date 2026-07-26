@@ -4,6 +4,7 @@ import { CTABand } from '@/components/layout/CTABand'
 import { RevealImage } from '@/components/motion/RevealImage'
 import { SlideIn } from '@/components/motion/SlideIn'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
+import { MilestoneTimeline } from '@/components/motion/MilestoneTimeline'
 import { CraneArtifact, SurveyMark, DimensionLines } from '@/components/ui/BlueprintArtifacts'
 import { faqs } from '@/content/faqs'
 import { FAQSection } from '@/components/ui/FAQSection'
@@ -147,39 +148,7 @@ export default function AboutPage() {
             </div>
           </SlideIn>
 
-          {/* The timeline itself is the graphic: a connector track with a node above each year */}
-          <div className="relative">
-            {/* Horizontal track through the node centers — desktop only (cards stack below lg) */}
-            <div
-              className="pointer-events-none absolute top-[13px] left-[12.5%] right-[12.5%] hidden lg:block h-[2px] rounded-full bg-gradient-to-r from-teal/15 via-teal/45 to-teal/15"
-              aria-hidden="true"
-            />
-
-            <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[20px]" stagger={0.1}>
-              {milestones.map((m, i) => (
-                <div key={i} className="group flex flex-col">
-                  {/* Timeline node — sits on the track, pulses teal on card hover */}
-                  <div className="relative hidden lg:flex justify-center mb-[26px]" aria-hidden="true">
-                    <span className="relative flex w-[28px] h-[28px] items-center justify-center rounded-full border-2 border-teal/50 bg-surface transition-all duration-300 group-hover:border-teal group-hover:shadow-[0_0_0_6px_rgba(22,168,184,0.12)]">
-                      <span className="w-[10px] h-[10px] rounded-full bg-teal transition-transform duration-300 group-hover:scale-125" />
-                    </span>
-                  </div>
-
-                  <div className="relative flex-1 overflow-hidden bg-white border border-hairline rounded-card p-[28px] flex flex-col gap-[10px] transition-all duration-300 hover:border-teal/40 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(0,0,0,0.10)]">
-                    {/* Teal accent bar — grows on hover to highlight the active milestone */}
-                    <span className="absolute top-0 left-0 h-[3px] w-[36px] bg-teal rounded-br-full transition-all duration-500 group-hover:w-full" />
-                    {/* Giant watermark year behind the content */}
-                    <span className="pointer-events-none absolute -right-2 -bottom-6 font-display font-[800] text-[92px] leading-none text-teal/[0.06] select-none">
-                      {m.year}
-                    </span>
-                    <span className="relative font-display font-[800] text-[28px] text-teal">{m.year}</span>
-                    <span className="relative font-display font-bold text-[17px] text-ink">{m.title}</span>
-                    <span className="relative text-[14.5px] leading-[1.6] text-body">{m.body}</span>
-                  </div>
-                </div>
-              ))}
-            </StaggerReveal>
-          </div>
+          <MilestoneTimeline milestones={milestones} />
         </div>
       </section>
 
