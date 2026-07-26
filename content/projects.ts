@@ -229,9 +229,9 @@ export const projects: Project[] = [
     duration: '16 months',
     year: '2016',
     safetyRecord: '0 fatal accidents',
-    image: '/brochurephotos/site photos/ROXUL ROCKWOOL/ROXUL ROCKWOOL 01 (2).webp',
+    image: '/brochurephotos/site photos/ROXUL ROCKWOOL/roxul-rockwool-building.webp',
     images: [
-      '/brochurephotos/site photos/ROXUL ROCKWOOL/ROXUL ROCKWOOL 01 (2).webp',
+      '/brochurephotos/site photos/ROXUL ROCKWOOL/roxul-rockwool-building.webp',
       '/brochurephotos/site photos/ROXUL ROCKWOOL/DSC_8467.webp',
       '/brochurephotos/site photos/ROXUL ROCKWOOL/DSC_8545.webp',
     ],
