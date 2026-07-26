@@ -98,7 +98,7 @@ export default function HomePage() {
       >
         <div className="absolute inset-0 w-full h-full overflow-hidden">
           <Image
-            src="/new hero image.png"
+            src="/new-hero-image.webp"
             alt="Crane lifting steel beams at a BD Buildcon construction site"
             fill
             className="object-cover animate-hero-zoom"

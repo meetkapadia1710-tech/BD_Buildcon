@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const sharp = require('sharp')
 
-const targetDir = path.join(__dirname, 'public')
+const targetDir = path.join(__dirname, '..', 'public')
 const extensions = ['.jpg', '.jpeg', '.png', '.gif']
 
 async function processDirectory(directory) {

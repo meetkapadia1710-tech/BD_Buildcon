@@ -35,6 +35,14 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://bdbuildcon.com',
   },
+  icons: {
+    icon: [
+      { url: '/icons/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icons/icon-512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: '/manifest.webmanifest',
   openGraph: {
     type: 'website',
     locale: 'en_IN',
@@ -55,6 +63,7 @@ export const metadata: Metadata = {
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
+  themeColor: '#1F2124',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

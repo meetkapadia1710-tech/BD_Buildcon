@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start -p 3002",
     "lint": "next lint",
+    "images:webp": "node scripts/convert-to-webp.js",
+    "icons:generate": "node scripts/generate-icons.js",
     "prepare": "husky"
   },
   "dependencies": {
