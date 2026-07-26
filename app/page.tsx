@@ -27,26 +27,6 @@ import { faqJsonLd, reviewJsonLd } from '@/lib/jsonld'
 import { submitEnquiry } from '@/lib/submitEnquiry'
 import { TrussArtifact, DimensionLines, SurveyMark, CraneArtifact } from '@/components/ui/BlueprintArtifacts'
 import { SpecializedServicesGrid } from '@/components/ui/SpecializedServicesGrid'
-import { PhotoStackGallery } from '@/components/ui/PhotoStackGallery'
-
-const machineryPhotos = [
-  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(125).webp',
-  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(126).webp',
-  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(155).webp',
-  '/brochurephotos/plant and machinery/image48.webp',
-  '/brochurephotos/site photos/technical photos/image33.webp',
-  '/brochurephotos/site photos/technical photos/image35.webp',
-  '/brochurephotos/site photos/technical photos/image36.webp',
-  '/brochurephotos/site photos/technical photos/image37.webp',
-  '/brochurephotos/site photos/technical photos/DocScanner Sep 9, 2025 5-45 PM_1(11).webp',
-  '/brochurephotos/site photos/technical photos/DocScanner Sep 9, 2025 5-45 PM_1(116).webp',
-  '/brochurephotos/site photos/technical photos/DocScanner Sep 9, 2025 5-45 PM_1(120).webp',
-  '/brochurephotos/site photos/technical photos/DocScanner Sep 9, 2025 5-45 PM_1(127).webp',
-  '/brochurephotos/fabrication yard/DocScanner Sep 9, 2025 5-45 PM_1(165).webp',
-  '/brochurephotos/fabrication yard/DocScanner Sep 9, 2025 5-45 PM_1(184).webp',
-  '/brochurephotos/structure/DocScanner Sep 9, 2025 5-45 PM_1(135).webp',
-  '/brochurephotos/structure/DocScanner Sep 9, 2025 5-45 PM_1(142).webp',
-]
 
 // Sectors are now defined inside SectorMarquee component
 
@@ -274,46 +254,6 @@ export default function HomePage() {
                 </SlideIn>
               )
             })}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Plant & Machinery (Editorial Copy + PhotoStack Gallery) ── */}
-      <section
-        id="fleet"
-        aria-label="Plant and Machinery"
-        className="relative overflow-hidden bg-white py-[64px] sm:py-[88px] border-t border-hairline"
-      >
-        <div className="max-w-container mx-auto px-gutter">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-[48px] lg:gap-[72px] items-center">
-            <SlideIn from="left">
-              <div>
-                <span className="block text-[13px] font-semibold uppercase tracking-[0.14em] text-teal mb-[14px]">
-                  Plant &amp; Machinery
-                </span>
-                <h2 className="font-display font-[800] text-[34px] sm:text-[42px] lg:text-[48px] leading-[1.15] tracking-[-0.01em] text-ink mb-[24px]">
-                  {statsDisplay.machinesOwned} owned machines. Zero rental dependency.
-                </h2>
-                <p className="text-[16px] sm:text-[17px] leading-[1.75] text-body mb-[16px]">
-                  We believe that investing in the latest technology and modern construction equipment is key to
-                  delivering superior productivity, precision, and project efficiency. Our modern and diverse fleet
-                  includes an RMC plant, a boom placer, excavators, vibratory rollers, transit mixers, and much more.
-                </p>
-                <p className="text-[16px] sm:text-[17px] leading-[1.75] text-body mb-[16px]">
-                  With {statsDisplay.machinesOwned} owned construction machines and equipment, we maintain complete
-                  operational control without relying on rented machinery — ensuring higher equipment availability,
-                  minimizing project delays, and allowing us to respond quickly to changing site requirements.
-                </p>
-                <p className="text-[16px] sm:text-[17px] leading-[1.75] text-body m-0">
-                  Regular maintenance and timely equipment upgrades ensure reliable performance, while advanced
-                  technology and automation help address labour challenges and keep every project on schedule.
-                </p>
-              </div>
-            </SlideIn>
-
-            <SlideIn from="right" className="flex justify-center items-center">
-              <PhotoStackGallery photos={machineryPhotos} title="Plant & Machinery Fleet" />
-            </SlideIn>
           </div>
         </div>
       </section>
