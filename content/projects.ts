@@ -229,11 +229,11 @@ export const projects: Project[] = [
     duration: '16 months',
     year: '2016',
     safetyRecord: '0 fatal accidents',
-    image: '/brochurephotos/site photos/ROXUL ROCKWOOL/DSC_8467.webp',
+    image: '/brochurephotos/site photos/ROXUL ROCKWOOL/ROXUL ROCKWOOL 01 (2).webp',
     images: [
+      '/brochurephotos/site photos/ROXUL ROCKWOOL/ROXUL ROCKWOOL 01 (2).webp',
       '/brochurephotos/site photos/ROXUL ROCKWOOL/DSC_8467.webp',
       '/brochurephotos/site photos/ROXUL ROCKWOOL/DSC_8545.webp',
-      '/brochurephotos/site photos/ROXUL ROCKWOOL/ROXUL ROCKWOOL 01 (2).webp',
     ],
     excerpt:
       'Greenfield insulation manufacturing facility — mass earthwork, heavy refractory foundations and structural erection for a high-temperature industrial process.',
