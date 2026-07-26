@@ -153,8 +153,8 @@ export default function WhyUsPage() {
               <span className="block text-[13px] font-semibold uppercase tracking-[0.14em] text-teal mb-[14px]">
                 The BD Buildcon Standard
               </span>
-              <h2 className="font-display font-[800] text-[34px] sm:text-[42px] lg:text-[52px] tracking-[-0.02em] leading-[1.08] text-ink m-0 max-w-[16ch]">
-                Built on uncompromising standards.
+              <h2 className="font-display font-[800] text-[34px] sm:text-[42px] lg:text-[52px] tracking-[-0.02em] leading-[1.08] text-ink m-0 max-w-[14ch]">
+                Six reasons clients call us back.
               </h2>
             </div>
             <p className="text-[16px] leading-[1.7] text-body max-w-[380px] m-0">
