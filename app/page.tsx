@@ -27,6 +27,7 @@ import { faqJsonLd, reviewJsonLd } from '@/lib/jsonld'
 import { submitEnquiry } from '@/lib/submitEnquiry'
 import { TrussArtifact, DimensionLines, SurveyMark, CraneArtifact } from '@/components/ui/BlueprintArtifacts'
 import { SpecializedServicesGrid } from '@/components/ui/SpecializedServicesGrid'
+import { MachineryCardDeck } from '@/components/ui/MachineryCardDeck'
 
 // Sectors are now defined inside SectorMarquee component
 
@@ -258,26 +259,31 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Pillars ── */}
+      {/* ── Plant & Machinery (100+ machines. All ours. 3D Card Deck) ── */}
       <section
-        aria-label="Company pillars"
-        className="relative overflow-hidden bg-surface border-y border-hairline py-[56px] sm:py-[64px]"
+        id="fleet"
+        aria-label="Plant and Machinery"
+        className="relative overflow-hidden bg-dark-bg py-[64px] sm:py-[88px]"
       >
-        <div className="texture-dots pointer-events-none absolute inset-0 text-teal/[0.07]" aria-hidden="true" />
-        <StaggerReveal
-          className="relative max-w-container mx-auto px-gutter grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[32px]"
-          stagger={0.08}
-        >
-          {pillars.map((p, i) => (
-            <div key={i} className="group flex flex-col items-center text-center gap-[14px]">
-              <div className="w-[60px] h-[60px] rounded-full bg-teal/10 flex items-center justify-center text-teal transition-all duration-300 group-hover:bg-teal group-hover:text-white group-hover:scale-110">
-                {p.icon}
-              </div>
-              <h3 className="font-display font-bold text-[19px] text-ink m-0">{p.title}</h3>
-              <p className="text-[15px] leading-[1.6] text-body m-0">{p.body}</p>
+        <div className="texture-grid pointer-events-none absolute inset-0 text-teal/[0.07]" aria-hidden="true" />
+        <div className="relative max-w-container mx-auto px-gutter">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-[24px] lg:gap-[32px] mb-[40px] lg:mb-[48px]">
+            <div>
+              <span className="block text-[13px] font-semibold uppercase tracking-[0.14em] text-[#5BD6E2] mb-[14px]">
+                Plant &amp; Machinery
+              </span>
+              <h2 className="font-display font-[800] text-[34px] sm:text-[42px] lg:text-[52px] tracking-[-0.02em] leading-[1.08] text-white m-0 max-w-[14ch]">
+                {statsDisplay.machinesOwned} machines. All ours.
+              </h2>
             </div>
-          ))}
-        </StaggerReveal>
+            <p className="text-[16px] leading-[1.7] text-white/70 max-w-[400px] m-0">
+              RMC plant, boom placer, excavators, vibratory rollers, transit mixers — an owned fleet means zero rental
+              dependency and zero waiting. Drag or flip through our card deck.
+            </p>
+          </div>
+
+          <MachineryCardDeck />
+        </div>
       </section>
 
       {/* ── How we build ── */}
