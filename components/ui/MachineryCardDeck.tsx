@@ -387,32 +387,28 @@ export function MachineryCardDeck() {
                   scale: 1,
                   rotate: 0,
                   opacity: 1,
-                  zIndex: 40,
                   filter: 'brightness(1)',
                 },
                 1: {
-                  y: -22,
-                  scale: 0.94,
-                  rotate: -2.5,
-                  opacity: 0.88,
-                  zIndex: 30,
+                  y: -18,
+                  scale: 0.95,
+                  rotate: -2,
+                  opacity: 0.92,
                   filter: 'brightness(0.85)',
                 },
                 2: {
-                  y: -44,
-                  scale: 0.88,
-                  rotate: 3,
-                  opacity: 0.7,
-                  zIndex: 20,
+                  y: -36,
+                  scale: 0.9,
+                  rotate: 2.5,
+                  opacity: 0.75,
                   filter: 'brightness(0.7)',
                 },
                 3: {
-                  y: -66,
-                  scale: 0.82,
+                  y: -54,
+                  scale: 0.85,
                   rotate: -1.5,
-                  opacity: 0.45,
-                  zIndex: 10,
-                  filter: 'brightness(0.5)',
+                  opacity: 0.5,
+                  filter: 'brightness(0.55)',
                 },
               }
 
@@ -421,7 +417,10 @@ export function MachineryCardDeck() {
               return (
                 <motion.div
                   key={card.id}
-                  style={isTop ? { x: dragX, rotate: cardRotate, opacity: cardOpacity } : undefined}
+                  style={{
+                    zIndex: (4 - diff) * 10,
+                    ...(isTop ? { x: dragX, rotate: cardRotate, opacity: cardOpacity } : {}),
+                  }}
                   drag={isTop ? 'x' : false}
                   dragConstraints={{ left: 0, right: 0 }}
                   dragElastic={0.7}
@@ -432,7 +431,6 @@ export function MachineryCardDeck() {
                       ? {
                           y: 0,
                           scale: 1,
-                          zIndex: 40,
                           filter: 'brightness(1)',
                         }
                       : targetVariant
@@ -448,35 +446,39 @@ export function MachineryCardDeck() {
                       setSelectedCardForModal(card)
                     }
                   }}
-                  className={`absolute top-4 sm:top-8 w-[94%] sm:w-[90%] max-w-[760px] h-[380px] sm:h-[430px] lg:h-[460px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/15 bg-[#121A26] shadow-[0_20px_60px_rgba(0,0,0,0.55)] cursor-grab active:cursor-grabbing select-none origin-bottom ${
+                  className={`absolute top-4 sm:top-8 w-[94%] sm:w-[90%] max-w-[760px] h-[380px] sm:h-[430px] lg:h-[460px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/15 bg-[#0B111A] shadow-[0_20px_60px_rgba(0,0,0,0.6)] cursor-grab active:cursor-grabbing select-none origin-bottom ${
                     isTop ? 'ring-1 ring-[#5BD6E2]/40' : ''
                   }`}
                 >
-                  {/* Card Background Photo */}
-                  <Image
-                    src={card.image}
-                    alt={card.alt}
-                    fill
-                    priority={isTop}
-                    sizes="(max-width: 768px) 94vw, 760px"
-                    className="object-cover transition-transform duration-700 hover:scale-105"
-                  />
+                  {/* Opaque Background & Photo */}
+                  <div className="absolute inset-0 bg-[#0B111A]">
+                    <Image
+                      src={card.image}
+                      alt={card.alt}
+                      fill
+                      priority={isTop}
+                      sizes="(max-width: 768px) 94vw, 760px"
+                      className="object-cover transition-transform duration-700 hover:scale-105"
+                    />
+                  </div>
 
                   {/* Gradient Overlays */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B111A] via-[#0B111A]/40 to-black/20" />
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B111A] via-[#0B111A]/70 to-black/30 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent pointer-events-none" />
 
                   {/* Top Bar Badges */}
                   <div className="absolute top-4 sm:top-6 left-4 sm:left-6 right-4 sm:right-6 flex items-center justify-between z-10 pointer-events-none">
                     <span className="px-3 py-1 rounded-full text-[11px] sm:text-[12px] font-bold uppercase tracking-wider bg-[#5BD6E2] text-dark-bg shadow-md">
                       {card.category}
                     </span>
-                    <span className="px-3 py-1 rounded-full text-[11px] sm:text-[12px] font-semibold bg-black/60 text-white/90 backdrop-blur-md border border-white/10">
-                      {card.quantity}
-                    </span>
+                    {isTop && (
+                      <span className="px-3 py-1 rounded-full text-[11px] sm:text-[12px] font-semibold bg-black/60 text-white/90 backdrop-blur-md border border-white/10">
+                        {card.quantity}
+                      </span>
+                    )}
                   </div>
 
-                  {/* Drag / Click Visual Hint (Desktop/Mobile) */}
+                  {/* Drag / Click Visual Hint (Desktop/Mobile) - Top Card Only */}
                   {isTop && (
                     <div className="absolute top-16 sm:top-20 left-1/2 -translate-x-1/2 z-10 pointer-events-none hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-white/15 text-white/70 text-[11px]">
                       <svg className="w-3.5 h-3.5 text-[#5BD6E2]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -491,46 +493,48 @@ export function MachineryCardDeck() {
                     </div>
                   )}
 
-                  {/* Bottom Content Card Overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-7 lg:p-8 z-10">
-                    <div className="flex items-end justify-between gap-4">
-                      <div className="max-w-[85%]">
-                        <span className="block text-[11px] font-bold uppercase tracking-[0.14em] text-[#5BD6E2] mb-1">
-                          BD Buildcon Owned Fleet
-                        </span>
-                        <h3 className="font-display font-[800] text-[20px] sm:text-[26px] lg:text-[30px] leading-[1.2] text-white tracking-[-0.01em] mb-2 drop-shadow-sm">
-                          {card.title}
-                        </h3>
-                        <p className="text-[13px] sm:text-[15px] leading-[1.5] text-white/80 line-clamp-2">
-                          {card.specs}
-                        </p>
-                      </div>
+                  {/* Bottom Content Overlay - Top Card Only */}
+                  {isTop && (
+                    <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-7 lg:p-8 z-10">
+                      <div className="flex items-end justify-between gap-4">
+                        <div className="max-w-[85%]">
+                          <span className="block text-[11px] font-bold uppercase tracking-[0.14em] text-[#5BD6E2] mb-1">
+                            BD Buildcon Owned Fleet
+                          </span>
+                          <h3 className="font-display font-[800] text-[20px] sm:text-[26px] lg:text-[30px] leading-[1.2] text-white tracking-[-0.01em] mb-2 drop-shadow-sm">
+                            {card.title}
+                          </h3>
+                          <p className="text-[13px] sm:text-[15px] leading-[1.5] text-white/80 line-clamp-2">
+                            {card.specs}
+                          </p>
+                        </div>
 
-                      {/* Expand / View Button */}
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          setSelectedCardForModal(card)
-                        }}
-                        className="w-[42px] h-[42px] sm:w-[48px] sm:h-[48px] rounded-full bg-white/10 hover:bg-[#5BD6E2] text-white hover:text-dark-bg backdrop-blur-md border border-white/20 hover:border-[#5BD6E2] flex items-center justify-center shrink-0 transition-all duration-300 shadow-lg group/btn"
-                        aria-label="Enlarge view"
-                      >
-                        <svg
-                          className="w-5 h-5 transition-transform group-hover/btn:scale-110"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth="2"
+                        {/* Expand / View Button */}
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedCardForModal(card)
+                          }}
+                          className="w-[42px] h-[42px] sm:w-[48px] sm:h-[48px] rounded-full bg-white/10 hover:bg-[#5BD6E2] text-white hover:text-dark-bg backdrop-blur-md border border-white/20 hover:border-[#5BD6E2] flex items-center justify-center shrink-0 transition-all duration-300 shadow-lg group/btn"
+                          aria-label="Enlarge view"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
-                          />
-                        </svg>
-                      </button>
+                          <svg
+                            className="w-5 h-5 transition-transform group-hover/btn:scale-110"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"
+                            />
+                          </svg>
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </motion.div>
               )
             })}

@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'BD Buildcon LLP — Industrial EPC Contractor',
     short_name: 'BD Buildcon',
     description:
-      'Turnkey industrial EPC contractor in Bharuch, Gujarat. 35+ years, ISO 9001:2015 certified, zero-accident record.',
+      'Turnkey industrial EPC contractor in Bharuch, Gujarat. 35+ years, ISO 9001:2015 certified, zero-fatality record.',
     start_url: '/',
     display: 'standalone',
     background_color: '#1F2124',

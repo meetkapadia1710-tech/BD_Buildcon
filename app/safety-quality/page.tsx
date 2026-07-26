@@ -16,12 +16,12 @@ export const dynamic = 'force-static'
 export const metadata: Metadata = {
   title: 'Safety & Quality',
   description:
-    'A 35-year zero-accident journey. ISO 9001:2015-certified quality systems and a dedicated quality laboratory on every site.',
+    'A 35-year zero-fatality journey. ISO 9001:2015-certified quality systems and a dedicated quality laboratory on every site.',
   alternates: { canonical: 'https://bdbuildcon.com/safety-quality' },
   openGraph: {
     url: 'https://bdbuildcon.com/safety-quality',
     title: 'Safety & Quality — BD Buildcon LLP',
-    description: '35-year zero-accident journey. ISO 9001:2015 certified with on-site quality laboratories.',
+    description: '35-year zero-fatality journey. ISO 9001:2015 certified with on-site quality laboratories.',
   },
 }
 
@@ -38,8 +38,8 @@ const iconProps = {
 }
 
 const heroStats = [
-  { value: '0', numeric: 0, suffix: '', label: 'Fatal Accidents' },
-  { value: '35', numeric: 35, suffix: '', label: 'Year Zero-Accident Journey' },
+  { value: '0', numeric: 0, suffix: '', label: 'Fatalities' },
+  { value: '35', numeric: 35, suffix: '', label: 'Year Zero-Fatality Journey' },
   { value: '100%', numeric: 100, suffix: '%', label: 'PPE Compliance' },
   { value: 'Daily', label: 'Toolbox Talks' },
 ]
@@ -50,7 +50,7 @@ const tickerItems = [
   'ISO 9001:2015 certified',
   'Lab on every site',
   'Daily toolbox talks',
-  '35-year 0 fatal accident record',
+  '35-year 0 fatality record',
 ]
 
 const protocols = [
@@ -206,7 +206,7 @@ export default function SafetyQualityPage() {
             serviceJsonLd({
               name: 'Safety & Quality Management',
               description:
-                'ISO 9001:2015-certified quality systems and zero-accident safety protocols for industrial EPC projects.',
+                'ISO 9001:2015-certified quality systems and zero-fatality safety protocols for industrial EPC projects.',
               url: 'https://bdbuildcon.com/safety-quality',
             }),
             faqJsonLd(safetyFaqs),
@@ -221,7 +221,7 @@ export default function SafetyQualityPage() {
         titleLines={[
           '35 years.',
           <>
-            <span className="text-[#5BD6E2]">0 Fatal</span> accidents.
+            <span className="text-[#5BD6E2]">0 Fatalities.</span>
           </>,
         ]}
         description="Not a slogan — a record. ISO 9001:2015-certified quality systems, a laboratory on every site, and a safety culture drilled into every workday since 1990."
@@ -310,7 +310,7 @@ export default function SafetyQualityPage() {
               Safety you can see.
             </h2>
             <p className="text-[16px] leading-[1.75] text-body mb-[16px]">
-              A safe workplace is the foundation of successful project delivery. Our 35-year zero-accident journey
+              A safe workplace is the foundation of successful project delivery. Our 35-year zero-fatality journey
               stands on disciplined culture, continuous training, strong leadership, and responsible construction
               practice.
             </p>
@@ -364,10 +364,10 @@ export default function SafetyQualityPage() {
                 </svg>
               </div>
               <div className="font-display font-[800] text-[26px] sm:text-[30px] text-ink mb-[10px]">
-                Zero-Accident Record
+                Zero-Fatality Record
               </div>
               <p className="text-[15px] sm:text-[15.5px] leading-[1.7] text-body m-0">
-                35 consecutive years of incident-free operations across all live industrial sites.
+                35 consecutive years of zero fatalities across all live industrial sites.
               </p>
             </div>
           </StaggerReveal>
@@ -377,7 +377,7 @@ export default function SafetyQualityPage() {
       <FAQSection faqs={safetyFaqs} />
 
       <CTABand
-        title="Build with the zero-accident contractor."
+        title="Build with the zero-fatality contractor."
         subtitle="Tell us about your project and we will respond within one business day."
         btnLabel="Start your project"
       />

@@ -14,7 +14,7 @@ function buildLlmsTxt(): string {
   lines.push(`# ${company.legalName}`)
   lines.push('')
   lines.push(
-    `> Industrial EPC (Engineering, Procurement & Construction) contractor headquartered in Bharuch, Gujarat, India. Formerly known as ${company.formerName}. Operating since ${company.foundedYear} (${statsDisplay.yearsExperience} years). ${statsDisplay.projects} projects delivered, ${statsDisplay.accidents} recorded accidents, ${statsDisplay.repeatClientPct} repeat-client rate. ${certLevels.join(', ')} certified.`,
+    `> Industrial EPC (Engineering, Procurement & Construction) contractor headquartered in Bharuch, Gujarat, India. Formerly known as ${company.formerName}. Operating since ${company.foundedYear} (${statsDisplay.yearsExperience} years). ${statsDisplay.projects} projects delivered, ${statsDisplay.accidents} recorded fatalities, ${statsDisplay.repeatClientPct} repeat-client rate. ${certLevels.join(', ')} certified.`,
   )
   lines.push('')
 

@@ -107,7 +107,7 @@ const detailedBulletDescriptions: Record<string, Record<string, string>> = {
     'Quality Assurance & Quality Control (QA/QC)':
       'ISO 9001:2015-certified QA/QC protocols enforced at every hold point from excavation to pre-pour and final erection.',
     'Health, Safety & Environment (HSE) Management':
-      'Full HSE compliance, site safety assemblies, daily toolbox talks, and continuous hazard monitoring backing our 35-year zero-accident record.',
+      'Full HSE compliance, site safety assemblies, daily toolbox talks, and continuous hazard monitoring backing our 35-year zero-fatality record.',
     'Safety Audits':
       'Regular site safety audits and statutory environmental inspections conducted by certified safety officers.',
     'Testing & Commissioning':
@@ -189,7 +189,7 @@ export default function ServiceDetailPage({ params }: Props) {
               </h2>
               <p className="text-[17px] leading-[1.75] text-body mb-[40px]">
                 {service.description} BD Buildcon brings complete technical depth, an owned machinery fleet of over 100
-                machines, and a 35-year zero-accident execution track record to every contract.
+                machines, and a 35-year zero-fatality execution track record to every contract.
               </p>
 
               <div className="space-y-[24px]">
@@ -220,7 +220,7 @@ export default function ServiceDetailPage({ params }: Props) {
                 <span className="block text-[12px] font-semibold uppercase tracking-[0.14em] text-[#5BD6E2] mb-[12px]">
                   Turnkey Guarantee
                 </span>
-                <h3 className="font-display font-bold text-[22px] mb-[16px] text-white">35 Years Zero Accidents</h3>
+                <h3 className="font-display font-bold text-[22px] mb-[16px] text-white">35 Years Zero Fatalities</h3>
                 <p className="text-[14.5px] leading-[1.65] text-white/75 mb-[24px]">
                   ISO 9001:2015 certified execution with zero rental dependency and dedicated on-site quality testing
                   labs.

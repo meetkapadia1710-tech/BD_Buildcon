@@ -41,7 +41,7 @@ const pillars = [
         />
       </svg>
     ),
-    title: '0 Fatal Accidents',
+    title: '0 Fatalities',
     body: 'Safety is engineered into every protocol, every day on site.',
   },
   {
@@ -56,7 +56,7 @@ const pillars = [
   {
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2 M9 3a4 4 0 100 8 4 4 0 000-8z M23 21v-2a4 4 0 00-3-3.87 M16 3.13a4 4 0 010 7.75" />
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2 M9 3a4 4 0 100 8 4 4 0 000-8z M23 21v-2a4 4 0 010 7.75" />
       </svg>
     ),
     title: '70% Repeat Clients',
@@ -76,7 +76,7 @@ const pillars = [
 const trackStats = [
   { value: stats.projects, suffix: '+', label: 'Projects Completed' },
   { value: stats.yearsExperience, suffix: '+', label: 'Years Experience' },
-  { value: stats.accidents, suffix: '', label: 'Fatal Accidents' },
+  { value: stats.accidents, suffix: '', label: 'Fatalities Recorded' },
   { value: stats.repeatClientPct, suffix: '%', label: 'Repeat Client Ratio' },
 ]
 
@@ -133,7 +133,7 @@ export default function HomePage() {
               </div>
               <div className="inline-flex items-center gap-[8px] bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-[14px] sm:px-[16px] py-[8px] text-white/90 font-medium text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
                 <span className="w-[6px] h-[6px] bg-[#5BD6E2] rounded-full" />
-                35-year zero accident
+                35-year zero fatality
               </div>
             </div>
 

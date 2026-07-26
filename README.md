@@ -70,7 +70,7 @@ Edit `content/projects.ts` — add a new entry to the `projects` array:
   scope: 'Civil, Mechanical',
   duration: '12 months',
   year: '2024',
-  safetyRecord: 'Zero accidents',
+  safetyRecord: '0 fatal accidents',
   image: '/images/my-project.jpg',  // Drop photo in /public/images/
   images: ['/images/my-project.jpg'],
   excerpt: 'Short description shown on card hover.',

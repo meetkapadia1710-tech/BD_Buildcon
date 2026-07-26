@@ -96,8 +96,8 @@ export default function AboutPage() {
                 BD Buildcon LLP (formerly Bhumi Developers) is an ISO 9001:2015–certified industrial EPC contractor
                 headquartered in Bharuch, Gujarat, India, delivering civil engineering, mechanical services, and turnkey
                 construction for industrial, chemical, pharmaceutical, corporate, and process industries since 1995.
-                With over 35 years of experience, a 35-year 0 fatal accident record, and a 70% repeat client ratio, we
-                have established ourselves as a trusted industrial contractor across Gujarat and India.
+                With over 35 years of experience, a 35-year zero-fatality record, and a 70% repeat client ratio, we have
+                established ourselves as a trusted industrial contractor across Gujarat and India.
               </p>
               <p className="text-[17px] leading-[1.75] text-body mb-[16px]">
                 We bring together a team of skilled engineers and professionals with expertise across civil, mechanical,

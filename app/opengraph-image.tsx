@@ -47,7 +47,7 @@ export default function OpengraphImage() {
           All projects delivered on deadline —
         </div>
         <div style={{ color: '#16A8B8', fontSize: 66, fontWeight: 800, lineHeight: 1.1, letterSpacing: '-0.02em' }}>
-          with zero accidents.
+          with zero fatalities.
         </div>
       </div>
 

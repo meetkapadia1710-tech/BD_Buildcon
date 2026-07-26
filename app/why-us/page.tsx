@@ -19,12 +19,12 @@ export const dynamic = 'force-static'
 export const metadata: Metadata = {
   title: 'Why Choose BD Buildcon',
   description:
-    '35-year zero-accident record, ISO 9001:2015 certification, BIM/ERP-driven execution, and 100+ owned machines. See why leading industrials choose BD Buildcon.',
+    '35-year zero-fatality record, ISO 9001:2015 certification, BIM/ERP-driven execution, and 100+ owned machines. See why leading industrials choose BD Buildcon.',
   alternates: { canonical: 'https://bdbuildcon.com/why-us' },
   openGraph: {
     url: 'https://bdbuildcon.com/why-us',
     title: 'Why Choose BD Buildcon LLP',
-    description: '35-year zero-accident record, ISO 9001:2015, BIM/ERP-driven execution, 100+ owned machines.',
+    description: '35-year zero-fatality record, ISO 9001:2015, BIM/ERP-driven execution, 100+ owned machines.',
   },
 }
 
@@ -33,7 +33,7 @@ const heroStats = [
     value: String(stats.zeroAccidentYears),
     numeric: stats.zeroAccidentYears,
     suffix: '',
-    label: 'Years zero-accident',
+    label: 'Years zero-fatality',
   },
   { value: statsDisplay.machinesOwned, numeric: stats.machinesOwned, suffix: '+', label: 'Machines we own' },
   { value: statsDisplay.repeatClientPct, numeric: stats.repeatClientPct, suffix: '%', label: 'Clients who return' },
@@ -41,7 +41,7 @@ const heroStats = [
 ]
 
 const tickerItems = [
-  'Zero accidents since 1990',
+  'Zero fatalities since 1990',
   'ISO 9001:2015 certified',
   '35+ years experience',
   'Turnkey EPC in-house',
@@ -52,8 +52,8 @@ const tickerItems = [
 const pillars = [
   {
     title: 'Safety',
-    badge: '0 accidents · 35 years',
-    body: 'Safety is engineered into every protocol, every day on site — stringent safety systems and full statutory and environmental compliance, proven by a 35-year zero-accident journey.',
+    badge: '0 fatalities · 35 years',
+    body: 'Safety is engineered into every protocol, every day on site — stringent safety systems and full statutory and environmental compliance, proven by a 35-year zero-fatality journey.',
     them: 'Incidents tolerated as "normal".',
     photo: '/brochurephotos/safety/image15.webp',
     photoAlt: 'Worker in full PPE during a safety demonstration',
@@ -124,7 +124,7 @@ export default function WhyUsPage() {
             in <span className="text-[#5BD6E2]">concrete.</span>
           </>,
         ]}
-        description="35 years on live industrial plants without a single accident. Every claim on this page is backed by a certificate, a client letter, or a machine we own."
+        description="35 years on live industrial plants without a single fatality. Every claim on this page is backed by a certificate, a client letter, or a machine we own."
         primaryCta={{ label: 'Start your project', href: '/contact' }}
         secondaryCta={{ label: 'See the fleet', href: '#fleet' }}
         stats={heroStats}

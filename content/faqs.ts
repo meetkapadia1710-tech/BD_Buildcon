@@ -24,7 +24,7 @@ export const faqs: FAQ[] = [
     id: 'safety-record',
     question: "What is BD Buildcon's safety record?",
     answer:
-      'BD Buildcon reports a zero-accident record across 35 years of project execution, and is ISO 9001:2015 certified for its Quality Management System.',
+      'BD Buildcon reports a zero-fatality record across 35 years of project execution, and is ISO 9001:2015 certified for its Quality Management System.',
     page: ['home', 'safety-quality', 'why-us'],
   },
   {
