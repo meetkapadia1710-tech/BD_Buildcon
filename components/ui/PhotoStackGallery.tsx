@@ -182,15 +182,15 @@ export function PhotoStackGallery({
                 animate={variant}
                 variants={cardVariants}
                 transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
-                className="absolute inset-0 rounded-xl sm:rounded-2xl overflow-hidden border-[4px] sm:border-[8px] border-white bg-[#0D1418] shadow-[0_12px_48px_rgba(0,0,0,0.12)] origin-bottom"
+                className="absolute inset-0 rounded-xl sm:rounded-2xl overflow-hidden border-[4px] sm:border-[8px] border-white bg-dark-bg shadow-[0_12px_48px_rgba(0,0,0,0.12)] origin-bottom"
               >
                 <Image
                   src={photo}
                   alt={stackAlt}
                   fill
                   sizes="(max-width: 640px) 90vw, 560px"
-                  style={{ objectFit: 'contain' }}
-                  className="object-contain p-1"
+                  style={{ objectFit: 'cover' }}
+                  className="object-cover"
                 />
               </motion.div>
             )
