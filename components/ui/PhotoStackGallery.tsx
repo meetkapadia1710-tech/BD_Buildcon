@@ -126,7 +126,7 @@ export function PhotoStackGallery({
                   initial={{ opacity: 0, scale: 0.9, y: 20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: i * 0.05, ease: 'easeOut' }}
-                  className="relative aspect-square rounded-card overflow-hidden shadow-sm border border-hairline bg-[#121A26]"
+                  className="relative aspect-[16/10] rounded-card overflow-hidden shadow-sm border border-hairline bg-[#0D1418]"
                 >
                   <Image
                     src={photo}
@@ -134,7 +134,7 @@ export function PhotoStackGallery({
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     style={{ objectFit: 'contain' }}
-                    className="object-contain p-2 hover:scale-105 transition-transform duration-500"
+                    className="object-contain p-1 hover:scale-105 transition-transform duration-500"
                   />
                 </motion.div>
               ))}
@@ -148,12 +148,12 @@ export function PhotoStackGallery({
   return (
     <>
       {/* ── The Stack ── */}
-      <div className="relative w-full max-w-[560px] mx-auto pt-[80px] pb-[40px] px-[16px] sm:px-[32px]">
+      <div className="relative w-full max-w-[560px] mx-auto pt-[60px] pb-[30px] px-[16px] sm:px-[32px]">
         {/* Glow effect */}
         <div className="absolute top-[30%] left-[10%] right-[10%] bottom-[10%] bg-teal/10 rounded-full blur-[60px] pointer-events-none" />
 
         <div
-          className="relative w-full aspect-[4/3] sm:aspect-[16/11] cursor-pointer group"
+          className="relative w-full aspect-[16/10] sm:aspect-[16/10] cursor-pointer group"
           onClick={() => setIsOpen(true)}
           role="button"
           tabIndex={0}
