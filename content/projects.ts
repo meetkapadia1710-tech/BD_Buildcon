@@ -30,7 +30,7 @@ export const projects: Project[] = [
     scope: 'Civil, Structural',
     duration: '14 months',
     year: '2023',
-    safetyRecord: 'Zero accidents',
+    safetyRecord: '0 fatal accidents',
     image: '/brochurephotos/site photos/aarti industries/DocScanner Sep 9, 2025 5-45 PM_1(4).webp',
     images: [
       '/brochurephotos/site photos/aarti industries/DocScanner Sep 9, 2025 5-45 PM_1(4).webp',
@@ -50,7 +50,7 @@ export const projects: Project[] = [
     scope: 'Civil, Structural, Earthwork, Mechanical',
     duration: '20 months',
     year: '2021',
-    safetyRecord: 'Zero accidents',
+    safetyRecord: '0 fatal accidents',
     image: '/brochurephotos/site photos/birla/BIRLA CELLULOSIC 3 (2).webp',
     images: ['/brochurephotos/site photos/birla/BIRLA CELLULOSIC 3 (2).webp'],
     excerpt:
@@ -64,23 +64,23 @@ export const projects: Project[] = [
   },
   {
     slug: 'city-center',
-    name: 'City Center Commercial Complex',
+    name: 'City Center Corporate Complex',
     client: 'City Center',
-    sector: 'Commercial',
+    sector: 'Corporate',
     location: 'Gujarat',
     scope: 'Civil, Architectural Finishing',
     duration: '18 months',
     year: '2020',
-    safetyRecord: 'Zero accidents',
+    safetyRecord: '0 fatal accidents',
     image: '/brochurephotos/site photos/city center/city-center-night-170.webp',
     images: [
       '/brochurephotos/site photos/city center/city-center-night-170.webp',
       '/brochurephotos/site photos/city center/IMG_20200627_125547.webp',
     ],
-    excerpt: 'A modern commercial hub featuring robust civil foundations and stunning architectural finish.',
+    excerpt: 'A modern corporate hub featuring robust civil foundations and stunning architectural finish.',
     challenge: 'Tight urban location with restricted access and strict local regulations.',
     whatWeBuilt: 'Complete civil and structural frame along with exterior facade works.',
-    outcome: 'A vibrant commercial destination delivered to exceptional standards.',
+    outcome: 'A vibrant corporate destination delivered to exceptional standards.',
   },
   {
     slug: 'dic-fine-chemicals',
@@ -91,7 +91,7 @@ export const projects: Project[] = [
     scope: 'Civil, Mechanical, Piping, Structural Steel',
     duration: '14 months',
     year: '2019',
-    safetyRecord: 'Zero accidents',
+    safetyRecord: '0 fatal accidents',
     image: '/brochurephotos/site photos/dic fine chem/DSC_2480.webp',
     images: [
       '/brochurephotos/site photos/dic fine chem/DSC_2480.webp',
@@ -115,7 +115,7 @@ export const projects: Project[] = [
     scope: 'Mechanical, Piping, Civil',
     duration: '10 months',
     year: '2020',
-    safetyRecord: 'Zero accidents',
+    safetyRecord: '0 fatal accidents',
     image: '/brochurephotos/site photos/gacl ppa/WhatsApp Image 2021-02-26 at 7.33.32 AM.webp',
     images: [
       '/brochurephotos/site photos/gacl ppa/WhatsApp Image 2021-02-26 at 7.33.32 AM.webp',
@@ -140,7 +140,7 @@ export const projects: Project[] = [
     scope: 'Civil, Mechanical, Piping, Structural Steel',
     duration: '18 months',
     year: '2017',
-    safetyRecord: 'Zero accidents',
+    safetyRecord: '0 fatal accidents',
     image: '/brochurephotos/site photos/gfl/Screenshot 2026-07-03 205836.webp',
     images: ['/brochurephotos/site photos/gfl/Screenshot 2026-07-03 205836.webp'],
     excerpt:
@@ -161,7 +161,7 @@ export const projects: Project[] = [
     scope: 'Civil, Structural, Earthwork',
     duration: '24 months',
     year: '2016',
-    safetyRecord: 'Zero accidents',
+    safetyRecord: '0 fatal accidents',
     image: '/brochurephotos/site photos/hscl/IMG-20190814-WA0039.webp',
     images: ['/brochurephotos/site photos/hscl/IMG-20190814-WA0039.webp'],
     excerpt:
@@ -181,7 +181,7 @@ export const projects: Project[] = [
     scope: 'Civil, Mechanical, Piping, PEB Structure',
     duration: '16 months',
     year: '2018',
-    safetyRecord: 'Zero accidents',
+    safetyRecord: '0 fatal accidents',
     image: '/brochurephotos/site photos/navin flourine/Screenshot 2026-07-03 205518.webp',
     images: [
       '/brochurephotos/site photos/navin flourine/Screenshot 2026-07-03 205518.webp',
@@ -207,7 +207,7 @@ export const projects: Project[] = [
     scope: 'Civil, Infrastructure',
     duration: '12 months',
     year: '2022',
-    safetyRecord: 'Zero accidents',
+    safetyRecord: '0 fatal accidents',
     image: '/brochurephotos/site photos/renew/WhatsApp Image 2026-07-12 at 12.59.19 PM.jpg',
     images: [
       '/brochurephotos/site photos/renew/WhatsApp Image 2026-07-12 at 12.59.19 PM.jpg',
@@ -228,7 +228,7 @@ export const projects: Project[] = [
     scope: 'Civil, Structural, Earthwork',
     duration: '16 months',
     year: '2016',
-    safetyRecord: 'Zero accidents',
+    safetyRecord: '0 fatal accidents',
     image: '/brochurephotos/site photos/ROXUL ROCKWOOL/DSC_8467.webp',
     images: [
       '/brochurephotos/site photos/ROXUL ROCKWOOL/DSC_8467.webp',
@@ -254,7 +254,7 @@ export const projects: Project[] = [
     scope: 'Civil, Mechanical, Piping, PEB Structure',
     duration: '18 months',
     year: '2023',
-    safetyRecord: 'Zero accidents',
+    safetyRecord: '0 fatal accidents',
     image: '/brochurephotos/site photos/tagros/TAGROS (1).webp',
     images: [
       '/brochurephotos/site photos/tagros/TAGROS (1).webp',
@@ -278,7 +278,7 @@ export const projects: Project[] = [
     scope: 'Civil, Mechanical, Piping',
     duration: '12 months',
     year: '2015',
-    safetyRecord: 'Zero accidents',
+    safetyRecord: '0 fatal accidents',
     image: '/brochurephotos/site photos/zcl/KBM_4823 - Copy.webp',
     images: ['/brochurephotos/site photos/zcl/KBM_4823 - Copy.webp'],
     excerpt:
@@ -299,7 +299,7 @@ export const projects: Project[] = [
     scope: 'Civil, Structural, Mechanical',
     duration: '12 months',
     year: '2024',
-    safetyRecord: 'Zero accidents',
+    safetyRecord: '0 fatal accidents',
     image: '/brochurephotos/site photos/acume chemical/DocScanner Sep 9, 2025 5-45 PM_1(130).webp',
     images: ['/brochurephotos/site photos/acume chemical/DocScanner Sep 9, 2025 5-45 PM_1(130).webp'],
     excerpt:
@@ -319,7 +319,7 @@ export const projects: Project[] = [
     scope: 'Civil, Structural, PEB Structure',
     duration: '12 months',
     year: '2023',
-    safetyRecord: 'Zero accidents',
+    safetyRecord: '0 fatal accidents',
     image: '/brochurephotos/site photos/agrotech/p2.webp',
     images: ['/brochurephotos/site photos/agrotech/p2.webp'],
     excerpt:
@@ -339,7 +339,7 @@ export const projects: Project[] = [
     scope: 'Civil, Structural, PEB Structure, Piping',
     duration: '18 months',
     year: '2022',
-    safetyRecord: 'Zero accidents',
+    safetyRecord: '0 fatal accidents',
     image: '/brochurephotos/site photos/atg tires/15-big.webp',
     images: ['/brochurephotos/site photos/atg tires/15-big.webp'],
     excerpt:
@@ -359,7 +359,7 @@ export const projects: Project[] = [
     scope: 'Civil, Mechanical, Piping, Structural Steel',
     duration: '14 months',
     year: '2021',
-    safetyRecord: 'Zero accidents',
+    safetyRecord: '0 fatal accidents',
     image: '/brochurephotos/site photos/bostik/5-big.webp',
     images: ['/brochurephotos/site photos/bostik/5-big.webp'],
     excerpt:
@@ -379,7 +379,7 @@ export const projects: Project[] = [
     scope: 'Civil, Mechanical, Piping, Structural Steel',
     duration: '16 months',
     year: '2024',
-    safetyRecord: 'Zero accidents',
+    safetyRecord: '0 fatal accidents',
     image: '/brochurephotos/site photos/deepak chemtech/deepak_310739.webp',
     images: ['/brochurephotos/site photos/deepak chemtech/deepak_310739.webp'],
     excerpt:
@@ -399,7 +399,7 @@ export const projects: Project[] = [
     scope: 'Civil, Mechanical, Piping, Structural Steel',
     duration: '18 months',
     year: '2022',
-    safetyRecord: 'Zero accidents',
+    safetyRecord: '0 fatal accidents',
     image: '/brochurephotos/site photos/deepak nitride/Deepak_Nitrite.webp',
     images: ['/brochurephotos/site photos/deepak nitride/Deepak_Nitrite.webp'],
     excerpt:
@@ -419,7 +419,7 @@ export const projects: Project[] = [
     scope: 'Civil, Mechanical, Piping',
     duration: '12 months',
     year: '2023',
-    safetyRecord: 'Zero accidents',
+    safetyRecord: '0 fatal accidents',
     image: '/brochurephotos/site photos/eurecat/p-1.webp',
     images: ['/brochurephotos/site photos/eurecat/p-1.webp'],
     excerpt:
@@ -439,7 +439,7 @@ export const projects: Project[] = [
     scope: 'Civil, Structural, Mechanical, Piping',
     duration: '16 months',
     year: '2023',
-    safetyRecord: 'Zero accidents',
+    safetyRecord: '0 fatal accidents',
     image: '/brochurephotos/site photos/khemani distilleries/p-1 (1).webp',
     images: ['/brochurephotos/site photos/khemani distilleries/p-1 (1).webp'],
     excerpt:
@@ -459,7 +459,7 @@ export const projects: Project[] = [
     scope: 'Civil, Mechanical, Piping, Structural Steel',
     duration: '20 months',
     year: '2021',
-    safetyRecord: 'Zero accidents',
+    safetyRecord: '0 fatal accidents',
     image: '/brochurephotos/site photos/reliance jamnagar/Screenshot 2026-07-03 205518.webp',
     images: [
       '/brochurephotos/site photos/reliance jamnagar/Screenshot 2026-07-03 205518.webp',

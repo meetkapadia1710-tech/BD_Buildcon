@@ -17,7 +17,7 @@ export const certifications: Certification[] = [
     type: 'recommendation',
     year: '2020',
     description:
-      'Safety certificate from GACL confirming zero accidents across all jobs executed at their facility. Signed by the Dy. General Manager (Civil).',
+      'Safety certificate from GACL confirming 0 fatal accidents across all jobs executed at their facility. Signed by the Dy. General Manager (Civil).',
     image: undefined,
     documentImage: '/images/certificate_placeholder.webp',
   },
@@ -50,7 +50,7 @@ export const certifications: Certification[] = [
     type: 'recommendation',
     year: '2019',
     description:
-      'Appreciation letter from Mott MacDonald recognising BD Buildcon for completing Civil and Structural works with zero accidents, and commending their professionalism and use of modern construction technologies.',
+      'Appreciation letter from Mott MacDonald recognising BD Buildcon for completing Civil and Structural works with 0 fatal accidents, and commending their professionalism and use of modern construction technologies.',
     image: undefined,
     documentImage: '/images/certificate_placeholder.webp',
   },

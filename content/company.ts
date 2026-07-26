@@ -10,7 +10,7 @@ export const FOUNDED_YEAR = 1995
 export const stats = {
   yearsExperience: 35, // 1990 → present ≈ 35 years
   zeroAccidentYears: 35, // per company profile: "35-year zero-accident journey"
-  projects: 50,
+  projects: 150,
   repeatClientPct: 70,
   accidents: 0,
   machinesOwned: 100,
@@ -20,7 +20,7 @@ export const stats = {
 export const statsDisplay = {
   yearsExperience: '35+',
   zeroAccidentYears: '35',
-  projects: '50+',
+  projects: '150+',
   repeatClientPct: '70%',
   accidents: '0',
   machinesOwned: '100+',

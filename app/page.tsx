@@ -26,6 +26,7 @@ import { FAQSection } from '@/components/ui/FAQSection'
 import { faqJsonLd, reviewJsonLd } from '@/lib/jsonld'
 import { submitEnquiry } from '@/lib/submitEnquiry'
 import { TrussArtifact, DimensionLines, SurveyMark, CraneArtifact } from '@/components/ui/BlueprintArtifacts'
+import { SpecializedServicesGrid } from '@/components/ui/SpecializedServicesGrid'
 
 // Sectors are now defined inside SectorMarquee component
 
@@ -40,7 +41,7 @@ const pillars = [
         />
       </svg>
     ),
-    title: 'Zero Accidents',
+    title: '0 Fatal Accidents',
     body: 'Safety is engineered into every protocol, every day on site.',
   },
   {
@@ -75,7 +76,7 @@ const pillars = [
 const trackStats = [
   { value: stats.projects, suffix: '+', label: 'Projects Completed' },
   { value: stats.yearsExperience, suffix: '+', label: 'Years Experience' },
-  { value: stats.accidents, suffix: '', label: 'Accidents Recorded' },
+  { value: stats.accidents, suffix: '', label: 'Fatal Accidents' },
   { value: stats.repeatClientPct, suffix: '%', label: 'Repeat Client Ratio' },
 ]
 
@@ -178,6 +179,23 @@ export default function HomePage() {
         </div>
 
         <div className="max-w-container mx-auto px-gutter pb-[72px] sm:pb-[96px]">
+          {/* ── Modern Specialized Services Grid (MVZ Green Infra style, mobile-optimized) ── */}
+          <SpecializedServicesGrid />
+
+          {/* ── Core Engineering Divisions (In-Depth Technical Scope) ── */}
+          <div className="text-center pt-[32px] sm:pt-[48px] pb-[40px] border-t border-hairline">
+            <span className="font-body text-[11px] font-bold text-teal bg-teal/5 px-[12px] py-[5px] rounded-full border border-teal/15 tracking-[0.1em] uppercase mb-[12px] inline-block">
+              Core Divisions
+            </span>
+            <h3 className="font-display font-bold text-[24px] sm:text-[32px] tracking-[-0.01em] text-ink mb-[12px]">
+              In-Depth Engineering Scope
+            </h3>
+            <p className="text-[15px] sm:text-[17px] leading-[1.6] text-body max-w-[620px] mx-auto">
+              Explore our turnkey execution methodology and comprehensive technical capabilities across our three
+              primary engineering divisions.
+            </p>
+          </div>
+
           <div className="flex flex-col gap-[64px] sm:gap-[80px]">
             {services.map((svc, idx) => {
               const isReversed = idx % 2 !== 0
@@ -217,7 +235,7 @@ export default function HomePage() {
                         {svc.description}
                       </p>
                       <ul className="flex flex-col gap-[8px] mb-[24px] sm:mb-[32px]">
-                        {svc.bullets.slice(0, 4).map((b, bi) => (
+                        {svc.bullets.slice(0, 5).map((b, bi) => (
                           <li key={bi} className="flex items-start gap-[10px] text-[14px] sm:text-[15px] text-body">
                             <span className="text-teal mt-[3px] shrink-0">✓</span>
                             {b}
