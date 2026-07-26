@@ -38,7 +38,7 @@ const iconProps = {
 }
 
 const heroStats = [
-  { value: '0', numeric: 0, suffix: '', label: 'Accidents Recorded' },
+  { value: '0', numeric: 0, suffix: '', label: 'Fatal Accidents' },
   { value: '35', numeric: 35, suffix: '', label: 'Year Zero-Accident Journey' },
   { value: '100%', numeric: 100, suffix: '%', label: 'PPE Compliance' },
   { value: 'Daily', label: 'Toolbox Talks' },
@@ -50,7 +50,7 @@ const tickerItems = [
   'ISO 9001:2015 certified',
   'Lab on every site',
   'Daily toolbox talks',
-  '35-year zero accident record',
+  '35-year 0 fatal accident record',
 ]
 
 const protocols = [
@@ -221,7 +221,7 @@ export default function SafetyQualityPage() {
         titleLines={[
           '35 years.',
           <>
-            <span className="text-[#5BD6E2]">Zero</span> accidents.
+            <span className="text-[#5BD6E2]">0 Fatal</span> accidents.
           </>,
         ]}
         description="Not a slogan — a record. ISO 9001:2015-certified quality systems, a laboratory on every site, and a safety culture drilled into every workday since 1990."

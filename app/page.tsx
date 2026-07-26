@@ -26,6 +26,7 @@ import { FAQSection } from '@/components/ui/FAQSection'
 import { faqJsonLd, reviewJsonLd } from '@/lib/jsonld'
 import { submitEnquiry } from '@/lib/submitEnquiry'
 import { TrussArtifact, DimensionLines, SurveyMark, CraneArtifact } from '@/components/ui/BlueprintArtifacts'
+import { SpecializedServicesGrid } from '@/components/ui/SpecializedServicesGrid'
 
 // Sectors are now defined inside SectorMarquee component
 
@@ -40,7 +41,7 @@ const pillars = [
         />
       </svg>
     ),
-    title: 'Zero Accidents',
+    title: '0 Fatal Accidents',
     body: 'Safety is engineered into every protocol, every day on site.',
   },
   {
@@ -75,7 +76,7 @@ const pillars = [
 const trackStats = [
   { value: stats.projects, suffix: '+', label: 'Projects Completed' },
   { value: stats.yearsExperience, suffix: '+', label: 'Years Experience' },
-  { value: stats.accidents, suffix: '', label: 'Accidents Recorded' },
+  { value: stats.accidents, suffix: '', label: 'Fatal Accidents' },
   { value: stats.repeatClientPct, suffix: '%', label: 'Repeat Client Ratio' },
 ]
 
@@ -161,12 +162,12 @@ export default function HomePage() {
       {/* ── Sector Marquee ── */}
       <SectorMarquee />
 
-      {/* ── What We Build ── */}
+      {/* ── Our Services ── */}
       <section aria-label="Services overview" className="bg-white">
-        <div className="max-w-container mx-auto px-gutter pt-[72px] sm:pt-[96px] pb-[48px] sm:pb-[64px]">
+        <div className="max-w-container mx-auto px-gutter pt-[56px] sm:pt-[72px] pb-[32px] sm:pb-[44px]">
           <div className="text-center">
             <h2 className="font-display font-bold text-[32px] sm:text-[42px] tracking-[-0.01em] text-ink mb-[16px]">
-              What We Build
+              Our Services
             </h2>
             <div className="w-[56px] h-[3px] bg-teal rounded-full mx-auto mb-[20px]" />
             <p className="text-[16px] sm:text-[18px] leading-[1.7] text-body max-w-[760px] mx-auto">
@@ -177,15 +178,32 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="max-w-container mx-auto px-gutter pb-[72px] sm:pb-[96px]">
-          <div className="flex flex-col gap-[64px] sm:gap-[80px]">
+        <div className="max-w-container mx-auto px-gutter pb-[56px] sm:pb-[72px]">
+          {/* ── Modern Specialized Services Grid (MVZ Green Infra style, mobile-optimized) ── */}
+          <SpecializedServicesGrid />
+
+          {/* ── Core Engineering Divisions (What We Build) ── */}
+          <div className="text-center pt-[24px] sm:pt-[36px] pb-[32px] border-t border-hairline">
+            <span className="font-body text-[11px] font-bold text-teal bg-teal/5 px-[12px] py-[5px] rounded-full border border-teal/15 tracking-[0.1em] uppercase mb-[12px] inline-block">
+              Core Divisions
+            </span>
+            <h3 className="font-display font-bold text-[32px] sm:text-[40px] tracking-[-0.01em] text-ink mb-[12px]">
+              What We Build
+            </h3>
+            <p className="text-[15px] sm:text-[17px] leading-[1.6] text-body max-w-[620px] mx-auto">
+              Explore our turnkey execution methodology and comprehensive technical capabilities across our three
+              primary engineering divisions.
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-[48px] sm:gap-[64px]">
             {services.map((svc, idx) => {
               const isReversed = idx % 2 !== 0
               return (
                 <SlideIn key={svc.id} from={isReversed ? 'right' : 'left'} delay={0.05}>
                   <div
                     className={`grid grid-cols-1 lg:grid-cols-2 gap-[32px] lg:gap-[64px] items-center${
-                      idx > 0 ? ' pt-[64px] sm:pt-[80px] border-t border-hairline' : ''
+                      idx > 0 ? ' pt-[48px] sm:pt-[64px] border-t border-hairline' : ''
                     }`}
                   >
                     <div
@@ -217,7 +235,7 @@ export default function HomePage() {
                         {svc.description}
                       </p>
                       <ul className="flex flex-col gap-[8px] mb-[24px] sm:mb-[32px]">
-                        {svc.bullets.slice(0, 4).map((b, bi) => (
+                        {svc.bullets.slice(0, 5).map((b, bi) => (
                           <li key={bi} className="flex items-start gap-[10px] text-[14px] sm:text-[15px] text-body">
                             <span className="text-teal mt-[3px] shrink-0">✓</span>
                             {b}
@@ -243,7 +261,7 @@ export default function HomePage() {
       {/* ── Pillars ── */}
       <section
         aria-label="Company pillars"
-        className="relative overflow-hidden bg-surface border-y border-hairline py-[80px]"
+        className="relative overflow-hidden bg-surface border-y border-hairline py-[56px] sm:py-[64px]"
       >
         <div className="texture-dots pointer-events-none absolute inset-0 text-teal/[0.07]" aria-hidden="true" />
         <StaggerReveal
@@ -266,7 +284,7 @@ export default function HomePage() {
       <BuildingScroll />
 
       {/* ── Stats ── */}
-      <section aria-label="Key statistics" className="relative overflow-hidden bg-teal py-[88px]">
+      <section aria-label="Key statistics" className="relative overflow-hidden bg-teal py-[64px] sm:py-[76px]">
         <div className="texture-dots pointer-events-none absolute inset-0 text-white/[0.08]" aria-hidden="true" />
         {/* Blueprint artifact — TrussArtifact bottom-left, white line-art */}
         <TrussArtifact className="pointer-events-none absolute -bottom-6 -left-6 w-[320px] h-auto text-white/[0.08] hidden lg:block" />
@@ -296,7 +314,10 @@ export default function HomePage() {
       </section>
 
       {/* ── Director ── */}
-      <section aria-label="Message from the Director" className="relative overflow-hidden bg-white py-[96px]">
+      <section
+        aria-label="Message from the Director"
+        className="relative overflow-hidden bg-white py-[64px] sm:py-[80px]"
+      >
         {/* Blueprint artifact — DimensionLines along left edge */}
         <DimensionLines className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 h-[80%] w-auto text-teal/[0.10] hidden lg:block" />
         <div className="relative z-10 max-w-container mx-auto px-gutter grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-[72px] items-center">
@@ -344,7 +365,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Trusted By ── */}
-      <section aria-label="Our clients" className="bg-surface border-top border-hairline py-[96px]">
+      <section aria-label="Our clients" className="bg-surface border-top border-hairline py-[64px] sm:py-[80px]">
         <div className="w-full mx-auto px-gutter xl:px-[80px]">
           <SlideIn from="bottom">
             <div className="text-center mb-[56px]">

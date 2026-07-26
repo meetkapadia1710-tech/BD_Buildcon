@@ -114,14 +114,6 @@ export function Building({
     const pGlobal = progress.get()
     const localProg = clamp01((pGlobal - progressStart) / (progressEnd - progressStart))
 
-    // 0. Blueprint wireframe: fully lit before this building starts, fades over
-    //    the first slice of its own build so the real structure rises through it.
-    if (blueprintRef.current) {
-      const bp = 1 - clamp01(localProg / 0.14)
-      blueprintMat.opacity = 0.9 * bp
-      blueprintRef.current.visible = bp > 0.01
-    }
-
     // 1. Foundation
     const fProg = clamp01(localProg / 0.1)
     const fs = Math.max(0.001, fProg)
@@ -318,9 +310,6 @@ export function Building({
 
   return (
     <group position={position}>
-      {/* Blueprint massing wireframe */}
-      <lineSegments ref={blueprintRef} geometry={blueprintGeo} material={blueprintMat} position={[0, coreH / 2, 0]} />
-
       {/* Foundation */}
       <mesh
         ref={foundRef}
