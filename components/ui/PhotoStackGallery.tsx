@@ -126,15 +126,15 @@ export function PhotoStackGallery({
                   initial={{ opacity: 0, scale: 0.9, y: 20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: i * 0.05, ease: 'easeOut' }}
-                  className="relative aspect-[16/10] rounded-card overflow-hidden shadow-sm border border-hairline bg-[#0D1418]"
+                  className="relative aspect-[16/10] rounded-card overflow-hidden shadow-md border border-hairline bg-surface"
                 >
                   <Image
                     src={photo}
                     alt={`Gallery image ${i + 1}`}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                    style={{ objectFit: 'contain' }}
-                    className="object-contain p-1 hover:scale-105 transition-transform duration-500"
+                    style={{ objectFit: 'cover' }}
+                    className="object-cover hover:scale-108 transition-transform duration-500"
                   />
                 </motion.div>
               ))}
