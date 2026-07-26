@@ -47,18 +47,28 @@ export function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 w-full transition-all duration-300 h-[60px] flex items-center border-b ${
-          scrolled ? 'bg-white border-hairline shadow-[0_1px_24px_rgba(0,0,0,0.08)]' : 'bg-white border-hairline'
+        className={`sticky top-0 z-50 w-full transition-all duration-300 flex items-center border-b ${
+          scrolled
+            ? 'h-[60px] bg-white border-hairline shadow-[0_1px_24px_rgba(0,0,0,0.08)]'
+            : 'h-[80px] sm:h-[88px] bg-white border-hairline'
         }`}
       >
         <div className="max-w-container w-full mx-auto px-gutter flex items-center justify-between gap-4">
           {/* ── Logo ── */}
-          <Link href="/" className="shrink-0 flex items-center" aria-label="BD Buildcon home">
-            <Logo light={true} className="h-10 w-auto" />
+          <Link href="/" className="shrink-0 flex items-center py-1" aria-label="BD Buildcon home">
+            <Logo
+              light={true}
+              className={`w-auto transition-all duration-300 ${scrolled ? 'h-9 sm:h-10' : 'h-13 sm:h-15 lg:h-[62px]'}`}
+            />
           </Link>
 
           {/* ── Desktop Nav ── */}
-          <nav className="hidden lg:flex items-stretch flex-1 justify-end pr-8 h-[60px]" aria-label="Main navigation">
+          <nav
+            className={`hidden lg:flex items-stretch flex-1 justify-end pr-8 transition-all duration-300 ${
+              scrolled ? 'h-[60px]' : 'h-[80px] sm:h-[88px]'
+            }`}
+            aria-label="Main navigation"
+          >
             {navLinks.map((link) => (
               <Link
                 key={link.href}
