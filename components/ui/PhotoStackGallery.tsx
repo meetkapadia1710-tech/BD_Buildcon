@@ -126,7 +126,7 @@ export function PhotoStackGallery({
                   initial={{ opacity: 0, scale: 0.9, y: 20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: i * 0.05, ease: 'easeOut' }}
-                  className="relative aspect-square rounded-card overflow-hidden shadow-sm border border-hairline bg-surface"
+                  className="relative aspect-[16/10] rounded-card overflow-hidden shadow-md border border-hairline bg-surface"
                 >
                   <Image
                     src={photo}
@@ -134,7 +134,7 @@ export function PhotoStackGallery({
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     style={{ objectFit: 'cover' }}
-                    className="object-cover hover:scale-110 transition-transform duration-500"
+                    className="object-cover hover:scale-108 transition-transform duration-500"
                   />
                 </motion.div>
               ))}
@@ -148,12 +148,12 @@ export function PhotoStackGallery({
   return (
     <>
       {/* ── The Stack ── */}
-      <div className="relative w-full max-w-[560px] mx-auto pt-[80px] pb-[40px] px-[16px] sm:px-[32px]">
+      <div className="relative w-full max-w-[560px] mx-auto pt-[60px] pb-[30px] px-[16px] sm:px-[32px]">
         {/* Glow effect */}
         <div className="absolute top-[30%] left-[10%] right-[10%] bottom-[10%] bg-teal/10 rounded-full blur-[60px] pointer-events-none" />
 
         <div
-          className="relative w-full aspect-[4/3] sm:aspect-[16/11] cursor-pointer group"
+          className="relative w-full aspect-[16/10] sm:aspect-[16/10] cursor-pointer group"
           onClick={() => setIsOpen(true)}
           role="button"
           tabIndex={0}
@@ -182,7 +182,7 @@ export function PhotoStackGallery({
                 animate={variant}
                 variants={cardVariants}
                 transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
-                className="absolute inset-0 rounded-xl sm:rounded-2xl overflow-hidden border-[4px] sm:border-[8px] border-white shadow-[0_12px_48px_rgba(0,0,0,0.12)] origin-bottom"
+                className="absolute inset-0 rounded-xl sm:rounded-2xl overflow-hidden border-[4px] sm:border-[8px] border-white bg-dark-bg shadow-[0_12px_48px_rgba(0,0,0,0.12)] origin-bottom"
               >
                 <Image
                   src={photo}

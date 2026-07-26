@@ -33,11 +33,12 @@ export function ServiceIcon({ name, className = 'w-7 h-7' }: { name: string; cla
           <path d="M12 20v2 M10 22h4" />
         </svg>
       )
+    case 'wind':
     case 'solar':
       return (
         <svg {...defaultProps}>
-          <path d="M3 17h12l-2-6H5l-2 6z M9 11v6 M3 17v2h12v-2 M17 9l3-3 M17 9l-3-3 M17 9v6 M15 15h4 M20 4a2 2 0 100-4 2 2 0 000 4z" />
-          <circle cx="17" cy="9" r="1" fill="currentColor" />
+          <path d="M12 2v20 M12 11l6-4 M12 11l-6-4 M12 11l3 7 M12 11l-3 7" strokeWidth="2" strokeLinecap="round" />
+          <circle cx="12" cy="11" r="2" />
         </svg>
       )
     case 'peb':

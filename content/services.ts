@@ -119,13 +119,13 @@ export const specializedServices: SpecializedService[] = [
     iconName: 'rig',
   },
   {
-    id: 'solar-epc-wind',
-    title: 'Solar EPC & WTG Wind Foundation work',
+    id: 'wtg-wind-foundation',
+    title: 'WTG Wind Foundation Work',
     category: 'Civil Engineering',
     sectorLabel: 'Renewable Energy',
     description:
-      'Comprehensive civil EPC works for solar power parks and high-capacity wind turbine generator (WTG) foundations.',
-    iconName: 'solar',
+      'Comprehensive civil EPC works for high-capacity wind turbine generator (WTG) foundations and renewable energy structures.',
+    iconName: 'wind',
   },
   {
     id: 'peb-work',

@@ -258,28 +258,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Pillars ── */}
-      <section
-        aria-label="Company pillars"
-        className="relative overflow-hidden bg-surface border-y border-hairline py-[56px] sm:py-[64px]"
-      >
-        <div className="texture-dots pointer-events-none absolute inset-0 text-teal/[0.07]" aria-hidden="true" />
-        <StaggerReveal
-          className="relative max-w-container mx-auto px-gutter grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[32px]"
-          stagger={0.08}
-        >
-          {pillars.map((p, i) => (
-            <div key={i} className="group flex flex-col items-center text-center gap-[14px]">
-              <div className="w-[60px] h-[60px] rounded-full bg-teal/10 flex items-center justify-center text-teal transition-all duration-300 group-hover:bg-teal group-hover:text-white group-hover:scale-110">
-                {p.icon}
-              </div>
-              <h3 className="font-display font-bold text-[19px] text-ink m-0">{p.title}</h3>
-              <p className="text-[15px] leading-[1.6] text-body m-0">{p.body}</p>
-            </div>
-          ))}
-        </StaggerReveal>
-      </section>
-
       {/* ── How we build ── */}
       <BuildingScroll />
 
