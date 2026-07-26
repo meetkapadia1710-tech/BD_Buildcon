@@ -10,6 +10,7 @@ import { PageWrapper } from '@/components/motion/PageWrapper'
 import { ScrollProgress } from '@/components/motion/ScrollProgress'
 import { Toaster } from 'sonner'
 import { GrainOverlay } from '@/components/ui/GrainOverlay'
+import { contactInfo, addressComponents, socialLinks } from '@/content/links'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -83,11 +84,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 foundingDate: '1995',
                 address: {
                   '@type': 'PostalAddress',
-                  streetAddress: 'Millenium Arcade, Opp SVM Engineering College, Old National Highway 8',
-                  addressLocality: 'Bharuch',
-                  addressRegion: 'Gujarat',
-                  postalCode: '392002',
-                  addressCountry: 'IN',
+                  streetAddress: addressComponents.streetAddress,
+                  addressLocality: addressComponents.addressLocality,
+                  addressRegion: addressComponents.addressRegion,
+                  postalCode: addressComponents.postalCode,
+                  addressCountry: addressComponents.addressCountry,
                 },
                 geo: {
                   '@type': 'GeoCoordinates',
@@ -97,21 +98,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 contactPoint: [
                   {
                     '@type': 'ContactPoint',
-                    telephone: '+91-98791-00355',
+                    telephone: contactInfo.phone,
                     contactType: 'customer service',
                     areaServed: 'IN',
                     availableLanguage: ['English', 'Hindi', 'Gujarati'],
                   },
-                  {
-                    '@type': 'ContactPoint',
-                    telephone: '+91-264-226-2355',
-                    contactType: 'customer service',
-                    contactOption: 'TollFree',
-                    areaServed: 'IN',
-                  },
                 ],
-                email: 'business@bdbuildcon.com',
-                openingHours: 'Mo-Sa 09:00-18:00',
+                email: contactInfo.email,
+                openingHours: contactInfo.openingHoursSchema,
+                openingHoursSpecification: contactInfo.openingHoursSpecification,
                 priceRange: '₹₹₹',
                 currenciesAccepted: 'INR',
                 paymentAccepted: 'Bank Transfer, Cheque',
@@ -131,7 +126,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Turnkey Project Delivery' } },
                   ],
                 },
-                sameAs: [],
+                // TODO(meet): socialLinks in content/links.ts is currently empty — fill in LinkedIn/other profile URLs, plus consider adding Google Business Profile, IndiaMART, and JustDial listing URLs here once live. sameAs is a strong entity-disambiguation signal for AI answer engines.
+                sameAs: Object.values(socialLinks).filter(Boolean),
               },
               {
                 '@context': 'https://schema.org',

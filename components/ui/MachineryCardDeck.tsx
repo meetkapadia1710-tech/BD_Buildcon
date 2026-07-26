@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef, useMemo } from 'react'
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import { AnimatePresence, motion, useMotionValue, useTransform } from 'framer-motion'
@@ -212,6 +212,16 @@ export function MachineryCardDeck() {
     return () => clearInterval(timer)
   }, [isPlaying, viewMode, selectedCardForModal, filteredCards.length])
 
+  const handleNext = useCallback(() => {
+    setSwipeDirection(1)
+    setCurrentIndex((prev) => (prev + 1) % filteredCards.length)
+  }, [filteredCards.length])
+
+  const handlePrev = useCallback(() => {
+    setSwipeDirection(-1)
+    setCurrentIndex((prev) => (prev - 1 + filteredCards.length) % filteredCards.length)
+  }, [filteredCards.length])
+
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -237,17 +247,7 @@ export function MachineryCardDeck() {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [selectedCardForModal, viewMode, filteredCards.length])
-
-  const handleNext = () => {
-    setSwipeDirection(1)
-    setCurrentIndex((prev) => (prev + 1) % filteredCards.length)
-  }
-
-  const handlePrev = () => {
-    setSwipeDirection(-1)
-    setCurrentIndex((prev) => (prev - 1 + filteredCards.length) % filteredCards.length)
-  }
+  }, [selectedCardForModal, viewMode, handleNext, handlePrev])
 
   const handleDragEnd = (_: unknown, info: { offset: { x: number }; velocity: { x: number } }) => {
     const threshold = 90

@@ -7,6 +7,8 @@ import { CTABand } from '@/components/layout/CTABand'
 import { FadeRise, FadeRiseItem } from '@/components/motion/FadeRise'
 import { RevealImage } from '@/components/motion/RevealImage'
 
+import { breadcrumbJsonLd } from '@/lib/jsonld'
+
 type Props = {
   params: { slug: string }
 }
@@ -39,30 +41,47 @@ export default function ProjectDetailPage({ params }: Props) {
   const project = projects[projectIndex]
   const next = projects.length > 1 ? projects[(projectIndex + 1) % projects.length] : null
 
+  const breadcrumbData = breadcrumbJsonLd([
+    { name: 'Projects', url: 'https://bdbuildcon.com/projects' },
+    { name: project.name, url: `https://bdbuildcon.com/projects/${project.slug}` },
+  ])
+
+  const creativeWorkData = {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    '@id': `https://bdbuildcon.com/projects/${project.slug}#case-study`,
+    name: project.name,
+    headline: project.name,
+    description: project.excerpt,
+    image: project.image,
+    author: { '@id': 'https://bdbuildcon.com/#organization' },
+    provider: { '@id': 'https://bdbuildcon.com/#organization' },
+    about: { '@type': 'Thing', name: project.sector },
+    locationCreated: { '@type': 'Place', name: project.location },
+  }
+
+  const jsonLdBlocks: Record<string, unknown>[] = [breadcrumbData, creativeWorkData]
+
+  if (project.quote) {
+    jsonLdBlocks.push({
+      '@context': 'https://schema.org',
+      '@type': 'Review',
+      itemReviewed: { '@id': 'https://bdbuildcon.com/#organization' },
+      author: {
+        '@type': 'Person',
+        name: project.quoteName || project.client,
+        ...(project.quoteTitle ? { jobTitle: project.quoteTitle } : {}),
+      },
+      reviewBody: project.quote,
+    })
+  }
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Article',
-            headline: project.name,
-            description: project.excerpt,
-            image: project.image,
-            author: {
-              '@type': 'Organization',
-              name: 'BD Buildcon LLP',
-            },
-            publisher: {
-              '@type': 'Organization',
-              name: 'BD Buildcon LLP',
-              logo: {
-                '@type': 'ImageObject',
-                url: 'https://bdbuildcon.com/logo.svg',
-              },
-            },
-          }),
+          __html: JSON.stringify(jsonLdBlocks),
         }}
       />
       {/* Cinematic hero */}

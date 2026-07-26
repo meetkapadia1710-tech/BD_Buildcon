@@ -20,6 +20,10 @@ import { services } from '@/content/services'
 import { clients } from '@/content/clients'
 import { consultants } from '@/content/consultants'
 import { stats, statsDisplay } from '@/content/company'
+import { faqs } from '@/content/faqs'
+import { testimonials } from '@/content/testimonials'
+import { FAQSection } from '@/components/ui/FAQSection'
+import { faqJsonLd, reviewJsonLd } from '@/lib/jsonld'
 import { submitEnquiry } from '@/lib/submitEnquiry'
 import { TrussArtifact, DimensionLines, SurveyMark, CraneArtifact } from '@/components/ui/BlueprintArtifacts'
 
@@ -76,8 +80,17 @@ const trackStats = [
 ]
 
 export default function HomePage() {
+  const homeFaqs = faqs.filter((f) => f.page.includes('home'))
+  const organizationReviews = reviewJsonLd(testimonials)
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([faqJsonLd(homeFaqs), ...organizationReviews]),
+        }}
+      />
       {/* ── Hero ── */}
       <section
         aria-label="Hero"
@@ -156,8 +169,10 @@ export default function HomePage() {
               What We Build
             </h2>
             <div className="w-[56px] h-[3px] bg-teal rounded-full mx-auto mb-[20px]" />
-            <p className="text-[16px] sm:text-[18px] leading-[1.7] text-body max-w-[640px] mx-auto">
-              Precision engineering and robust construction across specialised industrial disciplines.
+            <p className="text-[16px] sm:text-[18px] leading-[1.7] text-body max-w-[760px] mx-auto">
+              BD Buildcon LLP is an ISO 9001:2015–certified industrial EPC contractor based in Bharuch, Gujarat,
+              delivering civil engineering, mechanical services, and turnkey construction for India&apos;s chemical,
+              pharmaceutical, and process industries since 1995.
             </p>
           </div>
         </div>
@@ -210,10 +225,10 @@ export default function HomePage() {
                         ))}
                       </ul>
                       <Link
-                        href="/projects"
+                        href={`/services/${svc.id}`}
                         className="inline-flex items-center gap-[8px] py-[10px] -my-[10px] text-[13px] font-semibold uppercase tracking-[0.1em] text-teal hover:text-[#0E8C9B] transition-colors duration-200"
                       >
-                        View projects
+                        Explore service details
                         <span className="text-[16px]">→</span>
                       </Link>
                     </div>
@@ -458,6 +473,9 @@ export default function HomePage() {
           <HomeEnquiryForm />
         </div>
       </section>
+
+      {/* ── FAQ Section ── */}
+      <FAQSection faqs={homeFaqs} />
 
       {/* ── CTA band ── */}
       <CTABand />

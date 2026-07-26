@@ -28,3 +28,33 @@ export function serviceJsonLd(opts: { name: string; description: string; url: st
     serviceType: 'Industrial EPC Contracting',
   }
 }
+
+/** Generates a FAQPage JSON-LD object. */
+export function faqJsonLd(faqs: Array<{ question: string; answer: string }>): Record<string, unknown> {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  }
+}
+
+/** Generates Review JSON-LD objects for organization testimonials. */
+export function reviewJsonLd(
+  reviews: Array<{ name: string; title?: string; quote: string }>,
+): Record<string, unknown>[] {
+  return reviews.map((r) => ({
+    '@context': 'https://schema.org',
+    '@type': 'Review',
+    itemReviewed: { '@id': 'https://bdbuildcon.com/#organization' },
+    author: {
+      '@type': 'Person',
+      name: r.name,
+      ...(r.title ? { jobTitle: r.title } : {}),
+    },
+    reviewBody: r.quote,
+  }))
+}

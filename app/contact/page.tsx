@@ -3,7 +3,9 @@ import { PageTitleBand } from '@/components/layout/PageTitleBand'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { contactInfo } from '@/content/links'
 import { TrussArtifact } from '@/components/ui/BlueprintArtifacts'
-import { breadcrumbJsonLd } from '@/lib/jsonld'
+import { faqs } from '@/content/faqs'
+import { FAQSection } from '@/components/ui/FAQSection'
+import { breadcrumbJsonLd, faqJsonLd } from '@/lib/jsonld'
 import { EnquiryForm } from './EnquiryForm'
 
 export const metadata: Metadata = {
@@ -51,10 +53,10 @@ const infoCards = [
   {
     title: 'Email',
     icon: (
-      <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
     ),
     body: (
-      <div className="flex flex-col gap-[8px]">
+      <div className="flex flex-col gap-[4px]">
         <a
           href="mailto:business@bdbuildcon.com"
           className="inline-block py-[10px] -my-[10px] text-[15px] text-teal font-semibold hover:text-teal/80 transition-colors"
@@ -73,23 +75,22 @@ const infoCards = [
   {
     title: 'Office Hours',
     icon: <path d="M12 2a10 10 0 100 20 10 10 0 000-20z M12 6v6l4 2" />,
-    body: (
-      <p className="text-[15px] leading-[1.7] text-body m-0">
-        Monday – Saturday
-        <br />
-        9:00 AM – 6:00 PM IST
-      </p>
-    ),
+    body: <p className="text-[15px] leading-[1.7] text-body m-0">{contactInfo.hours}</p>,
   },
 ]
 
 export default function ContactPage() {
+  const contactFaqs = faqs.filter((f) => f.page.includes('contact'))
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbJsonLd([{ name: 'Contact Us', url: 'https://bdbuildcon.com/contact' }])),
+          __html: JSON.stringify([
+            breadcrumbJsonLd([{ name: 'Contact Us', url: 'https://bdbuildcon.com/contact' }]),
+            faqJsonLd(contactFaqs),
+          ]),
         }}
       />
 
@@ -147,6 +148,8 @@ export default function ContactPage() {
           </a>
         </div>
       </section>
+
+      <FAQSection faqs={contactFaqs} />
     </>
   )
 }

@@ -10,7 +10,9 @@ import { QuoteCarousel } from '@/components/ui/QuoteCarousel'
 import { SlideIn } from '@/components/motion/SlideIn'
 import { testimonials } from '@/content/testimonials'
 import { statsDisplay, stats } from '@/content/company'
-import { breadcrumbJsonLd } from '@/lib/jsonld'
+import { faqs } from '@/content/faqs'
+import { FAQSection } from '@/components/ui/FAQSection'
+import { breadcrumbJsonLd, faqJsonLd } from '@/lib/jsonld'
 
 export const dynamic = 'force-static'
 
@@ -99,12 +101,17 @@ const pillars = [
 ]
 
 export default function WhyUsPage() {
+  const whyUsFaqs = faqs.filter((f) => f.page.includes('why-us'))
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbJsonLd([{ name: 'Why BD Buildcon', url: 'https://bdbuildcon.com/why-us' }])),
+          __html: JSON.stringify([
+            breadcrumbJsonLd([{ name: 'Why BD Buildcon', url: 'https://bdbuildcon.com/why-us' }]),
+            faqJsonLd(whyUsFaqs),
+          ]),
         }}
       />
       <PageHero
@@ -260,6 +267,8 @@ export default function WhyUsPage() {
           </div>
         </div>
       </section>
+
+      <FAQSection faqs={whyUsFaqs} />
 
       <CTABand />
     </>

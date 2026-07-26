@@ -7,7 +7,9 @@ import { LightboxGallery } from '@/components/ui/LightboxGallery'
 import { SlideIn } from '@/components/motion/SlideIn'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { Spotlight } from '@/components/motion/Spotlight'
-import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/jsonld'
+import { faqs } from '@/content/faqs'
+import { FAQSection } from '@/components/ui/FAQSection'
+import { breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from '@/lib/jsonld'
 
 export const dynamic = 'force-static'
 
@@ -192,6 +194,8 @@ function SealIcon() {
 }
 
 export default function SafetyQualityPage() {
+  const safetyFaqs = faqs.filter((f) => f.page.includes('safety-quality'))
+
   return (
     <>
       <script
@@ -205,6 +209,7 @@ export default function SafetyQualityPage() {
                 'ISO 9001:2015-certified quality systems and zero-accident safety protocols for industrial EPC projects.',
               url: 'https://bdbuildcon.com/safety-quality',
             }),
+            faqJsonLd(safetyFaqs),
           ]),
         }}
       />
@@ -368,6 +373,8 @@ export default function SafetyQualityPage() {
           </StaggerReveal>
         </div>
       </section>
+
+      <FAQSection faqs={safetyFaqs} />
 
       <CTABand
         title="Build with the zero-accident contractor."

@@ -5,7 +5,9 @@ import { RevealImage } from '@/components/motion/RevealImage'
 import { SlideIn } from '@/components/motion/SlideIn'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { CraneArtifact, SurveyMark, DimensionLines } from '@/components/ui/BlueprintArtifacts'
-import { breadcrumbJsonLd } from '@/lib/jsonld'
+import { faqs } from '@/content/faqs'
+import { FAQSection } from '@/components/ui/FAQSection'
+import { breadcrumbJsonLd, faqJsonLd } from '@/lib/jsonld'
 
 export const dynamic = 'force-static'
 
@@ -58,12 +60,17 @@ const peopleCare = [
 ]
 
 export default function AboutPage() {
+  const aboutFaqs = faqs.filter((f) => f.page.includes('about'))
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbJsonLd([{ name: 'About Us', url: 'https://bdbuildcon.com/about' }])),
+          __html: JSON.stringify([
+            breadcrumbJsonLd([{ name: 'About Us', url: 'https://bdbuildcon.com/about' }]),
+            faqJsonLd(aboutFaqs),
+          ]),
         }}
       />
       <PageTitleBand
@@ -86,10 +93,11 @@ export default function AboutPage() {
                 Built project by project since 1995.
               </h2>
               <p className="text-[17px] leading-[1.75] text-body mb-[16px]">
-                BD Buildcon LLP is a leading turnkey contracting company based in Bharuch, Gujarat, specializing in
-                industrial, commercial, and corporate building projects. With a reputation for excellence and a proven
-                track record of delivering high-quality work, we have established ourselves as the preferred contractor
-                in the Gujarat region for industrial construction projects.
+                BD Buildcon LLP (formerly Bhumi Developers) is an ISO 9001:2015–certified industrial EPC contractor
+                headquartered in Bharuch, Gujarat, India, delivering civil engineering, mechanical services, and turnkey
+                construction for industrial, chemical, pharmaceutical, and process industries since 1995. With over 35
+                years of experience, a 35-year zero-accident record, and a 70% repeat client ratio, we have established
+                ourselves as a trusted industrial contractor across Gujarat and India.
               </p>
               <p className="text-[17px] leading-[1.75] text-body mb-[16px]">
                 We bring together a team of skilled engineers and professionals with expertise across civil, mechanical,
@@ -292,6 +300,8 @@ export default function AboutPage() {
           </StaggerReveal>
         </div>
       </section>
+
+      <FAQSection faqs={aboutFaqs} />
 
       <CTABand />
     </>
