@@ -27,7 +27,26 @@ import { faqJsonLd, reviewJsonLd } from '@/lib/jsonld'
 import { submitEnquiry } from '@/lib/submitEnquiry'
 import { TrussArtifact, DimensionLines, SurveyMark, CraneArtifact } from '@/components/ui/BlueprintArtifacts'
 import { SpecializedServicesGrid } from '@/components/ui/SpecializedServicesGrid'
-import { MachineryCardDeck } from '@/components/ui/MachineryCardDeck'
+import { PhotoStackGallery } from '@/components/ui/PhotoStackGallery'
+
+const machineryPhotos = [
+  '/brochurephotos/plant and machinery/image17.webp',
+  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM (1).webp',
+  '/brochurephotos/plant and machinery/image45.webp',
+  '/brochurephotos/plant and machinery/image46.webp',
+  '/brochurephotos/plant and machinery/image48.webp',
+  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM.webp',
+  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(126).webp',
+  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM (3).webp',
+  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.58.08 PM.webp',
+  '/brochurephotos/plant and machinery/image6.webp',
+  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(106).webp',
+  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(125).webp',
+  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(155).webp',
+  '/brochurephotos/plant and machinery/IMG-20150407-WA0003.webp',
+  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM (2).webp',
+  '/brochurephotos/plant and machinery/image44.webp',
+]
 
 // Sectors are now defined inside SectorMarquee component
 
@@ -259,30 +278,43 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Plant & Machinery (100+ machines. All ours. 3D Card Deck) ── */}
+      {/* ── Plant & Machinery (Editorial Copy + PhotoStack Gallery) ── */}
       <section
         id="fleet"
         aria-label="Plant and Machinery"
-        className="relative overflow-hidden bg-dark-bg py-[64px] sm:py-[88px]"
+        className="relative overflow-hidden bg-white py-[64px] sm:py-[88px] border-t border-hairline"
       >
-        <div className="texture-grid pointer-events-none absolute inset-0 text-teal/[0.07]" aria-hidden="true" />
-        <div className="relative max-w-container mx-auto px-gutter">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-[24px] lg:gap-[32px] mb-[40px] lg:mb-[48px]">
-            <div>
-              <span className="block text-[13px] font-semibold uppercase tracking-[0.14em] text-[#5BD6E2] mb-[14px]">
-                Plant &amp; Machinery
-              </span>
-              <h2 className="font-display font-[800] text-[34px] sm:text-[42px] lg:text-[52px] tracking-[-0.02em] leading-[1.08] text-white m-0 max-w-[14ch]">
-                {statsDisplay.machinesOwned} machines. All ours.
-              </h2>
-            </div>
-            <p className="text-[16px] leading-[1.7] text-white/70 max-w-[400px] m-0">
-              RMC plant, boom placer, excavators, vibratory rollers, transit mixers — an owned fleet means zero rental
-              dependency and zero waiting. Drag or flip through our card deck.
-            </p>
-          </div>
+        <div className="max-w-container mx-auto px-gutter">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-[48px] lg:gap-[72px] items-center">
+            <SlideIn from="left">
+              <div>
+                <span className="block text-[13px] font-semibold uppercase tracking-[0.14em] text-teal mb-[14px]">
+                  Plant &amp; Machinery
+                </span>
+                <h2 className="font-display font-[800] text-[34px] sm:text-[42px] lg:text-[48px] leading-[1.15] tracking-[-0.01em] text-ink mb-[24px]">
+                  {statsDisplay.machinesOwned} owned machines. Zero rental dependency.
+                </h2>
+                <p className="text-[16px] sm:text-[17px] leading-[1.75] text-body mb-[16px]">
+                  We believe that investing in the latest technology and modern construction equipment is key to
+                  delivering superior productivity, precision, and project efficiency. Our modern and diverse fleet
+                  includes an RMC plant, a boom placer, excavators, vibratory rollers, transit mixers, and much more.
+                </p>
+                <p className="text-[16px] sm:text-[17px] leading-[1.75] text-body mb-[16px]">
+                  With {statsDisplay.machinesOwned} owned construction machines and equipment, we maintain complete
+                  operational control without relying on rented machinery — ensuring higher equipment availability,
+                  minimizing project delays, and allowing us to respond quickly to changing site requirements.
+                </p>
+                <p className="text-[16px] sm:text-[17px] leading-[1.75] text-body m-0">
+                  Regular maintenance and timely equipment upgrades ensure reliable performance, while advanced
+                  technology and automation help address labour challenges and keep every project on schedule.
+                </p>
+              </div>
+            </SlideIn>
 
-          <MachineryCardDeck />
+            <SlideIn from="right" className="flex justify-center items-center">
+              <PhotoStackGallery photos={machineryPhotos} title="Plant & Machinery Fleet" />
+            </SlideIn>
+          </div>
         </div>
       </section>
 
