@@ -27,9 +27,9 @@ export function PillarExplorer({ items }: Props) {
   const current = items[active]
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-[32px] lg:gap-[56px] items-stretch">
+    <div className="grid grid-cols-1 lg:grid-cols-[380px_1fr] gap-[32px] lg:gap-[48px] items-stretch">
       {/* Rail */}
-      <div className="flex flex-col border-t border-hairline">
+      <div className="flex flex-col justify-between h-full border-t border-hairline">
         {items.map((item, i) => {
           const isActive = i === active
           return (
@@ -37,7 +37,7 @@ export function PillarExplorer({ items }: Props) {
               key={item.title}
               onClick={() => setActive(i)}
               aria-pressed={isActive}
-              className={`flex items-center gap-[18px] w-full text-left px-[16px] sm:px-[20px] py-[20px] sm:py-[24px] border-b border-hairline transition-colors duration-[250ms] ${
+              className={`flex items-center gap-[18px] w-full text-left px-[16px] sm:px-[20px] py-[16px] sm:py-[18px] flex-1 border-b border-hairline transition-colors duration-[250ms] ${
                 isActive ? 'bg-dark-bg text-white' : 'bg-transparent text-ink hover:bg-surface'
               }`}
             >
@@ -48,7 +48,7 @@ export function PillarExplorer({ items }: Props) {
               >
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <span className="font-display font-bold text-[17px] sm:text-[19px] text-left flex-1">{item.title}</span>
+              <span className="font-display font-bold text-[16px] sm:text-[18px] text-left flex-1">{item.title}</span>
               <svg
                 className={`w-[18px] h-[18px] shrink-0 transition-all duration-[250ms] ${
                   isActive ? 'text-[#5BD6E2] translate-x-0' : 'text-border -translate-x-1'
@@ -67,7 +67,7 @@ export function PillarExplorer({ items }: Props) {
       </div>
 
       {/* Detail panel — Full photo display */}
-      <div className="relative rounded-card overflow-hidden bg-dark-bg min-h-[380px] sm:min-h-[460px] lg:min-h-[520px] shadow-lg border border-white/[0.08]">
+      <div className="relative rounded-card overflow-hidden bg-dark-bg min-h-[360px] sm:min-h-[420px] lg:h-full lg:min-h-[440px] shadow-lg border border-white/[0.08]">
         <Image
           key={current.photo}
           src={current.photo}
