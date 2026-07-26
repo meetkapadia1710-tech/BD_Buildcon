@@ -46,6 +46,9 @@ export default function BuildingTowerWebGL(props: SceneProps) {
   useEffect(() => {
     const ok = webglSupported()
     setSupported(ok)
+    if (SCENE_ENABLED && ok) {
+      setMounted(true)
+    }
     if (!SCENE_ENABLED) reportSceneEvent({ event: 'scene_fallback_served', reason: 'disabled' })
     else if (!ok) reportSceneEvent({ event: 'scene_fallback_served', reason: 'no_webgl' })
   }, [])
@@ -55,24 +58,12 @@ export default function BuildingTowerWebGL(props: SceneProps) {
     const el = containerRef.current
     if (!el) return
 
-    // Mount once the section is within ~1 viewport; keep it mounted thereafter.
-    const mountObs = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          setMounted(true)
-          mountObs.disconnect()
-        }
-      },
-      { rootMargin: '100% 0px' },
-    )
-    // Drive the render loop only while any part is actually visible.
+    // Drive the render loop whenever the section is visible
     const activeObs = new IntersectionObserver((entries) => setActive(entries.some((e) => e.isIntersecting)), {
       threshold: 0,
     })
-    mountObs.observe(el)
     activeObs.observe(el)
     return () => {
-      mountObs.disconnect()
       activeObs.disconnect()
     }
   }, [])
