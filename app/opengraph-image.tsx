@@ -53,11 +53,9 @@ export default function OpengraphImage() {
 
       {/* Footer meta */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-        <div style={{ color: '#FDB913', fontSize: 26, fontWeight: 700 }}>Since 1995 · 30+ years</div>
+        <div style={{ color: '#FDB913', fontSize: 26, fontWeight: 700 }}>Since 1990 · 35+ years</div>
         <div style={{ color: '#6b7177', fontSize: 26 }}>·</div>
-        <div style={{ color: '#c8ced2', fontSize: 26, fontWeight: 600 }}>
-          ISO 9001:2015 · CRISIL SME 3 · Industrial EPC Contractor
-        </div>
+        <div style={{ color: '#c8ced2', fontSize: 26, fontWeight: 600 }}>ISO 9001:2015 · Industrial EPC Contractor</div>
       </div>
     </div>,
     { ...size },

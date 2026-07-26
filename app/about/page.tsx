@@ -12,12 +12,12 @@ export const dynamic = 'force-static'
 export const metadata: Metadata = {
   title: 'About BD Buildcon',
   description:
-    'Learn about BD Buildcon LLP — a turnkey industrial EPC contractor with 30+ years, ISO 9001:2015 certified, specialised in Civil, Mechanical, PEB, piling and piping.',
+    'Learn about BD Buildcon LLP — a turnkey industrial EPC contractor with 35+ years, ISO 9001:2015 certified, specialised in Civil, Mechanical, PEB, piling and piping.',
   alternates: { canonical: 'https://bdbuildcon.com/about' },
   openGraph: {
     url: 'https://bdbuildcon.com/about',
     title: 'About BD Buildcon LLP',
-    description: 'Turnkey industrial EPC contractor since 1995. ISO 9001:2015 certified, 30+ years of delivery.',
+    description: 'Turnkey industrial EPC contractor since 1995. ISO 9001:2015 certified, 35+ years of delivery.',
   },
 }
 
@@ -32,7 +32,11 @@ const milestones = [
     title: 'Industrial EPC expansion',
     body: 'Entered structural steel, PEB and mechanical works for chemical plants.',
   },
-  { year: '2015', title: 'ISO 9001:2015 certified', body: 'Formalised quality systems; CRISIL SME 3 rating earned.' },
+  {
+    year: '2015',
+    title: 'ISO 9001:2015 certified',
+    body: 'Formalised quality management systems across all project execution.',
+  },
   {
     year: '2021',
     title: 'BD Buildcon LLP',

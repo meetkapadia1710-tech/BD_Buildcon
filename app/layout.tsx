@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: '%s | BD Buildcon LLP',
   },
   description:
-    'Turnkey industrial EPC contractor since 1995. All projects completed on deadline with zero accidents. ISO 9001:2015 certified · CRISIL SME 3 rated · ₹200+ Cr delivered.',
+    'Turnkey industrial EPC contractor. All projects completed on deadline with zero accidents. ISO 9001:2015 certified · 35+ years experience · ₹200+ Cr delivered.',
   alternates: {
     canonical: 'https://bdbuildcon.com',
   },
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     siteName: 'BD Buildcon LLP',
     title: 'BD Buildcon LLP | Industrial EPC Contractor',
     description:
-      'Turnkey industrial EPC contractor since 1995. All projects completed on deadline with zero accidents.',
+      'Turnkey industrial EPC contractor with 35+ years experience. All projects completed on deadline with zero accidents.',
   },
   twitter: {
     card: 'summary_large_image',
@@ -79,7 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 },
                 image: 'https://bdbuildcon.com/opengraph-image.png',
                 description:
-                  'Turnkey industrial EPC contractor since 1995. ISO 9001:2015 certified, CRISIL SME 3 rated, zero-accident record across 35 years.',
+                  'Turnkey industrial EPC contractor with 35+ years of delivery. ISO 9001:2015 certified, zero-accident record across 35 years.',
                 foundingDate: '1995',
                 address: {
                   '@type': 'PostalAddress',

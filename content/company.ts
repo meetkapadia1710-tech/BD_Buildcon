@@ -8,7 +8,7 @@ export const FOUNDED_YEAR = 1995
 
 // Numeric values (for CountUp / RisingFloors animations)
 export const stats = {
-  yearsExperience: 30, // 1995 → present ≈ 30 years
+  yearsExperience: 35, // 1990 → present ≈ 35 years
   zeroAccidentYears: 35, // per company profile: "35-year zero-accident journey"
   projects: 50,
   repeatClientPct: 70,
@@ -18,7 +18,7 @@ export const stats = {
 
 // Display strings (for copy / badges)
 export const statsDisplay = {
-  yearsExperience: '30+',
+  yearsExperience: '35+',
   zeroAccidentYears: '35',
   projects: '50+',
   repeatClientPct: '70%',
@@ -27,12 +27,12 @@ export const statsDisplay = {
   valueDelivered: '₹200+ Cr',
 } as const
 
-export const certifications = ['ISO 9001:2015', 'CRISIL SME 3'] as const
+export const certifications = ['ISO 9001:2015'] as const
 
 export const company = {
   legalName: 'BD Buildcon LLP',
   formerName: 'Bhumi Developers',
   foundedYear: FOUNDED_YEAR,
-  // e.g. "Since 1995 · 30+ years"
+  // e.g. "Since 1995 · 35+ years"
   tagline: `Since ${FOUNDED_YEAR} · ${statsDisplay.yearsExperience} years`,
 } as const

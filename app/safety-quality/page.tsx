@@ -48,7 +48,7 @@ const tickerItems = [
   'ISO 9001:2015 certified',
   'Lab on every site',
   'Daily toolbox talks',
-  'CRISIL SME 3 rated',
+  '35-year zero accident record',
 ]
 
 const protocols = [
@@ -355,13 +355,14 @@ export default function SafetyQualityPage() {
                   strokeLinejoin="round"
                   aria-hidden="true"
                 >
-                  <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
-                  <line x1="4" x2="4" y1="22" y2="15" />
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 </svg>
               </div>
-              <div className="font-display font-[800] text-[26px] sm:text-[30px] text-ink mb-[10px]">CRISIL SME 3</div>
+              <div className="font-display font-[800] text-[26px] sm:text-[30px] text-ink mb-[10px]">
+                Zero-Accident Record
+              </div>
               <p className="text-[15px] sm:text-[15.5px] leading-[1.7] text-body m-0">
-                Independently rated financial strength and operational credibility.
+                35 consecutive years of incident-free operations across all live industrial sites.
               </p>
             </div>
           </StaggerReveal>

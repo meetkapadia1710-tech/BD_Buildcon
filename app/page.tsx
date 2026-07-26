@@ -111,7 +111,7 @@ export default function HomePage() {
             <div className="flex flex-wrap items-center gap-[12px] sm:gap-[16px] max-w-[600px]">
               <div className="inline-flex items-center gap-[8px] bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-[14px] sm:px-[16px] py-[8px] text-white/90 font-medium text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
                 <span className="w-[6px] h-[6px] bg-[#5BD6E2] rounded-full" />
-                30+ years
+                35+ years
               </div>
               <div className="inline-flex items-center gap-[8px] bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-[14px] sm:px-[16px] py-[8px] text-white/90 font-medium text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
                 <span className="w-[6px] h-[6px] bg-[#5BD6E2] rounded-full" />
@@ -119,7 +119,7 @@ export default function HomePage() {
               </div>
               <div className="inline-flex items-center gap-[8px] bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-[14px] sm:px-[16px] py-[8px] text-white/90 font-medium text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
                 <span className="w-[6px] h-[6px] bg-[#5BD6E2] rounded-full" />
-                CRISIL SME 3
+                35-year zero accident
               </div>
             </div>
 

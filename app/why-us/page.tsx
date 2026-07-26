@@ -5,7 +5,7 @@ import { CTABand } from '@/components/layout/CTABand'
 import { PageHero } from '@/components/ui/PageHero'
 import { TickerBand } from '@/components/ui/TickerBand'
 import { PillarExplorer } from '@/components/ui/PillarExplorer'
-import { LightboxGallery } from '@/components/ui/LightboxGallery'
+import { MachineryCardDeck } from '@/components/ui/MachineryCardDeck'
 import { QuoteCarousel } from '@/components/ui/QuoteCarousel'
 import { SlideIn } from '@/components/motion/SlideIn'
 import { testimonials } from '@/content/testimonials'
@@ -41,7 +41,7 @@ const heroStats = [
 const tickerItems = [
   'Zero accidents since 1990',
   'ISO 9001:2015 certified',
-  'CRISIL SME 3 rated',
+  '35+ years experience',
   'Turnkey EPC in-house',
   `${statsDisplay.valueDelivered} delivered`,
   'Since 1995 · Bharuch, Gujarat',
@@ -97,33 +97,6 @@ const pillars = [
     photoAlt: 'Heavy plant and machinery owned by BD Buildcon',
   },
 ]
-
-const machineryPhotos = [
-  '/brochurephotos/plant and machinery/image17.webp',
-  '/brochurephotos/plant and machinery/image44.webp',
-  '/brochurephotos/plant and machinery/image45.webp',
-  '/brochurephotos/plant and machinery/image46.webp',
-  '/brochurephotos/plant and machinery/image48.webp',
-  '/brochurephotos/plant and machinery/image6.webp',
-  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(106).webp',
-  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(125).webp',
-  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(126).webp',
-  '/brochurephotos/plant and machinery/DocScanner Sep 9, 2025 5-45 PM_1(155).webp',
-  '/brochurephotos/plant and machinery/IMG-20150407-WA0003.webp',
-  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM (1).webp',
-  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM (2).webp',
-  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM (3).webp',
-  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.44.00 PM.webp',
-  '/brochurephotos/plant and machinery/WhatsApp Image 2026-07-12 at 12.58.08 PM.webp',
-]
-
-const fleetSpanPattern = ['col-span-2 row-span-2', '', '', 'row-span-2', '', '', 'col-span-2', '']
-
-const fleetPhotos = machineryPhotos.map((src, i) => ({
-  src,
-  alt: 'BD Buildcon owned machinery',
-  spanClassName: fleetSpanPattern[i % fleetSpanPattern.length],
-}))
 
 export default function WhyUsPage() {
   return (
@@ -194,15 +167,11 @@ export default function WhyUsPage() {
             </div>
             <p className="text-[16px] leading-[1.7] text-white/60 max-w-[400px] m-0">
               RMC plant, boom placer, excavators, vibratory rollers, transit mixers — an owned fleet means zero rental
-              dependency and zero waiting. Click any photo to view.
+              dependency and zero waiting. Drag or flip through our card deck.
             </p>
           </div>
 
-          <LightboxGallery
-            photos={fleetPhotos}
-            groupLabel="Plant & Machinery"
-            gridClassName="grid grid-cols-2 sm:grid-cols-4 auto-rows-[150px] sm:auto-rows-[200px] gap-[14px]"
-          />
+          <MachineryCardDeck />
         </div>
       </section>
 

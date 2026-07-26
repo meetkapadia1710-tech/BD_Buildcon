@@ -65,15 +65,4 @@ export const certifications: Certification[] = [
     image: undefined,
     documentImage: '/images/certificate_placeholder.webp',
   },
-  {
-    id: 'crisil',
-    client: 'CRISIL SME Rating — NSIC',
-    clientShort: 'NSIC-CRISIL',
-    type: 'accreditation',
-    year: '2015',
-    description:
-      'CRISIL SME Rating of SME 3 awarded by NSIC-CRISIL, indicating an "Above Average" level of creditworthiness adjudged against other SMEs in India.',
-    image: undefined,
-    documentImage: '/images/certificate_placeholder.webp',
-  },
 ]
