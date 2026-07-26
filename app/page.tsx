@@ -132,8 +132,7 @@ export default function HomePage() {
                 ISO 9001:2015
               </div>
               <div className="inline-flex items-center gap-[8px] bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-[14px] sm:px-[16px] py-[8px] text-white/90 font-medium text-[10px] sm:text-[11px] uppercase tracking-[0.15em]">
-                <span className="w-[6px] h-[6px] bg-[#5BD6E2] rounded-full" />
-                35-year 0 fatal accident
+                <span className="w-[6px] h-[6px] bg-[#5BD6E2] rounded-full" />0 fatal accidents
               </div>
             </div>
 
