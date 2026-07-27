@@ -19,14 +19,14 @@ import { MagneticButton } from '@/components/motion/MagneticButton'
 import { services } from '@/content/services'
 import { clients } from '@/content/clients'
 import { consultants } from '@/content/consultants'
+import { submitEnquiry } from '@/lib/submitEnquiry'
+import { TrussArtifact, DimensionLines, SurveyMark, CraneArtifact } from '@/components/ui/BlueprintArtifacts'
+
 import { stats, statsDisplay } from '@/content/company'
 import { faqs } from '@/content/faqs'
 import { testimonials } from '@/content/testimonials'
 import { FAQSection } from '@/components/ui/FAQSection'
 import { faqJsonLd, reviewJsonLd } from '@/lib/jsonld'
-import { submitEnquiry } from '@/lib/submitEnquiry'
-import { TrussArtifact, DimensionLines, SurveyMark, CraneArtifact } from '@/components/ui/BlueprintArtifacts'
-import { SpecializedServicesGrid } from '@/components/ui/SpecializedServicesGrid'
 
 // Sectors are now defined inside SectorMarquee component
 
@@ -162,48 +162,33 @@ export default function HomePage() {
       {/* ── Sector Marquee ── */}
       <SectorMarquee />
 
-      {/* ── Our Services ── */}
-      <section aria-label="Services overview" className="bg-white">
-        <div className="max-w-container mx-auto px-gutter pt-[56px] sm:pt-[72px] pb-[32px] sm:pb-[44px]">
-          <div className="text-center">
+      {/* ── What We Build ── */}
+      <section aria-label="What We Build" className="bg-white">
+        <div className="max-w-container mx-auto px-gutter pt-[56px] sm:pt-[72px] pb-[56px] sm:pb-[72px]">
+          <div className="text-center mb-[48px] sm:mb-[64px]">
+            <span className="font-body text-[11px] font-bold text-teal bg-teal/5 px-[12px] py-[5px] rounded-full border border-teal/15 tracking-[0.1em] uppercase mb-[12px] inline-block">
+              Core Divisions
+            </span>
             <h2 className="font-display font-bold text-[32px] sm:text-[42px] tracking-[-0.01em] text-ink mb-[16px]">
-              Our Services
+              What We Build
             </h2>
             <div className="w-[56px] h-[3px] bg-teal rounded-full mx-auto mb-[20px]" />
             <p className="text-[16px] sm:text-[18px] leading-[1.7] text-body max-w-[760px] mx-auto">
               BD Buildcon LLP is an ISO 9001:2015–certified industrial EPC contractor based in Bharuch, Gujarat,
               delivering civil engineering, mechanical services, and turnkey construction for India&apos;s chemical,
-              pharmaceutical, and process industries since 1995.
-            </p>
-          </div>
-        </div>
-
-        <div className="max-w-container mx-auto px-gutter pb-[56px] sm:pb-[72px]">
-          {/* ── Modern Specialized Services Grid (MVZ Green Infra style, mobile-optimized) ── */}
-          <SpecializedServicesGrid />
-
-          {/* ── Core Engineering Divisions (What We Build) ── */}
-          <div className="text-center pt-[24px] sm:pt-[36px] pb-[32px] border-t border-hairline">
-            <span className="font-body text-[11px] font-bold text-teal bg-teal/5 px-[12px] py-[5px] rounded-full border border-teal/15 tracking-[0.1em] uppercase mb-[12px] inline-block">
-              Core Divisions
-            </span>
-            <h3 className="font-display font-bold text-[32px] sm:text-[40px] tracking-[-0.01em] text-ink mb-[12px]">
-              What We Build
-            </h3>
-            <p className="text-[15px] sm:text-[17px] leading-[1.6] text-body max-w-[620px] mx-auto">
-              Explore our turnkey execution methodology and comprehensive technical capabilities across our three
-              primary engineering divisions.
+              pharmaceutical, and process industries since 1995. Explore our turnkey execution methodology and
+              comprehensive technical capabilities across our three primary engineering divisions.
             </p>
           </div>
 
-          <div className="flex flex-col gap-[48px] sm:gap-[64px]">
+          <div className="flex flex-col gap-[80px] sm:gap-[100px]">
             {services.map((svc, idx) => {
               const isReversed = idx % 2 !== 0
               return (
                 <SlideIn key={svc.id} from={isReversed ? 'right' : 'left'} delay={0.05}>
                   <div
                     className={`grid grid-cols-1 lg:grid-cols-2 gap-[32px] lg:gap-[64px] items-center${
-                      idx > 0 ? ' pt-[48px] sm:pt-[64px] border-t border-hairline' : ''
+                      idx > 0 ? ' pt-[80px] sm:pt-[100px] border-t border-hairline' : ''
                     }`}
                   >
                     <div

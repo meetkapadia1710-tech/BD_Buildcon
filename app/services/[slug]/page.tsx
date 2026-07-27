@@ -10,8 +10,9 @@ import { CTABand } from '@/components/layout/CTABand'
 import { FAQSection } from '@/components/ui/FAQSection'
 import { SlideIn } from '@/components/motion/SlideIn'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
+import { CategoryServiceGrid } from '@/components/ui/CategoryServiceGrid'
+import { unifiedCapabilities } from '@/content/unifiedCapabilities'
 import { breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from '@/lib/jsonld'
-
 export const dynamic = 'force-static'
 
 type Props = {
@@ -192,23 +193,8 @@ export default function ServiceDetailPage({ params }: Props) {
                 machines, and a 35-year zero-fatality execution track record to every contract.
               </p>
 
-              <div className="space-y-[24px]">
-                {service.bullets.map((bullet, i) => {
-                  const desc =
-                    bulletDescriptions[bullet] || `${bullet} delivered to international industrial engineering codes.`
-                  return (
-                    <div
-                      key={i}
-                      className="p-[24px] rounded-card bg-surface border border-hairline transition-all hover:border-teal/30"
-                    >
-                      <h3 className="font-display font-bold text-[18px] text-ink mb-[8px] flex items-center gap-[10px]">
-                        <span className="w-[8px] h-[8px] rounded-full bg-teal shrink-0" />
-                        {bullet}
-                      </h3>
-                      <p className="text-[15px] leading-[1.65] text-body m-0 pl-[18px]">{desc}</p>
-                    </div>
-                  )
-                })}
+              <div className="mt-[32px]">
+                <CategoryServiceGrid items={unifiedCapabilities[service.id] || []} />
               </div>
             </SlideIn>
           </div>
