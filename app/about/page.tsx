@@ -153,15 +153,15 @@ export default function AboutPage() {
       </section>
 
       {/* ── Mission / Vision ── */}
-      <section aria-label="Mission and Vision" className="py-[96px] bg-white">
-        <div className="max-w-container mx-auto px-gutter grid grid-cols-1 md:grid-cols-2 gap-[24px] items-stretch">
+      <section aria-label="Mission and Vision" className="py-[48px] sm:py-[96px] bg-white">
+        <div className="max-w-container mx-auto px-gutter grid grid-cols-1 md:grid-cols-2 gap-[16px] sm:gap-[24px] items-stretch">
           <SlideIn from="left" className="h-full">
-            <div className="relative overflow-hidden bg-dark-bg rounded-card p-[48px] h-full">
+            <div className="relative overflow-hidden bg-dark-bg rounded-card p-[26px] sm:p-[48px] h-full">
               <div className="texture-dots pointer-events-none absolute inset-0 text-white/[0.05]" aria-hidden="true" />
-              <span className="relative block text-[13px] font-semibold uppercase tracking-[0.12em] text-[#5BD6E2] mb-[16px]">
+              <span className="relative block text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.12em] text-[#5BD6E2] mb-[10px] sm:mb-[16px]">
                 Mission
               </span>
-              <p className="relative font-display font-semibold text-[22px] leading-[1.5] text-white m-0">
+              <p className="relative font-display font-semibold text-[16.5px] sm:text-[22px] leading-[1.55] sm:leading-[1.5] text-white m-0">
                 To transform complex industrial challenges into successful outcomes through client-focused service,
                 uncompromising integrity, zero-compromise safety, engineering excellence, and an unwavering commitment
                 to delivering every project successfully.
@@ -169,12 +169,12 @@ export default function AboutPage() {
             </div>
           </SlideIn>
           <SlideIn from="right" delay={0.1} className="h-full">
-            <div className="relative overflow-hidden bg-teal rounded-card p-[48px] h-full">
+            <div className="relative overflow-hidden bg-teal rounded-card p-[26px] sm:p-[48px] h-full">
               <div className="texture-dots pointer-events-none absolute inset-0 text-white/[0.08]" aria-hidden="true" />
-              <span className="relative block text-[13px] font-semibold uppercase tracking-[0.12em] text-white/75 mb-[16px]">
+              <span className="relative block text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.12em] text-white/75 mb-[10px] sm:mb-[16px]">
                 Vision
               </span>
-              <p className="relative font-display font-semibold text-[22px] leading-[1.5] text-white m-0">
+              <p className="relative font-display font-semibold text-[16.5px] sm:text-[22px] leading-[1.55] sm:leading-[1.5] text-white m-0">
                 To become a leading industrial turnkey contractor recognized for safe, innovative, and sustainable
                 engineering solutions — delivering excellence, timely execution, and lasting client relationships across
                 India and beyond.

@@ -5,7 +5,7 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { SmoothCursor } from '@/components/motion/SmoothCursor'
 import { LenisProvider } from '@/components/motion/LenisProvider'
-import { PageTransitionOverlay } from '@/components/motion/PageTransitionOverlay'
+import { InitialLoader } from '@/components/motion/InitialLoader'
 import { PageWrapper } from '@/components/motion/PageWrapper'
 import { ScrollProgress } from '@/components/motion/ScrollProgress'
 import { Toaster } from 'sonner'
@@ -70,6 +70,12 @@ export const viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-IN" className={`${inter.variable} ${hanken.variable}`}>
+      <head>
+        {/* Without JS the splash can never dismiss itself — drop it up front. */}
+        <noscript>
+          <style>{`#initial-loader{display:none!important}`}</style>
+        </noscript>
+      </head>
       <body className="font-body text-ink bg-white antialiased">
         <script
           type="application/ld+json"
@@ -155,7 +161,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <GrainOverlay />
           <SmoothCursor />
           <ScrollProgress />
-          <PageTransitionOverlay />
+          <InitialLoader />
           <Header />
           <PageWrapper>
             <main>{children}</main>

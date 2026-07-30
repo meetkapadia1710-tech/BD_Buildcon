@@ -59,7 +59,7 @@ export function Header() {
           <Link href="/" className="shrink-0 flex items-center py-1" aria-label="BD Buildcon home">
             <Logo
               light={true}
-              className={`w-auto transition-all duration-300 ${scrolled ? 'h-9 sm:h-10' : 'h-13 sm:h-15 lg:h-[62px]'}`}
+              className={`w-auto transition-all duration-300 ${scrolled ? 'h-[36px] sm:h-[40px]' : 'h-[48px] sm:h-[56px] lg:h-[62px]'}`}
             />
           </Link>
 

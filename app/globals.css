@@ -191,6 +191,72 @@ img {
     animation: loading-sweep 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   }
 
+  /* ── Premium splash: ambient drift, glass sheen, entrance ──
+     Transform/opacity only, so each layer stays on the compositor at 60fps. */
+  @keyframes aurora-a {
+    0%,
+    100% {
+      transform: translate3d(-7%, -5%, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(9%, 7%, 0) scale(1.2);
+    }
+  }
+  .animate-aurora-a {
+    animation: aurora-a 19s ease-in-out infinite;
+  }
+
+  @keyframes aurora-b {
+    0%,
+    100% {
+      transform: translate3d(8%, 9%, 0) scale(1.15);
+    }
+    50% {
+      transform: translate3d(-9%, -7%, 0) scale(1);
+    }
+  }
+  .animate-aurora-b {
+    animation: aurora-b 24s ease-in-out infinite;
+  }
+
+  @keyframes glass-sheen {
+    0% {
+      transform: translate3d(-130%, 0, 0) skewX(-18deg);
+    }
+    100% {
+      transform: translate3d(360%, 0, 0) skewX(-18deg);
+    }
+  }
+  .animate-glass-sheen {
+    animation: glass-sheen 3.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes splash-in {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 16px, 0) scale(0.965);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+  .animate-splash-in {
+    animation: splash-in 0.9s var(--ease-out-quart) both;
+  }
+
+  @keyframes splash-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .animate-splash-fade-in {
+    animation: splash-fade-in 0.7s ease-out both;
+  }
+
   @keyframes bar-grow {
     0%,
     100% {

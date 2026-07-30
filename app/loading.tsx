@@ -1,37 +1,64 @@
-import Logo from '@/components/ui/Logo'
-import { AbstractSkyline } from '@/components/ui/AbstractSkyline'
+import { Skeleton, SkeletonText } from '@/components/ui/Skeleton'
 
+/**
+ * Route-level fallback shown while a page streams in.
+ * Mirrors the real page shape — a dark PageTitleBand followed by a
+ * centred section heading and a card grid — so content doesn't jump
+ * when it arrives.
+ */
 export default function Loading() {
   return (
-    <>
-      {/* ── Plain white loading band ── */}
-      <div
-        role="status"
-        aria-live="polite"
-        aria-label="Loading page"
-        className="relative flex min-h-[320px] w-full items-center justify-center overflow-hidden bg-white py-[96px]"
-      >
-        {/* Abstract skyline horizon */}
-        <AbstractSkyline className="pointer-events-none absolute inset-x-0 bottom-0 h-[64px] w-full text-teal/[0.16] sm:h-[84px]" />
+    <div role="status" aria-live="polite">
+      <span className="sr-only">Loading page…</span>
 
-        <div className="relative z-10 flex flex-col items-center gap-7">
-          <div className="relative flex items-center justify-center animate-pulse">
-            <Logo light={true} className="relative h-24 w-auto" />
+      {/* ── Title band — mirrors PageTitleBand ── */}
+      <section className="relative overflow-hidden bg-dark-bg py-[40px] lg:py-[48px]">
+        <div
+          className="absolute -right-32 -top-32 w-96 h-96 rounded-full opacity-20 blur-3xl pointer-events-none"
+          style={{ background: 'radial-gradient(circle, #16A8B8, transparent 70%)' }}
+          aria-hidden="true"
+        />
+
+        <div className="relative z-10 max-w-container mx-auto px-gutter">
+          {/* Breadcrumb */}
+          <div className="flex items-center gap-[8px] mb-[20px]" aria-hidden="true">
+            <Skeleton className="h-[10px] w-[48px] rounded-pill bg-white/10" />
+            <Skeleton className="h-[10px] w-[10px] rounded-pill bg-white/10" />
+            <Skeleton className="h-[10px] w-[76px] rounded-pill bg-white/10" />
           </div>
 
-          <span className="font-body text-[13px] font-semibold uppercase tracking-[0.22em] text-ink/70">
-            Engineering Excellence...
-          </span>
+          {/* Title */}
+          <Skeleton className="h-[38px] lg:h-[48px] w-[min(420px,72%)] rounded-[8px] bg-white/10" />
 
-          {/* Indeterminate sweep bar */}
-          <div className="relative h-[3px] w-[160px] overflow-hidden rounded-full bg-hairline" aria-hidden="true">
-            <span
-              className="animate-loading-sweep absolute inset-y-0 left-0 w-full rounded-full bg-teal"
-              style={{ boxShadow: '0 0 10px rgba(22,168,184,0.3)' }}
-            />
+          {/* Description */}
+          <div className="mt-[18px] flex flex-col gap-[10px] max-w-[640px]" aria-hidden="true">
+            <Skeleton className="h-[13px] w-full rounded-pill bg-white/10" />
+            <Skeleton className="h-[13px] w-[68%] rounded-pill bg-white/10" />
           </div>
         </div>
-      </div>
-    </>
+      </section>
+
+      {/* ── Content section — heading + card grid ── */}
+      <section className="bg-white py-[48px] sm:py-[96px]">
+        <div className="max-w-container mx-auto px-gutter">
+          <div className="flex flex-col items-center text-center mb-[32px] sm:mb-[56px]">
+            <Skeleton className="h-[12px] w-[104px] rounded-pill mb-[16px]" />
+            <Skeleton className="h-[30px] sm:h-[42px] w-[min(320px,80%)] rounded-[8px] mb-[16px]" />
+            <Skeleton className="h-[3px] w-[44px] sm:w-[56px] rounded-pill bg-teal/25 mb-[20px]" />
+            <SkeletonText lines={2} className="w-full max-w-[520px] items-center" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-[16px] sm:gap-[24px]">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className="rounded-card border border-hairline bg-white p-[20px] sm:p-[24px]">
+                <Skeleton className="aspect-[4/3] w-full rounded-[8px] mb-[18px]" />
+                <Skeleton className="h-[16px] w-[64%] rounded-pill mb-[14px]" />
+                <SkeletonText lines={3} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   )
 }

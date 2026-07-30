@@ -171,9 +171,9 @@ export function MilestoneTimeline({ milestones }: Props) {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: section,
-            start: 'top 70%',
-            end: 'bottom 45%',
-            scrub: 1,
+            start: 'top 80%',
+            end: 'top 25%',
+            scrub: 0.5,
           },
         })
 
@@ -205,9 +205,9 @@ export function MilestoneTimeline({ milestones }: Props) {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: section,
-            start: 'top 65%',
-            end: 'bottom 35%',
-            scrub: 1,
+            start: 'top 80%',
+            end: 'bottom 80%',
+            scrub: 0.5,
           },
         })
 
@@ -222,6 +222,9 @@ export function MilestoneTimeline({ milestones }: Props) {
           tl.to(vCardRefs.current[i], { opacity: 1, x: 0, duration: 0.1, ease: EASE.outStr }, startP)
         })
       }
+
+      // Refresh ScrollTrigger after a tick to handle image loading or layout layout shifts
+      ScrollTrigger.refresh()
     }, section)
 
     return () => ctx.revert()

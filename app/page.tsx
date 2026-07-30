@@ -103,6 +103,7 @@ export default function HomePage() {
             alt="Crane lifting steel beams at a BD Buildcon construction site"
             fill
             className="object-cover animate-hero-zoom"
+            sizes="100vw"
             priority
           />
         </div>
@@ -247,29 +248,34 @@ export default function HomePage() {
       <BuildingScroll />
 
       {/* ── Stats ── */}
-      <section aria-label="Key statistics" className="relative overflow-hidden bg-teal py-[64px] sm:py-[76px]">
+      <section aria-label="Key statistics" className="relative overflow-hidden bg-teal py-[44px] sm:py-[76px]">
         <div className="texture-dots pointer-events-none absolute inset-0 text-white/[0.08]" aria-hidden="true" />
         {/* Blueprint artifact — TrussArtifact bottom-left, white line-art */}
         <TrussArtifact className="pointer-events-none absolute -bottom-6 -left-6 w-[320px] h-auto text-white/[0.08] hidden lg:block" />
         <div className="relative max-w-container mx-auto px-gutter">
           <SlideIn from="bottom">
-            <div className="text-center mb-[56px]">
-              <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-white mb-[16px]">
+            <div className="text-center mb-[32px] sm:mb-[56px]">
+              <h2 className="font-display font-bold text-[28px] sm:text-[42px] tracking-[-0.01em] text-white mb-[12px] sm:mb-[16px]">
                 Our Track Record
               </h2>
-              <div className="w-[56px] h-[3px] bg-white/50 rounded-full mx-auto mb-[20px]" />
-              <p className="text-[18px] text-white/75 m-0">
+              <div className="w-[44px] sm:w-[56px] h-[3px] bg-white/50 rounded-full mx-auto mb-[14px] sm:mb-[20px]" />
+              <p className="text-[15px] sm:text-[18px] text-white/75 m-0">
                 Numbers that have been earned on site — not in a brochure.
               </p>
             </div>
           </SlideIn>
-          <StaggerReveal className="grid grid-cols-2 md:grid-cols-4 gap-[32px] text-center" stagger={0.1}>
+          <StaggerReveal
+            className="grid grid-cols-2 md:grid-cols-4 gap-x-[20px] gap-y-[28px] sm:gap-[32px] text-center"
+            stagger={0.1}
+          >
             {trackStats.map((s, i) => (
               <div key={i}>
-                <div className="font-display font-[800] text-[64px] leading-none text-white mb-[12px] font-variant-numeric tabular-nums">
+                <div className="font-display font-[800] text-[38px] sm:text-[52px] md:text-[64px] leading-none text-white mb-[8px] sm:mb-[12px] font-variant-numeric tabular-nums">
                   <CountUp target={s.value} suffix={s.suffix} />
                 </div>
-                <div className="text-[13px] font-semibold uppercase tracking-[0.1em] text-white/75">{s.label}</div>
+                <div className="text-[11px] sm:text-[13px] font-semibold uppercase tracking-[0.1em] text-white/75">
+                  {s.label}
+                </div>
               </div>
             ))}
           </StaggerReveal>
@@ -279,37 +285,45 @@ export default function HomePage() {
       {/* ── Director ── */}
       <section
         aria-label="Message from the Director"
-        className="relative overflow-hidden bg-white py-[64px] sm:py-[80px]"
+        className="relative overflow-hidden bg-white py-[44px] sm:py-[80px]"
       >
         {/* Blueprint artifact — DimensionLines along left edge */}
         <DimensionLines className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 h-[80%] w-auto text-teal/[0.10] hidden lg:block" />
-        <div className="relative z-10 max-w-container mx-auto px-gutter grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-[72px] items-center">
+        <div className="relative z-10 max-w-container mx-auto px-gutter grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-[28px] lg:gap-[72px] items-center">
           <SlideIn from="left">
-            <div
-              className="relative aspect-[3/4] rounded-card overflow-hidden bg-[#EFF3F4] flex items-center justify-center"
-              style={{ backgroundImage: 'repeating-linear-gradient(45deg, #EFF3F4 0 14px, #E6ECEE 14px 28px)' }}
-            >
-              <span className="font-mono text-[13px] color-body bg-white border border-hairline rounded-[6px] px-[12px] py-[6px]">
-                director portrait
-              </span>
+            <div className="relative aspect-[4/3] lg:aspect-[3/4] rounded-card overflow-hidden bg-[#EFF3F4]">
+              <Image
+                src="/images/owner-wide.webp"
+                alt="Kiran Majmudar, Director of BD Buildcon LLP, at his desk"
+                fill
+                className="object-cover lg:hidden"
+                sizes="100vw"
+              />
+              <Image
+                src="/images/owner-portrait.webp"
+                alt="Kiran Majmudar, Director of BD Buildcon LLP, at his desk"
+                fill
+                className="hidden object-cover lg:block"
+                sizes="40vw"
+              />
             </div>
           </SlideIn>
           <SlideIn from="right" delay={0.1}>
             <div>
-              <span className="block text-[13px] font-semibold uppercase tracking-[0.12em] text-teal mb-[20px]">
+              <span className="block text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.12em] text-teal mb-[12px] sm:mb-[20px]">
                 Desk of Directors
               </span>
-              <blockquote className="font-display font-semibold text-[26px] leading-[1.45] text-ink mb-[24px]">
+              <blockquote className="font-display font-semibold text-[19px] sm:text-[26px] leading-[1.4] sm:leading-[1.45] text-ink mb-[16px] sm:mb-[24px]">
                 &ldquo;Every project we undertake must be delivered safely, on time, and to the highest quality
                 standards. There are no shortcuts when people&apos;s lives and industrial operations depend on what we
                 build.&rdquo;
               </blockquote>
-              <p className="text-[17px] leading-[1.75] text-body mb-[32px]">
+              <p className="text-[15px] sm:text-[17px] leading-[1.65] sm:leading-[1.75] text-body mb-[22px] sm:mb-[32px]">
                 Over {stats.yearsExperience} years, we have grown from a regional civil contractor into a full-service
                 turnkey EPC partner recognised across Gujarat and beyond — earned project by project through transparent
                 communication, technical depth and the resilience to deliver under pressure.
               </p>
-              <div className="flex items-center gap-[16px] mb-[32px]">
+              <div className="flex items-center gap-[16px] mb-[22px] sm:mb-[32px]">
                 <span className="w-[40px] h-[2px] bg-teal block" />
                 <div>
                   <p className="font-display font-bold text-[17px] text-ink m-0">Kiran Majmudar</p>
@@ -328,13 +342,15 @@ export default function HomePage() {
       </section>
 
       {/* ── Trusted By ── */}
-      <section aria-label="Our clients" className="bg-surface border-top border-hairline py-[64px] sm:py-[80px]">
+      <section aria-label="Our clients" className="bg-surface border-top border-hairline py-[44px] sm:py-[80px]">
         <div className="w-full mx-auto px-gutter xl:px-[80px]">
           <SlideIn from="bottom">
-            <div className="text-center mb-[56px]">
-              <h2 className="font-display font-bold text-[42px] tracking-[-0.01em] text-ink mb-[16px]">Trusted By</h2>
-              <div className="w-[56px] h-[3px] bg-teal rounded-full mx-auto mb-[20px]" />
-              <p className="text-[18px] text-body m-0">
+            <div className="text-center mb-[32px] sm:mb-[56px]">
+              <h2 className="font-display font-bold text-[28px] sm:text-[42px] tracking-[-0.01em] text-ink mb-[12px] sm:mb-[16px]">
+                Trusted By
+              </h2>
+              <div className="w-[44px] sm:w-[56px] h-[3px] bg-teal rounded-full mx-auto mb-[14px] sm:mb-[20px]" />
+              <p className="text-[15px] sm:text-[18px] text-body m-0">
                 Industry leaders who partner with BD Buildcon for mission-critical construction.
               </p>
             </div>
@@ -342,47 +358,63 @@ export default function HomePage() {
           {/* ── Marquee Rows ── */}
           <div className="relative overflow-hidden">
             {/* Gradient masks for smooth fading on edges */}
-            <div className="absolute top-0 left-0 bottom-0 w-[80px] sm:w-[150px] bg-gradient-to-r from-surface to-transparent z-10 pointer-events-none" />
-            <div className="absolute top-0 right-0 bottom-0 w-[80px] sm:w-[150px] bg-gradient-to-l from-surface to-transparent z-10 pointer-events-none" />
+            <div className="absolute top-0 left-0 bottom-0 w-[32px] sm:w-[150px] bg-gradient-to-r from-surface to-transparent z-10 pointer-events-none" />
+            <div className="absolute top-0 right-0 bottom-0 w-[32px] sm:w-[150px] bg-gradient-to-l from-surface to-transparent z-10 pointer-events-none" />
 
             {/* Row 1: Clients (Moves left) */}
             <div className="flex w-max animate-marquee mb-[24px] hover:pause">
-              <div className="flex gap-[24px] pr-[24px]">
+              <div className="flex gap-[12px] pr-[12px] sm:gap-[24px] sm:pr-[24px]">
                 {clients.map((c, i) => (
                   <div
                     key={`client-1-${i}`}
-                    className="w-[240px] shrink-0 bg-white border border-hairline rounded-card p-[24px] flex flex-col items-center justify-center gap-[16px] min-h-[180px] text-center transition-all duration-200 hover:border-teal/40 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)]"
+                    className="w-[148px] sm:w-[240px] shrink-0 bg-white border border-hairline rounded-card p-[14px] sm:p-[24px] flex flex-col items-center justify-center gap-[10px] sm:gap-[16px] min-h-[126px] sm:min-h-[180px] text-center transition-all duration-200 hover:border-teal/40 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)]"
                   >
                     {c.logo && (
-                      <div className="relative w-full max-w-[160px] h-[72px]">
-                        <Image src={c.logo} alt={c.name} fill className="object-contain" />
+                      <div className="relative w-full max-w-[104px] sm:max-w-[160px] h-[46px] sm:h-[72px]">
+                        <Image
+                          src={c.logo}
+                          alt={c.name}
+                          fill
+                          className="object-contain"
+                          sizes="(max-width: 640px) 104px, 160px"
+                        />
                       </div>
                     )}
                     <div>
-                      <span className="block font-display font-bold text-[14.5px] leading-[1.2] text-ink">
+                      <span className="block font-display font-bold text-[12px] sm:text-[14.5px] leading-[1.2] text-ink">
                         {c.name}
                       </span>
-                      <span className="block text-[12px] text-body mt-[6px]">{c.sector}</span>
+                      <span className="block text-[10.5px] sm:text-[12px] text-body mt-[4px] sm:mt-[6px]">
+                        {c.sector}
+                      </span>
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="flex gap-[24px] pr-[24px]" aria-hidden="true">
+              <div className="flex gap-[12px] pr-[12px] sm:gap-[24px] sm:pr-[24px]" aria-hidden="true">
                 {clients.map((c, i) => (
                   <div
                     key={`client-2-${i}`}
-                    className="w-[240px] shrink-0 bg-white border border-hairline rounded-card p-[24px] flex flex-col items-center justify-center gap-[16px] min-h-[180px] text-center transition-all duration-200 hover:border-teal/40 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)]"
+                    className="w-[148px] sm:w-[240px] shrink-0 bg-white border border-hairline rounded-card p-[14px] sm:p-[24px] flex flex-col items-center justify-center gap-[10px] sm:gap-[16px] min-h-[126px] sm:min-h-[180px] text-center transition-all duration-200 hover:border-teal/40 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)]"
                   >
                     {c.logo && (
-                      <div className="relative w-full max-w-[160px] h-[72px]">
-                        <Image src={c.logo} alt={c.name} fill className="object-contain" />
+                      <div className="relative w-full max-w-[104px] sm:max-w-[160px] h-[46px] sm:h-[72px]">
+                        <Image
+                          src={c.logo}
+                          alt={c.name}
+                          fill
+                          className="object-contain"
+                          sizes="(max-width: 640px) 104px, 160px"
+                        />
                       </div>
                     )}
                     <div>
-                      <span className="block font-display font-bold text-[14.5px] leading-[1.2] text-ink">
+                      <span className="block font-display font-bold text-[12px] sm:text-[14.5px] leading-[1.2] text-ink">
                         {c.name}
                       </span>
-                      <span className="block text-[12px] text-body mt-[6px]">{c.sector}</span>
+                      <span className="block text-[10.5px] sm:text-[12px] text-body mt-[4px] sm:mt-[6px]">
+                        {c.sector}
+                      </span>
                     </div>
                   </div>
                 ))}
@@ -391,42 +423,58 @@ export default function HomePage() {
 
             {/* Row 2: Consultants (Moves right) */}
             <div className="flex w-max animate-marquee-reverse hover:[animation-play-state:paused]">
-              <div className="flex gap-[24px] pr-[24px]">
+              <div className="flex gap-[12px] pr-[12px] sm:gap-[24px] sm:pr-[24px]">
                 {consultants.map((c, i) => (
                   <div
                     key={`cons-1-${i}`}
-                    className="w-[240px] shrink-0 bg-white border border-hairline rounded-card p-[24px] flex flex-col items-center justify-center gap-[16px] min-h-[180px] text-center transition-all duration-200 hover:border-teal/40 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)]"
+                    className="w-[148px] sm:w-[240px] shrink-0 bg-white border border-hairline rounded-card p-[14px] sm:p-[24px] flex flex-col items-center justify-center gap-[10px] sm:gap-[16px] min-h-[126px] sm:min-h-[180px] text-center transition-all duration-200 hover:border-teal/40 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)]"
                   >
                     {c.logo && (
-                      <div className="relative w-full max-w-[160px] h-[72px]">
-                        <Image src={c.logo} alt={c.name} fill className="object-contain" />
+                      <div className="relative w-full max-w-[104px] sm:max-w-[160px] h-[46px] sm:h-[72px]">
+                        <Image
+                          src={c.logo}
+                          alt={c.name}
+                          fill
+                          className="object-contain"
+                          sizes="(max-width: 640px) 104px, 160px"
+                        />
                       </div>
                     )}
                     <div>
-                      <span className="block font-display font-bold text-[14.5px] leading-[1.2] text-ink">
+                      <span className="block font-display font-bold text-[12px] sm:text-[14.5px] leading-[1.2] text-ink">
                         {c.name}
                       </span>
-                      <span className="block text-[12px] text-body mt-[6px]">{c.sector}</span>
+                      <span className="block text-[10.5px] sm:text-[12px] text-body mt-[4px] sm:mt-[6px]">
+                        {c.sector}
+                      </span>
                     </div>
                   </div>
                 ))}
               </div>
-              <div className="flex gap-[24px] pr-[24px]" aria-hidden="true">
+              <div className="flex gap-[12px] pr-[12px] sm:gap-[24px] sm:pr-[24px]" aria-hidden="true">
                 {consultants.map((c, i) => (
                   <div
                     key={`cons-2-${i}`}
-                    className="w-[240px] shrink-0 bg-white border border-hairline rounded-card p-[24px] flex flex-col items-center justify-center gap-[16px] min-h-[180px] text-center transition-all duration-200 hover:border-teal/40 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)]"
+                    className="w-[148px] sm:w-[240px] shrink-0 bg-white border border-hairline rounded-card p-[14px] sm:p-[24px] flex flex-col items-center justify-center gap-[10px] sm:gap-[16px] min-h-[126px] sm:min-h-[180px] text-center transition-all duration-200 hover:border-teal/40 hover:shadow-[0_4px_16px_rgba(0,0,0,0.06)]"
                   >
                     {c.logo && (
-                      <div className="relative w-full max-w-[160px] h-[72px]">
-                        <Image src={c.logo} alt={c.name} fill className="object-contain" />
+                      <div className="relative w-full max-w-[104px] sm:max-w-[160px] h-[46px] sm:h-[72px]">
+                        <Image
+                          src={c.logo}
+                          alt={c.name}
+                          fill
+                          className="object-contain"
+                          sizes="(max-width: 640px) 104px, 160px"
+                        />
                       </div>
                     )}
                     <div>
-                      <span className="block font-display font-bold text-[14.5px] leading-[1.2] text-ink">
+                      <span className="block font-display font-bold text-[12px] sm:text-[14.5px] leading-[1.2] text-ink">
                         {c.name}
                       </span>
-                      <span className="block text-[12px] text-body mt-[6px]">{c.sector}</span>
+                      <span className="block text-[10.5px] sm:text-[12px] text-body mt-[4px] sm:mt-[6px]">
+                        {c.sector}
+                      </span>
                     </div>
                   </div>
                 ))}

@@ -6,7 +6,6 @@ import { PillarExplorer } from '@/components/ui/PillarExplorer'
 import { LightboxGallery } from '@/components/ui/LightboxGallery'
 import { SlideIn } from '@/components/motion/SlideIn'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
-import { Spotlight } from '@/components/motion/Spotlight'
 import { faqs } from '@/content/faqs'
 import { FAQSection } from '@/components/ui/FAQSection'
 import { breadcrumbJsonLd, serviceJsonLd, faqJsonLd, serializeJsonLd } from '@/lib/jsonld'
@@ -256,46 +255,80 @@ export default function SafetyQualityPage() {
         </div>
       </section>
 
-      {/* ── Quality Systems — photo cards ── */}
+      {/* ── Quality Systems — hairline capability matrix ── */}
       <section
         id="quality"
         aria-label="Quality Systems"
-        className="relative overflow-hidden bg-dark-bg py-[72px] lg:py-[110px]"
+        className="relative overflow-hidden bg-[#111920] py-[56px] sm:py-[72px] lg:py-[110px]"
       >
-        <div className="texture-grid pointer-events-none absolute inset-0 text-teal/[0.07]" aria-hidden="true" />
+        {/* Ambient glow — depth without a repeating pattern competing with the content */}
+        <div
+          className="pointer-events-none absolute -left-[10%] -top-[20%] h-[52vmax] w-[52vmax] rounded-full opacity-45 blur-[120px]"
+          style={{ background: 'radial-gradient(circle, rgba(22,168,184,0.30), transparent 65%)' }}
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute -bottom-[28%] -right-[12%] h-[46vmax] w-[46vmax] rounded-full opacity-40 blur-[130px]"
+          style={{ background: 'radial-gradient(circle, rgba(91,214,226,0.22), transparent 65%)' }}
+          aria-hidden="true"
+        />
+
         <div className="relative max-w-container mx-auto px-gutter">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-[24px] lg:gap-[32px] mb-[48px] lg:mb-[56px]">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-[20px] lg:gap-[48px] mb-[36px] sm:mb-[48px] lg:mb-[56px]">
             <div>
-              <span className="block text-[13px] font-semibold uppercase tracking-[0.14em] text-[#5BD6E2] mb-[14px]">
+              <span className="flex items-center gap-[10px] text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.14em] text-[#5BD6E2] mb-[14px]">
+                <span className="h-px w-[26px] bg-[#5BD6E2]/50" aria-hidden="true" />
                 Quality systems
               </span>
-              <h2 className="font-display font-[800] text-[34px] sm:text-[42px] lg:text-[52px] tracking-[-0.02em] leading-[1.08] text-white m-0 max-w-[15ch]">
+              <h2 className="font-display font-[800] text-[28px] sm:text-[42px] lg:text-[52px] tracking-[-0.02em] leading-[1.08] text-white m-0 max-w-[15ch]">
                 Documented from batch to handover.
               </h2>
             </div>
-            <p className="text-[16px] leading-[1.7] text-white/60 max-w-[400px] m-0">
+            <p className="text-[15px] sm:text-[16px] leading-[1.7] text-white/55 max-w-[400px] m-0 lg:text-right">
               Every site runs a dedicated quality laboratory, and QA paperwork travels with the structure — six
               disciplines, from mill certificate to handover dossier.
             </p>
           </div>
 
-          <StaggerReveal className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[18px]" stagger={0.07}>
-            {quality.map((q, i) => (
-              <Spotlight
-                key={i}
-                className="rounded-[14px] bg-[#1a2228] border border-white/[0.07] p-[28px] sm:p-[32px] flex flex-col gap-[14px] transition-all duration-300 hover:border-[rgba(91,214,226,0.4)] hover:-translate-y-1"
-                color="rgba(91,214,226,0.15)"
-              >
-                <div className="inline-flex w-fit border border-[rgba(91,214,226,0.4)] text-[#5BD6E2] font-display font-[800] text-[13px] tracking-[0.15em] px-[12px] py-[6px] rounded-pill">
-                  Q{i + 1}
+          {/* One cohesive panel; the 1px grid gaps read as hairline rules between cells */}
+          <div className="overflow-hidden rounded-[20px] border border-white/[0.09]">
+            <StaggerReveal
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.09]"
+              stagger={0.07}
+            >
+              {quality.map((q, i) => (
+                <div
+                  key={i}
+                  className="group relative bg-black/25 p-[26px] sm:p-[32px] transition-colors duration-300 hover:bg-black/10"
+                >
+                  {/* Teal wash on hover */}
+                  <span
+                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    style={{
+                      background: 'radial-gradient(ellipse 90% 70% at 50% 0%, rgba(91,214,226,0.10), transparent 70%)',
+                    }}
+                    aria-hidden="true"
+                  />
+
+                  <div className="relative">
+                    <div className="flex items-center justify-between mb-[20px]">
+                      <span className="inline-flex h-[42px] w-[42px] items-center justify-center rounded-[12px] border border-white/[0.10] bg-white/[0.04] text-[#5BD6E2] transition-colors duration-300 group-hover:border-[#5BD6E2]/40 group-hover:bg-[#5BD6E2]/10">
+                        {q.icon}
+                      </span>
+                      <span className="font-display font-[800] text-[13px] tabular-nums tracking-[0.14em] text-white/20 transition-colors duration-300 group-hover:text-[#5BD6E2]/60">
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                    </div>
+
+                    <h3 className="font-display font-bold text-[18px] sm:text-[20px] leading-[1.3] text-white mb-[10px]">
+                      {q.title}
+                    </h3>
+                    <p className="text-[14px] sm:text-[14.5px] leading-[1.65] text-white/55 m-0">{q.body}</p>
+                  </div>
                 </div>
-                <h3 className="font-display font-bold text-[20px] sm:text-[21px] text-white mt-[6px] mb-0">
-                  {q.title}
-                </h3>
-                <p className="text-[14.5px] leading-[1.65] text-white/60 m-0">{q.body}</p>
-              </Spotlight>
-            ))}
-          </StaggerReveal>
+              ))}
+            </StaggerReveal>
+          </div>
         </div>
       </section>
 

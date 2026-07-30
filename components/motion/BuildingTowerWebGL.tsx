@@ -46,12 +46,30 @@ export default function BuildingTowerWebGL(props: SceneProps) {
   useEffect(() => {
     const ok = webglSupported()
     setSupported(ok)
-    if (SCENE_ENABLED && ok) {
-      setMounted(true)
-    }
     if (!SCENE_ENABLED) reportSceneEvent({ event: 'scene_fallback_served', reason: 'disabled' })
     else if (!ok) reportSceneEvent({ event: 'scene_fallback_served', reason: 'no_webgl' })
   }, [])
+
+  // Pull the three.js chunk in only as the section approaches, rather than on
+  // mount — otherwise it competes with the hero for bandwidth on first paint.
+  // The poster covers the gap until the scene is ready.
+  useEffect(() => {
+    if (!SCENE_ENABLED || !supported) return
+    const el = containerRef.current
+    if (!el) return
+
+    const preloadObs = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setMounted(true)
+          preloadObs.disconnect()
+        }
+      },
+      { rootMargin: '600px 0px' },
+    )
+    preloadObs.observe(el)
+    return () => preloadObs.disconnect()
+  }, [supported])
 
   useEffect(() => {
     if (!SCENE_ENABLED) return

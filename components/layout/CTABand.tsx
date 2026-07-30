@@ -22,6 +22,7 @@ export function CTABand({
           alt="Site Construction"
           fill
           className="object-cover object-center"
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-teal-deep/95 to-teal/90" />
       </div>
