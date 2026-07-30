@@ -208,11 +208,13 @@ export const projects: Project[] = [
     duration: '12 months',
     year: '2022',
     safetyRecord: '0 fatal accidents',
-    // Only one photo exists on disk for this project. The two "12.59.20 PM" files
-    // referenced here previously were never present in public/ — drop them back in
-    // and re-add to `images` when the originals turn up.
+    // The missing "12.59.20 PM" files have been restored to public/
     image: '/brochurephotos/site photos/renew/WhatsApp Image 2026-07-12 at 12.59.19 PM.webp',
-    images: ['/brochurephotos/site photos/renew/WhatsApp Image 2026-07-12 at 12.59.19 PM.webp'],
+    images: [
+      '/brochurephotos/site photos/renew/WhatsApp Image 2026-07-12 at 12.59.19 PM.webp',
+      '/brochurephotos/site photos/renew/WhatsApp Image 2026-07-12 at 12.59.20 PM.webp',
+      '/brochurephotos/site photos/renew/WhatsApp Image 2026-07-12 at 12.59.20 PM (1).webp',
+    ],
     excerpt: 'Renewable energy infrastructure development supporting sustainable power solutions.',
     challenge: 'Managing extensive civil works across a vast site with varying terrains.',
     whatWeBuilt: 'Foundations and infrastructure to support critical energy installations.',

@@ -1,4 +1,7 @@
 export const employeeLinks = {
+  // WARNING: Novasoftwares does not currently support HTTPS for this host.
+  // DO NOT change to https:// as it will break the link and fail to redirect.
+  // Note that staff credentials will be sent in the clear until they enable TLS.
   erp: 'http://bhumi.novasoftwares.com/',
   email: 'https://mail.yandex.ru/?pdd_domain=bdbuildcon.com',
 }
