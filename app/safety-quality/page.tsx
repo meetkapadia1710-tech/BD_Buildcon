@@ -9,7 +9,7 @@ import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { Spotlight } from '@/components/motion/Spotlight'
 import { faqs } from '@/content/faqs'
 import { FAQSection } from '@/components/ui/FAQSection'
-import { breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from '@/lib/jsonld'
+import { breadcrumbJsonLd, serviceJsonLd, faqJsonLd, serializeJsonLd } from '@/lib/jsonld'
 
 export const dynamic = 'force-static'
 
@@ -201,7 +201,7 @@ export default function SafetyQualityPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([
+          __html: serializeJsonLd([
             breadcrumbJsonLd([{ name: 'Safety & Quality', url: 'https://bdbuildcon.com/safety-quality' }]),
             serviceJsonLd({
               name: 'Safety & Quality Management',

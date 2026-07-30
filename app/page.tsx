@@ -26,7 +26,7 @@ import { stats, statsDisplay } from '@/content/company'
 import { faqs } from '@/content/faqs'
 import { testimonials } from '@/content/testimonials'
 import { FAQSection } from '@/components/ui/FAQSection'
-import { faqJsonLd, reviewJsonLd } from '@/lib/jsonld'
+import { faqJsonLd, reviewJsonLd, serializeJsonLd } from '@/lib/jsonld'
 
 // Sectors are now defined inside SectorMarquee component
 
@@ -89,7 +89,7 @@ export default function HomePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([faqJsonLd(homeFaqs), ...organizationReviews]),
+          __html: serializeJsonLd([faqJsonLd(homeFaqs), ...organizationReviews]),
         }}
       />
       {/* ── Hero ── */}
@@ -492,8 +492,18 @@ function HomeEnquiryForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white border border-hairline rounded-card shadow-[0_1px_4px_rgba(0,0,0,0.06),0_4px_16px_rgba(0,0,0,0.06)] p-[32px] sm:p-[48px] flex flex-col gap-[28px]"
+      className="relative bg-white border border-hairline rounded-card shadow-[0_1px_4px_rgba(0,0,0,0.06),0_4px_16px_rgba(0,0,0,0.06)] p-[32px] sm:p-[48px] flex flex-col gap-[28px]"
     >
+      {/* Honeypot — invisible to users, bots fill it. /api/contact silently drops
+          any submission where this is non-empty. Keep it out of the tab order. */}
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute left-[-9999px] h-0 w-0 opacity-0"
+      />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-[24px] gap-y-[28px]">
         <div>
           <label
@@ -573,7 +583,7 @@ function HomeEnquiryForm() {
             name="sector"
             className="w-full bg-surface border border-hairline rounded-[10px] px-[18px] py-[14px] font-body text-[15.5px] text-ink appearance-auto focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
           >
-            <option>Select sector</option>
+            <option value="">Select sector</option>
             <option>Chemicals</option>
             <option>Pharma</option>
             <option>Petroleum</option>
@@ -597,7 +607,7 @@ function HomeEnquiryForm() {
             name="projectType"
             className="w-full bg-surface border border-hairline rounded-[10px] px-[18px] py-[14px] font-body text-[15.5px] text-ink appearance-auto focus:border-teal focus:shadow-[0_0_0_3px_rgba(22,168,184,0.12)] focus:outline-none"
           >
-            <option>Select type</option>
+            <option value="">Select type</option>
             <option>Greenfield Plant</option>
             <option>Plant Expansion</option>
             <option>PEB Structure</option>

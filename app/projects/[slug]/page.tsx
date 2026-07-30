@@ -7,7 +7,7 @@ import { CTABand } from '@/components/layout/CTABand'
 import { FadeRise, FadeRiseItem } from '@/components/motion/FadeRise'
 import { RevealImage } from '@/components/motion/RevealImage'
 
-import { breadcrumbJsonLd } from '@/lib/jsonld'
+import { breadcrumbJsonLd, serializeJsonLd } from '@/lib/jsonld'
 
 type Props = {
   params: { slug: string }
@@ -81,7 +81,7 @@ export default function ProjectDetailPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLdBlocks),
+          __html: serializeJsonLd(jsonLdBlocks),
         }}
       />
       {/* Cinematic hero */}
@@ -157,7 +157,9 @@ export default function ProjectDetailPage({ params }: Props) {
                       &ldquo;{project.quote}&rdquo;
                     </blockquote>
                     <figcaption className="mt-4 font-body text-body-md text-body">
-                      — {project.quoteName}, {project.quoteTitle}
+                      {/* quoteName/quoteTitle are optional — join only what exists so a
+                          missing title can't render a dangling "— Name, ". */}
+                      — {[project.quoteName || project.client, project.quoteTitle].filter(Boolean).join(', ')}
                     </figcaption>
                   </figure>
                 </FadeRiseItem>

@@ -12,7 +12,7 @@ import { testimonials } from '@/content/testimonials'
 import { statsDisplay, stats } from '@/content/company'
 import { faqs } from '@/content/faqs'
 import { FAQSection } from '@/components/ui/FAQSection'
-import { breadcrumbJsonLd, faqJsonLd } from '@/lib/jsonld'
+import { breadcrumbJsonLd, faqJsonLd, serializeJsonLd } from '@/lib/jsonld'
 
 const machineryPhotos = [
   '/brochurephotos/plant and machinery/image17.webp',
@@ -121,7 +121,7 @@ export default function WhyUsPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([
+          __html: serializeJsonLd([
             breadcrumbJsonLd([{ name: 'Why BD Buildcon', url: 'https://bdbuildcon.com/why-us' }]),
             faqJsonLd(whyUsFaqs),
           ]),

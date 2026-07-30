@@ -8,7 +8,7 @@ import { MilestoneTimeline } from '@/components/motion/MilestoneTimeline'
 import { CraneArtifact, SurveyMark, DimensionLines } from '@/components/ui/BlueprintArtifacts'
 import { faqs } from '@/content/faqs'
 import { FAQSection } from '@/components/ui/FAQSection'
-import { breadcrumbJsonLd, faqJsonLd } from '@/lib/jsonld'
+import { breadcrumbJsonLd, faqJsonLd, serializeJsonLd } from '@/lib/jsonld'
 
 export const dynamic = 'force-static'
 
@@ -68,7 +68,7 @@ export default function AboutPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([
+          __html: serializeJsonLd([
             breadcrumbJsonLd([{ name: 'About Us', url: 'https://bdbuildcon.com/about' }]),
             faqJsonLd(aboutFaqs),
           ]),

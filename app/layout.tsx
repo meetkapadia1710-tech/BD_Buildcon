@@ -11,6 +11,7 @@ import { ScrollProgress } from '@/components/motion/ScrollProgress'
 import { Toaster } from 'sonner'
 import { GrainOverlay } from '@/components/ui/GrainOverlay'
 import { contactInfo, addressComponents, socialLinks } from '@/content/links'
+import { serializeJsonLd } from '@/lib/jsonld'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -73,7 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify([
+            __html: serializeJsonLd([
               {
                 '@context': 'https://schema.org',
                 '@type': ['LocalBusiness', 'ConstructionCompany'],

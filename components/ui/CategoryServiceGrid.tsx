@@ -41,9 +41,9 @@ export function CategoryServiceGrid({ items }: { items: CapabilityCard[] }) {
               </div>
 
               {/* Title */}
-              <h4 className="font-display font-bold text-[17px] sm:text-[19px] text-ink leading-snug mb-2 group-hover:text-teal transition-colors duration-200">
+              <h3 className="font-display font-bold text-[17px] sm:text-[19px] text-ink leading-snug mb-2 group-hover:text-teal transition-colors duration-200">
                 {service.title}
-              </h4>
+              </h3>
 
               {/* Description */}
               <p className="text-[14px] leading-[1.6] text-body mb-5">{service.description}</p>

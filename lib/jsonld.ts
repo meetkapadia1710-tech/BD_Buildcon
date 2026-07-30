@@ -1,3 +1,21 @@
+/**
+ * Serialises JSON-LD for injection via dangerouslySetInnerHTML.
+ *
+ * JSON.stringify does not escape `<`, so a content string containing `</script>`
+ * would close the tag early and let the rest be parsed as HTML. Escaping `<` as
+ * the < unicode escape keeps the JSON semantically identical (parsers decode
+ * it back) while making tag-breakout impossible. Also escapes U+2028/U+2029,
+ * which are literal newlines to a JS parser.
+ *
+ * Use this instead of JSON.stringify for every ld+json block.
+ */
+export function serializeJsonLd(data: unknown): string {
+  return JSON.stringify(data).replace(
+    /[<\u2028\u2029]/g,
+    (ch) => '\\u' + ch.charCodeAt(0).toString(16).padStart(4, '0'),
+  )
+}
+
 /** Generates a BreadcrumbList JSON-LD object for inner pages. */
 export function breadcrumbJsonLd(crumbs: Array<{ name: string; url: string }>): Record<string, unknown> {
   return {

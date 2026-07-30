@@ -17,42 +17,56 @@ const contactSchema = z.object({
 
 type Lead = z.infer<typeof contactSchema>
 
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit'
+
 /**
- * Delivers a validated lead. Works end-to-end today (logs the lead); going live
- * is a one-line change — set RESEND_API_KEY in the environment and uncomment the
- * Resend block below (`npm install resend`).
+ * Delivers a validated lead to Web3Forms, which emails it to the address that owns
+ * the access key. Set WEB3FORMS_ACCESS_KEY in .env.local (and in the host's env vars
+ * for production) — get the key from https://web3forms.com by entering the inbox
+ * address you want leads delivered to.
+ *
+ * The key is deliberately read server-side rather than embedded in the client bundle:
+ * submissions stay behind this route's rate limiting and honeypot check.
+ *
+ * With no key set, the lead is logged instead of sent, so local dev still works.
  */
 async function sendLead(data: Lead): Promise<void> {
-  const apiKey = process.env.RESEND_API_KEY
+  const accessKey = process.env.WEB3FORMS_ACCESS_KEY
 
-  if (!apiKey) {
+  if (!accessKey) {
     console.warn(
-      '[Contact] No RESEND_API_KEY set — lead logged but NOT emailed. ' +
-        'Add RESEND_API_KEY to .env.local to deliver leads.',
+      '[Contact] No WEB3FORMS_ACCESS_KEY set — lead logged but NOT emailed. ' +
+        'Add WEB3FORMS_ACCESS_KEY to .env.local to deliver leads.',
     )
     console.log('[Contact Form Submission]', { timestamp: new Date().toISOString(), ...data })
     return
   }
 
-  // import { Resend } from 'resend'
-  // const resend = new Resend(apiKey)
-  // await resend.emails.send({
-  //   from: 'website@bdbuildcon.com',
-  //   to: 'business@bdbuildcon.com',
-  //   replyTo: data.email,
-  //   subject: `New Enquiry: ${data.subject}`,
-  //   text: [
-  //     `Name: ${data.name}`,
-  //     `Email: ${data.email}`,
-  //     `Phone: ${data.phone ?? 'N/A'}`,
-  //     `Company: ${data.company ?? 'N/A'}`,
-  //     `Sector: ${data.sector ?? 'N/A'}`,
-  //     `Project Type: ${data.projectType ?? 'N/A'}`,
-  //     `Subject: ${data.subject}`,
-  //     '',
-  //     data.message,
-  //   ].join('\n'),
-  // })
+  const res = await fetch(WEB3FORMS_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify({
+      access_key: accessKey,
+      subject: `New Enquiry: ${data.subject}`,
+      from_name: 'BD Buildcon Website',
+      // Web3Forms uses `email` as the reply-to for the notification it sends.
+      name: data.name,
+      email: data.email,
+      phone: data.phone ?? 'N/A',
+      company: data.company ?? 'N/A',
+      sector: data.sector ?? 'N/A',
+      project_type: data.projectType ?? 'N/A',
+      message: data.message,
+    }),
+  })
+
+  // Web3Forms answers 200 with {success:false, message} for a bad/disabled key,
+  // so the status code alone is not enough to call this delivered.
+  const result = (await res.json().catch(() => null)) as { success?: boolean; message?: string } | null
+
+  if (!res.ok || !result?.success) {
+    throw new Error(`Web3Forms rejected the submission (${res.status}): ${result?.message ?? 'unknown error'}`)
+  }
 }
 
 // Simple in-memory rate limiter: max 5 submissions per IP per minute.
@@ -61,8 +75,22 @@ const rateLimitMap = new Map<string, { count: number; resetAt: number }>()
 const LIMIT = 5
 const WINDOW_MS = 60_000
 
+// Entries are only ever rewritten for IPs that come back, so a long-running instance
+// would otherwise retain one entry per IP that ever submitted. Sweep expired entries
+// so the map stays proportional to *active* traffic rather than all traffic ever seen.
+// forEach rather than for..of: the tsconfig target predates downlevel Map iteration.
+// Deleting during a Map forEach is well-defined — removed keys are simply not revisited.
+function sweepExpired(now: number): void {
+  rateLimitMap.forEach((entry, key) => {
+    if (now > entry.resetAt) rateLimitMap.delete(key)
+  })
+}
+
 function isRateLimited(ip: string): boolean {
   const now = Date.now()
+
+  if (rateLimitMap.size > 1000) sweepExpired(now)
+
   const entry = rateLimitMap.get(ip)
   if (!entry || now > entry.resetAt) {
     rateLimitMap.set(ip, { count: 1, resetAt: now + WINDOW_MS })

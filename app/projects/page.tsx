@@ -5,7 +5,7 @@ import { CTABand } from '@/components/layout/CTABand'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { projects } from '@/content/projects'
 import { DimensionLines } from '@/components/ui/BlueprintArtifacts'
-import { breadcrumbJsonLd } from '@/lib/jsonld'
+import { breadcrumbJsonLd, serializeJsonLd } from '@/lib/jsonld'
 
 export const dynamic = 'force-static'
 
@@ -37,7 +37,7 @@ export default function ProjectsPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbJsonLd([{ name: 'Our Projects', url: 'https://bdbuildcon.com/projects' }])),
+          __html: serializeJsonLd(breadcrumbJsonLd([{ name: 'Our Projects', url: 'https://bdbuildcon.com/projects' }])),
         }}
       />
       <PageTitleBand
@@ -71,9 +71,9 @@ export default function ProjectsPage() {
                   </span>
                 </div>
                 <div className="p-[24px] flex flex-col gap-[8px] flex-1">
-                  <h3 className="font-display font-bold text-[19px] leading-[1.3] text-ink m-0 group-hover:text-teal transition-colors duration-200">
+                  <h2 className="font-display font-bold text-[19px] leading-[1.3] text-ink m-0 group-hover:text-teal transition-colors duration-200">
                     {p.name}
-                  </h3>
+                  </h2>
                   <p className="text-[14px] text-teal font-semibold m-0">{p.client}</p>
                   <p className="text-[14.5px] leading-[1.6] text-body m-0 flex-1">{p.scope}</p>
 

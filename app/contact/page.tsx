@@ -5,7 +5,7 @@ import { contactInfo } from '@/content/links'
 import { TrussArtifact } from '@/components/ui/BlueprintArtifacts'
 import { faqs } from '@/content/faqs'
 import { FAQSection } from '@/components/ui/FAQSection'
-import { breadcrumbJsonLd, faqJsonLd } from '@/lib/jsonld'
+import { breadcrumbJsonLd, faqJsonLd, serializeJsonLd } from '@/lib/jsonld'
 import { EnquiryForm } from './EnquiryForm'
 
 export const metadata: Metadata = {
@@ -87,7 +87,7 @@ export default function ContactPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([
+          __html: serializeJsonLd([
             breadcrumbJsonLd([{ name: 'Contact Us', url: 'https://bdbuildcon.com/contact' }]),
             faqJsonLd(contactFaqs),
           ]),
@@ -116,7 +116,7 @@ export default function ContactPage() {
                   </svg>
                 </span>
                 <div className="flex-1">
-                  <h3 className="font-display font-bold text-[17px] text-ink mb-[10px] mt-[8px]">{card.title}</h3>
+                  <h2 className="font-display font-bold text-[17px] text-ink mb-[10px] mt-[8px]">{card.title}</h2>
                   {card.body}
                 </div>
               </div>

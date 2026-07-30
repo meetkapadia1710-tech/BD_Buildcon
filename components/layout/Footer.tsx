@@ -15,7 +15,7 @@ export function Footer() {
         <FadeRise className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-6" stagger={0.1} y={16}>
           {/* About — 5 cols */}
           <div className="md:col-span-5 lg:pr-12">
-            <h3 className="font-display text-[18px] font-bold text-white mb-1">About Us</h3>
+            <h2 className="font-display text-[18px] font-bold text-white mb-1">About Us</h2>
             <span className="block w-[44px] h-[3px] rounded-full bg-teal mb-3" />
             <p className="font-body text-body-sm text-white/70 leading-relaxed max-w-md">
               BD Buildcon LLP (Formerly Bhumi Developers) provides expert construction services backed by
@@ -60,12 +60,13 @@ export function Footer() {
 
           {/* Company Links — 3 cols */}
           <div className="md:col-span-3">
-            <h3 className="font-display text-[18px] font-bold text-white mb-1">Company Links</h3>
+            <h2 className="font-display text-[18px] font-bold text-white mb-1">Company Links</h2>
             <span className="block w-[44px] h-[3px] rounded-full bg-teal mb-3" />
             <nav className="flex flex-col gap-2">
               {[
                 { label: 'Home', href: '/' },
                 { label: 'About Us', href: '/about' },
+                { label: 'Services', href: '/services' },
                 { label: 'Why Us', href: '/why-us' },
                 { label: 'Safety & Quality', href: '/safety-quality' },
                 { label: 'Projects', href: '/projects' },
@@ -85,7 +86,7 @@ export function Footer() {
 
           {/* Contact Info — 4 cols */}
           <div className="md:col-span-4">
-            <h3 className="font-display text-[18px] font-bold text-white mb-1">Contact Info</h3>
+            <h2 className="font-display text-[18px] font-bold text-white mb-1">Contact Info</h2>
             <span className="block w-[44px] h-[3px] rounded-full bg-teal mb-3" />
             <div className="flex flex-col gap-4">
               <div className="flex gap-4 group">
@@ -126,7 +127,11 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-20 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <p className="font-body text-body-sm text-white/60 tracking-wide">
+          {/* These pages are statically generated, so the server renders the *build*
+              year while the browser renders the current one. suppressHydrationWarning
+              lets React keep the client's value without logging a mismatch — otherwise
+              the year silently freezes at the last deploy and warns every New Year. */}
+          <p className="font-body text-body-sm text-white/60 tracking-wide" suppressHydrationWarning>
             © {new Date().getFullYear()} BD Buildcon LLP. All rights reserved.
           </p>
           <button

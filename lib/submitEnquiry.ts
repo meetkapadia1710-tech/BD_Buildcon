@@ -1,11 +1,15 @@
 export type EnquiryResult = { ok: boolean; error?: string }
 
-// Native <select> placeholder options ("Select sector") have no `value` attribute,
-// so their implicit value is their text — treat that as "nothing chosen."
+// Placeholder <option>s carry an explicit value="" so an unchosen select submits an
+// empty string. Anything empty (or whitespace-only) means "nothing entered."
+//
+// This used to also discard values starting with "Select ", back when the placeholder
+// options had no value attribute and submitted their own label. That heuristic ate
+// legitimate input — a message beginning "Select the best option for..." was silently
+// dropped, then failed the API's min-length check as a generic error.
 function cleanField(value: FormDataEntryValue | null): string | undefined {
   const str = value?.toString().trim()
-  if (!str || str.startsWith('Select ')) return undefined
-  return str
+  return str ? str : undefined
 }
 
 /**

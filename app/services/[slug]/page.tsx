@@ -12,7 +12,7 @@ import { SlideIn } from '@/components/motion/SlideIn'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { CategoryServiceGrid } from '@/components/ui/CategoryServiceGrid'
 import { unifiedCapabilities } from '@/content/unifiedCapabilities'
-import { breadcrumbJsonLd, serviceJsonLd, faqJsonLd } from '@/lib/jsonld'
+import { breadcrumbJsonLd, serviceJsonLd, faqJsonLd, serializeJsonLd } from '@/lib/jsonld'
 export const dynamic = 'force-static'
 
 type Props = {
@@ -39,87 +39,6 @@ export function generateMetadata({ params }: Props): Metadata {
   }
 }
 
-const detailedBulletDescriptions: Record<string, Record<string, string>> = {
-  'civil-engineering': {
-    'Industrial Infrastructure Development':
-      'BD Buildcon delivers end-to-end industrial infrastructure development including land grading, heavy foundations, access roads, drainage networks, and utility corridors tailored to process plants.',
-    'Brownfield & Greenfield Projects':
-      'Whether building new greenfield industrial complexes from the ground up or executing complex brownfield expansions inside live chemical and pharma facilities, BD Buildcon guarantees zero operational downtime for existing plants.',
-    'Plant Expansion & Industrial Modernization':
-      'We execute turnkey plant capacity expansions, structural retrofits, and equipment upgrades to modernise existing manufacturing assets efficiently.',
-    'Industrial, Commercial & Corporate Buildings':
-      'Constructing heavy-duty industrial plant buildings, administrative blocks, control rooms, and commercial facilities designed to international engineering standards.',
-    'Warehouses & Logistics Facilities':
-      'Designing and building large-span industrial warehouses, raw material storage bays, and dispatch facilities built for heavy fork-lift traffic and high floor load capacities.',
-    'RCC Construction':
-      'Reinforced Cement Concrete (RCC) structures built with certified concrete batches, stringent formwork controls, and mill-traceable steel reinforcement.',
-    'Structural Engineering & Construction':
-      'Precision structural engineering and heavy civil construction for complex process plant structures and high-load equipment platforms.',
-    'Heavy Equipment Foundations & Pile Foundations':
-      'Engineering and casting heavy machine foundations, compressor pedestals, DMC pile foundations, and vibrating equipment bases engineered for dynamic load stability.',
-    'Site Development, Earthworks, Excavation & Backfilling':
-      'Comprehensive site clearance, bulk excavation, soil compaction using owned 11.5 MT vibro rollers, and precision land grading for industrial bases.',
-    'Internal Roads & Pavements':
-      'Heavy-duty concrete and bitumen internal plant roads, heavy vehicle aprons, and paved yards engineered for continuous trailer and transit mixer traffic.',
-    'Storm Water & Drainage Systems':
-      'Engineered RCC storm water drains, rainwater harvesting pits, and plant runoff management systems compliant with statutory environmental norms.',
-    'Underground Utility & Service Networks':
-      'Underground piping trenches, electrical cable duct banks, fire-water mains, and industrial effluent drainage lines constructed with full CAD/BIM traceability.',
-  },
-  'mechanical-industrial': {
-    'Mechanical Construction':
-      'Complete mechanical construction services for industrial process plants, chemical units, and manufacturing facilities.',
-    'Heavy Equipment Erection':
-      'Rigging, alignment, and erection of heavy static and rotary equipment including pressure vessels, reactors, heat exchangers, and storage tanks.',
-    'Mechanical Equipment Installation':
-      'Precision positioning and mounting of mechanical equipment using owned mobile cranes and specialized lifting gear.',
-    'Industrial Fabrication':
-      'Custom industrial steel fabrication executed in our in-house fabrication yard under strict QA/QC standards.',
-    'Structural Steel Fabrication':
-      'Fabrication and assembly of heavy structural steel frames, pipe racks, equipment platforms, and access walkways.',
-    'Process & Utility Piping Fabrication':
-      'High-pressure process piping and utility line fabrication welded by qualified welders to international code specifications.',
-    'In-House Fabrication Yard':
-      'Operating a dedicated in-house fabrication facility equipped for high-volume steel cutting, bending, assembly, and quality testing.',
-    'Industrial Piping Systems':
-      'Complete installation of process fluid piping networks, steam headers, chemical transfer lines, and jacketed piping systems.',
-    'Utility Piping Networks':
-      'Cooling water lines, compressed air piping, nitrogen supply networks, and raw water distribution across industrial plants.',
-    'Slag Blasting':
-      'Surface preparation using high-pressure copper slag blasting to achieve required surface anchor profiles for coating adhesion.',
-    'Industrial Painting':
-      'Application of specialized anti-corrosive primer systems and industrial topcoats suited to chemical and marine atmospheres.',
-    'Protective Coating Systems':
-      'Epoxy coatings, polyurethane finishes, high-temperature paints, and chemical-resistant linings for long-term corrosion prevention.',
-  },
-  'turnkey-delivery': {
-    'Project Planning':
-      'Detailed project execution planning establishing baseline schedules, resource allocation, and critical path milestones.',
-    'Project Scheduling & Controls':
-      'Continuous progress monitoring, ERP-integrated resource tracking, and project control systems ensuring schedule compliance.',
-    'Procurement Management':
-      'Strategic procurement of civil, structural, and mechanical materials from approved vendors with mill certificate traceability.',
-    'Vendor & Supply Chain Management':
-      'Subcontractor management, vendor expediting, and logistics coordination to keep site supply chains seamless.',
-    'Cost Optimization':
-      'Value engineering and material optimization to deliver maximum structural durability within target client budgets.',
-    'Material Inspection':
-      'Rigorous incoming material inspection, mill certificate verification, and batch testing prior to site integration.',
-    'Quality Assurance & Quality Control (QA/QC)':
-      'ISO 9001:2015-certified QA/QC protocols enforced at every hold point from excavation to pre-pour and final erection.',
-    'Health, Safety & Environment (HSE) Management':
-      'Full HSE compliance, site safety assemblies, daily toolbox talks, and continuous hazard monitoring backing our 35-year zero-fatality record.',
-    'Safety Audits':
-      'Regular site safety audits and statutory environmental inspections conducted by certified safety officers.',
-    'Testing & Commissioning':
-      'Comprehensive hydro-testing, non-destructive testing (NDT), electrical continuity checks, and dry run commissioning.',
-    'Project Handover':
-      'Final project handover complete with as-built drawings, QA/QC inspection dossiers, statutory clearance certificates, and operating manuals.',
-    'After-Sales Support':
-      'Defects liability support and operational maintenance assistance following plant commissioning and handover.',
-  },
-}
-
 export default function ServiceDetailPage({ params }: Props) {
   const service = services.find((s) => s.id === params.slug)
   if (!service) notFound()
@@ -140,14 +59,13 @@ export default function ServiceDetailPage({ params }: Props) {
     .slice(0, 3)
 
   const serviceFaqs = faqs.filter((f) => f.page.includes('services'))
-  const bulletDescriptions = detailedBulletDescriptions[service.id] || {}
 
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([
+          __html: serializeJsonLd([
             breadcrumbJsonLd([
               { name: 'Services', url: 'https://bdbuildcon.com/services' },
               { name: service.title, url: `https://bdbuildcon.com/services/${service.id}` },

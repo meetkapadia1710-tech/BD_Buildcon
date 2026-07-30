@@ -31,8 +31,19 @@ export function EnquiryForm() {
     <SlideIn from="right">
       <form
         onSubmit={handleSubmit}
-        className="bg-white border border-hairline rounded-card shadow-[0_1px_4px_rgba(0,0,0,0.06),0_4px_16px_rgba(0,0,0,0.06)] p-[36px] sm:p-[48px] flex flex-col gap-[28px]"
+        className="relative bg-white border border-hairline rounded-card shadow-[0_1px_4px_rgba(0,0,0,0.06),0_4px_16px_rgba(0,0,0,0.06)] p-[36px] sm:p-[48px] flex flex-col gap-[28px]"
       >
+        {/* Honeypot — invisible to users, bots fill it. /api/contact silently drops
+            any submission where this is non-empty. Keep it out of the tab order. */}
+        <input
+          type="text"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          className="absolute left-[-9999px] h-0 w-0 opacity-0"
+        />
+
         <h2 className="font-display font-bold text-[24px] text-ink m-0 mb-[4px]">Send an Enquiry</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-[24px] gap-y-[28px]">
@@ -116,7 +127,7 @@ export function EnquiryForm() {
               name="sector"
               className="w-full bg-surface border border-hairline rounded-[10px] px-[18px] py-[14px] font-body text-[15.5px] text-ink appearance-auto focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
             >
-              <option>Select sector</option>
+              <option value="">Select sector</option>
               <option>Chemicals</option>
               <option>Pharma</option>
               <option>Petroleum</option>
@@ -140,7 +151,7 @@ export function EnquiryForm() {
               name="projectType"
               className="w-full bg-surface border border-hairline rounded-[10px] px-[18px] py-[14px] font-body text-[15.5px] text-ink appearance-auto focus:border-teal focus:ring-4 focus:ring-teal/10 outline-none transition-all"
             >
-              <option>Select type</option>
+              <option value="">Select type</option>
               <option>Greenfield Plant</option>
               <option>Plant Expansion</option>
               <option>PEB Structure</option>

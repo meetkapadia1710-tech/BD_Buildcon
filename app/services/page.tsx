@@ -7,7 +7,7 @@ import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { services } from '@/content/services'
 import { faqs } from '@/content/faqs'
 import { FAQSection } from '@/components/ui/FAQSection'
-import { breadcrumbJsonLd, faqJsonLd } from '@/lib/jsonld'
+import { breadcrumbJsonLd, faqJsonLd, serializeJsonLd } from '@/lib/jsonld'
 import { DimensionLines } from '@/components/ui/BlueprintArtifacts'
 
 export const dynamic = 'force-static'
@@ -33,7 +33,7 @@ export default function ServicesPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([
+          __html: serializeJsonLd([
             breadcrumbJsonLd([{ name: 'Services', url: 'https://bdbuildcon.com/services' }]),
             faqJsonLd(serviceFaqs),
           ]),
