@@ -64,9 +64,9 @@ export const projects: Project[] = [
   },
   {
     slug: 'city-center',
-    name: 'City Center Corporate Complex',
+    name: 'City Center Commercial Complex',
     client: 'Commercial Building',
-    sector: 'Corporate',
+    sector: 'Commercial',
     location: 'Gujarat',
     scope: 'Civil, Architectural Finishing',
     duration: '18 months',
