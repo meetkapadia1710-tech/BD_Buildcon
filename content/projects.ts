@@ -132,6 +132,36 @@ export const projects: Project[] = [
       "Zero accidents. Zero near-misses. GACL issued a formal safety certificate confirming BD Buildcon's exemplary safety record.",
   },
   {
+    // Narrative below is drafted from the site photographs; duration and year are
+    // client-confirmed. TODO(meet): confirm `location` — it was inherited from an
+    // earlier misattribution of these photos to GACL (Vadodara) and has NOT been
+    // re-checked for GFL. Also confirm the project name, scope line, and that the
+    // safety record applies to this job specifically.
+    slug: 'gfl-admin-building',
+    name: 'GFL administrative building',
+    client: 'GFL — Gujarat Fluorochemicals Ltd.',
+    sector: 'Fluorochemicals',
+    location: 'Gujarat',
+    scope: 'Civil, Structural, Architectural Finishing',
+    duration: '2020–2022',
+    year: '2022',
+    safetyRecord: '0 fatal accidents',
+    image: '/brochurephotos/site photos/gfl-2/gfl-2-admin-building-01.jpeg',
+    images: [
+      '/brochurephotos/site photos/gfl-2/gfl-2-admin-building-01.jpeg',
+      '/brochurephotos/site photos/gfl-2/gfl-2-admin-building-02.jpeg',
+      '/brochurephotos/site photos/gfl-2/gfl-2-admin-building-03.jpeg',
+    ],
+    excerpt:
+      'Two-storey administrative block with structural glazing, built inside GFL’s operating complex along with its plant roads, hydrant network and landscaping.',
+    challenge:
+      'The block sits within a live chemical complex, so construction traffic, lifting and finishing trades all had to work around continuous plant operations and permit-controlled access.',
+    whatWeBuilt:
+      'RCC-framed two-storey administrative building with structural glass curtain walling and rendered external finish, plus surrounding concrete plant roads, kerbing, fire hydrant line and landscaping.',
+    outcome:
+      'Handed over complete — building, access roads, hydrant network and landscaped surrounds finished together as one package.',
+  },
+  {
     slug: 'gfl-dahej',
     name: 'Fluorochemical plant, Dahej',
     client: 'GFL — Gujarat Fluorochemicals Ltd.',

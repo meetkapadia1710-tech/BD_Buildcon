@@ -8,6 +8,7 @@ import { SlideIn } from '@/components/motion/SlideIn'
 import { StaggerReveal } from '@/components/motion/StaggerReveal'
 import { faqs } from '@/content/faqs'
 import { FAQSection } from '@/components/ui/FAQSection'
+import { AwardsSection } from '@/components/ui/AwardsSection'
 import { breadcrumbJsonLd, serviceJsonLd, faqJsonLd, serializeJsonLd } from '@/lib/jsonld'
 
 export const dynamic = 'force-static'
@@ -358,6 +359,8 @@ export default function SafetyQualityPage() {
           />
         </div>
       </section>
+
+      <AwardsSection />
 
       {/* ── Accreditations ── */}
       <section aria-label="Certifications" className="bg-white py-[72px] lg:py-[110px]">

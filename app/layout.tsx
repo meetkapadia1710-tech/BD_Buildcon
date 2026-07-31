@@ -10,6 +10,7 @@ import { ScrollProgress } from '@/components/motion/ScrollProgress'
 import { Toaster } from 'sonner'
 import { GrainOverlay } from '@/components/ui/GrainOverlay'
 import { contactInfo, addressComponents, socialLinks } from '@/content/links'
+import { awards } from '@/content/awards'
 import { serializeJsonLd } from '@/lib/jsonld'
 
 const inter = Inter({
@@ -137,6 +138,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 },
                 // TODO(meet): socialLinks in content/links.ts is currently empty — fill in LinkedIn/other profile URLs, plus consider adding Google Business Profile, IndiaMART, and JustDial listing URLs here once live. sameAs is a strong entity-disambiguation signal for AI answer engines.
                 sameAs: Object.values(socialLinks).filter(Boolean),
+                // Client-issued safety recognitions (schema.org/Organization "award").
+                // Sourced from content/awards.ts so the page and the structured data
+                // can't drift apart.
+                award: awards.map((a) =>
+                  [a.title, a.kind, `awarded by ${a.issuer}`, a.year].filter(Boolean).join(' — '),
+                ),
               },
               {
                 '@context': 'https://schema.org',

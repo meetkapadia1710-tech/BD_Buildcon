@@ -166,9 +166,11 @@ export default function ProjectDetailPage({ params }: Props) {
               )}
             </div>
 
-            {/* Image gallery */}
+            {/* Image gallery — renders every photo in `images`. This used to cap at
+                slice(0, 3), which silently hid any photo added beyond the third
+                (the GACL-2 site photos were added to the data but never appeared). */}
             <div className="space-y-4">
-              {project.images.slice(0, 3).map((img, i) => (
+              {project.images.map((img, i) => (
                 <RevealImage
                   key={img}
                   src={img}
